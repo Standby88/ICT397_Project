@@ -12,6 +12,7 @@
 // Window dimensions
 const GLint WIDTH = 800, HEIGHT = 600;
 
+
 //vertex shader source
 /*const GLchar * vertShaderSource = "#version 330 core\n"
 "layout (location = 0) in vec3 position;\n"
