@@ -16,7 +16,6 @@ public:
 	void Use();
 	~Shader();
 
-private:
 	GLuint Program;
 };
 
