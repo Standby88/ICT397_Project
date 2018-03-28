@@ -14,7 +14,7 @@
 #include <glm\glm.hpp>
 #include <glm\gtc\matrix_transform.hpp>
 #include <glm\gtc\type_ptr.hpp>
-
+#include "Vector.h";
 // Window dimensions
 const GLint WIDTH = 800, HEIGHT = 600;
 int SCREEN_WIDTH, SCREEN_HEIGHT;
@@ -38,8 +38,26 @@ GLfloat lastFrame = 0.0f;
 
 int main()
 {
+	Vector a(1, 2, 3);
+	Vector b(12,-2,-3);
+	Vector c(1,2,3);
+	Vector testassignment(a);
+	float magtest = a.getMagnitude();
+	Vector normtest = normtest.calculateNorm(a,b);
+	float dottest = a.dotProduct(a,b);
+	float disttest = a.distBetweenPaPb(a, b);
+	Vector unitNorm = unitNorm.calculateUnitNorm(a,b);
+	Vector Add = Add.add(a, c);
+	Vector scalarM = scalarM.scalarMultiply(a, 5);
+	std::cout << a.getX() << a.getY() << a.getZ() << std::endl;
+	std::cout<<"mag "<<magtest<<" dot "<<dottest<< " distest " << disttest<<std::endl;
+	std::cout << normtest.getX() <<" "<< normtest.getY() << " " << normtest.getZ() << std::endl;
+	std::cout << unitNorm.getX() << " " << unitNorm.getY() << " " << unitNorm.getZ() << std::endl;
+	std::cout << Add.getX() << " " << Add.getY() << " " << Add.getZ() << std::endl;
+	std::cout << testassignment.getX() << " " << testassignment.getY() << " " << testassignment.getZ() << std::endl;
+	std::cout << scalarM.getX() << " " << scalarM.getY() << " " << scalarM.getZ() << std::endl;
 	// Init GLFW
-	glfwInit();
+	/*glfwInit();
 
 	// Set all the required options for GLFW
 	glfwWindowHint(GLFW_CONTEXT_VERSION_MAJOR, 3);
@@ -202,7 +220,7 @@ int main()
 	SOIL_free_image_data(image);
 	glBindTexture(GL_TEXTURE_2D, 0);*/
 
-	GLuint VBO, VAO;
+/*	GLuint VBO, VAO;
 	glGenVertexArrays(1, &VAO);
 	glGenBuffers(1, &VBO);
 	// Bind our Vertex Array Object first, then bind and set our buffers and pointers.
@@ -304,7 +322,8 @@ int main()
 	// Terminate GLFW, clearing any resources allocated by GLFW.
 	glfwTerminate();
 
-	return EXIT_SUCCESS;
+	return EXIT_SUCCESS;*/
+	return 0;
 }
 
 
