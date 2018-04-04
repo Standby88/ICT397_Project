@@ -1,8 +1,8 @@
 #include "Shader.h"
+#include <GL\glew.h>
 
-
-
-Shader::Shader(const GLchar *vertexPath, const GLchar *fragPath)
+//Shader::Shader(const GLchar *vertexPath, const GLchar *fragPath)
+Shader::Shader(const char *vertexPath, const char *fragPath)
 {
 
 	std::string vertexCode;

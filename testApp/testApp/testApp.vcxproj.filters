@@ -36,10 +36,17 @@
     <ClCompile Include="SOIL2\SOIL2.c">
       <Filter>SOIL2</Filter>
     </ClCompile>
+    <ClCompile Include="GraphicsEngine.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Model.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <None Include="core.frag" />
     <None Include="core.vs" />
+    <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Shader.h">
@@ -97,6 +104,15 @@
       <Filter>SOIL2</Filter>
     </ClInclude>
     <ClInclude Include="Camera.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Model.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Mesh.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="GraphicsEngine.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
