@@ -1,5 +1,5 @@
 ﻿  main.cpp
-c:\users\ducku\documents\ict397 - game\work\ict397_project\testapp\testapp\graphicsengine.h(41): warning C4244: 'initializing': conversion from 'double' to 'GLfloat', possible loss of data
-c:\users\ducku\documents\ict397 - game\work\ict397_project\testapp\testapp\graphicsengine.h(42): warning C4244: 'initializing': conversion from 'double' to 'GLfloat', possible loss of data
-  testApp.vcxproj -> C:\Users\Ducku\Documents\ICT397 - game\Work\ICT397_Project\testApp\Debug\testApp.exe
-  testApp.vcxproj -> C:\Users\Ducku\Documents\ICT397 - game\Work\ICT397_Project\testApp\Debug\testApp.pdb (Full PDB)
+c:\users\desmond\documents\github\ict397_project\testapp\testapp\graphicsengine.h(41): warning C4244: 'initializing': conversion from 'double' to 'GLfloat', possible loss of data
+c:\users\desmond\documents\github\ict397_project\testapp\testapp\graphicsengine.h(42): warning C4244: 'initializing': conversion from 'double' to 'GLfloat', possible loss of data
+  testApp.vcxproj -> C:\Users\Desmond\Documents\GitHub\ICT397_Project\testApp\Debug\testApp.exe
+  testApp.vcxproj -> C:\Users\Desmond\Documents\GitHub\ICT397_Project\testApp\Debug\testApp.pdb (Full PDB)

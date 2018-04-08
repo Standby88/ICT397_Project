@@ -148,14 +148,23 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="Character.cpp" />
+    <ClCompile Include="CharacterCreator.cpp" />
+    <ClCompile Include="Enemy.cpp" />
+    <ClCompile Include="GameAssetCreator.cpp" />
+    <ClCompile Include="GasmeAssetFactory.cpp" />
     <ClCompile Include="GraphicsEngine.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="Model.cpp" />
+    <ClCompile Include="Player.cpp" />
     <ClCompile Include="Shader.cpp" />
     <ClCompile Include="SOIL2\etc1_utils.c" />
     <ClCompile Include="SOIL2\image_DXT.c" />
     <ClCompile Include="SOIL2\image_helper.c" />
     <ClCompile Include="SOIL2\SOIL2.c" />
+    <ClCompile Include="Terrain.cpp" />
+    <ClCompile Include="TerrainCreator.cpp" />
+    <ClCompile Include="WorldTerrain.cpp" />
   </ItemGroup>
   <ItemGroup>
     <None Include="core.frag" />
@@ -164,9 +173,15 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Camera.h" />
+    <ClInclude Include="Character.h" />
+    <ClInclude Include="CharacterCreator.h" />
+    <ClInclude Include="Enemy.h" />
+    <ClInclude Include="GameAssetCreator.h" />
+    <ClInclude Include="GameAssetFactory.h" />
     <ClInclude Include="GraphicsEngine.h" />
     <ClInclude Include="Mesh.h" />
     <ClInclude Include="Model.h" />
+    <ClInclude Include="Player.h" />
     <ClInclude Include="Shader.h" />
     <ClInclude Include="SOIL2\etc1_utils.h" />
     <ClInclude Include="SOIL2\image_DXT.h" />
@@ -185,6 +200,9 @@
     <ClInclude Include="SOIL2\stbi_pvr_c.h" />
     <ClInclude Include="SOIL2\stb_image.h" />
     <ClInclude Include="SOIL2\stb_image_write.h" />
+    <ClInclude Include="Terrain.h" />
+    <ClInclude Include="TerrainCreator.h" />
+    <ClInclude Include="WorldTerrain.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
