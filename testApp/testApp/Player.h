@@ -1,10 +1,27 @@
 #pragma once
-#include "Character.h"
-class Player : public Character
+#include "GameAsset.h"
+class Player : public GameAsset
 {
+private:
+	std::string id;
 public:
-	std::string getName()
+	Player()
 	{
-		return "player";
+		id = "Player";
+	}
+	std::string getID()
+	{
+		return id;
+	}
+	static void scriptRegister(lua_State * L)
+	{
+		using namespace luabridge;
+		getGlobalNamespace(L)
+			.beginNamespace("GA")
+			.deriveClass<Player, GameAsset>("Player")
+			.addConstructor<void(*) (void)>()
+			.addFunction("getID", &Player::getID)
+			.endClass()
+			.endNamespace();
 	}
 };
