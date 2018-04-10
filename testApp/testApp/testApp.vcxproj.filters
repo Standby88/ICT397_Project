@@ -13,10 +13,107 @@
       <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
       <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
     </Filter>
+    <Filter Include="SOIL2">
+      <UniqueIdentifier>{78d16ad4-50b4-4933-aeca-e7866353a058}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="main.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="Shader.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="SOIL2\etc1_utils.c">
+      <Filter>SOIL2</Filter>
+    </ClCompile>
+    <ClCompile Include="SOIL2\image_DXT.c">
+      <Filter>SOIL2</Filter>
+    </ClCompile>
+    <ClCompile Include="SOIL2\image_helper.c">
+      <Filter>SOIL2</Filter>
+    </ClCompile>
+    <ClCompile Include="SOIL2\SOIL2.c">
+      <Filter>SOIL2</Filter>
+    </ClCompile>
+    <ClCompile Include="GraphicsEngine.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Model.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="core.frag" />
+    <None Include="core.vs" />
+    <None Include="packages.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="Shader.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="SOIL2\etc1_utils.h">
+      <Filter>SOIL2</Filter>
+    </ClInclude>
+    <ClInclude Include="SOIL2\image_DXT.h">
+      <Filter>SOIL2</Filter>
+    </ClInclude>
+    <ClInclude Include="SOIL2\image_helper.h">
+      <Filter>SOIL2</Filter>
+    </ClInclude>
+    <ClInclude Include="SOIL2\jo_jpeg.h">
+      <Filter>SOIL2</Filter>
+    </ClInclude>
+    <ClInclude Include="SOIL2\pkm_helper.h">
+      <Filter>SOIL2</Filter>
+    </ClInclude>
+    <ClInclude Include="SOIL2\pvr_helper.h">
+      <Filter>SOIL2</Filter>
+    </ClInclude>
+    <ClInclude Include="SOIL2\SOIL2.h">
+      <Filter>SOIL2</Filter>
+    </ClInclude>
+    <ClInclude Include="SOIL2\stb_image.h">
+      <Filter>SOIL2</Filter>
+    </ClInclude>
+    <ClInclude Include="SOIL2\stb_image_write.h">
+      <Filter>SOIL2</Filter>
+    </ClInclude>
+    <ClInclude Include="SOIL2\stbi_DDS.h">
+      <Filter>SOIL2</Filter>
+    </ClInclude>
+    <ClInclude Include="SOIL2\stbi_DDS_c.h">
+      <Filter>SOIL2</Filter>
+    </ClInclude>
+    <ClInclude Include="SOIL2\stbi_ext.h">
+      <Filter>SOIL2</Filter>
+    </ClInclude>
+    <ClInclude Include="SOIL2\stbi_ext_c.h">
+      <Filter>SOIL2</Filter>
+    </ClInclude>
+    <ClInclude Include="SOIL2\stbi_pkm.h">
+      <Filter>SOIL2</Filter>
+    </ClInclude>
+    <ClInclude Include="SOIL2\stbi_pkm_c.h">
+      <Filter>SOIL2</Filter>
+    </ClInclude>
+    <ClInclude Include="SOIL2\stbi_pvr.h">
+      <Filter>SOIL2</Filter>
+    </ClInclude>
+    <ClInclude Include="SOIL2\stbi_pvr_c.h">
+      <Filter>SOIL2</Filter>
+    </ClInclude>
+    <ClInclude Include="Camera.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Model.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Mesh.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="GraphicsEngine.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
 </Project>

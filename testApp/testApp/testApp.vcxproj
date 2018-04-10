@@ -88,7 +88,7 @@
       <WarningLevel>Level3</WarningLevel>
       <Optimization>Disabled</Optimization>
       <PreprocessorDefinitions>WIN32;_DEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
-      <AdditionalIncludeDirectories>$(SolutionDir)..\Ext_libs\GLFW\include;$(SolutionDir)..\Ext_libs\GLEW\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(SolutionDir)..\Ext_libs\glm;$(SolutionDir)..\Ext_libs\GLFW\include;$(SolutionDir)..\Ext_libs\GLEW\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
@@ -148,9 +148,54 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="GraphicsEngine.cpp" />
     <ClCompile Include="main.cpp" />
+    <ClCompile Include="Model.cpp" />
+    <ClCompile Include="Shader.cpp" />
+    <ClCompile Include="SOIL2\etc1_utils.c" />
+    <ClCompile Include="SOIL2\image_DXT.c" />
+    <ClCompile Include="SOIL2\image_helper.c" />
+    <ClCompile Include="SOIL2\SOIL2.c" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="core.frag" />
+    <None Include="core.vs" />
+    <None Include="packages.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="Camera.h" />
+    <ClInclude Include="GraphicsEngine.h" />
+    <ClInclude Include="Mesh.h" />
+    <ClInclude Include="Model.h" />
+    <ClInclude Include="Shader.h" />
+    <ClInclude Include="SOIL2\etc1_utils.h" />
+    <ClInclude Include="SOIL2\image_DXT.h" />
+    <ClInclude Include="SOIL2\image_helper.h" />
+    <ClInclude Include="SOIL2\jo_jpeg.h" />
+    <ClInclude Include="SOIL2\pkm_helper.h" />
+    <ClInclude Include="SOIL2\pvr_helper.h" />
+    <ClInclude Include="SOIL2\SOIL2.h" />
+    <ClInclude Include="SOIL2\stbi_DDS.h" />
+    <ClInclude Include="SOIL2\stbi_DDS_c.h" />
+    <ClInclude Include="SOIL2\stbi_ext.h" />
+    <ClInclude Include="SOIL2\stbi_ext_c.h" />
+    <ClInclude Include="SOIL2\stbi_pkm.h" />
+    <ClInclude Include="SOIL2\stbi_pkm_c.h" />
+    <ClInclude Include="SOIL2\stbi_pvr.h" />
+    <ClInclude Include="SOIL2\stbi_pvr_c.h" />
+    <ClInclude Include="SOIL2\stb_image.h" />
+    <ClInclude Include="SOIL2\stb_image_write.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
+    <Import Project="..\packages\Assimp.redist.3.0.0\build\native\Assimp.redist.targets" Condition="Exists('..\packages\Assimp.redist.3.0.0\build\native\Assimp.redist.targets')" />
+    <Import Project="..\packages\Assimp.3.0.0\build\native\Assimp.targets" Condition="Exists('..\packages\Assimp.3.0.0\build\native\Assimp.targets')" />
   </ImportGroup>
+  <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
+    <PropertyGroup>
+      <ErrorText>This project references NuGet package(s) that are missing on this computer. Use NuGet Package Restore to download them.  For more information, see http://go.microsoft.com/fwlink/?LinkID=322105. The missing file is {0}.</ErrorText>
+    </PropertyGroup>
+    <Error Condition="!Exists('..\packages\Assimp.redist.3.0.0\build\native\Assimp.redist.targets')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\Assimp.redist.3.0.0\build\native\Assimp.redist.targets'))" />
+    <Error Condition="!Exists('..\packages\Assimp.3.0.0\build\native\Assimp.targets')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\Assimp.3.0.0\build\native\Assimp.targets'))" />
+  </Target>
 </Project>
