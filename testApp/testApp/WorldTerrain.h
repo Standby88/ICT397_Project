@@ -1,28 +1,18 @@
 #pragma once
-#include "GameAsset.h"
-class WorldTerrain : public GameAsset
+#include "GameObject.h"
+class WorldTerrain : public GameObject
 {
 private:
-	std::string id;
+	
 public:
-	WorldTerrain()
-	{
-		id = "WorldTerrain";
-	}
-	std::string getID()
-	{
-		return id;
-	}
-	static void scriptRegister(lua_State * L)
-	{
-		using namespace luabridge;
-		getGlobalNamespace(L)
-			.beginNamespace("GA")
-			.deriveClass<WorldTerrain, GameAsset>("WorldTerrain")
-			.addConstructor<void(*) (void)>()
-			.addFunction("getID", &WorldTerrain::getID)
-			.endClass()
-			.endNamespace();
-	}
+
+	WorldTerrain();
+	
+	~WorldTerrain() {};
+
+	void Draw();
+
+	static void scriptRegister(lua_State * L);
+	
 };
 
