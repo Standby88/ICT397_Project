@@ -1,7 +1,6 @@
 #include <iostream>
 
 #include "GraphicsEngine.h"
-
 int main()
 {
 	GraphicsEngine grap;
@@ -11,3 +10,4 @@ int main()
 	}
 	return 0;
 }
+

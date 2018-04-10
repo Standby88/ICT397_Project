@@ -1,0 +1,18 @@
+﻿  stdafx.cpp
+  PhysicsTest.cpp
+e:\repositories\physicstest\external dependencies\bullet\src\linearmath\btidebugdraw.h(169): warning C4305: 'argument': truncation from 'double' to 'const btScalar'
+e:\repositories\physicstest\external dependencies\bullet\src\linearmath\btidebugdraw.h(170): warning C4305: 'argument': truncation from 'double' to 'const btScalar'
+e:\repositories\physicstest\external dependencies\bullet\src\linearmath\btidebugdraw.h(171): warning C4305: 'argument': truncation from 'double' to 'const btScalar'
+  Generating Code...
+BulletCollision_Debug.lib(btBoxShape.obj) : warning LNK4099: PDB 'BulletCollision.pdb' was not found with 'BulletCollision_Debug.lib(btBoxShape.obj)' or at 'E:\Repositories\PhysicsTest\Debug\BulletCollision.pdb'; linking object as if no debug info
+BulletCollision_Debug.lib(btCollisionShape.obj) : warning LNK4099: PDB 'BulletCollision.pdb' was not found with 'BulletCollision_Debug.lib(btCollisionShape.obj)' or at 'E:\Repositories\PhysicsTest\Debug\BulletCollision.pdb'; linking object as if no debug info
+BulletCollision_Debug.lib(btConvexInternalShape.obj) : warning LNK4099: PDB 'BulletCollision.pdb' was not found with 'BulletCollision_Debug.lib(btConvexInternalShape.obj)' or at 'E:\Repositories\PhysicsTest\Debug\BulletCollision.pdb'; linking object as if no debug info
+BulletCollision_Debug.lib(btConvexPolyhedron.obj) : warning LNK4099: PDB 'BulletCollision.pdb' was not found with 'BulletCollision_Debug.lib(btConvexPolyhedron.obj)' or at 'E:\Repositories\PhysicsTest\Debug\BulletCollision.pdb'; linking object as if no debug info
+BulletCollision_Debug.lib(btConvexShape.obj) : warning LNK4099: PDB 'BulletCollision.pdb' was not found with 'BulletCollision_Debug.lib(btConvexShape.obj)' or at 'E:\Repositories\PhysicsTest\Debug\BulletCollision.pdb'; linking object as if no debug info
+BulletCollision_Debug.lib(btPolyhedralConvexShape.obj) : warning LNK4099: PDB 'BulletCollision.pdb' was not found with 'BulletCollision_Debug.lib(btPolyhedralConvexShape.obj)' or at 'E:\Repositories\PhysicsTest\Debug\BulletCollision.pdb'; linking object as if no debug info
+LinearMath_Debug.lib(btAlignedAllocator.obj) : warning LNK4099: PDB 'LinearMath.pdb' was not found with 'LinearMath_Debug.lib(btAlignedAllocator.obj)' or at 'E:\Repositories\PhysicsTest\Debug\LinearMath.pdb'; linking object as if no debug info
+LinearMath_Debug.lib(btConvexHullComputer.obj) : warning LNK4099: PDB 'LinearMath.pdb' was not found with 'LinearMath_Debug.lib(btConvexHullComputer.obj)' or at 'E:\Repositories\PhysicsTest\Debug\LinearMath.pdb'; linking object as if no debug info
+LinearMath_Debug.lib(btGeometryUtil.obj) : warning LNK4099: PDB 'LinearMath.pdb' was not found with 'LinearMath_Debug.lib(btGeometryUtil.obj)' or at 'E:\Repositories\PhysicsTest\Debug\LinearMath.pdb'; linking object as if no debug info
+LinearMath_Debug.lib(btVector3.obj) : warning LNK4099: PDB 'LinearMath.pdb' was not found with 'LinearMath_Debug.lib(btVector3.obj)' or at 'E:\Repositories\PhysicsTest\Debug\LinearMath.pdb'; linking object as if no debug info
+  PhysicsTest.vcxproj -> E:\Repositories\PhysicsTest\Debug\PhysicsTest.exe
+  PhysicsTest.vcxproj -> E:\Repositories\PhysicsTest\Debug\PhysicsTest.pdb (Full PDB)
