@@ -7,11 +7,9 @@ class EnvironmentObject : public GameObject3D
 private:
 	
 public:
-
 	EnvironmentObject();
 	~EnvironmentObject();
 	void Draw(Shader &S);
-
 	static void scriptRegister(lua_State * L);
 
 };

@@ -13,6 +13,6 @@ public:
 	std::string getObjectType();
 	Model * getModel();
 	void LoadModel(char * Path);
-
+	static void scriptRegister(lua_State * L);
 };
 

@@ -11,9 +11,10 @@ CharacterManager::~CharacterManager()
 {
 }
 
-void CharacterManager::addPlayer(Player * in)
+void CharacterManager::addPlayer(GameObject * in)
 {
-	p = in;
+	Player*pl = dynamic_cast<Player*>(in);
+	p = pl;
 }
 
 void CharacterManager::addNPC(std::string key, int * in )
@@ -28,17 +29,19 @@ Player * CharacterManager::getPlayer()
 	return p;
 }
 
-int * CharacterManager::returnNPC(std::string K)
+int * CharacterManager::getNPC(std::string K)
 {
 	return nPCList[K];
 }
 
-void CharacterManager::RemoveNPC(std::string K)
+void CharacterManager::removeNPC(std::string K)
 {
 	nPCList.erase(K);
 }
 
-void CharacterManager::RemovePlayer()
+
+
+void CharacterManager::removePlayer()
 {
 	p = NULL;
 }

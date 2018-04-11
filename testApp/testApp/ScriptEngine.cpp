@@ -1,7 +1,12 @@
 #include "ScriptEngine.h"
 
 
-lua_State* ScriptEngine::TempLuaState()
+ScriptEngine::~ScriptEngine()
+{
+	lua_close(MainLuaState); 
+}
+
+lua_State* ScriptEngine::tempLuaState()
 {
 	return MainLuaState;
 }
@@ -17,7 +22,7 @@ void ScriptEngine::report_errors(int a)
 }
 
 //executes a lua script file
-void ScriptEngine::ExecuteFile(const char* file)
+void ScriptEngine::doLuaScript(const char* file)
 {
 	if (file == NULL)
 		return;

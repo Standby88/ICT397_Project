@@ -1,4 +1,4 @@
 ﻿  main.cpp
-c:\users\desmond\documents\github\ict397_project\testapp\testapp\terrainmanager.h(18): warning C4018: '<': signed/unsigned mismatch
+c:\users\desmond\documents\github\ict397_project\testapp\testapp\terrainmanager.h(19): warning C4018: '<': signed/unsigned mismatch
   testApp.vcxproj -> C:\Users\Desmond\Documents\GitHub\ICT397_Project\testApp\Debug\testApp.exe
   testApp.vcxproj -> C:\Users\Desmond\Documents\GitHub\ICT397_Project\testApp\Debug\testApp.pdb (Full PDB)

@@ -3,6 +3,9 @@
 #include <map>
 #include "GameAssetCreator.h"
 #include <iostream>
+#include "Player.h"
+#include "WorldTerrain.h"
+#include "EnvironmentObject.h"
 
 template <class T, class Key>
 class GameAssetFactory
@@ -26,6 +29,16 @@ public:
 	{
 		std::cout << "printing" << std::endl;
 	}
+	~GameAssetFactory()
+	{
+		std::map<Key, BaseCreator<T>*>::iterator i = CreateFuncMap.begin();
+		while (i != CreateFuncMap.end())
+		{
+			delete i->second;
+			++i;
+		}
+	}
+
 	static void scriptRegister(lua_State * L)
 	{
 		using namespace luabridge;
@@ -38,16 +51,6 @@ public:
 			.addFunction("Print", &GameAssetFactory<T, Key>::Print)
 			.endClass()
 			.endNamespace();
-		std::cout << "GAF Script Registered" << std::endl;
-	}
-	~GameAssetFactory()
-	{
-		std::map<Key, BaseCreator<T>*>::iterator i = CreateFuncMap.begin();
-		while (i != CreateFuncMap.end())
-		{
-			delete i->second;
-			++i;
-		}
 	}
 };
 

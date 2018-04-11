@@ -11,10 +11,11 @@ EnvironmentObjManager::~EnvironmentObjManager()
 {
 }
 
-void EnvironmentObjManager::addObject(EnvironmentObject * in, std::string key)
+void EnvironmentObjManager::addObject(GameObject * in, std::string key)
 {
+	EnvironmentObject * item = dynamic_cast<EnvironmentObject*>(in);
 	typedef std::pair<std::string, EnvironmentObject*> temp;
-	environmentObjList.insert(temp(key, in));
+	environmentObjList.insert(temp(key, item));
 }
 
 void EnvironmentObjManager::DrawAllObjects()
@@ -22,7 +23,7 @@ void EnvironmentObjManager::DrawAllObjects()
 	eOL::iterator itr;
 	for (itr = environmentObjList.begin(); itr != environmentObjList.end(); ++itr)
 	{
-		std::cout<<(*itr).second->getObjectType()<<endl;
+		std::cout<<(*itr).second->getObjectType()<<std::endl;
 	}
 
 

@@ -22,7 +22,7 @@ void EnvironmentObject::scriptRegister(lua_State * L)
 	using namespace luabridge;
 	getGlobalNamespace(L)
 		.beginNamespace("GA")
-		.deriveClass<EnvironmentObject, GameObject>("Enemy")
+		.deriveClass<EnvironmentObject, GameObject>("EnvironmentObject")
 		.addConstructor<void(*) (void)>()
 		.addFunction("Draw", &EnvironmentObject::Draw)
 		.endClass()

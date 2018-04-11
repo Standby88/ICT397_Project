@@ -10,7 +10,7 @@ private:
 public:
 	EnvironmentObjManager();
 	~EnvironmentObjManager();
-	void addObject(EnvironmentObject* in, std::string key);
+	void addObject(GameObject* in, std::string key);
 	/*voidDrawAllObjects(Shader & S)
 	{
 		eOL::iterator itr;
@@ -22,6 +22,20 @@ public:
 	void DrawAllObjects();//test only
 	void removeObject(std::string k);
 	EnvironmentObject* getObject(std::string);
+	static void scriptRegister(lua_State * L)
+	{
+		using namespace luabridge;
+		getGlobalNamespace(L)
+			.beginNamespace("EOM")
+			.beginClass<EnvironmentObjManager>("EnvironmentObjManager")
+			.addConstructor<void(*) (void)>()
+			.addFunction("addObject", &EnvironmentObjManager::addObject)
+			.addFunction("drawAllObjects", &EnvironmentObjManager::DrawAllObjects)
+			.addFunction("removeObject", &EnvironmentObjManager::removeObject)
+			.addFunction("getObject", &EnvironmentObjManager::getObject)
+			.endClass()
+			.endNamespace();
+	}
 
 };
 

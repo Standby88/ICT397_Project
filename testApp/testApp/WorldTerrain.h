@@ -5,7 +5,6 @@ class WorldTerrain : public GameObject
 private:
 	std::string th;
 public:
-
 	WorldTerrain();
 	
 	~WorldTerrain() {};
