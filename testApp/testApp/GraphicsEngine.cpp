@@ -36,12 +36,15 @@ bool GraphicsEngine::GLFWpro()
 
 	std::cout << "2. Window context creation complete" << std::endl;
 
+	camera = Camera(glm::vec3(0.0f, 0.0f, 3.0f));
+
 	// Set the required callback functions
-	//glfwSetKeyCallback(window, KeyCallback);
-	//glfwSetCursorPosCallback(window, MouseCallback);
+	PlayerInput playerInput = PlayerInput(WIDTH, HEIGHT, &camera, &deltaTime);
+
+	glfwSetInputMode(glfwGetCurrentContext(), GLFW_CURSOR, GLFW_CURSOR_DISABLED);
 
 	// GLFW Options
-	glfwSetInputMode(window, GLFW_CURSOR, GLFW_CURSOR_DISABLED);
+	//glfwSetInputMode(window, GLFW_CURSOR, GLFW_CURSOR_DISABLED);
 
 	std::cout << "3. Input - keyboard complete" << std::endl << "4. Input - mouse complete" << std::endl;
 
@@ -87,9 +90,11 @@ bool GraphicsEngine::GLFWpro()
 
 		// Check and call events
 		glfwPollEvents();
-		//DoMovement();
 
-		camera = Camera(glm::vec3(0.0f, 0.0f, 3.0f));
+		
+
+		playerInput.DoMovement(deltaTime);
+		
 
 		// Clear the colorbuffer
 		glClearColor(0.2f, 0.3f, 0.3f, 1.0f);

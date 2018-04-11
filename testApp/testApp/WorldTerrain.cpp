@@ -5,7 +5,7 @@ WorldTerrain::WorldTerrain()
 	objectPos.x = 0;
 	objectPos.y = 0;
 	objectPos.z = 0;
-	objectModel = NULL;
+	//objectModel = NULL;
 }
 
 void WorldTerrain::Draw()

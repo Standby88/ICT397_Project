@@ -150,11 +150,15 @@
   <ItemGroup>
     <ClCompile Include="Enemy.cpp" />
     <ClCompile Include="GameAssetCreator.cpp" />
+    <ClCompile Include="GameObject.cpp" />
+    <ClCompile Include="GameObject3D.cpp" />
     <ClCompile Include="GasmeAssetFactory.cpp" />
     <ClCompile Include="GraphicsEngine.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="Model.cpp" />
+    <ClCompile Include="ModelManager.cpp" />
     <ClCompile Include="Player.cpp" />
+    <ClCompile Include="PlayerInput.cpp" />
     <ClCompile Include="ScriptEngine.cpp" />
     <ClCompile Include="Shader.cpp" />
     <ClCompile Include="SOIL2\etc1_utils.c" />
@@ -173,10 +177,14 @@
     <ClInclude Include="Enemy.h" />
     <ClInclude Include="GameAssetCreator.h" />
     <ClInclude Include="GameAssetFactory.h" />
+    <ClInclude Include="GameObject.h" />
+    <ClInclude Include="GameObject3D.h" />
     <ClInclude Include="GraphicsEngine.h" />
     <ClInclude Include="Mesh.h" />
     <ClInclude Include="Model.h" />
+    <ClInclude Include="ModelManager.h" />
     <ClInclude Include="Player.h" />
+    <ClInclude Include="PlayerInput.h" />
     <ClInclude Include="ScriptEngine.h" />
     <ClInclude Include="Shader.h" />
     <ClInclude Include="SOIL2\etc1_utils.h" />
