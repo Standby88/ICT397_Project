@@ -22,20 +22,7 @@ public:
 	void DrawAllObjects();//test only
 	void removeObject(std::string k);
 	EnvironmentObject* getObject(std::string);
-	static void scriptRegister(lua_State * L)
-	{
-		using namespace luabridge;
-		getGlobalNamespace(L)
-			.beginNamespace("EOM")
-			.beginClass<EnvironmentObjManager>("EnvironmentObjManager")
-			.addConstructor<void(*) (void)>()
-			.addFunction("addObject", &EnvironmentObjManager::addObject)
-			.addFunction("drawAllObjects", &EnvironmentObjManager::DrawAllObjects)
-			.addFunction("removeObject", &EnvironmentObjManager::removeObject)
-			.addFunction("getObject", &EnvironmentObjManager::getObject)
-			.endClass()
-			.endNamespace();
-	}
+	static void scriptRegister(lua_State * L);
 
 };
 

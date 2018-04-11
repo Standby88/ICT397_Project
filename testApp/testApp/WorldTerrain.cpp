@@ -8,6 +8,11 @@ WorldTerrain::WorldTerrain()
 	objectPos.z = 0;
 }
 
+WorldTerrain::~WorldTerrain()
+{
+
+}
+
 void WorldTerrain::Draw()
 {
 	std::cout << th << std::endl;

@@ -11,6 +11,8 @@ Player::Player()
 
 Player::~Player()
 {
+	objectModel = NULL;
+	delete objectModel;
 }
 
 void Player::Draw(Shader &S)

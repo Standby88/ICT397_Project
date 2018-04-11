@@ -11,6 +11,8 @@ EnvironmentObject::EnvironmentObject()
 
 EnvironmentObject::~EnvironmentObject()
 {
+	objectModel = NULL;
+	delete objectModel;
 }
 
 void EnvironmentObject::Draw(Shader &S)

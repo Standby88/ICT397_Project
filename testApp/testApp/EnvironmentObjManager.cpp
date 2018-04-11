@@ -9,6 +9,12 @@ EnvironmentObjManager::EnvironmentObjManager()
 
 EnvironmentObjManager::~EnvironmentObjManager()
 {
+	
+	eOL::iterator itr;
+	for (itr = environmentObjList.begin(); itr != environmentObjList.end(); ++itr)
+	{
+		delete itr->second;
+	}
 }
 
 void EnvironmentObjManager::addObject(GameObject * in, std::string key)
@@ -37,4 +43,19 @@ void EnvironmentObjManager::removeObject(std::string k)
 EnvironmentObject * EnvironmentObjManager::getObject(std::string k)
 {
 	return environmentObjList[k];
+}
+
+void EnvironmentObjManager::scriptRegister(lua_State * L)
+{
+	using namespace luabridge;
+	getGlobalNamespace(L)
+		.beginNamespace("EOM")
+		.beginClass<EnvironmentObjManager>("EnvironmentObjManager")
+		.addConstructor<void(*) (void)>()
+		.addFunction("addObject", &EnvironmentObjManager::addObject)
+		.addFunction("drawAllObjects", &EnvironmentObjManager::DrawAllObjects)
+		.addFunction("removeObject", &EnvironmentObjManager::removeObject)
+		.addFunction("getObject", &EnvironmentObjManager::getObject)
+		.endClass()
+		.endNamespace();
 }

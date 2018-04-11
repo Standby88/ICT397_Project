@@ -7,7 +7,7 @@ private:
 public:
 	WorldTerrain();
 	
-	~WorldTerrain() {};
+	~WorldTerrain();
 
 	void Draw();
 

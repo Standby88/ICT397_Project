@@ -31,12 +31,13 @@ public:
 	}
 	~GameAssetFactory()
 	{
-		std::map<Key, BaseCreator<T>*>::iterator i = CreateFuncMap.begin();
-		while (i != CreateFuncMap.end())
+		typedef std::map<Key, BaseCreator<T>*>::iterator i;
+		i itr;
+		for (itr = CreateFuncMap.begin(); itr != CreateFuncMap.end(); ++itr)
 		{
-			delete i->second;
-			++i;
+			delete itr->second;
 		}
+
 	}
 
 	static void scriptRegister(lua_State * L)
