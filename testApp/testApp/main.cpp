@@ -4,13 +4,13 @@ int main()
 {
 	
 	ScriptEngine * LuaEn = new ScriptEngine();
-	ScriptEngine::expFuncToLua(LuaEn->tempLuaState());
+	ScriptEngine::expFuncToLua(LuaEn->getLuaState());
 	LuaEn->doLuaScript("Game.lua");
 	EnvironmentObjManager * Etest = NULL;
 	CharacterManager * Ctest = NULL;
-	Etest = getGlobal(LuaEn->tempLuaState(), "EnObjMan");
+	Etest = getGlobal(LuaEn->getLuaState(), "EnObjMan");
 	Etest->DrawAllObjects();
-	Ctest = getGlobal(LuaEn->tempLuaState(), "ChMan");
+	Ctest = getGlobal(LuaEn->getLuaState(), "ChMan");
 	Ctest->drawPlayer();
 	getchar();
 	return 0;
