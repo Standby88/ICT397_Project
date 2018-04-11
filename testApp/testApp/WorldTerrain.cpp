@@ -1,16 +1,16 @@
 #include "WorldTerrain.h"
-
+#include <iostream>
 WorldTerrain::WorldTerrain()
 {
+	th = "Terrain";
 	objectPos.x = 0;
 	objectPos.y = 0;
 	objectPos.z = 0;
-	objectModel = NULL;
 }
 
 void WorldTerrain::Draw()
 {
-
+	std::cout << th << std::endl;
 }
 void WorldTerrain::scriptRegister(lua_State * L)
 {

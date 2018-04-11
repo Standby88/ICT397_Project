@@ -1,13 +1,9 @@
 #include <iostream>
+#include "TerrainManager.h"
 
-#include "GraphicsEngine.h"
 int main()
 {
-	GraphicsEngine grap;
-	if (grap.GLFWpro() == true)
-	{
-		return 1;
-	}
+	getchar();
 	return 0;
 }
 

@@ -2,6 +2,7 @@
 
 Player::Player()
 {
+	objectType = "PlayerType";
 	objectPos.x = 0;
 	objectPos.y = 0;
 	objectPos.z = 0;
@@ -12,7 +13,7 @@ Player::~Player()
 {
 }
 
-void Player::Draw(Shader S)
+void Player::Draw(Shader &S)
 {
 	objectModel->Draw(S);
 }

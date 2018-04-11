@@ -1,22 +1,27 @@
 #pragma once
 
-#include <vector>
+#include <unordered_map>
 #include "EnvironmentObject.h"
 class EnvironmentObjManager
 {
 private:
-	std::vector<EnvironmentObject> eOL;
-
+	typedef std::unordered_map<std::string, EnvironmentObject* > eOL;
+	eOL environmentObjList;
 public:
 	EnvironmentObjManager();
 	~EnvironmentObjManager();
-	void addObject(EnvironmentObject& in);
-	void DrawObjects(Shader S)
+	void addObject(EnvironmentObject* in, std::string key);
+	/*voidDrawAllObjects(Shader & S)
 	{
-		for (int i = 0; i < eOL.size(); i++)
+		eOL::iterator itr;
+		for (itr = environmentObjList.begin(); itr != environmentObjList.end(); ++itr)
 		{
-			eOL[i].Draw(S);
+			(*itr).second->Draw(S) << endl;
 		}
-	}
+	}*/
+	void DrawAllObjects();//test only
+	void removeObject(std::string k);
+	EnvironmentObject* getObject(std::string);
+
 };
 

@@ -25,8 +25,6 @@ public:
 
 	glm::vec3 getObjectPos();
 
-	//virtual void Draw() = 0;
-
 	static void scriptRegister(lua_State * L);
 	
 };

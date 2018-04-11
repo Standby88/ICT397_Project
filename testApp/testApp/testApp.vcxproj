@@ -148,8 +148,12 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClCompile Include="Enemy.cpp" />
+    <ClCompile Include="CharacterManager.cpp" />
+    <ClCompile Include="EnvironmentObject.cpp" />
+    <ClCompile Include="EnvironmentObjManager.cpp" />
     <ClCompile Include="GameAssetCreator.cpp" />
+    <ClCompile Include="GameObject.cpp" />
+    <ClCompile Include="GameObject3D.cpp" />
     <ClCompile Include="GasmeAssetFactory.cpp" />
     <ClCompile Include="GraphicsEngine.cpp" />
     <ClCompile Include="main.cpp" />
@@ -161,6 +165,7 @@
     <ClCompile Include="SOIL2\image_DXT.c" />
     <ClCompile Include="SOIL2\image_helper.c" />
     <ClCompile Include="SOIL2\SOIL2.c" />
+    <ClCompile Include="TerrainManager.cpp" />
     <ClCompile Include="WorldTerrain.cpp" />
   </ItemGroup>
   <ItemGroup>
@@ -170,9 +175,13 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Camera.h" />
-    <ClInclude Include="Enemy.h" />
+    <ClInclude Include="CharacterManager.h" />
+    <ClInclude Include="EnvironmentObject.h" />
+    <ClInclude Include="EnvironmentObjManager.h" />
     <ClInclude Include="GameAssetCreator.h" />
     <ClInclude Include="GameAssetFactory.h" />
+    <ClInclude Include="GameObject.h" />
+    <ClInclude Include="GameObject3D.h" />
     <ClInclude Include="GraphicsEngine.h" />
     <ClInclude Include="Mesh.h" />
     <ClInclude Include="Model.h" />
@@ -196,7 +205,7 @@
     <ClInclude Include="SOIL2\stbi_pvr_c.h" />
     <ClInclude Include="SOIL2\stb_image.h" />
     <ClInclude Include="SOIL2\stb_image_write.h" />
-    <ClInclude Include="GameAsset.h" />
+    <ClInclude Include="TerrainManager.h" />
     <ClInclude Include="WorldTerrain.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />

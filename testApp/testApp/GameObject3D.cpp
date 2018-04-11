@@ -4,12 +4,18 @@ GameObject3D::GameObject3D()
 {
 }
 
+std::string GameObject3D::getObjectType()
+{
+	return objectType;
+}
+
 Model * GameObject3D::getModel()
 {
 	return objectModel;
 }
 
-
-GameObject3D::~GameObject3D()
+void GameObject3D::LoadModel(char * Path)
 {
 }
+
+

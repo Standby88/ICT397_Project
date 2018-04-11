@@ -1,4 +1,4 @@
-﻿  LINK : C:\Users\Desmond\Documents\GitHub\ICT397_Project\testApp\Debug\testApp.exe not found or not built by the last incremental link; performing full link
-LINK : warning LNK4098: defaultlib 'MSVCRT' conflicts with use of other libs; use /NODEFAULTLIB:library
+﻿  main.cpp
+c:\users\desmond\documents\github\ict397_project\testapp\testapp\terrainmanager.h(18): warning C4018: '<': signed/unsigned mismatch
   testApp.vcxproj -> C:\Users\Desmond\Documents\GitHub\ICT397_Project\testApp\Debug\testApp.exe
   testApp.vcxproj -> C:\Users\Desmond\Documents\GitHub\ICT397_Project\testApp\Debug\testApp.pdb (Full PDB)

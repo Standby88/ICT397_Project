@@ -11,7 +11,34 @@ CharacterManager::~CharacterManager()
 {
 }
 
-void CharacterManager::addObject(GameObject3D & in)
+void CharacterManager::addPlayer(Player * in)
 {
-	cOL.push_back(in);
+	p = in;
+}
+
+void CharacterManager::addNPC(std::string key, int * in )
+{
+	typedef std::pair<std::string,int*> temp;
+	nPCList.insert(temp(key, in));
+}
+
+
+Player * CharacterManager::getPlayer()
+{
+	return p;
+}
+
+int * CharacterManager::returnNPC(std::string K)
+{
+	return nPCList[K];
+}
+
+void CharacterManager::RemoveNPC(std::string K)
+{
+	nPCList.erase(K);
+}
+
+void CharacterManager::RemovePlayer()
+{
+	p = NULL;
 }
