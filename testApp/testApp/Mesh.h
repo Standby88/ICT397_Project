@@ -32,7 +32,18 @@ struct Texture
 	string type;
 	aiString path;
 };
-
+/**
+* @class Mesh
+* @brief Used to store mesh details and handle mesh use
+*
+* @author Alex
+* @version 1
+* @date
+*
+* @todo
+*
+* @bug
+*/
 class Mesh
 {
 public:
@@ -43,6 +54,12 @@ public:
 
 	/*  Functions  */
 	// Constructor
+
+	/**
+	* @brief Mesh constructor that initializes a new mess given parameters
+	*
+	*@param vector<Vertex> vertices, vector<GLuint> indices, vector<Texture> texture
+	*/
 	Mesh(vector<Vertex> vertices, vector<GLuint> indices, vector<Texture> textures)
 	{
 		this->vertices = vertices;
@@ -54,6 +71,11 @@ public:
 	}
 
 	// Render the mesh
+	/**
+	* @brief Draw function used to render emsh in scene
+	*
+	*@param Shader shader
+	*/
 	void Draw(Shader shader)
 	{
 		// Bind appropriate textures
@@ -102,10 +124,13 @@ public:
 
 private:
 	/*  Render data  */
+	///data used for rendering
 	GLuint VAO, VBO, EBO;
 
 	/*  Functions    */
-	// Initializes all the buffer objects/arrays
+	/**
+	* @brief Initializes all the buffer objects/arrays
+	*/ 
 	void setupMesh()
 	{
 		// Create buffers/arrays

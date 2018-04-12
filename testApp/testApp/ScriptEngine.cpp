@@ -12,7 +12,7 @@ lua_State* ScriptEngine::getLuaState()
 }
 
 
-void ScriptEngine::report_errors(int a)
+void ScriptEngine::errorReport(int a)
 {
 	if (a != 0)
 	{
@@ -28,7 +28,7 @@ void ScriptEngine::doLuaScript(const char* file)
 		return;
 
 	int state = luaL_dofile(MainLuaState, file);
-	report_errors(state);
+	errorReport(state);
 }
 
 void ScriptEngine::expFuncToLua(lua_State * L)

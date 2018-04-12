@@ -17,20 +17,36 @@
 
 #include "Mesh.h"
 //#include "Shader.h"
-
+/**
+* @class Model
+* @brief Used to load model and store model data for it to be drawn
+*
+* @author Alex
+* @version 1
+* @date
+*
+* @todo
+*
+* @bug
+*/
 using namespace std;
 
 class Model
 {
 public:
 	/*  Functions   */
-	// Constructor, expects a filepath to a 3D model.
+
+	/**
+	* @brief Constructor, expects a filepath to a 3D model.
+	*/
 	Model(GLchar *path)
 	{
 		this->loadModel(path);
 	}
 
-	// Draws the model, and thus all its meshes
+	/**
+	* @brief Draws the model, and thus all its meshes
+	*/
 	void Draw(Shader shader)
 	{
 		for (GLuint i = 0; i < this->meshes.size(); i++)
@@ -40,18 +56,47 @@ public:
 	}
 
 private:
-	/*  Model Data  */
+	/// Model Data  
 	vector<Mesh> meshes;
 	string directory;
 	vector<Texture> textures_loaded;	// Stores all the textures loaded so far, optimization to make sure textures aren't loaded more than once.
 
-										/*  Functions   */
-										// Loads a model with supported ASSIMP extensions from file and stores the resulting meshes in the meshes vector.
+	/**
+    * @brief Loads a model with supported ASSIMP extensions from file and stores the resulting meshes in the meshes vector.
+	*
+	*@param string path
+	*/
 	void loadModel(string path);
+
+	/**
+	* @brief  Processes a node in a recursive fashion. Processes each individual mesh located at the node and repeats this process on its children nodes (if any).
+	*
+	*@param aiNode* node, const aiScene* scene
+	*/
 	void processNode(aiNode* node, const aiScene* scene);
+
+	/**
+	* @brief process mesh data
+	*
+	*@param aiNode* node, const aiScene* scene
+	*@return Mesh
+	*/
 	Mesh processMesh(aiMesh *mesh, const aiScene *scene);
+
+	/**
+	* @brief load material textures
+	*
+	*@param aiMaterial *mat, aiTextureType type, string typeName
+	*@return vector<texture>
+	*/
 	vector<Texture> loadMaterialTextures(aiMaterial *mat, aiTextureType type, string typeName);
 
+	/**
+	* @brief gets the texture from file
+	*
+	*@param const char *path, string directory
+	*@return GLint index
+	*/
 	GLint TextureFromFile(const char *path, string directory);
 
 	/*void loadModel(string path)

@@ -8,6 +8,20 @@
 
 #include <glm/gtc/matrix_transform.hpp>
 
+/**
+* @class Camera
+* @brief Camera class used for viewing the scene
+*
+*
+* @author Alex
+* @version 
+* @date 
+*
+* @todo 
+*
+* @bug 
+*/
+
 enum Camera_Move
 {
 	FORWARD,
@@ -25,7 +39,12 @@ const GLfloat ZOOM = 45.0f;
 class Camera
 {
 public:
-	//camera constructor 
+
+	/**
+	* @brief constructor for camera, initialises all the values
+	*
+	* @param vec3 position, vec3 up, vec3 yaw, vec3 pitch
+	*/
 	Camera(glm::vec3 position = glm::vec3(0.0f, 0.0f, 0.0f), glm::vec3 up = glm::vec3(0.0f, 1.0f, 0.0f), GLfloat yaw = YAW
 		,GLfloat pitch = PITCH) : front(glm::vec3(0.0f, 0.0f, -1.0f)), movementSpeed(SPEED), mouseSensitivity(SENSITIVTY), zoom(ZOOM)
 	{
@@ -36,6 +55,11 @@ public:
 		this->updateCameraVectors();
 	}
 
+	/**
+	* @brief constructor for camera, initialises all the values
+	*
+	* @param GLfloat posX, GLfloat posY, GLfloat posZ, GLfloat upX, GLfloat upY, GLfloat upZ, GLfloat yaw, GLfloat pitch
+	*/
 	Camera(GLfloat posX, GLfloat posY, GLfloat posZ, GLfloat upX, GLfloat upY, GLfloat upZ, GLfloat yaw, GLfloat pitch)
 		:front(glm::vec3(0.0f, 0.0f, -1.0f)), movementSpeed(SPEED), mouseSensitivity(SENSITIVTY), zoom(ZOOM)
 	{
@@ -46,11 +70,22 @@ public:
 		this->updateCameraVectors();
 	}
 
+	/**
+	* @brief accessor for view matrix
+	*
+	* @param 
+	* @return looAt Matrix
+	*/
 	glm::mat4 GetViewMatrix()
 	{
 		return glm::lookAt(this->position, this->position + this->front, this->up);
 	}
 
+	/**
+	* @brief process keyboard input to change camera position
+	*
+	* @param Camera_Move direction, GLfloat deltaTime
+	*/
 	void ProcessKeyboard(Camera_Move direction, GLfloat deltaTime)
 	{
 		GLfloat velocity = this->movementSpeed * deltaTime;
@@ -76,6 +111,11 @@ public:
 		}
 	}
 
+	/**
+	* @brief process mouse input to change camera pitch and yaw
+	*
+	* @param GLfloat xOffset, GLfloat yOffset, GLboolean constrainPitch
+	*/
 	void ProcessMouseMovement(GLfloat xOffset, GLfloat yOffset, GLboolean constrainPitch = true)
 	{
 		xOffset *= this->mouseSensitivity;
@@ -102,6 +142,11 @@ public:
 		this->updateCameraVectors();
 	}
 
+	/**
+	* @brief process mouse scroll input to change camera zoom
+	*
+	* @param GLfloat yOffset
+	*/
 	void ProcessMouseScroll(GLfloat yOffset)
 	{
 		if (this->zoom >= 1.0f && this->zoom <= 45.0f)
@@ -120,6 +165,11 @@ public:
 		}
 	}
 
+	/**
+	* @brief accessor for zoom
+	*
+	* @return zoom
+	*/
 	GLfloat GetZoom()
 	{
 		return this->zoom;
@@ -142,6 +192,10 @@ private:
 	GLfloat mouseSensitivity;
 	GLfloat zoom;
 
+	/**
+	* @brief helper function that is used to update the camera when a parameter is changed
+	*
+	*/
 	void updateCameraVectors()
 	{
 		// Calculate the new Front vector

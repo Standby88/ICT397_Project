@@ -14,7 +14,7 @@ Model * GameObject3D::getModel()
 	return objectModel;
 }
 
-void GameObject3D::LoadModel(char * Path)
+void GameObject3D::LoadModel(unsigned char * Path)
 {
 }
 
