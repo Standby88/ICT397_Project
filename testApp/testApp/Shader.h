@@ -42,7 +42,7 @@ public:
 	*/
 	~Shader();
 
-	///
+	///where the shader programs are stored once they are compiled.
 	int Program;
 	//GLuint Program;
 };
