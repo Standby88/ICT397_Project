@@ -54,7 +54,16 @@ public:
 
 	/*  Functions  */
 	// Constructor
+	Mesh()
+	{
 
+	}
+	
+	void setMesh()
+	{
+		// Now that we have all the required data, set the vertex buffers and its attribute pointers.
+		this->setupMesh();
+	}
 	/**
 	* @brief Mesh constructor that initializes a new mess given parameters
 	*
@@ -108,7 +117,7 @@ public:
 
 		// Also set each mesh's shininess property to a default value (if you want you could extend this to another mesh property and possibly change this value)
 		glUniform1f(glGetUniformLocation(shader.Program, "material.shininess"), 16.0f);
-
+	
 		// Draw mesh
 		glBindVertexArray(this->VAO);
 		glDrawElements(GL_TRIANGLES, this->indices.size(), GL_UNSIGNED_INT, 0);
@@ -122,6 +131,69 @@ public:
 		}
 	}
 
+	void Draw()
+	{
+		glBindVertexArray(this->VAO);
+		glDrawElements(GL_TRIANGLES, this->indices.size(), GL_UNSIGNED_INT, 0);
+		glBindVertexArray(0);
+	}
+	void setT()
+	{
+		GLuint elements[] = {
+			0, 1, 2,3
+		};
+		glm::vec3 Position[6];
+		Position[0].x = -0.5f;
+		Position[0].y = 0.5f;
+		Position[0].z = 0.0f;
+		
+
+		Position[1].x = 0.5f;
+		Position[1].y = -0.5f;
+		Position[1].z = -0.0f;
+		
+
+		Position[2].x = -0.5f;
+		Position[2].y = -0.5f;
+		Position[2].z = 0.0f;
+		
+		Position[3].x = -0.5f;
+		Position[3].y = 0.5f;
+		Position[3].z = 0.0f;
+
+
+		Position[4].x = 0.5f;
+		Position[4].y = -0.5f;
+		Position[4].z = -0.0f;
+
+
+		Position[5].x = -0.5f;
+		Position[5].y = -0.5f;
+		Position[5].z = 0.0f;
+		//GLuint vbo = 0;
+		glGenBuffers(1, &this->VBO);
+		glBindBuffer(GL_ARRAY_BUFFER, this->VBO);
+		glBufferData(GL_ARRAY_BUFFER, 3 * sizeof(glm::vec3), Position, GL_STATIC_DRAW);
+
+	
+
+		glGenVertexArrays(1, &this->VAO);
+		glBindVertexArray(this->VAO);
+		glEnableVertexAttribArray(0);
+		glBindBuffer(GL_ARRAY_BUFFER, this->VBO);
+		glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 0, NULL);
+
+		glGenBuffers(1, &this->EBO);
+		glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, this->EBO);
+		glBufferData(GL_ELEMENT_ARRAY_BUFFER, sizeof(elements), elements, GL_STATIC_DRAW);
+	}
+
+	void dT()
+	{
+		glBindVertexArray(this->VAO);
+		// draw points 0-3 from the currently bound VAO with current in-use shader
+		glDrawElements(GL_TRIANGLES, 3, GL_UNSIGNED_INT, 0);
+	}
 private:
 	/*  Render data  */
 	///data used for rendering
@@ -162,4 +234,6 @@ private:
 
 		glBindVertexArray(0);
 	}
+
+	
 };

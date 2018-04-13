@@ -75,7 +75,7 @@
     <ClCompile Include="TerrainManager.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="PhysicsFacade.cpp">
+    <ClCompile Include="RAwIMGLoader.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
@@ -184,7 +184,7 @@
     <ClInclude Include="TerrainManager.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="PhysicsFacade.h">
+    <ClInclude Include="RAwIMGLoader.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>

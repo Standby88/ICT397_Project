@@ -1,7 +1,6 @@
 #pragma once
 #include "GameObject.h"
 #include "Model.h"
-#include "PhysicsFacade.h"
 
 /**
 * @class GameObject3D

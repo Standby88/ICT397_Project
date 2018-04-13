@@ -89,6 +89,7 @@
       <Optimization>Disabled</Optimization>
       <PreprocessorDefinitions>WIN32;_DEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <AdditionalIncludeDirectories>$(SolutionDir)..\Ext_libs\glm;$(SolutionDir)..\Ext_libs\GLFW\include;$(SolutionDir)..\Ext_libs\GLEW\include;$(SolutionDir)..\Ext_libs\Lua\include;$(SolutionDir)..\Ext_libs\Lua\include\LuaBridge;$(SolutionDir)..\Ext_libs\bullet\src;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
@@ -158,8 +159,8 @@
     <ClCompile Include="GraphicsEngine.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="Model.cpp" />
-    <ClCompile Include="PhysicsFacade.cpp" />
     <ClCompile Include="Player.cpp" />
+    <ClCompile Include="RAwIMGLoader.cpp" />
     <ClCompile Include="ScriptEngine.cpp" />
     <ClCompile Include="Shader.cpp" />
     <ClCompile Include="SOIL2\etc1_utils.c" />
@@ -186,8 +187,8 @@
     <ClInclude Include="GraphicsEngine.h" />
     <ClInclude Include="Mesh.h" />
     <ClInclude Include="Model.h" />
-    <ClInclude Include="PhysicsFacade.h" />
     <ClInclude Include="Player.h" />
+    <ClInclude Include="RAwIMGLoader.h" />
     <ClInclude Include="ScriptEngine.h" />
     <ClInclude Include="Shader.h" />
     <ClInclude Include="SOIL2\etc1_utils.h" />

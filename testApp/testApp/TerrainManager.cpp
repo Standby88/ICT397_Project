@@ -25,7 +25,7 @@ void TerrainManager::DrawTerrain()
 {
 	for (int i = 0; i < terrainList.size(); i++)
 	{
-		(*terrainList[i]).Draw();
+		//(*terrainList[i]).Draw();
 	}
 
 }

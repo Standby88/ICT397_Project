@@ -69,13 +69,17 @@ bool GraphicsEngine::GLFWpro()
 	// Load models
 	Model ourModel("nanosuit/nanosuit.obj");
 	//Model ourModel("TEMP/fixed.dae");
-
+	
 	std::cout << "6. Models loaded" << std::endl;
-
+	WorldTerrain t1;
+	t1.loadHeightfield("height128.raw", 128);
+	t1.collectData();
+	std::cout << "6. Models loaded" << std::endl;
+	
 	// Draw in wireframe
 	//glPolygonMode( GL_FRONT_AND_BACK, GL_LINE );
 
-	glm::mat4 projection = glm::perspective(camera.GetZoom(), (float)SCREEN_WIDTH / (float)SCREEN_HEIGHT, 0.1f, 100.0f);
+	glm::mat4 projection = glm::perspective(camera.GetZoom(), (float)SCREEN_WIDTH / (float)SCREEN_HEIGHT, 0.1f, 10000.0f);
 
 	// Game loop
 	while (!glfwWindowShouldClose(window))
@@ -89,14 +93,14 @@ bool GraphicsEngine::GLFWpro()
 		glfwPollEvents();
 		//DoMovement();
 
-		camera = Camera(glm::vec3(0.0f, 0.0f, 3.0f));
+		camera = Camera(glm::vec3(0.0f,-1.0f, 3.0f));
 
 		// Clear the colorbuffer
 		glClearColor(0.2f, 0.3f, 0.3f, 1.0f);
 		glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 
 		shader.Use();
-
+		glPolygonMode(GL_FRONT_AND_BACK, GL_LINE);
 		glm::mat4 view = camera.GetViewMatrix();
 		glUniformMatrix4fv(glGetUniformLocation(shader.Program, "projection"), 1, GL_FALSE, glm::value_ptr(projection));
 		glUniformMatrix4fv(glGetUniformLocation(shader.Program, "view"), 1, GL_FALSE, glm::value_ptr(view));
@@ -106,7 +110,8 @@ bool GraphicsEngine::GLFWpro()
 		model = glm::translate(model, glm::vec3(0.0f, -1.75f, 0.0f)); // Translate it down a bit so it's at the center of the scene
 		model = glm::scale(model, glm::vec3(1.0f, 1.0f, 1.0f));	// It's a bit too big for our scene, so scale it down
 		glUniformMatrix4fv(glGetUniformLocation(shader.Program, "model"), 1, GL_FALSE, glm::value_ptr(model));
-		ourModel.Draw(shader);
+		//ourModel.Draw(shader);
+		t1.Draw(shader);
 
 		// Swap the buffers
 		glfwSwapBuffers(window);

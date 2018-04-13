@@ -1,6 +1,8 @@
 #pragma once
 #include "GameObject.h"
-
+#include <vector>
+#include "RAwIMGLoader.h"
+#include "Mesh.h"
 /**
 * @class WorldTerrain
 * @brief used to represent terrain of the world
@@ -18,8 +20,18 @@ class WorldTerrain : public GameObject
 {
 private:
 
+	Mesh terMesh;
 	///temp test string
-	std::string th;
+	unsigned char *terrainData;
+	glm::vec3 scale;
+	std::vector<Vertex> vertecies;
+	vector<GLuint> indices;
+	std::vector<unsigned char> hcolor;
+	int size;
+
+	bool inbounds(int xpos, int zpos);
+	unsigned char getHeightColor(int xpos, int zpos);
+	float getHeight(int xpos, int zpos);
 public:
 
 	/**
@@ -36,7 +48,7 @@ public:
 	/**
 	* @brief render the terrain
 	*/
-	void Draw();
+	void Draw(Shader s);
 
 	/**
 	* @brief register all functions to lua to be used.
@@ -45,5 +57,13 @@ public:
 	*/
 	static void scriptRegister(lua_State * L);
 	
+	void collectData();
+
+	bool loadHeightfield(char *filename, const int size);
+
+	void setScalingFactor(glm::vec3 newScale);
+
+
+	int getSize();
 };
 

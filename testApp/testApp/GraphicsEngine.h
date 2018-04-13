@@ -18,7 +18,7 @@
 //#include <glm\gtc\type_ptr.hpp>
 
 #include "SOIL2\SOIL2.h"
-
+#include "WorldTerrain.h"
 /*void KeyCallback(GLFWwindow *window, int key, int scancode, int action, int mode);
 void ScrollCallback(GLFWwindow *window, double xOffset, double yOffset);
 void MouseCallback(GLFWwindow *window, double xPos, double yPos);
