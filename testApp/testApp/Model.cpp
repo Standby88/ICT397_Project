@@ -1,5 +1,15 @@
 #include "Model.h"
 
+Model::Model()
+{
+
+}
+
+char * Model::getName()
+{
+	return m_path;
+}
+
 void Model::loadModel(string path)
 {
 	// Read file via ASSIMP

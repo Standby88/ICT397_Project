@@ -20,6 +20,8 @@
 
 #include "SOIL2\SOIL2.h"
 
+#include "ModelManager.h"
+
 
 class GraphicsEngine
 {
@@ -33,6 +35,8 @@ public:
 	// Window dimensions
 	const GLint WIDTH = 800, HEIGHT = 600;
 	int SCREEN_WIDTH, SCREEN_HEIGHT;
+
+	ModelManager m_Models;
 
 	Camera  camera;
 	GLdouble lastX = WIDTH / 2.0;

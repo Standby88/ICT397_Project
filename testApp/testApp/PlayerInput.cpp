@@ -88,6 +88,11 @@ void PlayerInput::DoMovement(GLfloat time)
 			wire = false;
 		}
 	}
+
+	if (glfwGetKey(glfwGetCurrentContext(), GLFW_KEY_ESCAPE) == GLFW_PRESS)
+	{
+		glfwSetWindowShouldClose(glfwGetCurrentContext(), GL_TRUE);
+	}
 }
 
 void PlayerInput::WrapKeyCallback(GLFWwindow *window, int key, int scancode, int action, int mode)

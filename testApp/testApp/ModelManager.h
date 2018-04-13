@@ -3,6 +3,7 @@
 #include <iostream>
 #include <string>
 
+
 #include "Model.h"
 
 class ModelManager
@@ -13,8 +14,10 @@ public:
 
 	bool AddModel( char * modelPath);
 
+	Model GetModel(char * modelPath);
+
 private:
-	//map<char*, Model> models;
+	map<std::string, Model *> models;
 
 };
 
