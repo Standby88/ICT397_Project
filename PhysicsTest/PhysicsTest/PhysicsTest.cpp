@@ -46,18 +46,23 @@ int main()
 	infile.read(reinterpret_cast<char*>(terrainData), length);
 	infile.close();
 	//-----------------------------------------------------------
-
+	
 	PhysicsFacade pf = PhysicsFacade();
 	PhysicsVector grav(0, -10, 0);
-	PhysicsVector planeNorm(0, 1, 0);
-	float offSet = 1;
+	PhysicsVector planeNorm(1, 0, 0);
+	PhysicsVector boxVec(1, 50, 0);
+	float offSet = 2;
 
-	pf.InitGravity(grav);
-	//pf.CreateStaticRigidPlane(planeNorm, offSet);
+	//pf.InitPhysics(grav);
+		//create a character
+	//pf.CreateKinematicCharacter();
+	pf.SetGravity(-10.f);
 	pf.CreateHeightFieldRigidBody(10, 10, terrainData, 1, 1, false, false);
-	pf.CreateFallingSphereRigidBody(1);
+	pf.CreateSphereRigidBody(1, 1, 0, 50, 0, 0, 0, 0);
+	//pf.CreateFallingBoxRigidBody(boxVec);
 	for (int i = 0; i < 300; i++)
 	{
+		
 		pf.StepSimulation(1 / 60.f, 10);
 	}
 	
