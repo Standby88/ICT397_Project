@@ -70,11 +70,12 @@ void WorldTerrain::collectData()
 		{
 			temp.TexCoords.x = ((float)x / getSize());
 			temp.TexCoords.y = ((float)z / getSize());
-			hc = (float)getHeightColor(x, z)/256.0f;
-			temp.color.x = hc;
-			temp.color.y = hc;
-			temp.color.z = hc;
-			temp.color.w = 1.0f;
+			temp.height = (float)getHeightColor(x, z);
+
+			//temp.color.x = hc.x;
+			//temp.color.y = hc.y;
+			//temp.color.z = hc.z;
+			//temp.color.w = 1.0f;
 			temp.Position.x = ((float)x*scale.x) + objectPos.x;
 			temp.Position.y = (getHeight(x, z)) + objectPos.y;
 			temp.Position.z = ((float)(z)*scale.z) + objectPos.z;
@@ -83,7 +84,11 @@ void WorldTerrain::collectData()
 			terMesh.vertices.push_back(temp);
 		}
 	}
-
+	
+	terMesh.terrainTex[0] = TextureFromFile("pebble.png","images" );
+	terMesh.terrainTex[1] = TextureFromFile("grey.png", "images");
+	terMesh.terrainTex[2] = TextureFromFile("ice.png", "images");
+	terMesh.terrainTex[3] = TextureFromFile("dirt.png", "images");
 	for (int y = 0; y < getSize() -1; ++y)
 	{
 		for (int x = 0; x < getSize() -1; ++x)

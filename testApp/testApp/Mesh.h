@@ -24,8 +24,8 @@ struct Vertex
 	glm::vec3 Normal;
 	// TexCoords
 	glm::vec2 TexCoords;
-
-	glm::vec4 color;
+	//height of point
+	float height;
 };
 
 struct Texture
@@ -53,7 +53,7 @@ public:
 	vector<Vertex> vertices;
 	vector<GLuint> indices;
 	vector<Texture> textures;
-	vector<glm::vec3> t;
+	GLint terrainTex[4];
 	/*  Functions  */
 	// Constructor
 	Mesh()
@@ -63,7 +63,6 @@ public:
 	
 	void setMesh()
 	{
-		// Now that we have all the required data, set the vertex buffers and its attribute pointers.
 		this->setupMesh();
 	}
 	/**
@@ -73,14 +72,39 @@ public:
 	*/
 	Mesh(vector<Vertex> vertices, vector<GLuint> indices, vector<Texture> textures)
 	{
+		
 		this->vertices = vertices;
 		this->indices = indices;
 		this->textures = textures;
-
 		// Now that we have all the required data, set the vertex buffers and its attribute pointers.
 		this->setupMesh();
 	}
+	void drawTerrain(Shader shader)
+	{
+		glUniform1i(glGetUniformLocation(shader.Program, "t1"), 0);
+		glUniform1i(glGetUniformLocation(shader.Program, "t2"), 1);
+		glUniform1i(glGetUniformLocation(shader.Program, "t3"), 2);
+		glUniform1i(glGetUniformLocation(shader.Program, "t4"), 3);
+		GLint t1 = terrainTex[0];
+		glActiveTexture(GL_TEXTURE0);
+		glBindTexture(GL_TEXTURE_2D, t1);
 
+		GLint t2 = terrainTex[1];
+		glActiveTexture(GL_TEXTURE1);
+		glBindTexture(GL_TEXTURE_2D, t2);
+
+		GLint t3 = terrainTex[2];
+		glActiveTexture(GL_TEXTURE2);
+		glBindTexture(GL_TEXTURE_2D, t3);
+
+		GLint t4 = terrainTex[3];
+		glActiveTexture(GL_TEXTURE3);
+		glBindTexture(GL_TEXTURE_2D, t4);
+		// Draw mesh
+		glBindVertexArray(this->VAO);
+		glDrawElements(GL_TRIANGLES, this->indices.size(), GL_UNSIGNED_INT, 0);
+		glBindVertexArray(0);
+	}
 	// Render the mesh
 	/**
 	* @brief Draw function used to render emsh in scene
@@ -120,16 +144,12 @@ public:
 		// Also set each mesh's shininess property to a default value (if you want you could extend this to another mesh property and possibly change this value)
 		glUniform1f(glGetUniformLocation(shader.Program, "material.shininess"), 16.0f);
 		
-		for (int i = 0; i < indices.size(); i++)
-		{
-			//std::cout << indices[i] << std::endl;
-		}
 		
 		// Draw mesh
 		glBindVertexArray(this->VAO);
 		glDrawElements(GL_TRIANGLES, this->indices.size(), GL_UNSIGNED_INT, 0);
 		glBindVertexArray(0);
-
+		
 		// Always good practice to set everything back to defaults once configured.
 		for (GLuint i = 0; i < this->textures.size(); i++)
 		{
@@ -183,7 +203,7 @@ private:
 		glVertexAttribPointer(2, 2, GL_FLOAT, GL_FALSE, sizeof(Vertex), (GLvoid *)offsetof(Vertex, TexCoords));
 
 		glEnableVertexAttribArray(3);
-		glVertexAttribPointer(3, 4, GL_FLOAT, GL_FALSE, sizeof(Vertex), (GLvoid *)offsetof(Vertex, color));
+		glVertexAttribPointer(3, 4, GL_FLOAT, GL_FALSE, sizeof(Vertex), (GLvoid *)offsetof(Vertex, height));
 
 		glBindVertexArray(0);
 	}

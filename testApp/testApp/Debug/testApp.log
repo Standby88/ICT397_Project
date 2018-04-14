@@ -1,35 +1,4 @@
 ﻿  WorldTerrain.cpp
-c:\users\desmond\documents\github\ict397_project\testapp\testapp\mesh.h(123): warning C4018: '<': signed/unsigned mismatch
-  Generating Code...
-  Compiling...
-  main.cpp
-c:\users\desmond\documents\github\ict397_project\testapp\testapp\mesh.h(123): warning C4018: '<': signed/unsigned mismatch
-c:\users\desmond\documents\github\ict397_project\testapp\testapp\graphicsengine.h(64): warning C4244: 'initializing': conversion from 'double' to 'GLfloat', possible loss of data
-c:\users\desmond\documents\github\ict397_project\testapp\testapp\graphicsengine.h(65): warning C4244: 'initializing': conversion from 'double' to 'GLfloat', possible loss of data
-  TerrainManager.cpp
-c:\users\desmond\documents\github\ict397_project\testapp\testapp\mesh.h(123): warning C4018: '<': signed/unsigned mismatch
-c:\users\desmond\documents\github\ict397_project\testapp\testapp\terrainmanager.cpp(26): warning C4018: '<': signed/unsigned mismatch
-  ScriptEngine.cpp
-c:\users\desmond\documents\github\ict397_project\testapp\testapp\mesh.h(123): warning C4018: '<': signed/unsigned mismatch
-  Player.cpp
-c:\users\desmond\documents\github\ict397_project\testapp\testapp\mesh.h(123): warning C4018: '<': signed/unsigned mismatch
-  Model.cpp
-c:\users\desmond\documents\github\ict397_project\testapp\testapp\mesh.h(123): warning C4018: '<': signed/unsigned mismatch
-  GraphicsEngine.cpp
-c:\users\desmond\documents\github\ict397_project\testapp\testapp\mesh.h(123): warning C4018: '<': signed/unsigned mismatch
-c:\users\desmond\documents\github\ict397_project\testapp\testapp\graphicsengine.h(64): warning C4244: 'initializing': conversion from 'double' to 'GLfloat', possible loss of data
-c:\users\desmond\documents\github\ict397_project\testapp\testapp\graphicsengine.h(65): warning C4244: 'initializing': conversion from 'double' to 'GLfloat', possible loss of data
-c:\users\desmond\documents\github\ict397_project\testapp\testapp\graphicsengine.cpp(89): warning C4244: 'initializing': conversion from 'double' to 'GLfloat', possible loss of data
-  GasmeAssetFactory.cpp
-c:\users\desmond\documents\github\ict397_project\testapp\testapp\mesh.h(123): warning C4018: '<': signed/unsigned mismatch
-  GameObject3D.cpp
-c:\users\desmond\documents\github\ict397_project\testapp\testapp\mesh.h(123): warning C4018: '<': signed/unsigned mismatch
-  EnvironmentObject.cpp
-c:\users\desmond\documents\github\ict397_project\testapp\testapp\mesh.h(123): warning C4018: '<': signed/unsigned mismatch
-  EnvironmentObjManager.cpp
-c:\users\desmond\documents\github\ict397_project\testapp\testapp\mesh.h(123): warning C4018: '<': signed/unsigned mismatch
-  CharacterManager.cpp
-c:\users\desmond\documents\github\ict397_project\testapp\testapp\mesh.h(123): warning C4018: '<': signed/unsigned mismatch
-  Generating Code...
+c:\users\desmond\documents\github\ict397_project\testapp\testapp\worldterrain.cpp(65): warning C4101: 'hc': unreferenced local variable
   testApp.vcxproj -> C:\Users\Desmond\Documents\GitHub\ICT397_Project\testApp\Debug\testApp.exe
   testApp.vcxproj -> C:\Users\Desmond\Documents\GitHub\ICT397_Project\testApp\Debug\testApp.pdb (Full PDB)

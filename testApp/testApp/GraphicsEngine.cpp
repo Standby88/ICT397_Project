@@ -73,9 +73,9 @@ bool GraphicsEngine::GLFWpro()
 	std::cout << "6. Models loaded" << std::endl;
 	WorldTerrain t1;
 	t1.loadHeightfield("height128.raw", 128);
-	t1.setScalingFactor(glm::vec3(0.5,1,0.5));
+	t1.setScalingFactor(glm::vec3(1.5f,0.5f,1.5f));
 	t1.collectData();
-	std::cout << "6. Models loaded" << std::endl;
+	std::cout << "7. terrain" << std::endl;
 	
 	// Draw in wireframe
 	//glPolygonMode( GL_FRONT_AND_BACK, GL_LINE );
@@ -94,7 +94,7 @@ bool GraphicsEngine::GLFWpro()
 		glfwPollEvents();
 		//DoMovement();
 
-		camera = Camera(glm::vec3(45.0f,100.0f, 180.0f));
+		camera = Camera(glm::vec3(45.0f,100.0f, 300.0f));
 
 		// Clear the colorbuffer
 		glClearColor(0.2f, 0.3f, 0.3f, 1.0f);
