@@ -73,13 +73,14 @@ bool GraphicsEngine::GLFWpro()
 	std::cout << "6. Models loaded" << std::endl;
 	WorldTerrain t1;
 	t1.loadHeightfield("height128.raw", 128);
+	t1.setScalingFactor(glm::vec3(0.5,1,0.5));
 	t1.collectData();
 	std::cout << "6. Models loaded" << std::endl;
 	
 	// Draw in wireframe
 	//glPolygonMode( GL_FRONT_AND_BACK, GL_LINE );
 
-	glm::mat4 projection = glm::perspective(camera.GetZoom(), (float)SCREEN_WIDTH / (float)SCREEN_HEIGHT, 0.1f, 10000.0f);
+	glm::mat4 projection = glm::perspective(camera.GetZoom(), (float)SCREEN_WIDTH / (float)SCREEN_HEIGHT, 0.0001f, 10000.0f);
 
 	// Game loop
 	while (!glfwWindowShouldClose(window))
@@ -93,14 +94,14 @@ bool GraphicsEngine::GLFWpro()
 		glfwPollEvents();
 		//DoMovement();
 
-		camera = Camera(glm::vec3(0.0f,-1.0f, 3.0f));
+		camera = Camera(glm::vec3(45.0f,100.0f, 180.0f));
 
 		// Clear the colorbuffer
 		glClearColor(0.2f, 0.3f, 0.3f, 1.0f);
 		glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 
 		shader.Use();
-		glPolygonMode(GL_FRONT_AND_BACK, GL_LINE);
+		// glPolygonMode(GL_FRONT_AND_BACK, GL_LINE);
 		glm::mat4 view = camera.GetViewMatrix();
 		glUniformMatrix4fv(glGetUniformLocation(shader.Program, "projection"), 1, GL_FALSE, glm::value_ptr(projection));
 		glUniformMatrix4fv(glGetUniformLocation(shader.Program, "view"), 1, GL_FALSE, glm::value_ptr(view));

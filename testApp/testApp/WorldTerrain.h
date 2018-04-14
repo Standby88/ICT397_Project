@@ -3,6 +3,10 @@
 #include <vector>
 #include "RAwIMGLoader.h"
 #include "Mesh.h"
+struct VertexRGB
+{
+	float t[6];
+};
 /**
 * @class WorldTerrain
 * @brief used to represent terrain of the world
@@ -48,7 +52,7 @@ public:
 	/**
 	* @brief render the terrain
 	*/
-	void Draw(Shader s);
+	void Draw(Shader);
 
 	/**
 	* @brief register all functions to lua to be used.

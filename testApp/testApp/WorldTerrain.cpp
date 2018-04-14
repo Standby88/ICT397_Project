@@ -59,95 +59,45 @@ void WorldTerrain::scriptRegister(lua_State * L)
 void WorldTerrain::collectData()
 {
 
-	terMesh.setT();
 	Vertex temp;
 	GLuint TEMPINDEX = 0;
-	/*terMesh.indices.push_back(TEMPINDEX);
-	temp.Position.x = -100;
-	temp.Position.y = 0;
-	temp.Position.z = 0;
-	temp.TexCoords.x = 0;
-	temp.TexCoords.y = 0;
-	terMesh.vertices.push_back(temp);
+	
+	float hc;
 
-	temp.Position.x = 100;
-	temp.Position.y = 0;
-	temp.Position.z = 0;
-	temp.TexCoords.x = 0;
-	temp.TexCoords.y = 1;
-	terMesh.vertices.push_back(temp);
-
-	temp.Position.x = 0;
-	temp.Position.y = 100;
-	temp.Position.z = 0;
-	temp.TexCoords.x = 1;
-	temp.TexCoords.y = 0;
-	terMesh.vertices.push_back(temp);*/
-	unsigned char hc;
-
-	for (int z = 0; z < getSize() - 1; z++)
+	for (int z = 0; z < getSize(); z++)
 	{
-		for (int x = 0; x < getSize() - 1; x++)
+		for (int x = 0; x < getSize(); x++)
 		{
 			temp.TexCoords.x = ((float)x / getSize());
 			temp.TexCoords.y = ((float)z / getSize());
-			hc = getHeightColor(x, z);
-			hcolor.push_back(hc);
-			temp.Position.x = x;//((float)x*scale.x) + objectPos.x;
-			temp.Position.y = 0.5;//(getHeight(x, z)) + objectPos.y;
-			temp.Position.z = z;//((float)(z)*scale.z) + objectPos.z;
+			hc = (float)getHeightColor(x, z)/256.0f;
+			temp.color.x = hc;
+			temp.color.y = hc;
+			temp.color.z = hc;
+			temp.color.w = 1.0f;
+			temp.Position.x = ((float)x*scale.x) + objectPos.x;
+			temp.Position.y = (getHeight(x, z)) + objectPos.y;
+			temp.Position.z = ((float)(z)*scale.z) + objectPos.z;
 			//temp.Normal = glm::normalize(temp.Position);
 
 			terMesh.vertices.push_back(temp);
-
-			/*TEMPINDEX = 0;
-			terMesh.indices.push_back(TEMPINDEX);
-			TEMPINDEX = 1;
-			terMesh.indices.push_back(TEMPINDEX);
-			TEMPINDEX = 3;
-			terMesh.indices.push_back(TEMPINDEX);
-			TEMPINDEX = 1;
-			terMesh.indices.push_back(TEMPINDEX);
-			TEMPINDEX = 4;
-			terMesh.indices.push_back(TEMPINDEX);
-			TEMPINDEX = 3;
-			terMesh.indices.push_back(TEMPINDEX);*/
-			float start = z * getSize() + x;
-			TEMPINDEX = start;
-			terMesh.indices.push_back(TEMPINDEX);
-			TEMPINDEX = start + 1;
-			terMesh.indices.push_back(TEMPINDEX);
-			TEMPINDEX = start + getSize();
-			terMesh.indices.push_back(TEMPINDEX);
-			TEMPINDEX = start+1;
-			terMesh.indices.push_back(TEMPINDEX);
-			TEMPINDEX = start + getSize();
-			terMesh.indices.push_back(TEMPINDEX);
-			TEMPINDEX = start + getSize() + 1;
-			terMesh.indices.push_back(TEMPINDEX);
 		}
 	}
-	/*int k = 0;
-	for (int z = 0; z < getSize() - 1; z++)
-	{
-		for (int x = 0; x < getSize() - 1; x++)
-		{
-			float start = z * getSize() + x;
-			TEMPINDEX = start;
-			terMesh.indices.push_back(TEMPINDEX);
-			TEMPINDEX = start + 1;
-			terMesh.indices.push_back(TEMPINDEX);
-			TEMPINDEX = start + getSize();
-			terMesh.indices.push_back(TEMPINDEX);
-			TEMPINDEX = start + 1;
-			terMesh.indices.push_back(TEMPINDEX);
-			TEMPINDEX = start + 1 + getSize();
-			terMesh.indices.push_back(TEMPINDEX);
-			TEMPINDEX = start + getSize();
-			terMesh.indices.push_back(TEMPINDEX);
-		}
-	}*/
 
+	for (int y = 0; y < getSize() -1; ++y)
+	{
+		for (int x = 0; x < getSize() -1; ++x)
+		{
+				int start = y * getSize() + x;
+				terMesh.indices.push_back((short)start);
+				terMesh.indices.push_back((short)(start + 1));
+				terMesh.indices.push_back((short)(start + getSize()));
+				terMesh.indices.push_back((short)(start + 1));
+				terMesh.indices.push_back((short)(start + 1 + getSize()));
+				terMesh.indices.push_back((short)(start + getSize()));
+		}
+	}
+	
 	terMesh.setMesh();
 }
 
