@@ -16,8 +16,12 @@ public:
 
 	Model GetModel(char * modelPath);
 
+	static ModelManager & GetModelManager();
+
+	void destroyModelManager();
+
 private:
-	map<std::string, Model *> models;
+	std::map<std::string, Model *> models;
 
 };
 

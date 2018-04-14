@@ -18,10 +18,8 @@
 
 #include "PlayerInput.h"
 
-#include "SOIL2\SOIL2.h"
-
 #include "ModelManager.h"
-
+#include "TextureManager.h"
 
 class GraphicsEngine
 {
@@ -37,6 +35,7 @@ public:
 	int SCREEN_WIDTH, SCREEN_HEIGHT;
 
 	ModelManager m_Models;
+	TextureManager m_TextureMan;
 
 	Camera  camera;
 	GLdouble lastX = WIDTH / 2.0;

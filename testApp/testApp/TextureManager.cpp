@@ -6,10 +6,23 @@ TextureManager::TextureManager()
 {
 }
 
-bool TextureManager::AddTexture(char *path)
+TextureManager & TextureManager::GetTextureManager()
+{
+	static TextureManager * texMan = NULL;
+
+	if (texMan == NULL)
+	{
+		texMan = new TextureManager();
+
+	}
+
+	return * texMan;
+}
+
+bool TextureManager::AddTexture(const char *path)
 {
 	
-	if (textures.count(path))
+	if (textures.count(path) != 1)
 	{
 		textures[path] = LoadTexture(path);
 		return true;
@@ -17,21 +30,18 @@ bool TextureManager::AddTexture(char *path)
 	return false;
 }
 
-GLuint TextureManager::GetTexture(char *path)
+GLuint TextureManager::GetTexture(const char *path)
 {
-	std::map <std::string, GLuint>::iterator it = textures.find(path);
 
-	if(it != textures.end())
+	if(textures.count(path) == 1)
 	{
-		//std::cout << "Model at ";
-		//std::cout << models[modelPath]->getName() << endl;
 		return textures[path];
 	}
 
 	return NULL;
 }
 
-GLuint TextureManager::LoadTexture(char *path)
+GLuint TextureManager::LoadTexture(const char *path)
 {
 	//Generate texture ID and load texture data
 	GLuint textureID;
@@ -56,6 +66,14 @@ GLuint TextureManager::LoadTexture(char *path)
 	SOIL_free_image_data(image);
 
 	return textureID;
+}
+
+void TextureManager::DestroyTextureManager()
+{
+	TextureManager * texMan = &GetTextureManager();
+
+	if (texMan != NULL)
+		delete texMan;
 }
 
 

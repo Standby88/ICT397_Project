@@ -39,9 +39,12 @@ bool GraphicsEngine::GLFWpro()
 	camera = Camera(glm::vec3(0.0f, 0.0f, 3.0f));
 
 	// Set the required callback functions
-	PlayerInput playerInput = PlayerInput(WIDTH, HEIGHT, &camera, &deltaTime);
+	//PlayerInput playerInput = PlayerInput(WIDTH, HEIGHT, &camera, &deltaTime);
+	PlayerInput playerInput = PlayerInput::getCurrentPlayerInput();
+	playerInput.SetAttributes(&camera);
+	playerInput.SetCallbacks();
 
-	glfwSetInputMode(glfwGetCurrentContext(), GLFW_CURSOR, GLFW_CURSOR_DISABLED);
+	//glfwSetInputMode(glfwGetCurrentContext(), GLFW_CURSOR, GLFW_CURSOR_DISABLED);
 
 	// GLFW Options
 	//glfwSetInputMode(window, GLFW_CURSOR, GLFW_CURSOR_DISABLED);
@@ -70,10 +73,26 @@ bool GraphicsEngine::GLFWpro()
 
 	std::cout << "5. Shader setup and compiled" << std::endl;
 	// Load models
-	Model ourModel("nanosuit/nanosuit.obj");
-	//Model ourModel("TEMP/fixed.dae");
+	//Model ourModel("nanosuit/nanosuit.obj");
+	if (m_Models.AddModel("nanosuit/nanosuit.obj"))
+	{
+		std::cout << "6. nanosuit/nanosuit.obj SUCCESS" << std::endl;
+	}
+	else
+		std::cout << "6. nanosuit/nanosuit.obj FAILED" << std::endl;
 
+	//check if it loads more of the same model
+	if (m_Models.AddModel("nanosuit/nanosuit.obj"))
+	{
+		std::cout << "6. Tricked me loaded 2 of the same model" << std::endl;
+	}
+	else
+		std::cout << "6. can't trick me I've seen that model before" << std::endl;
 	std::cout << "6. Models loaded" << std::endl;
+
+	m_TextureMan = TextureManager::GetTextureManager();
+
+	Model m = m_Models.GetModel("nanosuit/nanosuit.obj");
 
 	// Draw in wireframe
 	//glPolygonMode( GL_FRONT_AND_BACK, GL_LINE );
@@ -91,9 +110,9 @@ bool GraphicsEngine::GLFWpro()
 		// Check and call events
 		glfwPollEvents();
 
-		
-
 		playerInput.DoMovement(deltaTime);
+
+		//playerInputDoMovement(deltaTime);
 		
 
 		// Clear the colorbuffer
@@ -111,8 +130,8 @@ bool GraphicsEngine::GLFWpro()
 		model = glm::translate(model, glm::vec3(0.0f, -1.75f, 0.0f)); // Translate it down a bit so it's at the center of the scene
 		model = glm::scale(model, glm::vec3(1.0f, 1.0f, 1.0f));	// It's a bit too big for our scene, so scale it down
 		glUniformMatrix4fv(glGetUniformLocation(shader.Program, "model"), 1, GL_FALSE, glm::value_ptr(model));
-		ourModel.Draw(shader);
 
+		m.Draw(shader);
 		// Swap the buffers
 		glfwSwapBuffers(window);
 	}

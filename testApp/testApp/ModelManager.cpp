@@ -6,6 +6,18 @@ ModelManager::ModelManager()
 {
 }
 
+ModelManager & ModelManager::GetModelManager()
+{
+	ModelManager * modelMan = NULL;
+
+	if (modelMan == NULL)
+	{
+		modelMan = new ModelManager();
+	}
+
+	return *modelMan;
+}
+
 
 bool ModelManager::AddModel(char * modelPath)
 {
@@ -35,6 +47,15 @@ Model ModelManager::GetModel(char * modelPath)
 	return NULL;
 }
 
+void ModelManager::destroyModelManager()
+{
+	ModelManager *modelMan = &GetModelManager();
+
+	if (modelMan != NULL)
+		delete modelMan;
+}
+
 ModelManager::~ModelManager()
 {
+
 }

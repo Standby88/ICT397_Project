@@ -15,12 +15,16 @@ public:
 	TextureManager();
 	~TextureManager();
 
-	bool AddTexture(char * path);
+	bool AddTexture(const char * path);
 
-	GLuint GetTexture(char * path);
+	GLuint GetTexture(const char * path);
+
+	static TextureManager & GetTextureManager();
+
+	void DestroyTextureManager();
 
 private:
-	GLuint LoadTexture(char * path);
+	GLuint LoadTexture(const char * path);
 
 	std::map <std::string, GLuint> textures;
 };
