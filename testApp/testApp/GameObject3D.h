@@ -7,7 +7,7 @@ protected:
 	Model * objectModel;
 public:
 	GameObject3D();
-	virtual ~GameObject3D() {};
+	virtual ~GameObject3D();
 	virtual void Draw(Shader S) = 0;
 	Model * getModel();
 	void LoadModel(char * Path);

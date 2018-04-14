@@ -5,10 +5,10 @@ GameObject::GameObject()
 	objectPos.x = 0;
 	objectPos.y = 0;
 	objectPos.z = 0;
-	objectModel = NULL;
+	//objectModel = NULL;
 }
 
-void GameObject::updateOject(float x, float y, float z)
+void GameObject::updateObject(float x, float y, float z)
 {
 	objectPos.x = x;
 	objectPos.y = y;
@@ -26,7 +26,7 @@ void GameObject::scriptRegister(lua_State * L)
 		.beginNamespace("GA")
 		.beginClass<GameObject>("GameObject")
 		.addConstructor<void(*) (void)>()
-		.addFunction("updateObject", &GameObject::updateOject)
+		.addFunction("updateObject", &GameObject::updateObject)
 		.addFunction("getObjectPos", &GameObject::getObjectPos)
 		.endClass()
 		.endNamespace();

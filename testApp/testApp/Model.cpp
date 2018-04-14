@@ -1,5 +1,15 @@
 #include "Model.h"
 
+Model::Model()
+{
+
+}
+
+char * Model::getName()
+{
+	return m_path;
+}
+
 void Model::loadModel(string path)
 {
 	// Read file via ASSIMP
@@ -121,6 +131,7 @@ Mesh Model::processMesh(aiMesh *mesh, const aiScene *scene)
 // The required info is returned as a Texture struct.
 vector<Texture> Model::loadMaterialTextures(aiMaterial *mat, aiTextureType type, string typeName)
 {
+	TextureManager texMan = TextureManager::GetTextureManager();
 	vector<Texture> textures;
 
 	for (GLuint i = 0; i < mat->GetTextureCount(type); i++)
@@ -145,7 +156,13 @@ vector<Texture> Model::loadMaterialTextures(aiMaterial *mat, aiTextureType type,
 		if (!skip)
 		{   // If texture hasn't been loaded already, load it
 			Texture texture;
-			texture.id = TextureFromFile(str.C_Str(), this->directory);
+			//texture.id = TextureFromFile(str.C_Str(), this->directory);
+			string filename = string(str.C_Str());
+			filename = this->directory + '/' + filename;
+			//add the texture to the textureManager
+			texMan.AddTexture(filename.c_str());
+			//get the texture from the textureManager
+			texture.id = texMan.GetTexture(filename.c_str());
 			texture.type = typeName;
 			texture.path = str;
 			textures.push_back(texture);
@@ -164,7 +181,7 @@ GLint Model::TextureFromFile(const char *path, string directory)
 	filename = directory + '/' + filename;
 	GLuint textureID;
 	glGenTextures(1, &textureID);
-
+	
 	int width, height;
 
 	unsigned char *image = SOIL_load_image(filename.c_str(), &width, &height, 0, SOIL_LOAD_RGB);
