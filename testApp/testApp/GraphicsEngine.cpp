@@ -40,9 +40,9 @@ bool GraphicsEngine::GLFWpro()
 
 	// Set the required callback functions
 	//PlayerInput playerInput = PlayerInput(WIDTH, HEIGHT, &camera, &deltaTime);
-	PlayerInput playerInput = PlayerInput::getCurrentPlayerInput();
-	playerInput.SetAttributes(&camera);
-	playerInput.SetCallbacks();
+	//PlayerInput playerInput = PlayerInput::getCurrentPlayerInput();
+	//playerInput.SetAttributes(&camera);
+	//playerInput.SetCallbacks();
 
 	//glfwSetInputMode(glfwGetCurrentContext(), GLFW_CURSOR, GLFW_CURSOR_DISABLED);
 
@@ -70,7 +70,7 @@ bool GraphicsEngine::GLFWpro()
 
 	// Setup and compile our shaders
 	Shader shader("3dvsShaderTEMP.vs", "3dfragShaderTEMP.frag");
-
+	//Shader terrainShader("terrainvertex.vs","terrainfrag.frag");
 	std::cout << "5. Shader setup and compiled" << std::endl;
 	// Load models
 	//Model ourModel("nanosuit/nanosuit.obj");
@@ -110,7 +110,7 @@ bool GraphicsEngine::GLFWpro()
 		// Check and call events
 		glfwPollEvents();
 
-		playerInput.DoMovement(deltaTime);
+		//playerInput.DoMovement(deltaTime);
 
 		//playerInputDoMovement(deltaTime);
 		

@@ -17,7 +17,6 @@
 #include <glm\gtc\matrix_transform.hpp>
 
 #include "PlayerInput.h"
-
 #include "ModelManager.h"
 #include "TextureManager.h"
 
