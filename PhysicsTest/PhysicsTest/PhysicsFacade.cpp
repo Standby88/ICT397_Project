@@ -55,10 +55,10 @@ void PhysicsFacade::SetGravity(float grav)
 	this->dynamicsWorld->setGravity(gravity);
 }*/
 
-int PhysicsFacade::AssignObjectIndex()
+/*int PhysicsFacade::AssignObjectIndex()
 {
 	return this->bodyIndex++;
-}
+}*/
 
 /*void PhysicsFacade::CharacterSetup(float charW, float charH, float xPos, float yPos, float zPos, float m)
 {
@@ -103,7 +103,7 @@ int PhysicsFacade::AssignObjectIndex()
 
 
 //uses a heightmap to generate a collidable terrain
-int PhysicsFacade::CreateHeightFieldRigidBody(int 	heightStickWidth, int heightStickLength,
+void PhysicsFacade::CreateHeightFieldRigidBody(int 	heightStickWidth, int heightStickLength,
 	const void * heightfieldData, float scaleHeight, int upAxis,
 	bool useFloatData, bool flipQuadEdges)
 {
@@ -124,10 +124,10 @@ int PhysicsFacade::CreateHeightFieldRigidBody(int 	heightStickWidth, int heightS
 	
 	dynamicsWorld->addRigidBody(hFieldRigidBody);
 	
-	return AssignObjectIndex();
+	
 }
 
-int PhysicsFacade::CreateSphereRigidBody(float rad, float m, float xPos, float yPos, float zPos, float xIner, float yIner, float zIner)
+void PhysicsFacade::CreateSphereRigidBody(float rad, float m, float xPos, float yPos, float zPos, float xIner, float yIner, float zIner)
 {
 	btCollisionShape* sphereShape = new btSphereShape((btScalar)rad);
 	this->collisionShapes.push_back(sphereShape);
@@ -154,10 +154,10 @@ int PhysicsFacade::CreateSphereRigidBody(float rad, float m, float xPos, float y
 
 	dynamicsWorld->addRigidBody(body);
 
-	return AssignObjectIndex();
+	
 }
 
-int PhysicsFacade::CreateRigidBodyBox(int h, int w, int l, int m, int xPos, int yPos, int zPos, int xIner, int yIner, int zIner)
+void PhysicsFacade::CreateRigidBodyBox(int h, int w, int l, int m, int xPos, int yPos, int zPos, int xIner, int yIner, int zIner)
 {
 	btCollisionShape* boxShape = new btBoxShape(btVector3(btScalar(w), btScalar(h), btScalar(l)));
 	this->collisionShapes.push_back(boxShape);
@@ -183,11 +183,11 @@ int PhysicsFacade::CreateRigidBodyBox(int h, int w, int l, int m, int xPos, int 
 	
 	dynamicsWorld->addRigidBody(body);
 	
-	return AssignObjectIndex();
+	
 }
 
 //not really use atm
-int PhysicsFacade::CreateRigidBodyPlane(const PhysicsVector& planeNorm, float oSet)
+/*int PhysicsFacade::CreateRigidBodyPlane(const PhysicsVector& planeNorm, float oSet)
 {
 	btCollisionShape* planeShape = new btStaticPlaneShape(btVector3(planeNorm.x, planeNorm.y, planeNorm.z), oSet);
 	btVector3 planeNormal = btVector3(planeNorm.x, planeNorm.y, planeNorm.z);
@@ -244,7 +244,7 @@ int PhysicsFacade::CreateFallingConeRigidBody(float radius, float height)
 	dynamicsWorld->addRigidBody(fallRigidBody);
 	//collisionObjects.push_back(*fallRigidBody);
 	return AssignObjectIndex();
-}
+}*/
 
 void PhysicsFacade::CharacterMovement(int charIndex, float dt, int moveDir)
 {

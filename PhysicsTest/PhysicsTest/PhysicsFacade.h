@@ -63,18 +63,17 @@ typedef struct PhysicsVector
 class PhysicsFacade
 {
 private:
-	
+		/// btDefaultCollisionConfiguration object pointer
 	btDefaultCollisionConfiguration* collisionConfiguration;
-	
+		/// btCollisionDispatcher object pointer
 	btCollisionDispatcher* dispatcher;
-	
+		/// btBroadphaseInterface object pointer
 	btBroadphaseInterface* overLappingPairCache;
-
+		/// btSequentialImpulseConstraintSolver object pointer
 	btSequentialImpulseConstraintSolver* solver;
-	
-	//used to keep track of shapes
+		/// used to keep track of shapes
 	btAlignedObjectArray<btCollisionShape*> collisionShapes;
-
+		/// btDiscreteDynamicsWorld object pointer
 	btDiscreteDynamicsWorld* dynamicsWorld;
 	/*
 	//std::vector<btCollisionObject> collisionObjects;
@@ -84,7 +83,7 @@ private:
 	btRigidBody* pBody;*/
 
 
-	int bodyIndex;
+	//int bodyIndex;
 
 	/**
 	* @brief
@@ -96,13 +95,24 @@ private:
 	* @pre
 	* @post
 	*/
-	int AssignObjectIndex();
+	//int AssignObjectIndex();
 
 public:
+		///Default constructor to initiailise class member variables
 	PhysicsFacade();
-	
+		///Default destructor to free memory
 	~PhysicsFacade();
 
+	/**
+	* @brief Sets the gravity
+	*
+	*	
+	*
+	* @param float
+	* @return void
+	* @pre
+	* @post
+	*/
 	void SetGravity(float grav);
 
 	//PhysicsFacade(PhysicsFacade const &) = delete;
@@ -119,7 +129,7 @@ public:
 	* @pre
 	* @post
 	*/
-	void InitPhysics(PhysicsVector& grav);
+	//void InitPhysics(PhysicsVector& grav);
 
 	//void CharacterSetup(float charW, float charH, float xPosition, float yPosition, float zPosition, float mass);
 
@@ -133,10 +143,10 @@ public:
 	* @pre
 	* @post
 	*/
-	int CreateKinematicCharacter();
+	//int CreateKinematicCharacter();
 
 	/**
-	* @brief
+	* @brief 
 	*
 	*
 	*
@@ -148,46 +158,46 @@ public:
 	int CreateRigidBodyPlane(const PhysicsVector& planeNorm, float offset);
 
 	/**
-	* @brief
+	* @brief Takes in a height field and creates a rigid body
 	*
+	* 
 	*
-	*
-	* @param
-	* @return
+	* @param int, int, const void*, float, int, bool, bool
+	* @return void 
 	* @pre
 	* @post
 	*/
-	int CreateHeightFieldRigidBody(int heightStickWidth, int heightStickLength,
+	void CreateHeightFieldRigidBody(int heightStickWidth, int heightStickLength,
 		const void * heightfieldData, float scaleHeight, int upAxis,
 		bool useFloatData, bool flipQuadEdges);
 
 	/**
-	* @brief
+	* @brief Creates a spherical rigid body
 	*
 	*
 	*
-	* @param
-	* @return
+	* @param float, float, float, float, float, float, float, float
+	* @return void
 	* @pre
 	* @post
 	*/
-	int CreateSphereRigidBody(float radius, float mass, float xPosition, float yPosition, float zPosition, 
+	void CreateSphereRigidBody(float radius, float mass, float xPosition, float yPosition, float zPosition, 
 		float xInertia, float yInertia, float zInertia);
 
 	/**
-	* @brief
+	* @brief Creates a box shaped rigid body
 	*
 	*
 	*
-	* @param
+	* @param int, int, int, int, int, int, int, int, int, int
 	* @return
 	* @pre
 	* @post
 	*/
-	int CreateRigidBodyBox(int height, int width, int length, int mass, int xPosition, int yPosition, int zPosition, int xInertia, int yInertia, int zInertia);
+	void CreateRigidBodyBox(int height, int width, int length, int mass, int xPosition, int yPosition, int zPosition, int xInertia, int yInertia, int zInertia);
 
 	/**
-	* @brief
+	* @brief 
 	*
 	*
 	*
@@ -232,53 +242,63 @@ public:
 	void CharacterMovement(int characterIndex, float dt, int moveDirection);
 
 	/**
-	* @brief
+	* @brief Updates the rigid bodies within the world
 	*
 	*
 	*
-	* @param
-	* @return
+	* @param float, int
+	* @return void
 	* @pre
 	* @post
 	*/
 	void StepSimulation(float tStep, int maxSubSteps);
 
 	/**
-	* @brief
+	* @brief Returns the X value of a body
 	*
 	*
 	*
-	* @param
-	* @return
+	* @param int
+	* @return float
 	* @pre
 	* @post
 	*/
 	float GetXOrigin(int i);
 
 	/**
-	* @brief
+	* @brief Returns the Y value of a body
 	*
 	*
 	*
-	* @param
-	* @return
+	* @param int 
+	* @return float
 	* @pre
 	* @post
 	*/
 	float GetYOrigin(int i);
 
 	/**
-	* @brief
+	* @brief Returns the Z value of a body
 	*
 	*
 	*
-	* @param
-	* @return
+	* @param int 
+	* @return float
 	* @pre
 	* @post
 	*/
 	float GetZOrigin(int i);
 
+	/**
+	* @brief Exposes the class methods to Lua
+	*
+	*
+	*
+	* @param lua_state*
+	* @return void
+	* @pre
+	* @post
+	*/
 	//void scriptRegister(lua_state * L);
 
 };
