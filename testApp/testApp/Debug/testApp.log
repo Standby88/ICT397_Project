@@ -1,3 +1,4 @@
 ﻿  GraphicsEngine.cpp
-  testApp.vcxproj -> C:\Users\Desmond\Documents\GitHub\ICT397_Project\testApp\Debug\testApp.exe
-  testApp.vcxproj -> C:\Users\Desmond\Documents\GitHub\ICT397_Project\testApp\Debug\testApp.pdb (Full PDB)
+LINK : warning LNK4098: defaultlib 'MSVCRT' conflicts with use of other libs; use /NODEFAULTLIB:library
+  testApp.vcxproj -> C:\Users\Ducku\Documents\ICT397 - game\Work\ICT397_Project\testApp\Debug\testApp.exe
+  testApp.vcxproj -> C:\Users\Ducku\Documents\ICT397 - game\Work\ICT397_Project\testApp\Debug\testApp.pdb (Full PDB)

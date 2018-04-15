@@ -62,7 +62,7 @@ Shader::Shader(const char *vertexPath, const char *fragPath)
 	if (!success)
 	{
 		glGetShaderInfoLog(fragShader, 512, NULL, infolog);
-		std::cout << "ERROR::SHADER::FRAGMENT:COMPILATION FAILED\n" << infolog << std::endl;
+		std::cout << "ERROR::SHADER::FRAGMENT:COMPILATION FAILED\n" << fragPath << " \n" << infolog << std::endl;
 	}
 
 	this->Program = glCreateProgram();
