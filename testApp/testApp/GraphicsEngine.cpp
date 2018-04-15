@@ -40,6 +40,8 @@ bool GraphicsEngine::GLFWpro()
 
 	// Set the required callback functions
 	//PlayerInput playerInput = PlayerInput(WIDTH, HEIGHT, &camera, &deltaTime);
+
+	
 	PlayerInput playerInput = PlayerInput::getCurrentPlayerInput();
 	playerInput.SetAttributes(&camera);
 	playerInput.SetCallbacks();

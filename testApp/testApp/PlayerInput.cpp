@@ -26,7 +26,8 @@ PlayerInput::PlayerInput(int width, int height, Camera *cam, GLfloat* deltaTime)
 void PlayerInput::destroyCurrentPlayerInput()
 {
 	PlayerInput *playerInput = &getCurrentPlayerInput();
-	delete playerInput;
+	if(playerInput != NULL)
+		delete playerInput;
 }
 
 PlayerInput & PlayerInput::getCurrentPlayerInput()
@@ -35,16 +36,38 @@ PlayerInput & PlayerInput::getCurrentPlayerInput()
 
 	if (playerInput == NULL) {
 
-		glfwSetKeyCallback(glfwGetCurrentContext(), * WrapKeyCallback);
-		glfwSetCursorPosCallback(glfwGetCurrentContext(), * WrapMouseCallback);
-		glfwSetInputMode(glfwGetCurrentContext(), GLFW_CURSOR, GLFW_CURSOR_DISABLED);
+		/*glfwSetKeyCallback(glfwGetCurrentContext(), *WrapKeyCallback);
+		glfwSetCursorPosCallback(glfwGetCurrentContext(), *WrapMouseCallback);
+		glfwSetInputMode(glfwGetCurrentContext(), GLFW_CURSOR, GLFW_CURSOR_DISABLED);*/
 
-		//playerInput = new PlayerInput();
+		playerInput = new PlayerInput();
 	}
 
 	return *playerInput;
 }
 
+
+void PlayerInput::SetAttributes(Camera *cam)
+{
+	glfwGetWindowSize(glfwGetCurrentContext(), &w, &h);
+	lastX = w / 2;
+	lastY = h / 2;
+
+	m_time = glfwGetTime();
+
+	*keys = new bool[1024];
+
+	firstMouse = true;
+
+	camera = cam;
+}
+
+void PlayerInput::SetCallbacks()
+{
+	glfwSetKeyCallback(glfwGetCurrentContext(), *WrapKeyCallback);
+	glfwSetCursorPosCallback(glfwGetCurrentContext(), *WrapMouseCallback);
+	//glfwSetInputMode(glfwGetCurrentContext(), GLFW_CURSOR, GLFW_CURSOR_DISABLED);
+}
 
 PlayerInput::~PlayerInput()
 {
@@ -55,13 +78,13 @@ PlayerInput::~PlayerInput()
 void PlayerInput::DoMovement(GLfloat time)
 {
 	// Camera controls
-	if(glfwGetKey(glfwGetCurrentContext(), GLFW_KEY_W) == GLFW_PRESS|| glfwGetKey(glfwGetCurrentContext(), GLFW_KEY_W) == GLFW_REPEAT)
+	if (glfwGetKey(glfwGetCurrentContext(), GLFW_KEY_W) == GLFW_PRESS || glfwGetKey(glfwGetCurrentContext(), GLFW_KEY_W) == GLFW_REPEAT)
 	{
 		//std::cout << "GAMEPLAY - W or UP - at TIME - "<< time << std::endl;
 		camera->ProcessKeyboard(FORWARD, time);
 	}
 
-	if (glfwGetKey(glfwGetCurrentContext(), GLFW_KEY_S) == GLFW_PRESS|| glfwGetKey(glfwGetCurrentContext(), GLFW_KEY_S) == GLFW_REPEAT)
+	if (glfwGetKey(glfwGetCurrentContext(), GLFW_KEY_S) == GLFW_PRESS || glfwGetKey(glfwGetCurrentContext(), GLFW_KEY_S) == GLFW_REPEAT)
 	{
 		//std::cout << "GAMEPLAY - S or DOWN" << std::endl;
 		camera->ProcessKeyboard(BACKWARD, time);
@@ -69,12 +92,11 @@ void PlayerInput::DoMovement(GLfloat time)
 
 	/*if (keys[GLFW_KEY_A] || keys[GLFW_KEY_LEFT])
 	{
-		camera->ProcessKeyboard(LEFT, m_time);
+	camera->ProcessKeyboard(LEFT, m_time);
 	}
-
 	if (keys[GLFW_KEY_D] || keys[GLFW_KEY_RIGHT])
 	{
-		camera->ProcessKeyboard(RIGHT, m_time);
+	camera->ProcessKeyboard(RIGHT, m_time);
 	}*/
 
 	if (glfwGetKey(glfwGetCurrentContext(), GLFW_KEY_V) == GLFW_PRESS)
@@ -144,7 +166,8 @@ void PlayerInput::MouseCallback(GLFWwindow *window, double xPos, double yPos)
 	lastX = xPos;
 	lastY = yPos;
 
-	camera->ProcessMouseMovement(xOffset, yOffset);
+	if (xOffset > 0.0f || yOffset > 0.0f)
+		camera->ProcessMouseMovement(xOffset, yOffset);
 }
 
 void PlayerInput::WrapScrollCallback(GLFWwindow *window, double xOffset, double yOffset)
