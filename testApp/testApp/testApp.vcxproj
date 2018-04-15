@@ -148,6 +148,7 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="Camera.cpp" />
     <ClCompile Include="Enemy.cpp" />
     <ClCompile Include="GameAssetCreator.cpp" />
     <ClCompile Include="GameObject.cpp" />
@@ -165,6 +166,7 @@
     <ClCompile Include="SOIL2\image_DXT.c" />
     <ClCompile Include="SOIL2\image_helper.c" />
     <ClCompile Include="SOIL2\SOIL2.c" />
+    <ClCompile Include="TextureManager.cpp" />
     <ClCompile Include="WorldTerrain.cpp" />
   </ItemGroup>
   <ItemGroup>
@@ -205,6 +207,7 @@
     <ClInclude Include="SOIL2\stb_image.h" />
     <ClInclude Include="SOIL2\stb_image_write.h" />
     <ClInclude Include="GameAsset.h" />
+    <ClInclude Include="TextureManager.h" />
     <ClInclude Include="WorldTerrain.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
