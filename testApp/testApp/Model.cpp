@@ -5,9 +5,23 @@ Model::Model()
 
 }
 
-char * Model::getName()
+std::string Model::getName()
 {
 	return m_path;
+}
+
+void Model::scriptRegister(lua_State * L)
+{
+	using namespace luabridge;
+	getGlobalNamespace(L)
+		.beginNamespace("MOD")
+		.beginClass<Model>("Model")
+		.addConstructor<void(*) (void)>()
+		.addConstructor<void(*) (GLchar *)>()
+		.addFunction("Draw", &Model::Draw)
+		.addFunction("getName", &Model::getName)
+		.endClass()
+		.endNamespace();
 }
 
 void Model::loadModel(string path)

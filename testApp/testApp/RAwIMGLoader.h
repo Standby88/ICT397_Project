@@ -4,6 +4,6 @@
 class RawIMGLoader
 {
 public:
-	static unsigned char* loadRaw(char *filename, const int size);
+	static unsigned char* loadRaw(const char *filename, const int size);
 };
 

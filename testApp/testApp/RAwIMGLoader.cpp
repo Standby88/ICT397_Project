@@ -4,7 +4,7 @@
 
 
 
-unsigned char * RawIMGLoader::loadRaw(char * filename, const int size)
+unsigned char * RawIMGLoader::loadRaw(const char * filename, const int size)
 {
 	unsigned char * data = NULL;
 	std::ifstream infile(filename, std::ios::binary);

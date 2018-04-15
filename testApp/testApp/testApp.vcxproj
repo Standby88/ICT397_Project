@@ -148,11 +148,13 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="CharacterManager.cpp" />
     <ClCompile Include="Enemy.cpp" />
+    <ClCompile Include="EnvironmentObject.cpp" />
+    <ClCompile Include="EnvironmentObjManager.cpp" />
     <ClCompile Include="GameAssetCreator.cpp" />
     <ClCompile Include="GameObject.cpp" />
     <ClCompile Include="GameObject3D.cpp" />
-    <ClCompile Include="GasmeAssetFactory.cpp" />
     <ClCompile Include="GraphicsEngine.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="Model.cpp" />
@@ -160,12 +162,14 @@
     <ClCompile Include="Player.cpp" />
     <ClCompile Include="PlayerInput.cpp" />
     <ClCompile Include="RAwIMGLoader.cpp" />
+    <ClCompile Include="SceneRender.cpp" />
     <ClCompile Include="ScriptEngine.cpp" />
     <ClCompile Include="Shader.cpp" />
     <ClCompile Include="SOIL2\etc1_utils.c" />
     <ClCompile Include="SOIL2\image_DXT.c" />
     <ClCompile Include="SOIL2\image_helper.c" />
     <ClCompile Include="SOIL2\SOIL2.c" />
+    <ClCompile Include="TerrainManager.cpp" />
     <ClCompile Include="TextureManager.cpp" />
     <ClCompile Include="WorldTerrain.cpp" />
   </ItemGroup>
@@ -176,7 +180,10 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Camera.h" />
+    <ClInclude Include="CharacterManager.h" />
     <ClInclude Include="Enemy.h" />
+    <ClInclude Include="EnvironmentObject.h" />
+    <ClInclude Include="EnvironmentObjManager.h" />
     <ClInclude Include="GameAssetCreator.h" />
     <ClInclude Include="GameAssetFactory.h" />
     <ClInclude Include="GameObject.h" />
@@ -188,6 +195,7 @@
     <ClInclude Include="Player.h" />
     <ClInclude Include="PlayerInput.h" />
     <ClInclude Include="RAwIMGLoader.h" />
+    <ClInclude Include="SceneRender.h" />
     <ClInclude Include="ScriptEngine.h" />
     <ClInclude Include="Shader.h" />
     <ClInclude Include="SOIL2\etc1_utils.h" />
@@ -207,7 +215,7 @@
     <ClInclude Include="SOIL2\stbi_pvr_c.h" />
     <ClInclude Include="SOIL2\stb_image.h" />
     <ClInclude Include="SOIL2\stb_image_write.h" />
-    <ClInclude Include="GameAsset.h" />
+    <ClInclude Include="TerrainManager.h" />
     <ClInclude Include="TextureManager.h" />
     <ClInclude Include="WorldTerrain.h" />
   </ItemGroup>

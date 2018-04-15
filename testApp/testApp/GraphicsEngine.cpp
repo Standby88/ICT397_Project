@@ -8,6 +8,9 @@ GraphicsEngine::GraphicsEngine()
 
 bool GraphicsEngine::GLFWpro()
 {
+	ScriptEngine * LuaEn = new ScriptEngine();
+	ScriptEngine::expFuncToLua(LuaEn->getLuaState());
+	
 	// Init GLFW
 	glfwInit();
 	// Set all the required options for GLFW
@@ -30,13 +33,16 @@ bool GraphicsEngine::GLFWpro()
 		return false;
 	}
 
+	
+
+
 	glfwMakeContextCurrent(window);
 
 	glfwGetFramebufferSize(window, &SCREEN_WIDTH, &SCREEN_HEIGHT);
 
 	std::cout << "2. Window context creation complete" << std::endl;
 
-	camera = Camera(glm::vec3(0.0f, 0.0f, 3.0f));
+	camera = Camera(glm::vec3(50.0f, 90.0f, 250.0f));
 
 	// Set the required callback functions
 	//PlayerInput playerInput = PlayerInput(WIDTH, HEIGHT, &camera, &deltaTime);
@@ -60,6 +66,7 @@ bool GraphicsEngine::GLFWpro()
 		return false;
 	}
 
+	LuaEn->doLuaScript("Game.lua");
 	// Define the viewport dimensions
 	glViewport(0, 0, SCREEN_WIDTH, SCREEN_HEIGHT);
 
@@ -69,41 +76,62 @@ bool GraphicsEngine::GLFWpro()
 	std::cout << "4. Viewport creation complete" << std::endl;
 
 	// Setup and compile our shaders
-	Shader shader("3dvsShaderTEMP.vs", "3dfragShaderTEMP.frag");
-	//Shader terrainShader("terrainvertex.vs","terrainfrag.frag");
+	Shader Tshader("terrainvertex.vs", "terrainfrag.frag");
+	Shader S("3dvsShaderTEMP.vs", "3dfragShaderTEMP.frag");
+	
 	std::cout << "5. Shader setup and compiled" << std::endl;
 	// Load models
 	//Model ourModel("nanosuit/nanosuit.obj");
-	if (m_Models.AddModel("nanosuit/nanosuit.obj"))
+	if (m_Models.addModel("nanosuit/nanosuit.obj"))
 	{
 		std::cout << "6. nanosuit/nanosuit.obj SUCCESS" << std::endl;
 	}
 	else
 		std::cout << "6. nanosuit/nanosuit.obj FAILED" << std::endl;
 
-	//check if it loads more of the same model
-	if (m_Models.AddModel("nanosuit/nanosuit.obj"))
-	{
-		std::cout << "6. Tricked me loaded 2 of the same model" << std::endl;
-	}
-	else
-		std::cout << "6. can't trick me I've seen that model before" << std::endl;
 	std::cout << "6. Models loaded" << std::endl;
 
 	m_TextureMan = TextureManager::GetTextureManager();
+	/**/
+	//Model* m = m_Models.GetModel("nanosuit/nanosuit.obj");
 
-	Model m = m_Models.GetModel("nanosuit/nanosuit.obj");
+	EnvironmentObjManager *Etest = NULL;
+	Etest = getGlobal(LuaEn->getLuaState(), "EnObjMan");
+	TerrainManager *Ttest = NULL;
+	Ttest = getGlobal(LuaEn->getLuaState(), "TerManager");
+	//Etest->getObject("N1")->updateObject(50.0, 100.0, 0.0);
+	//EnvironmentObject * b = NULL;
+	//b = getGlobal(LuaEn->getLuaState(), "Mod1");
+	//b->getObjectType();
+	//GameAssetFactory<GameObject, std::string> GA;
+	//GA.Register("Ter", new GameAssetCreator<WorldTerrain, GameObject>);
+	//GA.Register("Nano", new GameAssetCreator<EnvironmentObject, GameObject>);
+	//TerrainManager a;
+	//a.AddTerrain(GA.Create("Ter"));
+	//a.getTerrain(0)->setScalingFactor(5.0f, 0.5f, 1.0f);
+	//a.getTerrain(0)->loadHeightfield("height128.raw", 128);
+	//a.getTerrain(0)->SetTerrainVariable("images/ice.png", "images/grey.png", "images/pebble.png", "images/dirt.png");
+	
+	/*EnvironmentObjManager c;
+	c.addObject(GA.Create("Nano"), "N1");
+	c.addObject(GA.Create("Nano"), "N2");
+	c.getObject("N1")->addModel(m_Models.GetModel("nanosuit/nanosuit.obj"));
+	c.getObject("N2")->addModel(m_Models.GetModel("nanosuit/nanosuit.obj"));
+	c.getObject("N2")->updateObject(50.0f, 10.0f, 0.0f);
 
+	EnvironmentObject * b = NULL;
+	b = getGlobal(LuaEn->getLuaState(), "E2");*/
+	//b->addModel(m_Models.GetModel("nanosuit/nanosuit.obj"));
 	// Draw in wireframe
 	//glPolygonMode( GL_FRONT_AND_BACK, GL_LINE );
 
-	glm::mat4 projection = glm::perspective(camera.GetZoom(), (float)SCREEN_WIDTH / (float)SCREEN_HEIGHT, 0.1f, 100.0f);
+	glm::mat4 projection = glm::perspective(camera.GetZoom(), (float)SCREEN_WIDTH / (float)SCREEN_HEIGHT, 0.1f, 1000.0f);
 
 	// Game loop
 	while (!glfwWindowShouldClose(window))
 	{
 		// Set frame time
-		GLfloat currentFrame = glfwGetTime();
+		GLfloat currentFrame = (float)glfwGetTime();
 		deltaTime = currentFrame - lastFrame;
 		lastFrame = currentFrame;
 
@@ -113,25 +141,24 @@ bool GraphicsEngine::GLFWpro()
 		//playerInput.DoMovement(deltaTime);
 
 		//playerInputDoMovement(deltaTime);
-		
 
 		// Clear the colorbuffer
 		glClearColor(0.2f, 0.3f, 0.3f, 1.0f);
 		glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
-
-		shader.Use();
-
+		S.Use();
 		glm::mat4 view = camera.GetViewMatrix();
-		glUniformMatrix4fv(glGetUniformLocation(shader.Program, "projection"), 1, GL_FALSE, glm::value_ptr(projection));
-		glUniformMatrix4fv(glGetUniformLocation(shader.Program, "view"), 1, GL_FALSE, glm::value_ptr(view));
-
-		// Draw the loaded model
+		/*glUniformMatrix4fv(glGetUniformLocation(S.Program, "projection"), 1, GL_FALSE, glm::value_ptr(projection));
+		glUniformMatrix4fv(glGetUniformLocation(S.Program, "view"), 1, GL_FALSE, glm::value_ptr(view));
 		glm::mat4 model;
-		model = glm::translate(model, glm::vec3(0.0f, -1.75f, 0.0f)); // Translate it down a bit so it's at the center of the scene
+		model = glm::translate(model, glm::vec3(0,0,0)); // Translate it down a bit so it's at the center of the scene
 		model = glm::scale(model, glm::vec3(1.0f, 1.0f, 1.0f));	// It's a bit too big for our scene, so scale it down
-		glUniformMatrix4fv(glGetUniformLocation(shader.Program, "model"), 1, GL_FALSE, glm::value_ptr(model));
+		glUniformMatrix4fv(glGetUniformLocation(S.Program, "model"), 1, GL_FALSE, glm::value_ptr(model));
+		*/
+		//b->Draw(S);
+		//c.getObject("N2")->Draw(S);
+		SceneRender::renderEnvironmentObj(*Etest,view, projection, S);
+		SceneRender::renderTerrain(*Ttest, view, projection, Tshader);
 
-		m.Draw(shader);
 		// Swap the buffers
 		glfwSwapBuffers(window);
 	}

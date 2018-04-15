@@ -18,9 +18,18 @@
 #include "TextureManager.h"
 
 #include "Mesh.h"
+
+extern "C"
+{
+# include "lua.h"
+# include "lauxlib.h"
+# include "lualib.h"
+}
+#include <LuaBridge.h>
+#include <string>
+#include <glm\glm.hpp>
 //#include "Shader.h"
 
-using namespace std;
 
 class Model
 {
@@ -28,7 +37,7 @@ public:
 	Model();
 	/*  Functions   */
 	// Constructor, expects a filepath to a 3D model.
-	Model(GLchar *path)
+	Model(std::string path)
 	{
 		this->loadModel(path);
 		m_path = path;
@@ -43,10 +52,12 @@ public:
 		}
 	}
 
-	char * getName();
+	std::string getName();
+
+	static void scriptRegister(lua_State * L);
 
 private:
-	char * m_path;
+	std::string m_path;
 	/*  Model Data  */
 	vector<Mesh> meshes;
 	string directory;

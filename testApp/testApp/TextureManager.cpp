@@ -19,7 +19,7 @@ TextureManager & TextureManager::GetTextureManager()
 	return * texMan;
 }
 
-bool TextureManager::AddTexture(const char *path)
+bool TextureManager::AddTexture(const std::string path)
 {
 	
 	if (textures.count(path) != 1)
@@ -30,26 +30,26 @@ bool TextureManager::AddTexture(const char *path)
 	return false;
 }
 
-GLuint TextureManager::GetTexture(const char *path)
+GLuint TextureManager::GetTexture(const std::string path)
 {
 
 	if(textures.count(path) == 1)
 	{
 		return textures[path];
 	}
-
+	std::cout << "no texture";
 	return NULL;
 }
 
-GLuint TextureManager::LoadTexture(const char *path)
+GLuint TextureManager::LoadTexture(const std::string path)
 {
 	//Generate texture ID and load texture data
 	GLuint textureID;
 	glGenTextures(1, &textureID);
-
+	const char* Cpath = path.c_str();
 	int imageWidth, imageHeight;
 
-	unsigned char *image = SOIL_load_image(path, &imageWidth, &imageHeight, 0, SOIL_LOAD_RGB);
+	unsigned char *image = SOIL_load_image(Cpath, &imageWidth, &imageHeight, 0, SOIL_LOAD_RGB);
 
 	// Assign texture to ID
 	glBindTexture(GL_TEXTURE_2D, textureID);

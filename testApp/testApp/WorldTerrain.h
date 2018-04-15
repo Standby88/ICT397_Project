@@ -3,6 +3,7 @@
 #include "RAwIMGLoader.h"
 #include "Mesh.h"
 #include "TextureManager.h"
+#include "SOIL2/SOIL2.h"
 class WorldTerrain : public GameObject
 {
 private:
@@ -42,12 +43,15 @@ public:
 	*/
 	static void scriptRegister(lua_State * L);
 
-	void collectData();
+	void SetTerrainVariable(std::string, std::string, std::string, std::string);
 
-	bool loadHeightfield(char *filename, const int size);
+	bool loadHeightfield(std::string , const int size);
 
-	void setScalingFactor(glm::vec3 newScale);
+	void setScalingFactor(float x, float y, float z);
 
-
+	WorldTerrain* convert(GameObject* a)
+	{
+		return dynamic_cast<WorldTerrain*>(a);
+	}
 	int getSize();
 };

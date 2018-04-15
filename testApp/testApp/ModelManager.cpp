@@ -19,9 +19,9 @@ ModelManager & ModelManager::GetModelManager()
 }
 
 
-bool ModelManager::AddModel(char * modelPath)
+bool ModelManager::addModel(std::string modelPath/*char * modelPath*/)
 {
-
+	
 	if (models.count(modelPath) != 1)
 	{
 		Model* temp = new Model(modelPath);
@@ -32,7 +32,7 @@ bool ModelManager::AddModel(char * modelPath)
 	return false;
 }
 
-Model ModelManager::GetModel(char * modelPath)
+Model* ModelManager::GetModel(std::string modelPath)
 {
 	map<std::string, Model *>::iterator it = models.begin();
 
@@ -40,8 +40,8 @@ Model ModelManager::GetModel(char * modelPath)
 	{
 		//std::cout << "Model at ";
 		//std::cout << models[modelPath]->getName() << endl;
-		if(strcmp(models[modelPath]->getName(), modelPath) == 0)
-			return *models.at(modelPath);
+		if(models[modelPath]->getName().compare(modelPath) == 0)
+			return models.at(modelPath);
 	}
 
 	return NULL;
@@ -53,6 +53,22 @@ void ModelManager::destroyModelManager()
 
 	if (modelMan != NULL)
 		delete modelMan;
+}
+
+void ModelManager::scriptRegister(lua_State * L)
+{
+	using namespace luabridge;
+	getGlobalNamespace(L)
+		.beginNamespace("MM")
+		.beginClass<ModelManager>("ModelManager")
+		.addConstructor<void(*)(void)>()
+		.addFunction("addModel", &ModelManager::addModel)
+		.addFunction("GetModel", &ModelManager::GetModel)
+		.addStaticFunction("GetModelManager", &ModelManager::GetModelManager)
+		.addFunction("destroyModelManager", &ModelManager::destroyModelManager)
+		.addFunction("print", &ModelManager::print)
+		.endClass()
+		.endNamespace();
 }
 
 ModelManager::~ModelManager()

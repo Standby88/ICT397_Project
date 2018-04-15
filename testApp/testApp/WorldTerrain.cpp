@@ -41,7 +41,7 @@ WorldTerrain::~WorldTerrain()
 
 void WorldTerrain::Draw(Shader s)
 {
-	terMesh.Draw(s);
+	terMesh.drawTerrain(s);
 }
 void WorldTerrain::scriptRegister(lua_State * L)
 {
@@ -51,17 +51,19 @@ void WorldTerrain::scriptRegister(lua_State * L)
 		.deriveClass<WorldTerrain, GameObject>("WorldTerrain")
 		.addConstructor<void(*) (void)>()
 		.addFunction("Draw", &WorldTerrain::Draw)
+		.addFunction("SetTerrainVariable", &WorldTerrain::SetTerrainVariable)
+		.addFunction("loadHeightfield", &WorldTerrain::loadHeightfield)
+		.addFunction("setScallingFactor", &WorldTerrain::setScalingFactor)
+		.addFunction("convert", &WorldTerrain::convert)
 		.endClass()
 		.endNamespace();
 }
 
-void WorldTerrain::collectData()
+void WorldTerrain::SetTerrainVariable(std::string tex1, std::string tex2, std::string tex3, std::string tex4)
 {
 
 	Vertex temp;
 	GLuint TEMPINDEX = 0;
-
-	float hc;
 
 	for (int z = 0; z < getSize(); z++)
 	{
@@ -74,20 +76,22 @@ void WorldTerrain::collectData()
 			temp.Position.x = ((float)x*scale.x) + objectPos.x;
 			temp.Position.y = (getHeight(x, z)) + objectPos.y;
 			temp.Position.z = ((float)(z)*scale.z) + objectPos.z;
-			//temp.Normal = glm::normalize(temp.Position);
 
 			terMesh.vertices.push_back(temp);
 		}
 	}
-	TextureManager::GetTextureManager().AddTexture("image\pebble.png");
-	TextureManager::GetTextureManager().AddTexture("image\grey.png");
-	TextureManager::GetTextureManager().AddTexture("image\ice.png");
-	TextureManager::GetTextureManager().AddTexture("image\dirt.png");
 
-	terMesh.terrainTex[0] = TextureManager::GetTextureManager().GetTexture("image\pebble.png");
-	terMesh.terrainTex[1] = TextureManager::GetTextureManager().GetTexture("image\grey.png");
-	terMesh.terrainTex[2] = TextureManager::GetTextureManager().GetTexture("image\ice.png");
-	terMesh.terrainTex[3] = TextureManager::GetTextureManager().GetTexture("image\dirt.png");
+	TextureManager::GetTextureManager().AddTexture(tex1);
+	TextureManager::GetTextureManager().AddTexture(tex2);
+	TextureManager::GetTextureManager().AddTexture(tex3);
+	TextureManager::GetTextureManager().AddTexture(tex4);
+	
+	terMesh.terrainTex[0] = TextureManager::GetTextureManager().GetTexture(tex1);
+	terMesh.terrainTex[1] = TextureManager::GetTextureManager().GetTexture(tex2);
+	terMesh.terrainTex[2] = TextureManager::GetTextureManager().GetTexture(tex3);
+	terMesh.terrainTex[3] = TextureManager::GetTextureManager().GetTexture(tex4);
+	
+	std::cout << terMesh.terrainTex[0] << std::endl;
 	for (int y = 0; y < getSize() - 1; ++y)
 	{
 		for (int x = 0; x < getSize() - 1; ++x)
@@ -101,20 +105,22 @@ void WorldTerrain::collectData()
 			terMesh.indices.push_back((short)(start + getSize()));
 		}
 	}
-
 	terMesh.setMesh();
 }
 
-bool WorldTerrain::loadHeightfield(char * filename, const int size)
+bool WorldTerrain::loadHeightfield(std::string filename, const int size)
 {
-	terrainData = RawIMGLoader::loadRaw(filename, size);
+	const char* cfilename = filename.c_str();
+	terrainData = RawIMGLoader::loadRaw(cfilename, size);
 	this->size = size;
 	return true;
 }
 
-void WorldTerrain::setScalingFactor(glm::vec3 newScale)
+void WorldTerrain::setScalingFactor(float x, float y, float z)
 {
-	scale = newScale;
+	scale.x = x;
+	scale.y = y;
+	scale.z = z;
 }
 
 

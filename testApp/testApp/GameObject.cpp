@@ -5,7 +5,7 @@ GameObject::GameObject()
 	objectPos.x = 0;
 	objectPos.y = 0;
 	objectPos.z = 0;
-	//objectModel = NULL;
+
 }
 
 void GameObject::updateObject(float x, float y, float z)
@@ -13,6 +13,7 @@ void GameObject::updateObject(float x, float y, float z)
 	objectPos.x = x;
 	objectPos.y = y;
 	objectPos.z = z;
+	std::cout << "gameObj" << std::endl;
 }
 glm::vec3 GameObject::getObjectPos()
 {

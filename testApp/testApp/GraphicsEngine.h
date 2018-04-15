@@ -16,10 +16,13 @@
 #include <glm\glm.hpp>
 #include <glm\gtc\matrix_transform.hpp>
 
+#include "ScriptEngine.h"
+#include "SceneRender.h"
 #include "PlayerInput.h"
 #include "ModelManager.h"
 #include "TextureManager.h"
-
+#include "GameAssetFactory.h"
+#include "EnvironmentObjManager.h"
 class GraphicsEngine
 {
 public:

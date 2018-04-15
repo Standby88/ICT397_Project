@@ -12,13 +12,21 @@ public:
 	ModelManager();
 	~ModelManager();
 
-	bool AddModel( char * modelPath);
+	bool addModel(std::string modelPath/*char * modelPath*/);
 
-	Model GetModel(char * modelPath);
+	Model* GetModel(std::string modelPath);
 
 	static ModelManager & GetModelManager();
 
 	void destroyModelManager();
+
+	void print()
+	{
+		std::cout << "hello" << std::endl;
+	}
+
+	static void scriptRegister(lua_State * L);
+
 
 private:
 	std::map<std::string, Model *> models;

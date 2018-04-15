@@ -1,22 +1,113 @@
 #pragma once
-#include <vector>
+#include <unordered_map>
 #include "Player.h"
+/**
+* @class ChacterManager
+* @brief Used to manage character objects like player, enemies and NPC
+* Objects can be drawn, added, removed and accessed from list
+*
+* @author Desmond Ma
+* @version 1
+* @date 
+*
+* @todo
+*
+* @bug 
+*/
 class CharacterManager
 {
 private:
-	Player p;
-	//std::vector<NPC> NPCList;
-public:
-	CharacterManager();
-	~CharacterManager();
-	void addObject(GameObject3D& in);
-	void DrawPlayer(Shader S)
-	{
-		p.Draw(S);
-	}
-	void DrawNPC(Shader S)
-	{
+	///pointer to player object
+	Player* p;
 
+	///used to store NPC 
+	typedef std::unordered_map<std::string, int* > NPCL;
+	NPCL nPCList;
+public:
+
+	/**
+	* @brief Constructor for charactermanager
+	*/
+	CharacterManager();
+
+	/**
+	* @brief destructor for manager. Correctly releases memory used for pointer
+	*
+	*/
+	~CharacterManager();
+
+	/**
+	* @brief Used to add player to player pointer by dynamic cast from gameobj to player type.
+	*
+	* @param GameObject* in
+	*/
+	void addPlayer(GameObject* in);
+
+	/**
+	* @brief Used to add NPC to character list pointer pointer by dynamic cast from gameobj to objtype type.
+	*currently no NPC are used so store int pointer for test
+	* @param string key, int* in
+	*/
+	void addNPC(std::string key, int* in );
+	/*void CharacterManager::DrawPlayer(Shader & S)
+	{
+		p->Draw(S);
+	}*/
+	/*void CharacterManager::DrawNPCs(Shader & s)
+	{
+	NPCL::iterator itr;
+	for (itr = nPCList.begin(); itr != nPCList.end(); ++itr)
+	{
+		(*itr).second->Draw();
 	}
+	}*/
+
+	/**
+	* @brief used to render the player from the model details
+	*
+	*/
+	void drawPlayer();
+
+	/**
+	* @brief Draw all the NPCs stored in the list
+	*
+	*/
+	void drawNPCs();
+
+	/**
+	* @brief accessor for the player
+	*
+	* @return Player*
+	*/
+	Player* getPlayer();
+
+	/**
+	* @brief returns a pointer to an npc from the list given a string
+	* no npcs at the moment so it returns a pointer to an int
+	* @param string key
+	* @return NPC*
+	*/
+	int* getNPC(std::string);
+
+	/**
+	* @brief remove an npc from the list
+	*
+	* @param string key
+	*/
+	void removeNPC(std::string);
+
+	/**
+	* @brief remove player
+	*
+	*/
+	void removePlayer();
+
+	/**
+	* @brief register all functions to lua to be used.
+	*
+	* @param lua_State * L
+	*/
+	static void scriptRegister(lua_State * L);
+	
 };
 

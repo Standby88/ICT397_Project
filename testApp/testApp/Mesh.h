@@ -42,7 +42,7 @@ public:
 	vector<Vertex> vertices;
 	vector<GLuint> indices;
 	vector<Texture> textures;
-	GLint terrainTex[4];
+	GLuint terrainTex[4];
 
 	
 	/*  Functions  */
@@ -70,19 +70,19 @@ public:
 		glUniform1i(glGetUniformLocation(shader.Program, "t2"), 1);
 		glUniform1i(glGetUniformLocation(shader.Program, "t3"), 2);
 		glUniform1i(glGetUniformLocation(shader.Program, "t4"), 3);
-		GLint t1 = terrainTex[0];
+		GLuint t1 = terrainTex[0];
 		glActiveTexture(GL_TEXTURE0);
 		glBindTexture(GL_TEXTURE_2D, t1);
 
-		GLint t2 = terrainTex[1];
+		GLuint t2 = terrainTex[1];
 		glActiveTexture(GL_TEXTURE1);
 		glBindTexture(GL_TEXTURE_2D, t2);
 
-		GLint t3 = terrainTex[2];
+		GLuint t3 = terrainTex[2];
 		glActiveTexture(GL_TEXTURE2);
 		glBindTexture(GL_TEXTURE_2D, t3);
 
-		GLint t4 = terrainTex[3];
+		GLuint t4 = terrainTex[3];
 		glActiveTexture(GL_TEXTURE3);
 		glBindTexture(GL_TEXTURE_2D, t4);
 		// Draw mesh

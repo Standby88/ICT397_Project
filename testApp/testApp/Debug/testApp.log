@@ -1,4 +1,3 @@
 ﻿  GraphicsEngine.cpp
-c:\users\desmond\documents\github\ict397_project\testapp\testapp\graphicsengine.cpp(106): warning C4244: 'initializing': conversion from 'double' to 'GLfloat', possible loss of data
   testApp.vcxproj -> C:\Users\Desmond\Documents\GitHub\ICT397_Project\testApp\Debug\testApp.exe
   testApp.vcxproj -> C:\Users\Desmond\Documents\GitHub\ICT397_Project\testApp\Debug\testApp.pdb (Full PDB)
