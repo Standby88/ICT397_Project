@@ -10,7 +10,18 @@ bool GraphicsEngine::GLFWpro()
 {
 	ScriptEngine * LuaEn = new ScriptEngine();
 	ScriptEngine::expFuncToLua(LuaEn->getLuaState());
-	
+	float points[] = {
+		-0.5f, 0.5f, 0.0f, 0.0f, 1.0f,
+		-0.5f, -0.5f,  0.0f, 0.0f, 0.0f,
+		0.5f, -0.5f,  0.0f, 1.0f, 0.0f,
+		0.5f,  0.5f,  0.0f, 1.0f, 1.0f
+		
+	};
+	GLuint indices[] =
+	{
+		0, 1, 2,	
+		0, 2, 3		
+	};
 	// Init GLFW
 	glfwInit();
 	// Set all the required options for GLFW
@@ -33,17 +44,11 @@ bool GraphicsEngine::GLFWpro()
 		return false;
 	}
 
-	
-
-
 	glfwMakeContextCurrent(window);
-
 	glfwGetFramebufferSize(window, &SCREEN_WIDTH, &SCREEN_HEIGHT);
-
 	std::cout << "2. Window context creation complete" << std::endl;
 
-	camera = Camera(glm::vec3(50.0f, 90.0f, 250.0f));
-
+	camera = Camera(glm::vec3(50.0f, 50.0f, 200.0f));
 	// Set the required callback functions
 	//PlayerInput playerInput = PlayerInput(WIDTH, HEIGHT, &camera, &deltaTime);
 	//PlayerInput playerInput = PlayerInput::getCurrentPlayerInput();
@@ -78,50 +83,40 @@ bool GraphicsEngine::GLFWpro()
 	// Setup and compile our shaders
 	Shader Tshader("terrainvertex.vs", "terrainfrag.frag");
 	Shader S("3dvsShaderTEMP.vs", "3dfragShaderTEMP.frag");
-	
-	std::cout << "5. Shader setup and compiled" << std::endl;
-	// Load models
-	//Model ourModel("nanosuit/nanosuit.obj");
-	if (m_Models.addModel("nanosuit/nanosuit.obj"))
-	{
-		std::cout << "6. nanosuit/nanosuit.obj SUCCESS" << std::endl;
-	}
-	else
-		std::cout << "6. nanosuit/nanosuit.obj FAILED" << std::endl;
+	Shader Pshader("PhotoVertex.vs","PhotoFrag.frag");
 
-	std::cout << "6. Models loaded" << std::endl;
+
+	GLuint VAO;
+	glCreateVertexArrays(1, &VAO);
+	glBindVertexArray(VAO);
+	GLuint VBO;
+	glGenBuffers(1, &VBO);
+	glBindBuffer(GL_ARRAY_BUFFER, VBO);
+	glBufferData(GL_ARRAY_BUFFER, 30 * sizeof(float), points, GL_STATIC_DRAW);
+
+	GLuint EBO;
+	glGenBuffers(1, &EBO);
+	glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, EBO);
+	glBufferData(GL_ELEMENT_ARRAY_BUFFER, sizeof(indices), indices, GL_STATIC_DRAW);
+
+	
+	glEnableVertexAttribArray(0);
+	glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 5 * sizeof(float), NULL);
+
+	glEnableVertexAttribArray(1);
+	glVertexAttribPointer(1, 2, GL_FLOAT, GL_FALSE, 5 * sizeof(float), (GLvoid*)(sizeof(float)*3));
+
+	glBindVertexArray(0);
 
 	m_TextureMan = TextureManager::GetTextureManager();
-	/**/
-	//Model* m = m_Models.GetModel("nanosuit/nanosuit.obj");
+	TextureManager::GetTextureManager().AddTexture("image/dirt.png");
+	texture1 = TextureManager::GetTextureManager().GetTexture("image/dirt.png");
 
 	EnvironmentObjManager *Etest = NULL;
 	Etest = getGlobal(LuaEn->getLuaState(), "EnObjMan");
 	TerrainManager *Ttest = NULL;
 	Ttest = getGlobal(LuaEn->getLuaState(), "TerManager");
-	//Etest->getObject("N1")->updateObject(50.0, 100.0, 0.0);
-	//EnvironmentObject * b = NULL;
-	//b = getGlobal(LuaEn->getLuaState(), "Mod1");
-	//b->getObjectType();
-	//GameAssetFactory<GameObject, std::string> GA;
-	//GA.Register("Ter", new GameAssetCreator<WorldTerrain, GameObject>);
-	//GA.Register("Nano", new GameAssetCreator<EnvironmentObject, GameObject>);
-	//TerrainManager a;
-	//a.AddTerrain(GA.Create("Ter"));
-	//a.getTerrain(0)->setScalingFactor(5.0f, 0.5f, 1.0f);
-	//a.getTerrain(0)->loadHeightfield("height128.raw", 128);
-	//a.getTerrain(0)->SetTerrainVariable("images/ice.png", "images/grey.png", "images/pebble.png", "images/dirt.png");
-	
-	/*EnvironmentObjManager c;
-	c.addObject(GA.Create("Nano"), "N1");
-	c.addObject(GA.Create("Nano"), "N2");
-	c.getObject("N1")->addModel(m_Models.GetModel("nanosuit/nanosuit.obj"));
-	c.getObject("N2")->addModel(m_Models.GetModel("nanosuit/nanosuit.obj"));
-	c.getObject("N2")->updateObject(50.0f, 10.0f, 0.0f);
 
-	EnvironmentObject * b = NULL;
-	b = getGlobal(LuaEn->getLuaState(), "E2");*/
-	//b->addModel(m_Models.GetModel("nanosuit/nanosuit.obj"));
 	// Draw in wireframe
 	//glPolygonMode( GL_FRONT_AND_BACK, GL_LINE );
 
@@ -137,34 +132,29 @@ bool GraphicsEngine::GLFWpro()
 
 		// Check and call events
 		glfwPollEvents();
-
 		//playerInput.DoMovement(deltaTime);
-
 		//playerInputDoMovement(deltaTime);
-
+		
 		// Clear the colorbuffer
 		glClearColor(0.2f, 0.3f, 0.3f, 1.0f);
 		glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
-		S.Use();
 		glm::mat4 view = camera.GetViewMatrix();
-		/*glUniformMatrix4fv(glGetUniformLocation(S.Program, "projection"), 1, GL_FALSE, glm::value_ptr(projection));
-		glUniformMatrix4fv(glGetUniformLocation(S.Program, "view"), 1, GL_FALSE, glm::value_ptr(view));
-		glm::mat4 model;
-		model = glm::translate(model, glm::vec3(0,0,0)); // Translate it down a bit so it's at the center of the scene
-		model = glm::scale(model, glm::vec3(1.0f, 1.0f, 1.0f));	// It's a bit too big for our scene, so scale it down
-		glUniformMatrix4fv(glGetUniformLocation(S.Program, "model"), 1, GL_FALSE, glm::value_ptr(model));
-		*/
-		//b->Draw(S);
-		//c.getObject("N2")->Draw(S);
-		SceneRender::renderEnvironmentObj(*Etest,view, projection, S);
-		SceneRender::renderTerrain(*Ttest, view, projection, Tshader);
+		//SceneRender::renderEnvironmentObj(*Etest,view, projection, S);
+		//SceneRender::renderTerrain(*Ttest, view, projection, Tshader);
+		
+		Pshader.Use();
+		GLuint t21 = texture1;
+		glUniform1i(glGetUniformLocation(Pshader.Program, "t21"), 0);
+		glActiveTexture(GL_TEXTURE0);
+		glBindTexture(GL_TEXTURE_2D, t21);
+		glBindVertexArray(VAO);
+		glDrawElements(GL_TRIANGLES, 6, GL_UNSIGNED_INT, 0);
 
 		// Swap the buffers
 		glfwSwapBuffers(window);
 	}
 
 	glfwTerminate();
-
 	return true;
 }
 

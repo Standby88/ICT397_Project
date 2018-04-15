@@ -31,7 +31,6 @@ public:
 
 	bool GLFWpro();
 
-
 	// Window dimensions
 	const GLint WIDTH = 800, HEIGHT = 600;
 	int SCREEN_WIDTH, SCREEN_HEIGHT;
@@ -50,5 +49,18 @@ public:
 	GLfloat deltaTime = 0.0f;
 	GLfloat lastFrame = 0.0f;
 
+	
+	
+	GLuint texture1 = 0;
+	
+	void setupPhoto()
+	{
+		
+		
+	}
 
+	void drawPhoto(Shader S)
+	{
+		
+	}
 };
