@@ -1,7 +1,6 @@
 #include "GraphicsEngine.h"
 
 #include <glm\gtc\type_ptr.hpp>
-
 GraphicsEngine::GraphicsEngine()
 {
 }
@@ -37,14 +36,12 @@ bool GraphicsEngine::GLFWpro()
 	glfwGetFramebufferSize(window, &SCREEN_WIDTH, &SCREEN_HEIGHT);
 	std::cout << "2. Window context creation complete" << std::endl;
 
-	camera = Camera(glm::vec3(50.0f, 50.0f, 200.0f));
-	// Set the required callback functions
-	//PlayerInput playerInput = PlayerInput(WIDTH, HEIGHT, &camera, &deltaTime);
-	//PlayerInput playerInput = PlayerInput::getCurrentPlayerInput();
-	//playerInput.SetAttributes(&camera);
-	//playerInput.SetCallbacks();
+	camera = Camera(glm::vec3(0.0f, 0.0f, 3.0f));
 
-	//glfwSetInputMode(glfwGetCurrentContext(), GLFW_CURSOR, GLFW_CURSOR_DISABLED);
+	PlayerInput playerInput = PlayerInput::getCurrentPlayerInput();
+	playerInput.SetAttributes(&camera);
+	playerInput.SetCallbacks();
+
 
 	// GLFW Options
 	//glfwSetInputMode(window, GLFW_CURSOR, GLFW_CURSOR_DISABLED);
@@ -59,8 +56,9 @@ bool GraphicsEngine::GLFWpro()
 		std::cout << "Failed to initialize GLEW" << std::endl;
 		return false;
 	}
-
+	setupPhoto();
 	LuaEn->doLuaScript("Game.lua");
+
 	// Define the viewport dimensions
 	glViewport(0, 0, SCREEN_WIDTH, SCREEN_HEIGHT);
 
@@ -75,6 +73,51 @@ bool GraphicsEngine::GLFWpro()
 	Shader Pshader("Shaders/coreImage.vs","Shaders/coreImage.frag");
 
 	//extents position of the window
+
+	EnvironmentObjManager *Etest = NULL;
+	Etest = getGlobal(LuaEn->getLuaState(), "EnObjMan");
+	TerrainManager *Ttest = NULL;
+	Ttest = getGlobal(LuaEn->getLuaState(), "TerManager");
+
+	// Draw in wireframe
+	//glPolygonMode( GL_FRONT_AND_BACK, GL_LINE );
+
+	glm::mat4 projection = glm::perspective(camera.GetZoom(), (float)SCREEN_WIDTH / (float)SCREEN_HEIGHT, 0.1f, 1000.0f);
+
+	// Game loop
+	while (!glfwWindowShouldClose(window))
+	{
+		// Set frame time
+		GLfloat currentFrame = (float)glfwGetTime();
+		deltaTime = currentFrame - lastFrame;
+		lastFrame = currentFrame;
+
+		// Check and call events
+		glfwPollEvents();
+		playerInput.DoMovement(deltaTime);
+		
+		// Clear the colorbuffer
+		glClearColor(0.2f, 0.3f, 0.3f, 1.0f);
+		glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
+		camera = Camera::getCameraInstance();
+		glm::mat4 view = camera.GetViewMatrix();
+		SceneRender::renderEnvironmentObj(*Etest,view, projection, S);
+		SceneRender::renderTerrain(*Ttest, view, projection, Tshader);
+
+		if (PlayerInput::getCurrentPlayerInput().photo == true)
+		{
+			drawPhoto(Pshader);
+		}
+		// Swap the buffers
+		glfwSwapBuffers(window);
+	}
+
+	glfwTerminate();
+	return true;
+}
+
+void GraphicsEngine::setupPhoto()
+{
 	GLfloat points[] =
 	{
 		// Positions          // Colors           // Texture Coords
@@ -90,7 +133,7 @@ bool GraphicsEngine::GLFWpro()
 		1, 2, 3
 	};
 
-	GLuint VBO, VAO, EBO;
+
 	glGenVertexArrays(1, &VAO);
 	glGenBuffers(1, &VBO);
 	glGenBuffers(1, &EBO);
@@ -119,52 +162,17 @@ bool GraphicsEngine::GLFWpro()
 	m_TextureMan.AddTexture("images/ICT397.jpg");
 
 	texture1 = m_TextureMan.GetTexture("images/ICT397.jpg");
+}
 
-	EnvironmentObjManager *Etest = NULL;
-	Etest = getGlobal(LuaEn->getLuaState(), "EnObjMan");
-	TerrainManager *Ttest = NULL;
-	Ttest = getGlobal(LuaEn->getLuaState(), "TerManager");
-
-	// Draw in wireframe
-	//glPolygonMode( GL_FRONT_AND_BACK, GL_LINE );
-
-	glm::mat4 projection = glm::perspective(camera.GetZoom(), (float)SCREEN_WIDTH / (float)SCREEN_HEIGHT, 0.1f, 1000.0f);
-
-	// Game loop
-	while (!glfwWindowShouldClose(window))
-	{
-		// Set frame time
-		GLfloat currentFrame = (float)glfwGetTime();
-		deltaTime = currentFrame - lastFrame;
-		lastFrame = currentFrame;
-
-		// Check and call events
-		glfwPollEvents();
-		//playerInput.DoMovement(deltaTime);
-		//playerInputDoMovement(deltaTime);
-		
-		// Clear the colorbuffer
-		glClearColor(0.2f, 0.3f, 0.3f, 1.0f);
-		glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
-		glm::mat4 view = camera.GetViewMatrix();
-		//SceneRender::renderEnvironmentObj(*Etest,view, projection, S);
-		//SceneRender::renderTerrain(*Ttest, view, projection, Tshader);
-		
-		Pshader.Use();
-		//GLuint t21 = texture1;
-		glUniform1i(glGetUniformLocation(Pshader.Program, "texture1"), 0);
-		glActiveTexture(GL_TEXTURE0);
-		glBindTexture(GL_TEXTURE_2D, texture1);
-		glBindVertexArray(VAO);
-		glDrawElements(GL_TRIANGLES, 6, GL_UNSIGNED_INT, 0);
-		glBindVertexArray(0);
-
-		// Swap the buffers
-		glfwSwapBuffers(window);
-	}
-
-	glfwTerminate();
-	return true;
+void GraphicsEngine::drawPhoto(Shader S)
+{
+	S.Use();
+	glUniform1i(glGetUniformLocation(S.Program, "texture1"), 0);
+	glActiveTexture(GL_TEXTURE0);
+	glBindTexture(GL_TEXTURE_2D, texture1);
+	glBindVertexArray(VAO);
+	glDrawElements(GL_TRIANGLES, 6, GL_UNSIGNED_INT, 0);
+	glBindVertexArray(0); 
 }
 
 GraphicsEngine::~GraphicsEngine()

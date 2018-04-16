@@ -48,19 +48,13 @@ public:
 
 	GLfloat deltaTime = 0.0f;
 	GLfloat lastFrame = 0.0f;
-
+	GLuint VBO, VAO, EBO;
 	
 	
 	GLuint texture1 = 0;
 	
-	void setupPhoto()
-	{
-		
-		
-	}
+	void setupPhoto();
 
-	void drawPhoto(Shader S)
-	{
-		
-	}
+	void drawPhoto(Shader S);
+
 };

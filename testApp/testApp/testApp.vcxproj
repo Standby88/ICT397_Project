@@ -148,6 +148,7 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="Camera.cpp" />
     <ClCompile Include="CharacterManager.cpp" />
     <ClCompile Include="Enemy.cpp" />
     <ClCompile Include="EnvironmentObject.cpp" />

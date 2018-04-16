@@ -29,6 +29,7 @@ E1:updateObject(0.0, 0.0, 0.0)
 E2:updateObject(10.0, 0.0, 0.0)
 
 T1:setScallingFactor(5.0, 0.5, 1.0)
+T1:updateObject(-50.0, -30.0, 0.0)
 T1:loadHeightfield("height128.raw", 128)
 T1:SetTerrainVariable("images/ice.png", "images/grey.png", "images/pebble.png", "images/dirt.png")
 EnObjMan = EOM.EnvironmentObjManager()

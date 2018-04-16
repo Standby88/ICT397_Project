@@ -16,10 +16,6 @@ public:
 
 	PlayerInput(int width, int height, Camera *cam, GLfloat *deltaTime);
 
-	GLfloat lastX;
-	GLfloat lastY;
-	bool keys[1024];
-	bool firstMouse = true;
 
 	GLfloat m_time;
 
@@ -32,12 +28,23 @@ public:
 
 	void DoMovement(GLfloat time);
 
+	void SetAttributes(Camera * cam);
+
+	void SetCallbacks();
+
 	static void WrapKeyCallback(GLFWwindow *window, int key, int scancode, int action, int mode);
 	static void WrapMouseCallback(GLFWwindow *window, double xPos, double yPos);
 	static void WrapScrollCallback(GLFWwindow *window, double xOffset, double yOffset);
+	bool photo = false;
+
 private:
 
 	int w, h;
+
+	GLfloat lastX;
+	GLfloat lastY;
+	bool keys[1024];
+	bool firstMouse;
 
 	void KeyCallback(GLFWwindow *window, int key, int scancode, int action, int mode);
 	void MouseCallback(GLFWwindow *window, double xPos, double yPos);
