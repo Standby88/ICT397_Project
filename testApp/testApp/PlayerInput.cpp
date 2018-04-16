@@ -61,7 +61,7 @@ void PlayerInput::SetCallbacks()
 {
 	glfwSetKeyCallback(glfwGetCurrentContext(), *WrapKeyCallback);
 	glfwSetCursorPosCallback(glfwGetCurrentContext(), *WrapMouseCallback);
-	//glfwSetInputMode(glfwGetCurrentContext(), GLFW_CURSOR, GLFW_CURSOR_DISABLED);
+	glfwSetInputMode(glfwGetCurrentContext(), GLFW_CURSOR, GLFW_CURSOR_DISABLED);
 }
 
 PlayerInput::~PlayerInput()

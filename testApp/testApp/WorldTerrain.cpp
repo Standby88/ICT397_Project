@@ -56,6 +56,7 @@ void WorldTerrain::scriptRegister(lua_State * L)
 		.addFunction("loadHeightfield", &WorldTerrain::loadHeightfield)
 		.addFunction("setScallingFactor", &WorldTerrain::setScalingFactor)
 		.addFunction("convert", &WorldTerrain::convert)
+		.addFunction("getHeightAt", &WorldTerrain::getHeight)
 		.addFunction("CreateTerrainRigidBody", &WorldTerrain::CreateTerrainRigidBody)
 		.endClass()
 		.endNamespace();

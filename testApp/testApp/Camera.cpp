@@ -15,11 +15,6 @@ Camera::Camera(GLfloat posX, GLfloat posY, GLfloat posZ, GLfloat upX, GLfloat up
 Camera* Camera::GetCameraInstance()
 {
 	if (instance == 0) {
-
-		/*glfwSetKeyCallback(glfwGetCurrentContext(), *WrapKeyCallback);
-		glfwSetCursorPosCallback(glfwGetCurrentContext(), *WrapMouseCallback);
-		glfwSetInputMode(glfwGetCurrentContext(), GLFW_CURSOR, GLFW_CURSOR_DISABLED);*/
-
 		instance = new Camera(glm::vec3(0.0f, 0.0f, 3.0f));
 		std::cout << "First camera instance created" << std::endl;
 	}
@@ -93,10 +88,6 @@ void Camera::ProcessMouseMovement(GLfloat xOffset, GLfloat yOffset, GLboolean co
 	// Update Front, Right and Up Vectors using the updated Eular angle
 	this->updateCameraVectors();
 
-	GLFWwindow* win = glfwGetCurrentContext();
-	int x, y;
-	glfwGetWindowSize(win, &x, &y);
-	glfwSetCursorPos(win, (double)x / 2, (double)y / 2);
 	justwarped = true;
 }
 

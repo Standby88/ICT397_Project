@@ -142,9 +142,9 @@ public:
 		glBindVertexArray(0); // Unbind VAO
 
 		m_TextureMan = TextureManager::GetTextureManager();
-		m_TextureMan.AddTexture("images/manual.png");
+		m_TextureMan.AddTexture("assets/images/manual.png");
 
-		texture2 = m_TextureMan.GetTexture("images/manual.png");
+		texture2 = m_TextureMan.GetTexture("assets/images/manual.png");
 	}
 
 	void drawMaunal(Shader S) 

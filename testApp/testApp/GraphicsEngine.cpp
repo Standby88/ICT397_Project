@@ -59,7 +59,7 @@ bool GraphicsEngine::GLFWpro()
 	setupPhoto();
 	setUpmanual();
 
-	LuaEn->doLuaScript("Game.lua");
+	LuaEn->doLuaScript("Scripts/GameManager.lua");
 
 	// Define the viewport dimensions
 	glViewport(0, 0, SCREEN_WIDTH, SCREEN_HEIGHT);
@@ -108,10 +108,18 @@ bool GraphicsEngine::GLFWpro()
 
 		if (PlayerInput::getCurrentPlayerInput().photo == true)
 		{
+			glPolygonMode(GL_FRONT_AND_BACK, GL_FILL);
+
+			PlayerInput::getCurrentPlayerInput().wire = true;
+
 			drawPhoto(Pshader);
 		}
 		if (PlayerInput::getCurrentPlayerInput().Manual == true)
 		{
+			glPolygonMode(GL_FRONT_AND_BACK, GL_FILL);
+
+			PlayerInput::getCurrentPlayerInput().wire = true;
+
 			drawMaunal(Pshader);
 		}
 		if (PlayerInput::getCurrentPlayerInput().wire == true)
@@ -174,9 +182,9 @@ void GraphicsEngine::setupPhoto()
 	glBindVertexArray(0); // Unbind VAO
 
 	m_TextureMan = TextureManager::GetTextureManager();
-	m_TextureMan.AddTexture("images/ICT397.jpg");
+	m_TextureMan.AddTexture("assets/images/ICT397.jpg");
 
-	texture1 = m_TextureMan.GetTexture("images/ICT397.jpg");
+	texture1 = m_TextureMan.GetTexture("assets/images/ICT397.jpg");
 }
 
 void GraphicsEngine::drawPhoto(Shader S)

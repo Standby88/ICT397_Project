@@ -10,10 +10,10 @@ uniform sampler2D t4;
 void main()
 {
 	vec4 totalColor;
-	vec4 T1 = texture2D(t1, TexCoords);
-	vec4 T2 = texture2D(t2, TexCoords);
-	vec4 T3 = texture2D(t3, TexCoords);
-	vec4 T4 = texture2D(t4, TexCoords);
+	vec4 T1 = texture(t1, TexCoords);
+	vec4 T2 = texture(t2, TexCoords);
+	vec4 T3 = texture(t3, TexCoords);
+	vec4 T4 = texture(t4, TexCoords);
 	float weightt1 = (50.0f - abs(Height - 256.0f))/50.0f;
 	if(weightt1>0)
 	{

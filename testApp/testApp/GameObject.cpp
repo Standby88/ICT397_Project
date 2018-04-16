@@ -13,8 +13,28 @@ void GameObject::updateObject(float x, float y, float z)
 	objectPos.x = x;
 	objectPos.y = y;
 	objectPos.z = z;
-	std::cout << "gameObj" << std::endl;
+	//std::cout << "gameObj" << std::endl;
 }
+
+void GameObject::updateObjectRotation(float w, float x, float y, float z)
+{
+	angle = w;
+	rotateAxis.x = x;
+	rotateAxis.y = y;
+	rotateAxis.z = z;
+	//std::cout << "gameObj" << std::endl;
+}
+
+float GameObject::getObjectAngle()
+{
+	return angle;
+}
+
+glm::vec3 GameObject::getObjectRotation()
+{
+	return rotateAxis;
+}
+
 glm::vec3 GameObject::getObjectPos()
 {
 	return objectPos;
@@ -29,6 +49,7 @@ void GameObject::scriptRegister(lua_State * L)
 		.addConstructor<void(*) (void)>()
 		.addFunction("updateObject", &GameObject::updateObject)
 		.addFunction("getObjectPos", &GameObject::getObjectPos)
+		.addFunction("updateObjectRotation", &GameObject::updateObjectRotation)
 		.endClass()
 		.endNamespace();
 }
