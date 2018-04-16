@@ -57,6 +57,8 @@ bool GraphicsEngine::GLFWpro()
 		return false;
 	}
 	setupPhoto();
+	setUpmanual();
+
 	LuaEn->doLuaScript("Game.lua");
 
 	// Define the viewport dimensions
@@ -80,7 +82,7 @@ bool GraphicsEngine::GLFWpro()
 	Ttest = getGlobal(LuaEn->getLuaState(), "TerManager");
 
 	// Draw in wireframe
-	//glPolygonMode( GL_FRONT_AND_BACK, GL_LINE );
+	//
 
 	glm::mat4 projection = glm::perspective(camera.GetZoom(), (float)SCREEN_WIDTH / (float)SCREEN_HEIGHT, 0.1f, 1000.0f);
 
@@ -108,6 +110,19 @@ bool GraphicsEngine::GLFWpro()
 		{
 			drawPhoto(Pshader);
 		}
+		if (PlayerInput::getCurrentPlayerInput().Manual == true)
+		{
+			drawMaunal(Pshader);
+		}
+		if (PlayerInput::getCurrentPlayerInput().wire == true)
+		{
+			glPolygonMode(GL_FRONT_AND_BACK, GL_LINE);
+		}
+		else
+		{
+			glPolygonMode(GL_FRONT_AND_BACK, GL_FILL);
+		}
+		
 		// Swap the buffers
 		glfwSwapBuffers(window);
 	}
