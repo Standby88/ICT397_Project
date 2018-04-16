@@ -95,6 +95,8 @@ public:
 
 	///draw wireframe
 	bool wire = false;
+	///draw manual
+	bool Manual = false;
 
 	GLfloat m_time;
 
