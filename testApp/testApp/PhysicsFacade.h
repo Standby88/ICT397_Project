@@ -25,6 +25,16 @@
 #include <vector>
 #include <iostream>	//only included to check values
 
+extern "C"
+{
+# include "lua.h"
+# include "lauxlib.h"
+# include "lualib.h"
+}
+#include <LuaBridge.h>
+#include <string>
+#include <glm\glm.hpp>
+
 typedef struct PhysicsVector
 {
 	PhysicsVector(float xCoord, float yCoord, float zCoord)
@@ -311,7 +321,7 @@ public:
 	* @pre
 	* @post
 	*/
-	//void scriptRegister(lua_state * L);
+	void scriptRegister(lua_state * L);
 
 };
 

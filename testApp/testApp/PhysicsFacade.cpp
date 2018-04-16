@@ -366,16 +366,18 @@ float PhysicsFacade::GetZOrigin(int i)
 	}
 }
 
-/*void PhysicsFacade::scriptRegister(lua_State * L)
+void PhysicsFacade::scriptRegister(lua_State * L)
 {
 	using namespace luabridge;
 	getGlobalNamespace(L)
-		.beginNamespace("GA")
-		.beginClass<GameObject>("GameObject")
+		.beginNamespace("PF")
+		.beginClass<PhysicsFacade>("PhysicsFacade")
 		.addConstructor<void(*) (void)>()
-		.addFunction("updateObject", &GameObject::updateOject)
-		.addFunction("getObjectPos", &GameObject::getObjectPos)
+		.addFunction("", &PhysicsFacade::)
+		.addFunction("", &PhysicsFacade::)
 		.endClass()
 		.endNamespace();
-}*/
+}
+
+
 
