@@ -22,11 +22,29 @@ const GLfloat PITCH = 0.0f;
 const GLfloat SPEED = 6.0f;
 const GLfloat SENSITIVTY = 0.25f;
 const GLfloat ZOOM = 45.0f;
+/**
+* @class Camera
+* @brief Camera class used for viewing the scene
+*
+*
+* @author Alex
+* @version
+* @date
+*
+* @todo
+*
+* @bug
+*/
 
 class Camera
 {
 public:
-	//camera constructor 
+
+	/**
+	* @brief constructor for camera, initialises all the values
+	*
+	* @param vec3 position, vec3 up, vec3 yaw, vec3 pitch
+	*/
 	Camera(glm::vec3 position = glm::vec3(0.0f, 0.0f, 0.0f), glm::vec3 up = glm::vec3(0.0f, 1.0f, 0.0f), GLfloat yaw = YAW
 		, GLfloat pitch = PITCH) : front(glm::vec3(0.0f, 0.0f, -1.0f)), movementSpeed(SPEED), mouseSensitivity(SENSITIVTY), zoom(ZOOM)
 	{
@@ -41,18 +59,50 @@ public:
 		glfwSetCursorPos(win, (double)x / 2, (double)y / 2);
 	}
 
+	/**
+	* @brief constructor for camera, initialises all the values
+	*
+	* @param GLfloat posX, GLfloat posY, GLfloat posZ, GLfloat upX, GLfloat upY, GLfloat upZ, GLfloat yaw, GLfloat pitch
+	*/
 	Camera(GLfloat posX, GLfloat posY, GLfloat posZ, GLfloat upX, GLfloat upY, GLfloat upZ, GLfloat yaw, GLfloat pitch);
 
+	/**
+	* @brief accessor for view matrix
+	*
+	* @param
+	* @return looAt Matrix
+	*/
 	glm::mat4 GetViewMatrix();
 
+	/**
+	* @brief process keyboard input to change camera position
+	*
+	* @param Camera_Move direction, GLfloat deltaTime
+	*/
 	void ProcessKeyboard(Camera_Move direction, GLfloat deltaTime);
+
 
 	static Camera & getCameraInstance();
 
+	/**
+	* @brief process mouse input to change camera pitch and yaw
+	*
+	* @param GLfloat xOffset, GLfloat yOffset, GLboolean constrainPitch
+	*/
 	void ProcessMouseMovement(GLfloat xOffset, GLfloat yOffset, GLboolean constrainPitch = true);
 
+	/**
+	* @brief process mouse scroll input to change camera zoom
+	*
+	* @param GLfloat yOffset
+	*/
 	void ProcessMouseScroll(GLfloat yOffset);
 
+	/**
+	* @brief accessor for zoom
+	*
+	* @return zoom
+	*/
 	GLfloat GetZoom();
 
 private:
@@ -71,6 +121,10 @@ private:
 	GLfloat movementSpeed;
 	GLfloat mouseSensitivity;
 	GLfloat zoom;
-
+	
+	/**
+	* @brief helper function that is used to update the camera when a parameter is changed
+	*
+	*/
 	void updateCameraVectors();
 };

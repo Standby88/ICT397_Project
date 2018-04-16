@@ -92,3 +92,14 @@ void Shader::Use()
 Shader::~Shader()
 {
 }
+
+void Shader::scriptRegister(lua_State * L)
+{
+	using namespace luabridge;
+	getGlobalNamespace(L)
+		.beginNamespace("Shader")
+		.beginClass<Shader>("Shader")
+		.addConstructor<void(*)(const char*, const char*)>()
+		.endClass()
+		.endNamespace();
+}

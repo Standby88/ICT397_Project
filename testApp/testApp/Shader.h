@@ -13,28 +13,49 @@ extern "C"
 #include <LuaBridge.h>
 #include <string>
 #include <glm\glm.hpp>
-//#include <GL\glew.h>
 
+/**
+* @class Shader
+* @brief used to compile and setup shader programs
+*
+* @author alex
+* @version 1
+* @date
+*
+* @todo
+*
+* @bug
+*/
 class Shader
 {
 public:
 
-	//Shader(const GLchar *vertexPath, const GLchar *fragPath);
+	/**
+	* @brief Constructor used to initialize the shader
+	*
+	*@param const char *vertexPath, const char *fragPath
+	*/
 	Shader(const char *vertexPath, const char *fragPath);
+
+	/**
+	* @brief Use shader program
+	*/
 	void Use();
+
+	/**
+	* @brief destructor for shader object
+	*/
 	~Shader();
-	static void scriptRegister(lua_State * L)
-	{
-		using namespace luabridge;
-		getGlobalNamespace(L)
-			.beginNamespace("Shader")
-			.beginClass<Shader>("Shader")
-			.addConstructor<void(*)(const char*, const char*)>()
-			.endClass()
-			.endNamespace();
-	}
+
+
+	/**
+	* @brief used to register the functions to ua
+	*
+	*@param lua_state * L
+	*/
+	static void scriptRegister(lua_State * L);
+	
 
 	int Program;
-	//GLuint Program;
 };
 

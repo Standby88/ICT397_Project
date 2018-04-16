@@ -46,8 +46,12 @@ public:
 	*/
 	static void scriptRegister(lua_State * L);
 
-	EnvironmentObject* convert(GameObject* a)
-	{
-		return dynamic_cast<EnvironmentObject*>(a);
-	}
+	/**
+	* @brief used to register the functions to ua
+	*
+	*@param GameObject* a
+	*@return EnvironmentObject*
+	*/
+	EnvironmentObject* convert(GameObject* a);
+
 };

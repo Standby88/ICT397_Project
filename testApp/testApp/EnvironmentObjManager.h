@@ -75,6 +75,11 @@ public:
 	*/
 	static void scriptRegister(lua_State * L);
 
+	/**
+	* @brief returns reference to current map
+	*
+	* @return EnvironmentObject*
+	*/
 	std::unordered_map<std::string, EnvironmentObject* >& getEnObjMap();
 };
 

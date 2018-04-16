@@ -66,7 +66,6 @@ void ModelManager::scriptRegister(lua_State * L)
 		.addFunction("GetModel", &ModelManager::GetModel)
 		.addStaticFunction("GetModelManager", &ModelManager::GetModelManager)
 		.addFunction("destroyModelManager", &ModelManager::destroyModelManager)
-		.addFunction("print", &ModelManager::print)
 		.endClass()
 		.endNamespace();
 }

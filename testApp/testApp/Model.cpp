@@ -5,6 +5,19 @@ Model::Model()
 
 }
 
+Model::Model(std::string path)
+{
+	this->loadModel(path);
+	m_path = path;
+}
+
+void Model::Draw(Shader shader)
+{
+	for (GLuint i = 0; i < this->meshes.size(); i++)
+	{
+		this->meshes[i].Draw(shader);
+	}
+}
 std::string Model::getName()
 {
 	return m_path;

@@ -28,32 +28,51 @@ extern "C"
 #include <LuaBridge.h>
 #include <string>
 #include <glm\glm.hpp>
-//#include "Shader.h"
 
-
+/**
+* @class Model
+* @brief Used to load model and store model data for it to be drawn
+*
+* @author Alex
+* @version 1
+* @date
+*
+* @todo
+*
+* @bug
+*/
 class Model
 {
 public:
+
+	/**
+	* @brief default Constructor
+	*/
 	Model();
+
+
 	/*  Functions   */
-	// Constructor, expects a filepath to a 3D model.
-	Model(std::string path)
-	{
-		this->loadModel(path);
-		m_path = path;
-	}
+	/**
+	* @brief Constructor, expects a filepath to a 3D model.
+	*/
+	Model(std::string path);
 
-	// Draws the model, and thus all its meshes
-	void Draw(Shader shader)
-	{
-		for (GLuint i = 0; i < this->meshes.size(); i++)
-		{
-			this->meshes[i].Draw(shader);
-		}
-	}
 
+	/**
+	* @brief Draws the model, and thus all its meshes
+	*/
+	void Draw(Shader shader);
+	
+	/**
+	* @brief returns path of model
+	*@return string m_path
+	*/
 	std::string getName();
 
+	/**
+	* @brief expose functions to lua
+	*@param lua_State * L
+	*/
 	static void scriptRegister(lua_State * L);
 
 private:
@@ -61,14 +80,43 @@ private:
 	/*  Model Data  */
 	vector<Mesh> meshes;
 	string directory;
-	vector<Texture> textures_loaded;	// Stores all the textures loaded so far, optimization to make sure textures aren't loaded more than once.
+	vector<Texture> textures_loaded;	
 
-										/*  Functions   */
-										// Loads a model with supported ASSIMP extensions from file and stores the resulting meshes in the meshes vector.
+	/**
+    * @brief Loads a model with supported ASSIMP extensions from file and stores the resulting meshes in the meshes vector.
+	*
+	*@param string path
+	*/
 	void loadModel(string path);
+
+	/**
+	* @brief  Processes a node in a recursive fashion. Processes each individual mesh located at the node and repeats this process on its children nodes (if any).
+	*
+	*@param aiNode* node, const aiScene* scene
+	*/
 	void processNode(aiNode* node, const aiScene* scene);
+
+	/**
+	* @brief process mesh data
+	*
+	*@param aiNode* node, const aiScene* scene
+	*@return Mesh
+	*/
 	Mesh processMesh(aiMesh *mesh, const aiScene *scene);
+
+	/**
+	* @brief load material textures
+	*
+	*@param aiMaterial *mat, aiTextureType type, string typeName
+	*@return vector<texture>
+	*/
 	vector<Texture> loadMaterialTextures(aiMaterial *mat, aiTextureType type, string typeName);
 
+	/**
+	* @brief gets the texture from file
+	*
+	*@param const char *path, string directory
+	*@return GLint index
+	*/
 	GLint TextureFromFile(const char *path, string directory);
 };
