@@ -29,6 +29,22 @@ PhysicsFacade::~PhysicsFacade()
 	collisionShapes.clear();
 }
 
+PhysicsFacade & PhysicsFacade::GetPhysicsInstance()
+{
+	static PhysicsFacade *physFac = NULL;
+
+	if (physFac == NULL) {
+
+		/*glfwSetKeyCallback(glfwGetCurrentContext(), *WrapKeyCallback);
+		glfwSetCursorPosCallback(glfwGetCurrentContext(), *WrapMouseCallback);
+		glfwSetInputMode(glfwGetCurrentContext(), GLFW_CURSOR, GLFW_CURSOR_DISABLED);*/
+
+		physFac = new PhysicsFacade();
+	}
+
+	return *physFac;
+}
+
 void PhysicsFacade::SetGravity(float grav)
 {
 	dynamicsWorld->setGravity(btVector3(0, grav, 0));

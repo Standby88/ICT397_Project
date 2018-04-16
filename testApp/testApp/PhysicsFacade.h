@@ -104,6 +104,18 @@ public:
 	~PhysicsFacade();
 
 	/**
+	* @brief
+	*
+	*
+	*
+	* @param
+	* @return
+	* @pre
+	* @post
+	*/
+	static PhysicsFacade & GetPhysicsInstance();
+
+	/**
 	* @brief Sets the gravity
 	*
 	*	
