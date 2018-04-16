@@ -32,6 +32,7 @@ WorldTerrain::WorldTerrain()
 	scale.z = 1.0f;
 
 	terrainData = NULL;
+
 }
 
 WorldTerrain::~WorldTerrain()
@@ -55,6 +56,7 @@ void WorldTerrain::scriptRegister(lua_State * L)
 		.addFunction("loadHeightfield", &WorldTerrain::loadHeightfield)
 		.addFunction("setScallingFactor", &WorldTerrain::setScalingFactor)
 		.addFunction("convert", &WorldTerrain::convert)
+		.addFunction("CreateTerrainRigidBody", &WorldTerrain::CreateTerrainRigidBody)
 		.endClass()
 		.endNamespace();
 }
@@ -106,6 +108,7 @@ void WorldTerrain::SetTerrainVariable(std::string tex1, std::string tex2, std::s
 		}
 	}
 	terMesh.setMesh();
+	CreateTerrainRigidBody();
 }
 
 bool WorldTerrain::loadHeightfield(std::string filename, const int size)
@@ -127,4 +130,9 @@ void WorldTerrain::setScalingFactor(float x, float y, float z)
 int WorldTerrain::getSize()
 {
 	return size;
+}
+
+void WorldTerrain::CreateTerrainRigidBody()
+{
+	wPhysFac->CreateHeightFieldRigidBody(size, size, terrainData, scale.y, 1, false, false);
 }

@@ -72,7 +72,7 @@ PlayerInput::~PlayerInput()
 
 void PlayerInput::DoMovement(GLfloat time)
 {
-	camera = &Camera::getCameraInstance();
+	camera = Camera::GetCameraInstance();
 	// Camera controls
 	if (glfwGetKey(glfwGetCurrentContext(), GLFW_KEY_W) == GLFW_PRESS || glfwGetKey(glfwGetCurrentContext(), GLFW_KEY_W) == GLFW_REPEAT)
 	{
@@ -166,7 +166,7 @@ void PlayerInput::WrapMouseCallback(GLFWwindow *window, double xPos, double yPos
 
 void PlayerInput::MouseCallback(GLFWwindow *window, double xPos, double yPos)
 {
-	camera = &Camera::getCameraInstance();
+	camera = Camera::GetCameraInstance();
 	if (firstMouse)
 	{
 		lastX = xPos;

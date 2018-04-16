@@ -6,7 +6,6 @@
 
 #include <GLFW/glfw3.h>
 
-
 #include "Camera.h"
 #include "Model.h"
 
@@ -65,9 +64,12 @@ public:
 	TextureManager m_TextureMan;
 
 	///scene camera and camera variables
-	Camera  camera;
+	Camera*  camera = Camera::GetCameraInstance();
 	GLdouble lastX = WIDTH / 2.0;
 	GLdouble lastY = HEIGHT / 2.0;
+
+	///Physics 
+	PhysicsFacade* PhysFac = PhysicsFacade::GetPhysicsInstance();
 
 	///input key states
 	bool keys[1024];

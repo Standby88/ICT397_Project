@@ -4,6 +4,7 @@
 #include "Mesh.h"
 #include "TextureManager.h"
 #include "SOIL2/SOIL2.h"
+#include "PhysicsFacade.h"
 /**
 * @class WorldTerrain
 * @brief used to represent terrain of the world
@@ -27,6 +28,9 @@ private:
 	glm::vec3 scale;
 	int size;
 	
+	///access PhysicsFacade
+	PhysicsFacade* wPhysFac = PhysicsFacade::GetPhysicsInstance();
+
 	/**
 	* @brief helper function used to check if x and z pos is in heightmap
 	*@param int xpos, int zpos
@@ -99,5 +103,8 @@ public:
 	{
 		return dynamic_cast<WorldTerrain*>(a);
 	}
+
 	int getSize();
+
+	void CreateTerrainRigidBody();
 };

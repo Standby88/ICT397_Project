@@ -9,14 +9,6 @@
 
 #pragma once
 
-/*extern "C"
-{
-#include "lua.h"
-#include "lauxlib.h"
-#include "lualib.h"
-}
-#include <LuaBridge.h>*/
-
 #include "btBulletDynamicsCommon.h"
 #include "BulletCollision\Gimpact\btGImpactCollisionAlgorithm.h"
 #include "BulletCollision\CollisionShapes\btHeightfieldTerrainShape.h"
@@ -34,6 +26,8 @@ extern "C"
 #include <LuaBridge.h>
 #include <string>
 #include <glm\glm.hpp>
+
+using namespace luabridge;
 
 typedef struct PhysicsVector
 {
@@ -85,6 +79,8 @@ private:
 	btAlignedObjectArray<btCollisionShape*> collisionShapes;
 		/// btDiscreteDynamicsWorld object pointer
 	btDiscreteDynamicsWorld* dynamicsWorld;
+	
+	static PhysicsFacade* instance;
 	/*
 	//std::vector<btCollisionObject> collisionObjects;
 
@@ -106,10 +102,13 @@ private:
 	* @post
 	*/
 	//int AssignObjectIndex();
+protected:
 
 public:
-		///Default constructor to initiailise class member variables
+		
+	///Default constructor to initiailise class member variables
 	PhysicsFacade();
+
 		///Default destructor to free memory
 	~PhysicsFacade();
 
@@ -123,7 +122,7 @@ public:
 	* @pre
 	* @post
 	*/
-	static PhysicsFacade & GetPhysicsInstance();
+	static PhysicsFacade* GetPhysicsInstance();
 
 	/**
 	* @brief Sets the gravity
@@ -216,7 +215,7 @@ public:
 	* @pre
 	* @post
 	*/
-	void CreateRigidBodyBox(int height, int width, int length, int mass, int xPosition, int yPosition, int zPosition, int xInertia, int yInertia, int zInertia);
+	void CreateBoxRigidBody(int height, int width, int length, int mass, int xPosition, int yPosition, int zPosition, int xInertia, int yInertia, int zInertia);
 
 	/**
 	* @brief 
@@ -321,7 +320,7 @@ public:
 	* @pre
 	* @post
 	*/
-	void scriptRegister(lua_state * L);
+	static void scriptRegister(lua_State * L);
 
 };
 

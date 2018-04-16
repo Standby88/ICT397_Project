@@ -1,5 +1,7 @@
 #include "PhysicsFacade.h"
 
+PhysicsFacade* PhysicsFacade::instance = 0;
+
 PhysicsFacade::PhysicsFacade()
 {
 	collisionConfiguration = new btDefaultCollisionConfiguration();
@@ -29,20 +31,15 @@ PhysicsFacade::~PhysicsFacade()
 	collisionShapes.clear();
 }
 
-PhysicsFacade & PhysicsFacade::GetPhysicsInstance()
+PhysicsFacade* PhysicsFacade::GetPhysicsInstance()
 {
-	static PhysicsFacade *physFac = NULL;
-
-	if (physFac == NULL) {
-
-		/*glfwSetKeyCallback(glfwGetCurrentContext(), *WrapKeyCallback);
-		glfwSetCursorPosCallback(glfwGetCurrentContext(), *WrapMouseCallback);
-		glfwSetInputMode(glfwGetCurrentContext(), GLFW_CURSOR, GLFW_CURSOR_DISABLED);*/
-
-		physFac = new PhysicsFacade();
+	if (instance == 0) 
+	{
+		instance = new PhysicsFacade();
+		std::cout << "First physicsfacade instance created" << std::endl;
 	}
-
-	return *physFac;
+	
+	return instance;
 }
 
 void PhysicsFacade::SetGravity(float grav)
@@ -137,10 +134,16 @@ void PhysicsFacade::CreateHeightFieldRigidBody(int 	heightStickWidth, int height
 		//has 0 mass, it's static, won't move.
 	btRigidBody::btRigidBodyConstructionInfo hFieldRigidBodyCI(0, hFieldMotionState, hFieldShape, btVector3(0, 0, 0));
 	btRigidBody* hFieldRigidBody = new btRigidBody(hFieldRigidBodyCI);
-	
+
+	std::cout << "Number of collision objects 1: " << dynamicsWorld->getNumCollisionObjects() << std::endl;
+	if (heightfieldData)
+	{
+		std::cout << "HeightfieldData is not NULL" << std::endl;
+	}
+	std::cout << "Capacity of dynamicsWorld: " << dynamicsWorld->getCollisionObjectArray().capacity() << std::endl;
 	dynamicsWorld->addRigidBody(hFieldRigidBody);
-	
-	
+	std::cout << "Capacity of dynamicsWorld: " << dynamicsWorld->getCollisionObjectArray().capacity() << std::endl;
+	std::cout << "Number of collision objects 4: " << dynamicsWorld->getNumCollisionObjects() << std::endl;
 }
 
 void PhysicsFacade::CreateSphereRigidBody(float rad, float m, float xPos, float yPos, float zPos, float xIner, float yIner, float zIner)
@@ -167,13 +170,14 @@ void PhysicsFacade::CreateSphereRigidBody(float rad, float m, float xPos, float 
 	btDefaultMotionState* sphereMotionState = new btDefaultMotionState(sphereTransform);
 	btRigidBody::btRigidBodyConstructionInfo sphereRBCI(mass, sphereMotionState, sphereShape, localInertia);
 	btRigidBody* body = new btRigidBody(sphereRBCI);
-
+	std::cout << "Number of collision objects 2: " << dynamicsWorld->getNumCollisionObjects() << std::endl;
+	std::cout << "Capacity of dynamicsWorld: " << dynamicsWorld->getCollisionObjectArray().capacity() << std::endl;
 	dynamicsWorld->addRigidBody(body);
-
+	std::cout << "Number of collision objects 3: " <<  dynamicsWorld->getNumCollisionObjects() << std::endl;
 	
 }
 
-void PhysicsFacade::CreateRigidBodyBox(int h, int w, int l, int m, int xPos, int yPos, int zPos, int xIner, int yIner, int zIner)
+void PhysicsFacade::CreateBoxRigidBody(int h, int w, int l, int m, int xPos, int yPos, int zPos, int xIner, int yIner, int zIner)
 {
 	btCollisionShape* boxShape = new btBoxShape(btVector3(btScalar(w), btScalar(h), btScalar(l)));
 	this->collisionShapes.push_back(boxShape);
@@ -181,7 +185,7 @@ void PhysicsFacade::CreateRigidBodyBox(int h, int w, int l, int m, int xPos, int
 	boxTransform.setIdentity();
 
 	boxTransform.setOrigin(btVector3(xPos, yPos, zPos));
-	btScalar boxMass = m;
+	btScalar boxMass(m);
 
 	bool isDynamic = (boxMass != 0.f);
 
@@ -197,6 +201,7 @@ void PhysicsFacade::CreateRigidBodyBox(int h, int w, int l, int m, int xPos, int
 	btRigidBody::btRigidBodyConstructionInfo groundRBCI(boxMass, boxMotionState, boxShape, localInertia);
 	btRigidBody* body = new btRigidBody(groundRBCI);
 	
+
 	dynamicsWorld->addRigidBody(body);
 	
 	
@@ -373,8 +378,14 @@ void PhysicsFacade::scriptRegister(lua_State * L)
 		.beginNamespace("PF")
 		.beginClass<PhysicsFacade>("PhysicsFacade")
 		.addConstructor<void(*) (void)>()
-		.addFunction("", &PhysicsFacade::)
-		.addFunction("", &PhysicsFacade::)
+		.addFunction("CreateHeightFieldRigidBody", &PhysicsFacade::CreateHeightFieldRigidBody)
+		.addFunction("CreateSphereRigidBody", &PhysicsFacade::CreateSphereRigidBody)
+		//.addFunction("CreateBoxRigidBodyBox", &PhysicsFacade::CreateBoxRigidBody)
+		.addFunction("SetGravity", &PhysicsFacade::SetGravity)
+		.addFunction("GetXOrigin", &PhysicsFacade::GetXOrigin)
+		.addFunction("GetYOrigin", &PhysicsFacade::GetYOrigin)
+		.addFunction("GetZOrigin", &PhysicsFacade::GetZOrigin)
+
 		.endClass()
 		.endNamespace();
 }

@@ -1,5 +1,7 @@
 #include "Camera.h"
 
+Camera* Camera::instance = 0;
+
 Camera::Camera(GLfloat posX, GLfloat posY, GLfloat posZ, GLfloat upX, GLfloat upY, GLfloat upZ, GLfloat yaw, GLfloat pitch)
 	:front(glm::vec3(0.0f, 0.0f, -1.0f)), movementSpeed(SPEED), mouseSensitivity(SENSITIVTY), zoom(ZOOM)
 {
@@ -10,20 +12,19 @@ Camera::Camera(GLfloat posX, GLfloat posY, GLfloat posZ, GLfloat upX, GLfloat up
 	this->updateCameraVectors();
 }
 
-Camera & Camera::getCameraInstance()
+Camera* Camera::GetCameraInstance()
 {
-	static Camera *cam = NULL;
-
-	if (cam == NULL) {
+	if (instance == 0) {
 
 		/*glfwSetKeyCallback(glfwGetCurrentContext(), *WrapKeyCallback);
 		glfwSetCursorPosCallback(glfwGetCurrentContext(), *WrapMouseCallback);
 		glfwSetInputMode(glfwGetCurrentContext(), GLFW_CURSOR, GLFW_CURSOR_DISABLED);*/
 
-		cam = new Camera(glm::vec3(0.0f, 0.0f, 3.0f));
+		instance = new Camera(glm::vec3(0.0f, 0.0f, 3.0f));
+		std::cout << "First camera instance created" << std::endl;
 	}
 
-	return *cam;
+	return instance;
 }
 
 glm::mat4 Camera::GetViewMatrix()
@@ -134,4 +135,10 @@ void Camera::updateCameraVectors()
 	// Also re-calculate the Right and Up vector
 	this->right = glm::normalize(glm::cross(this->front, this->worldUp));  // Normalize the vectors, because their length gets closer to 0 the more you look up or down which results in slower movement.
 	this->up = glm::normalize(glm::cross(this->right, this->front));
+}
+
+void Camera::CreateCameraRigidBodyBox()
+{
+	//cPhysFac.CreateBoxRigidBody(1.75, 1.5, 1.5, 60, position.x, position.y, position.z, 0, 0, 0);
+	cPhysFac->CreateSphereRigidBody(1.75, 60, position.x, position.y, position.z, 0, 0, 0);
 }

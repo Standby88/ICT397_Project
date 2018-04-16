@@ -121,9 +121,9 @@ void PhysicsFacade::CreateHeightFieldRigidBody(int 	heightStickWidth, int height
 		//has 0 mass, it's static, won't move.
 	btRigidBody::btRigidBodyConstructionInfo hFieldRigidBodyCI(0, hFieldMotionState, hFieldShape, btVector3(0, 0, 0));
 	btRigidBody* hFieldRigidBody = new btRigidBody(hFieldRigidBodyCI);
-	
+	std::cout << "Capacity of dynamicsWorld: " << dynamicsWorld->getCollisionObjectArray().capacity() << std::endl;
 	dynamicsWorld->addRigidBody(hFieldRigidBody);
-	
+	std::cout << "Capacity of dynamicsWorld: " << dynamicsWorld->getCollisionObjectArray().capacity() << std::endl;
 	
 }
 
@@ -151,7 +151,7 @@ void PhysicsFacade::CreateSphereRigidBody(float rad, float m, float xPos, float 
 	btDefaultMotionState* sphereMotionState = new btDefaultMotionState(sphereTransform);
 	btRigidBody::btRigidBodyConstructionInfo sphereRBCI(mass, sphereMotionState, sphereShape, localInertia);
 	btRigidBody* body = new btRigidBody(sphereRBCI);
-
+	
 	dynamicsWorld->addRigidBody(body);
 
 	

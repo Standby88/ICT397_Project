@@ -2,6 +2,8 @@
 
 #include <vector>
 
+#include "PhysicsFacade.h"
+
 #include <GL/glew.h>
 
 #include <glm/glm.hpp>
@@ -22,6 +24,8 @@ const GLfloat PITCH = 0.0f;
 const GLfloat SPEED = 6.0f;
 const GLfloat SENSITIVTY = 0.25f;
 const GLfloat ZOOM = 45.0f;
+
+
 /**
 * @class Camera
 * @brief Camera class used for viewing the scene
@@ -57,6 +61,7 @@ public:
 		int x, y;
 		glfwGetWindowSize(win, &x, &y);
 		glfwSetCursorPos(win, (double)x / 2, (double)y / 2);
+		CreateCameraRigidBodyBox();
 	}
 
 	/**
@@ -82,7 +87,7 @@ public:
 	void ProcessKeyboard(Camera_Move direction, GLfloat deltaTime);
 
 
-	static Camera & getCameraInstance();
+	static Camera* GetCameraInstance();
 
 	/**
 	* @brief process mouse input to change camera pitch and yaw
@@ -105,6 +110,8 @@ public:
 	*/
 	GLfloat GetZoom();
 
+	void CreateCameraRigidBodyBox();
+
 private:
 	// Camera Attributes
 	glm::vec3 position;
@@ -122,9 +129,16 @@ private:
 	GLfloat mouseSensitivity;
 	GLfloat zoom;
 	
+	static Camera* instance;
+
+	PhysicsFacade* cPhysFac = PhysicsFacade::GetPhysicsInstance();
+
 	/**
 	* @brief helper function that is used to update the camera when a parameter is changed
 	*
 	*/
 	void updateCameraVectors();
+
+	
+
 };

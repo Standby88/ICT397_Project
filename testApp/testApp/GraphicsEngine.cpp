@@ -36,10 +36,10 @@ bool GraphicsEngine::GLFWpro()
 	glfwGetFramebufferSize(window, &SCREEN_WIDTH, &SCREEN_HEIGHT);
 	std::cout << "2. Window context creation complete" << std::endl;
 
-	camera = Camera(glm::vec3(0.0f, 0.0f, 3.0f));
-
+	camera = Camera::GetCameraInstance();
+	
 	PlayerInput playerInput = PlayerInput::getCurrentPlayerInput();
-	playerInput.SetAttributes(&camera);
+	playerInput.SetAttributes(camera);
 	playerInput.SetCallbacks();
 
 
@@ -84,7 +84,7 @@ bool GraphicsEngine::GLFWpro()
 	// Draw in wireframe
 	//
 
-	glm::mat4 projection = glm::perspective(camera.GetZoom(), (float)SCREEN_WIDTH / (float)SCREEN_HEIGHT, 0.1f, 1000.0f);
+	glm::mat4 projection = glm::perspective(camera->GetZoom(), (float)SCREEN_WIDTH / (float)SCREEN_HEIGHT, 0.1f, 1000.0f);
 
 	// Game loop
 	while (!glfwWindowShouldClose(window))
@@ -101,8 +101,8 @@ bool GraphicsEngine::GLFWpro()
 		// Clear the colorbuffer
 		glClearColor(0.2f, 0.3f, 0.3f, 1.0f);
 		glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
-		camera = Camera::getCameraInstance();
-		glm::mat4 view = camera.GetViewMatrix();
+		camera = Camera::GetCameraInstance();
+		glm::mat4 view = camera->GetViewMatrix();
 		SceneRender::renderEnvironmentObj(*Etest,view, projection, S);
 		SceneRender::renderTerrain(*Ttest, view, projection, Tshader);
 
