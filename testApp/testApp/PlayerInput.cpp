@@ -35,10 +35,6 @@ PlayerInput & PlayerInput::getCurrentPlayerInput()
 
 	if (playerInput == NULL) {
 
-		/*glfwSetKeyCallback(glfwGetCurrentContext(), *WrapKeyCallback);
-		glfwSetCursorPosCallback(glfwGetCurrentContext(), *WrapMouseCallback);
-		glfwSetInputMode(glfwGetCurrentContext(), GLFW_CURSOR, GLFW_CURSOR_DISABLED);*/
-
 		playerInput = new PlayerInput();
 	}
 
@@ -116,7 +112,7 @@ void PlayerInput::WrapKeyCallback(GLFWwindow *window, int key, int scancode, int
 
 void PlayerInput::KeyCallback(GLFWwindow *window, int key, int scancode, int action, int mode)
 {
-	if (key == GLFW_KEY_ESCAPE && action == GLFW_PRESS)
+	if (key == GLFW_KEY_X && action == GLFW_PRESS)
 	{
 		if (photo == false)
 		{
@@ -125,6 +121,28 @@ void PlayerInput::KeyCallback(GLFWwindow *window, int key, int scancode, int act
 		else if(photo == true)
 		{
 			glfwSetWindowShouldClose(glfwGetCurrentContext(), GL_TRUE);
+		}
+	}
+
+	if (key == GLFW_KEY_M && action == GLFW_PRESS)
+	{
+		if (Manual == false)
+		{
+			Manual = true;
+		}
+		else if (Manual == true)
+		{
+			Manual = false;
+		}
+	}if (key == GLFW_KEY_K && action == GLFW_PRESS)
+	{
+		if (wire == false)
+		{
+			wire = true;
+		}
+		else if (wire == true)
+		{
+			wire = false;
 		}
 	}
 	if (key >= 0 && key < 1024)
