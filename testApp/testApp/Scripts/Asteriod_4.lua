@@ -1,8 +1,8 @@
 --asteroid object
 --print ("First Environmental Object")
-E5 = Factory:Create("EnvironObj")
-E5 = test:convert(E5)
-E5:addModel(asteroid_2)
+A4 = Factory:Create("EnvironObj")
+A4 = test:convert(A4)
+A4:addModel(asteroid_2)
 --E2:addRigidbody()
-E5:updateObject(15.0, 0.0, 11.0)
+A4:updateObject(15.0, 0.0, 11.0)
 --print ("Model finished ")

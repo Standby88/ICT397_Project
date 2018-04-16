@@ -11,6 +11,7 @@ unsigned char WorldTerrain::getHeightColor(int xpos, int zpos)
 	}
 	return 1;
 }
+
 float WorldTerrain::getHeight(int xpos, int zpos)
 {
 
@@ -55,6 +56,7 @@ void WorldTerrain::scriptRegister(lua_State * L)
 		.addFunction("loadHeightfield", &WorldTerrain::loadHeightfield)
 		.addFunction("setScallingFactor", &WorldTerrain::setScalingFactor)
 		.addFunction("convert", &WorldTerrain::convert)
+		.addFunction("getHeightAt", &WorldTerrain::getHeight)
 		.endClass()
 		.endNamespace();
 }
