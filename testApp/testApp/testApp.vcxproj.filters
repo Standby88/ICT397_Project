@@ -90,6 +90,9 @@
     <ClCompile Include="Mesh.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="PhysicsFacade.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <None Include="core.frag" />
@@ -209,6 +212,9 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="SceneRender.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="PhysicsFacade.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
