@@ -373,8 +373,8 @@ void PhysicsFacade::scriptRegister(lua_State * L)
 		.beginNamespace("PF")
 		.beginClass<PhysicsFacade>("PhysicsFacade")
 		.addConstructor<void(*) (void)>()
-		.addFunction("", &PhysicsFacade::)
-		.addFunction("", &PhysicsFacade::)
+		//.addFunction("", &PhysicsFacade::)
+		//.addFunction("", &PhysicsFacade::)
 		.endClass()
 		.endNamespace();
 }

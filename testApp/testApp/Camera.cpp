@@ -91,12 +91,6 @@ void Camera::ProcessMouseMovement(GLfloat xOffset, GLfloat yOffset, GLboolean co
 
 	// Update Front, Right and Up Vectors using the updated Eular angle
 	this->updateCameraVectors();
-
-	GLFWwindow* win = glfwGetCurrentContext();
-	int x, y;
-	glfwGetWindowSize(win, &x, &y);
-	glfwSetCursorPos(win, (double)x / 2, (double)y / 2);
-	justwarped = true;
 }
 
 void Camera::ProcessMouseScroll(GLfloat yOffset)

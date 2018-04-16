@@ -321,7 +321,7 @@ public:
 	* @pre
 	* @post
 	*/
-	void scriptRegister(lua_state * L);
+	void scriptRegister(lua_State * L);
 
 };
 
