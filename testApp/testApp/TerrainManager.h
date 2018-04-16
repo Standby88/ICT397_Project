@@ -69,6 +69,11 @@ public:
 	*/
 	static void scriptRegister(lua_State * L);
 
+	/**
+	* @brief used to return the whole terrain list
+	*
+	* @return std::vector<WorldTerrain*>&
+	*/
 	std::vector<WorldTerrain*>& getTerrainList();
 
 

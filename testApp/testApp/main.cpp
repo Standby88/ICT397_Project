@@ -8,10 +8,9 @@ int main()
 {
 
 
-	GraphicsEngine t;
-	t.GLFWpro();
+	GraphicsEngine gameLoop;
+	gameLoop.GLFWpro();
 	
-	getchar();
 	return 0;
 }
 

@@ -31,3 +31,8 @@ void EnvironmentObject::scriptRegister(lua_State * L)
 		.endClass()
 		.endNamespace();
 }
+
+EnvironmentObject * EnvironmentObject::convert(GameObject * a)
+{
+	return dynamic_cast<EnvironmentObject*>(a);
+}
