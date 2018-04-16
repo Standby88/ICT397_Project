@@ -166,6 +166,8 @@ void PlayerInput::MouseCallback(GLFWwindow *window, double xPos, double yPos)
 	lastX = xPos;
 	lastY = yPos;
 
+	camera = &Camera::getCameraInstance();
+
 	if (xOffset > 0.0f || yOffset > 0.0f)
 		camera->ProcessMouseMovement(xOffset, yOffset);
 }

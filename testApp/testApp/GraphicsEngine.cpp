@@ -36,7 +36,7 @@ bool GraphicsEngine::GLFWpro()
 
 	std::cout << "2. Window context creation complete" << std::endl;
 
-	camera = Camera(glm::vec3(0.0f, 0.0f, 3.0f));
+	camera = Camera::getCameraInstance();
 
 	// Set the required callback functions
 	//PlayerInput playerInput = PlayerInput(WIDTH, HEIGHT, &camera, &deltaTime);
@@ -46,7 +46,7 @@ bool GraphicsEngine::GLFWpro()
 	playerInput.SetAttributes(&camera);
 	playerInput.SetCallbacks();
 
-	//glfwSetInputMode(glfwGetCurrentContext(), GLFW_CURSOR, GLFW_CURSOR_DISABLED);
+	glfwSetInputMode(glfwGetCurrentContext(), GLFW_CURSOR, GLFW_CURSOR_DISABLED);
 
 	// GLFW Options
 	//glfwSetInputMode(window, GLFW_CURSOR, GLFW_CURSOR_DISABLED);
@@ -112,10 +112,7 @@ bool GraphicsEngine::GLFWpro()
 		// Check and call events
 		glfwPollEvents();
 
-		playerInput.DoMovement(deltaTime);
-
-		//playerInputDoMovement(deltaTime);
-		
+		playerInput.DoMovement(deltaTime);		
 
 		// Clear the colorbuffer
 		glClearColor(0.2f, 0.3f, 0.3f, 1.0f);
