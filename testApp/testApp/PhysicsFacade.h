@@ -18,11 +18,7 @@
 #include <LuaBridge.h>*/
 
 #include "btBulletDynamicsCommon.h"
-<<<<<<< HEAD
 #include "Ext_libs\bullet\src\BulletCollision\btGImpactCollisionAlgorithm.h"
-=======
-#include "BulletCollision\Gimpact\btGImpactCollisionAlgorithm.h"
->>>>>>> 027d44100f4cf9d857d1c1b09a0ba3dac649483d
 #include "BulletCollision\CollisionShapes\btHeightfieldTerrainShape.h"
 #include "BulletCollision\CollisionDispatch\btGhostObject.h"
 #include "BulletDynamics\Character\btKinematicCharacterController.h"

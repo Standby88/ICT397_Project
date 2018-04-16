@@ -87,11 +87,7 @@
     <ClCompile Include="Camera.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-<<<<<<< HEAD
     <ClCompile Include="Mesh.cpp">
-=======
-    <ClCompile Include="PhysicsFacade.cpp">
->>>>>>> 027d44100f4cf9d857d1c1b09a0ba3dac649483d
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
@@ -213,9 +209,6 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="SceneRender.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="PhysicsFacade.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
