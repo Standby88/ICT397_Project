@@ -1,0 +1,10 @@
+--asteroid object
+--print ("First Environmental Object")
+E11 = Factory:Create("EnvironObj")
+E11 = test:convert(E11)
+E11:addModel(asteroid_1)
+--E2:addRigidbody()
+x = math.random(11.0, 15.0)
+y = math.random(16.0, 18.0)
+E11:updateObject(x, 0.0,y)
+--print ("Model finished ")

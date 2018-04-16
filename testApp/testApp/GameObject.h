@@ -28,6 +28,9 @@ protected:
 
 	///Stores where the object is located in the scene
 	glm::vec3 objectPos;
+	
+	glm::vec3 rotateAxis;
+	float angle;
 
 public:
 
@@ -49,11 +52,32 @@ public:
 	void updateObject(float x, float y, float z);
 
 	/**
+	* @brief used to update the rotation of the object
+	*
+	*@param float w, float x, float y, float z
+	*/
+	void updateObjectRotation(float w, float x, float y, float z);
+
+	/**
 	* @brief used to access objects position
 	*
 	*@pretun vec3
 	*/
 	glm::vec3 getObjectPos();
+
+	/**
+	* @brief used to access objects rotation
+	*
+	*@pretun vec3
+	*/
+	glm::vec3 getObjectRotation();
+
+	/**
+	* @brief used to access objects angle of rotation
+	*
+	*@pretun float
+	*/
+	float getObjectAngle();
 
 	/**
 	* @brief register all functions to lua to be used.

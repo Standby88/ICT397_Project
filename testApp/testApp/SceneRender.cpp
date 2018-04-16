@@ -14,6 +14,8 @@ void SceneRender::renderEnvironmentObj(EnvironmentObjManager& EM, glm::mat4 view
 {
 	std::unordered_map<std::string, EnvironmentObject* > drawMap = EM.getEnObjMap();
 	glm::vec3 posVec;
+	glm::vec3 rotateAxis;
+	float angle;
 	S.Use();
 	glUniformMatrix4fv(glGetUniformLocation(S.Program, "projection"), 1, GL_FALSE, glm::value_ptr(projection));
 	glUniformMatrix4fv(glGetUniformLocation(S.Program, "view"), 1, GL_FALSE, glm::value_ptr(view));
@@ -24,6 +26,10 @@ void SceneRender::renderEnvironmentObj(EnvironmentObjManager& EM, glm::mat4 view
 	{
 		glm::mat4 model;
 		posVec = (*itr).second->getObjectPos();
+		angle = (*itr).second->getObjectAngle();
+		rotateAxis = (*itr).second->getObjectRotation();
+		if (angle > 0.0f)
+		model = glm::rotate(model, angle, rotateAxis);
 		model = glm::translate(model, posVec); // Translate it down a bit so it's at the center of the scene
 		model = glm::scale(model, glm::vec3(1.0f, 1.0f, 1.0f));	// It's a bit too big for our scene, so scale it down
 		glUniformMatrix4fv(glGetUniformLocation(S.Program, "model"), 1, GL_FALSE, glm::value_ptr(model));
