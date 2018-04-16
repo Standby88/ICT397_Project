@@ -1,24 +1,97 @@
-﻿  main.cpp
+﻿  WorldTerrain.cpp
+  TextureManager.cpp
+  TerrainManager.cpp
+e:\repositories\ict397_project\testapp\testapp\terrainmanager.cpp(26): warning C4018: '<': signed/unsigned mismatch
+  Shader.cpp
+  ScriptEngine.cpp
+  SceneRender.cpp
+  RAwIMGLoader.cpp
+e:\repositories\ict397_project\testapp\testapp\rawimgloader.cpp(25): warning C4244: 'initializing': conversion from 'std::streamoff' to 'int', possible loss of data
   PlayerInput.cpp
-c:\users\desmond\documents\github\ict397_project\testapp\testapp\playerinput.cpp(8): warning C4244: '=': conversion from 'int' to 'GLfloat', possible loss of data
-c:\users\desmond\documents\github\ict397_project\testapp\testapp\playerinput.cpp(9): warning C4244: '=': conversion from 'int' to 'GLfloat', possible loss of data
-c:\users\desmond\documents\github\ict397_project\testapp\testapp\playerinput.cpp(11): warning C4244: '=': conversion from 'double' to 'GLfloat', possible loss of data
-c:\users\desmond\documents\github\ict397_project\testapp\testapp\playerinput.cpp(19): warning C4244: '=': conversion from 'int' to 'GLfloat', possible loss of data
-c:\users\desmond\documents\github\ict397_project\testapp\testapp\playerinput.cpp(20): warning C4244: '=': conversion from 'int' to 'GLfloat', possible loss of data
-c:\users\desmond\documents\github\ict397_project\testapp\testapp\playerinput.cpp(52): warning C4244: '=': conversion from 'int' to 'GLfloat', possible loss of data
-c:\users\desmond\documents\github\ict397_project\testapp\testapp\playerinput.cpp(53): warning C4244: '=': conversion from 'int' to 'GLfloat', possible loss of data
-c:\users\desmond\documents\github\ict397_project\testapp\testapp\playerinput.cpp(55): warning C4244: '=': conversion from 'double' to 'GLfloat', possible loss of data
-c:\users\desmond\documents\github\ict397_project\testapp\testapp\playerinput.cpp(57): warning C4800: 'bool *': forcing value to bool 'true' or 'false' (performance warning)
-c:\users\desmond\documents\github\ict397_project\testapp\testapp\playerinput.cpp(162): warning C4244: '=': conversion from 'double' to 'GLfloat', possible loss of data
-c:\users\desmond\documents\github\ict397_project\testapp\testapp\playerinput.cpp(163): warning C4244: '=': conversion from 'double' to 'GLfloat', possible loss of data
-c:\users\desmond\documents\github\ict397_project\testapp\testapp\playerinput.cpp(166): warning C4244: 'initializing': conversion from 'double' to 'GLfloat', possible loss of data
-c:\users\desmond\documents\github\ict397_project\testapp\testapp\playerinput.cpp(167): warning C4244: 'initializing': conversion from 'double' to 'GLfloat', possible loss of data
-c:\users\desmond\documents\github\ict397_project\testapp\testapp\playerinput.cpp(170): warning C4244: '=': conversion from 'double' to 'GLfloat', possible loss of data
-c:\users\desmond\documents\github\ict397_project\testapp\testapp\playerinput.cpp(171): warning C4244: '=': conversion from 'double' to 'GLfloat', possible loss of data
-c:\users\desmond\documents\github\ict397_project\testapp\testapp\playerinput.cpp(184): warning C4244: 'argument': conversion from 'double' to 'GLfloat', possible loss of data
-  Generating Code...
-  Compiling...
+e:\repositories\ict397_project\testapp\testapp\playerinput.cpp(8): warning C4244: '=': conversion from 'int' to 'GLfloat', possible loss of data
+e:\repositories\ict397_project\testapp\testapp\playerinput.cpp(9): warning C4244: '=': conversion from 'int' to 'GLfloat', possible loss of data
+e:\repositories\ict397_project\testapp\testapp\playerinput.cpp(11): warning C4244: '=': conversion from 'double' to 'GLfloat', possible loss of data
+e:\repositories\ict397_project\testapp\testapp\playerinput.cpp(19): warning C4244: '=': conversion from 'int' to 'GLfloat', possible loss of data
+e:\repositories\ict397_project\testapp\testapp\playerinput.cpp(20): warning C4244: '=': conversion from 'int' to 'GLfloat', possible loss of data
+e:\repositories\ict397_project\testapp\testapp\playerinput.cpp(52): warning C4244: '=': conversion from 'int' to 'GLfloat', possible loss of data
+e:\repositories\ict397_project\testapp\testapp\playerinput.cpp(53): warning C4244: '=': conversion from 'int' to 'GLfloat', possible loss of data
+e:\repositories\ict397_project\testapp\testapp\playerinput.cpp(55): warning C4244: '=': conversion from 'double' to 'GLfloat', possible loss of data
+e:\repositories\ict397_project\testapp\testapp\playerinput.cpp(57): warning C4800: 'bool *': forcing value to bool 'true' or 'false' (performance warning)
+e:\repositories\ict397_project\testapp\testapp\playerinput.cpp(154): warning C4244: '=': conversion from 'double' to 'GLfloat', possible loss of data
+e:\repositories\ict397_project\testapp\testapp\playerinput.cpp(155): warning C4244: '=': conversion from 'double' to 'GLfloat', possible loss of data
+e:\repositories\ict397_project\testapp\testapp\playerinput.cpp(158): warning C4244: 'initializing': conversion from 'double' to 'GLfloat', possible loss of data
+e:\repositories\ict397_project\testapp\testapp\playerinput.cpp(159): warning C4244: 'initializing': conversion from 'double' to 'GLfloat', possible loss of data
+e:\repositories\ict397_project\testapp\testapp\playerinput.cpp(162): warning C4244: '=': conversion from 'double' to 'GLfloat', possible loss of data
+e:\repositories\ict397_project\testapp\testapp\playerinput.cpp(163): warning C4244: '=': conversion from 'double' to 'GLfloat', possible loss of data
+e:\repositories\ict397_project\testapp\testapp\playerinput.cpp(176): warning C4244: 'argument': conversion from 'double' to 'GLfloat', possible loss of data
+  Player.cpp
+  PhysicsFacade.cpp
+e:\repositories\ict397_project\ext_libs\bullet\src\linearmath\btidebugdraw.h(169): warning C4305: 'argument': truncation from 'double' to 'const btScalar'
+e:\repositories\ict397_project\ext_libs\bullet\src\linearmath\btidebugdraw.h(170): warning C4305: 'argument': truncation from 'double' to 'const btScalar'
+e:\repositories\ict397_project\ext_libs\bullet\src\linearmath\btidebugdraw.h(171): warning C4305: 'argument': truncation from 'double' to 'const btScalar'
+e:\repositories\ict397_project\testapp\testapp\physicsfacade.h(40): warning C4091: 'typedef ': ignored on left of 'PhysicsVector' when no variable is declared
+e:\repositories\ict397_project\testapp\testapp\physicsfacade.cpp(167): warning C4244: 'argument': conversion from 'int' to 'const btScalar', possible loss of data
+e:\repositories\ict397_project\testapp\testapp\physicsfacade.cpp(168): warning C4244: 'initializing': conversion from 'int' to 'btScalar', possible loss of data
+e:\repositories\ict397_project\testapp\testapp\physicsfacade.cpp(172): warning C4244: 'argument': conversion from 'int' to 'const btScalar', possible loss of data
+  ModelManager.cpp
+  Model.cpp
+  main.cpp
   GraphicsEngine.cpp
+  GameObject3D.cpp
+  GameObject.cpp
+  GameAssetCreator.cpp
+  EnvironmentObjManager.cpp
+  EnvironmentObject.cpp
+  Enemy.cpp
   Generating Code...
-  testApp.vcxproj -> C:\Users\Desmond\Documents\GitHub\ICT397_Project\testApp\Debug\testApp.exe
-  testApp.vcxproj -> C:\Users\Desmond\Documents\GitHub\ICT397_Project\testApp\Debug\testApp.pdb (Full PDB)
+e:\repositories\ict397_project\testapp\testapp\physicsfacade.cpp(327): warning C4715: 'PhysicsFacade::GetXOrigin': not all control paths return a value
+e:\repositories\ict397_project\testapp\testapp\physicsfacade.cpp(339): warning C4715: 'PhysicsFacade::GetYOrigin': not all control paths return a value
+e:\repositories\ict397_project\testapp\testapp\physicsfacade.cpp(351): warning C4715: 'PhysicsFacade::GetZOrigin': not all control paths return a value
+  Compiling...
+  CharacterManager.cpp
+  Camera.cpp
+  Generating Code...
+  SOIL2.c
+e:\repositories\ict397_project\testapp\testapp\soil2\stbi_dds_c.h(46): warning C4996: 'fopen': This function or variable may be unsafe. Consider using fopen_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+  c:\program files (x86)\windows kits\10\include\10.0.10240.0\ucrt\stdio.h(205): note: see declaration of 'fopen'
+e:\repositories\ict397_project\testapp\testapp\soil2\stbi_dds_c.h(320): warning C4996: 'fopen': This function or variable may be unsafe. Consider using fopen_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+  c:\program files (x86)\windows kits\10\include\10.0.10240.0\ucrt\stdio.h(205): note: see declaration of 'fopen'
+e:\repositories\ict397_project\testapp\testapp\soil2\stbi_dds_c.h(569): warning C4996: 'fopen': This function or variable may be unsafe. Consider using fopen_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+  c:\program files (x86)\windows kits\10\include\10.0.10240.0\ucrt\stdio.h(205): note: see declaration of 'fopen'
+e:\repositories\ict397_project\testapp\testapp\soil2\stbi_pvr_c.h(31): warning C4996: 'fopen': This function or variable may be unsafe. Consider using fopen_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+  c:\program files (x86)\windows kits\10\include\10.0.10240.0\ucrt\stdio.h(205): note: see declaration of 'fopen'
+e:\repositories\ict397_project\testapp\testapp\soil2\stbi_pvr_c.h(150): warning C4996: 'fopen': This function or variable may be unsafe. Consider using fopen_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+  c:\program files (x86)\windows kits\10\include\10.0.10240.0\ucrt\stdio.h(205): note: see declaration of 'fopen'
+e:\repositories\ict397_project\testapp\testapp\soil2\stbi_pvr_c.h(981): warning C4996: 'fopen': This function or variable may be unsafe. Consider using fopen_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+  c:\program files (x86)\windows kits\10\include\10.0.10240.0\ucrt\stdio.h(205): note: see declaration of 'fopen'
+e:\repositories\ict397_project\testapp\testapp\soil2\stbi_pkm_c.h(46): warning C4996: 'fopen': This function or variable may be unsafe. Consider using fopen_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+  c:\program files (x86)\windows kits\10\include\10.0.10240.0\ucrt\stdio.h(205): note: see declaration of 'fopen'
+e:\repositories\ict397_project\testapp\testapp\soil2\stbi_pkm_c.h(120): warning C4996: 'fopen': This function or variable may be unsafe. Consider using fopen_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+  c:\program files (x86)\windows kits\10\include\10.0.10240.0\ucrt\stdio.h(205): note: see declaration of 'fopen'
+e:\repositories\ict397_project\testapp\testapp\soil2\stbi_pkm_c.h(207): warning C4996: 'fopen': This function or variable may be unsafe. Consider using fopen_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+  c:\program files (x86)\windows kits\10\include\10.0.10240.0\ucrt\stdio.h(205): note: see declaration of 'fopen'
+e:\repositories\ict397_project\testapp\testapp\soil2\stbi_ext_c.h(53): warning C4996: 'fopen': This function or variable may be unsafe. Consider using fopen_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+  c:\program files (x86)\windows kits\10\include\10.0.10240.0\ucrt\stdio.h(205): note: see declaration of 'fopen'
+e:\repositories\ict397_project\testapp\testapp\soil2\stb_image_write.h(222): warning C4996: 'fopen': This function or variable may be unsafe. Consider using fopen_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+  c:\program files (x86)\windows kits\10\include\10.0.10240.0\ucrt\stdio.h(205): note: see declaration of 'fopen'
+e:\repositories\ict397_project\testapp\testapp\soil2\stb_image_write.h(613): warning C4996: 'sprintf': This function or variable may be unsafe. Consider using sprintf_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+  c:\program files (x86)\windows kits\10\include\10.0.10240.0\ucrt\stdio.h(1769): note: see declaration of 'sprintf'
+e:\repositories\ict397_project\testapp\testapp\soil2\stb_image_write.h(997): warning C4996: 'fopen': This function or variable may be unsafe. Consider using fopen_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+  c:\program files (x86)\windows kits\10\include\10.0.10240.0\ucrt\stdio.h(205): note: see declaration of 'fopen'
+e:\repositories\ict397_project\testapp\testapp\soil2\jo_jpeg.h(249): warning C4996: 'fopen': This function or variable may be unsafe. Consider using fopen_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+  c:\program files (x86)\windows kits\10\include\10.0.10240.0\ucrt\stdio.h(205): note: see declaration of 'fopen'
+e:\repositories\ict397_project\testapp\testapp\soil2\soil2.c(2295): warning C4996: 'fopen': This function or variable may be unsafe. Consider using fopen_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+  c:\program files (x86)\windows kits\10\include\10.0.10240.0\ucrt\stdio.h(205): note: see declaration of 'fopen'
+e:\repositories\ict397_project\testapp\testapp\soil2\soil2.c(2612): warning C4996: 'fopen': This function or variable may be unsafe. Consider using fopen_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+  c:\program files (x86)\windows kits\10\include\10.0.10240.0\ucrt\stdio.h(205): note: see declaration of 'fopen'
+e:\repositories\ict397_project\testapp\testapp\soil2\soil2.c(2749): warning C4996: 'fopen': This function or variable may be unsafe. Consider using fopen_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+  c:\program files (x86)\windows kits\10\include\10.0.10240.0\ucrt\stdio.h(205): note: see declaration of 'fopen'
+  image_helper.c
+  image_DXT.c
+e:\repositories\ict397_project\testapp\testapp\soil2\image_dxt.c(92): warning C4996: 'fopen': This function or variable may be unsafe. Consider using fopen_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+  c:\program files (x86)\windows kits\10\include\10.0.10240.0\ucrt\stdio.h(205): note: see declaration of 'fopen'
+  etc1_utils.c
+  Generating Code...
+LINK : warning LNK4098: defaultlib 'MSVCRT' conflicts with use of other libs; use /NODEFAULTLIB:library
+  testApp.vcxproj -> E:\Repositories\ICT397_Project\testApp\Debug\testApp.exe
+  testApp.vcxproj -> E:\Repositories\ICT397_Project\testApp\Debug\testApp.pdb (Full PDB)
