@@ -16,6 +16,7 @@
 
 using namespace std;
 
+///holds all the information about a single vertex point
 struct Vertex
 {
 	// Position
@@ -28,19 +29,21 @@ struct Vertex
 	float height;
 };
 
+///holds the assimp information a texture
 struct Texture
 {
 	GLuint id;
 	string type;
 	aiString path;
 };
+
 /**
 * @class Mesh
 * @brief Used to store mesh details and handle mesh use
 *
 * @author Alex
 * @version 1
-* @date
+* @date 04/04/2018
 *
 * @todo
 *

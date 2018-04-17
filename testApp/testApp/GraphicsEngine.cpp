@@ -19,7 +19,7 @@ bool GraphicsEngine::GLFWpro()
 	glfwWindowHint(GLFW_OPENGL_FORWARD_COMPAT, GL_TRUE);
 	glfwWindowHint(GLFW_RESIZABLE, GL_FALSE);
 
-	std::cout << "1. GLFW initation complete" << std::endl;
+	//std::cout << "1. GLFW initation complete" << std::endl;
 
 	// Create a GLFWwindow object that we can use for GLFW's functions
 	GLFWwindow *window = glfwCreateWindow(WIDTH, HEIGHT, "LearnOpenGL", nullptr, nullptr);
@@ -34,7 +34,7 @@ bool GraphicsEngine::GLFWpro()
 
 	glfwMakeContextCurrent(window);
 	glfwGetFramebufferSize(window, &SCREEN_WIDTH, &SCREEN_HEIGHT);
-	std::cout << "2. Window context creation complete" << std::endl;
+	//std::cout << "2. Window context creation complete" << std::endl;
 
 	camera = Camera::GetCameraInstance();
 	
@@ -46,7 +46,7 @@ bool GraphicsEngine::GLFWpro()
 	// GLFW Options
 	//glfwSetInputMode(window, GLFW_CURSOR, GLFW_CURSOR_DISABLED);
 
-	std::cout << "3. Input - keyboard complete" << std::endl << "4. Input - mouse complete" << std::endl;
+	///std::cout << "3. Input - keyboard complete" << std::endl << "4. Input - mouse complete" << std::endl;
 
 	// Set this to true so GLEW knows to use a modern approach to retrieving function pointers and extensions
 	glewExperimental = GL_TRUE;
@@ -67,7 +67,7 @@ bool GraphicsEngine::GLFWpro()
 	// OpenGL options
 	glEnable(GL_DEPTH_TEST);
 
-	std::cout << "4. Viewport creation complete" << std::endl;
+	//std::cout << "4. Viewport creation complete" << std::endl;
 
 	// Setup and compile our shaders
 	Shader Tshader("Shaders/terrainvertex.vs", "Shaders/terrainfrag.frag");

@@ -78,9 +78,9 @@ public:
 private:
 	std::string m_path;
 	/*  Model Data  */
-	vector<Mesh> meshes;
-	string directory;
-	vector<Texture> textures_loaded;	
+	vector<Mesh> m_meshes;
+	string m_directory;
+	vector<Texture> m_textures_loaded;	
 
 	/**
     * @brief Loads a model with supported ASSIMP extensions from file and stores the resulting meshes in the meshes vector.
@@ -111,12 +111,4 @@ private:
 	*@return vector<texture>
 	*/
 	vector<Texture> loadMaterialTextures(aiMaterial *mat, aiTextureType type, string typeName);
-
-	/**
-	* @brief gets the texture from file
-	*
-	*@param const char *path, string directory
-	*@return GLint index
-	*/
-	GLint TextureFromFile(const char *path, string directory);
 };
