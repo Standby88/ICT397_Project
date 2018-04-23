@@ -38,7 +38,9 @@ private:
 	EnvironmentObjManager *Eom;
 	GameWorld* gameWorld;
 	SceneRender* render;
-
+	glm::mat4 projection;
+	PlayerInput playerInput;
+	GLFWwindow *window;
 public:
 	/**
 	* @brief Constructor for GraphicsEngine
@@ -86,7 +88,7 @@ public:
 	GLuint VBO, VAO, EBO;
 	GLuint texture1 = 0;
 	GLuint texture2 = 0;
-	
+	void initilize();
 	/**
 	* @brief used to set up photo for quiting
 	*/

@@ -56,4 +56,6 @@ EnObjMan:addObject(A7, "asteroid_7")
 EnObjMan:addObject(A8, "asteroid_8")
 EnObjMan:addObject(A9, "asteroid_9")
 
+
+World = GW.GameWorld(TerManager, EnObjMan)
 print ("Game script end")

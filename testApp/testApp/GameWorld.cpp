@@ -19,7 +19,7 @@ TerrainManager * GameWorld::getTerrain()
 
 EnvironmentObjManager * GameWorld::getEnvironment()
 {
-	return this->environment;
+	return environment;
 }
 
 void GameWorld::scriptRegister(lua_State * L)
@@ -29,9 +29,6 @@ void GameWorld::scriptRegister(lua_State * L)
 		.beginNamespace("GW")
 		.beginClass<GameWorld>("GameWorld")
 		.addConstructor<void(*) (TerrainManager*, EnvironmentObjManager*)>()
-		//.addFunction("updateObject", &GameObject::updateObject)
-		//.addFunction("getObjectPos", &GameObject::getObjectPos)
-		//.addFunction("updateObjectRotation", &GameObject::updateObjectRotation)
 		.endClass()
 		.endNamespace();
 }

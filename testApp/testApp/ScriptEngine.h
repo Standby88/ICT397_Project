@@ -1,12 +1,11 @@
 #pragma once
 #include <iostream>
 
-#include "CharacterManager.h"
-#include "EnvironmentObjManager.h"
+#include "GameWorld.h"
 #include "GameAssetFactory.h"
 #include "GameAssetCreator.h"
 #include "ModelManager.h"
-#include "TerrainManager.h"
+
 
 extern "C"
 {

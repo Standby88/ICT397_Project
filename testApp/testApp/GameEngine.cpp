@@ -8,9 +8,6 @@ GameEngine::GameEngine()
 
 bool GameEngine::GLFWpro()
 {
-	ScriptEngine * LuaEn = new ScriptEngine();
-	ScriptEngine::expFuncToLua(LuaEn->getLuaState());
-
 	// Init GLFW
 	glfwInit();
 	// Set all the required options for GLFW
@@ -20,65 +17,18 @@ bool GameEngine::GLFWpro()
 	glfwWindowHint(GLFW_OPENGL_FORWARD_COMPAT, GL_TRUE);
 	glfwWindowHint(GLFW_RESIZABLE, GL_FALSE);
 
-	//std::cout << "1. GLFW initation complete" << std::endl;
-
-	// Create a GLFWwindow object that we can use for GLFW's functions
 	GLFWwindow *window = glfwCreateWindow(WIDTH, HEIGHT, "LearnOpenGL", nullptr, nullptr);
-
-	if (nullptr == window)
-	{
-		std::cout << "Failed to create GLFW window" << std::endl;
-		glfwTerminate();
-
-		return false;
-	}
 
 	glfwMakeContextCurrent(window);
 	glfwGetFramebufferSize(window, &SCREEN_WIDTH, &SCREEN_HEIGHT);
-	//std::cout << "2. Window context creation complete" << std::endl;
-	render = new SceneRender(gameWorld);
-	camera = Camera::GetCameraInstance();
-	
-	PlayerInput playerInput = PlayerInput::getCurrentPlayerInput();
-	playerInput.SetAttributes(camera);
-	playerInput.SetCallbacks();
-
-	// Set this to true so GLEW knows to use a modern approach to retrieving function pointers and extensions
 	glewExperimental = GL_TRUE;
-	// Initialize GLEW to setup the OpenGL Function pointers
-	if (GLEW_OK != glewInit())
-	{
-		std::cout << "Failed to initialize GLEW" << std::endl;
-		return false;
-	}
-	setupPhoto();
-	setUpmanual();
-
-	LuaEn->doLuaScript("Scripts/GameManager.lua");
-
-	// Define the viewport dimensions
+	glewInit();
 	glViewport(0, 0, SCREEN_WIDTH, SCREEN_HEIGHT);
-
-	// OpenGL options
 	glEnable(GL_DEPTH_TEST);
-
-	//std::cout << "4. Viewport creation complete" << std::endl;
-
-	// Setup and compile our shaders
-	Shader Tshader("Shaders/terrainvertex.vs", "Shaders/terrainfrag.frag");
 	Shader Pshader("Shaders/coreImage.vs","Shaders/coreImage.frag");
-	
-	//extents position of the window
 
+	initilize();
 
-	Eom = getGlobal(LuaEn->getLuaState(), "EnObjMan");
-	Tm = getGlobal(LuaEn->getLuaState(), "TerManager");
-
-	gameWorld = new GameWorld(Tm, Eom);
-	render = new SceneRender(gameWorld);
-	glm::mat4 projection = glm::perspective(camera->GetZoom(), (float)SCREEN_WIDTH / (float)SCREEN_HEIGHT, 0.1f, 1000.0f);
-	render->addShader("Shaders/3dvsShaderTEMP.vs", "Shaders/3dfragShaderTEMP.frag", "environment");
-	render->addShader("Shaders/terrainvertex.vs", "Shaders/terrainfrag.frag", "terrain");
 	// Game loop
 	while (!glfwWindowShouldClose(window))
 	{
@@ -97,7 +47,6 @@ bool GameEngine::GLFWpro()
 		camera = Camera::GetCameraInstance();
 		glm::mat4 view = camera->GetViewMatrix();
 		render->renderScene(view, projection);
-		//SceneRender::renderTerrain(*Tm, view, projection, Tshader);
 
 		if (PlayerInput::getCurrentPlayerInput().photo == true)
 		{
@@ -130,6 +79,24 @@ bool GameEngine::GLFWpro()
 
 	glfwTerminate();
 	return true;
+}
+
+void GameEngine::initilize()
+{
+	camera = Camera::GetCameraInstance();
+	playerInput = PlayerInput::getCurrentPlayerInput();
+	playerInput.SetAttributes(camera);
+	playerInput.SetCallbacks();
+	ScriptEngine * LuaEn = new ScriptEngine();
+	ScriptEngine::expFuncToLua(LuaEn->getLuaState());
+	LuaEn->doLuaScript("Scripts/GameManager.lua");
+	gameWorld = getGlobal(LuaEn->getLuaState(), "World");
+	render = new SceneRender(gameWorld);
+	projection = glm::perspective(camera->GetZoom(), (float)SCREEN_WIDTH / (float)SCREEN_HEIGHT, 0.1f, 1000.0f);
+	render->addShader("Shaders/3dvsShaderTEMP.vs", "Shaders/3dfragShaderTEMP.frag", "environment");
+	render->addShader("Shaders/terrainvertex.vs", "Shaders/terrainfrag.frag", "terrain");
+	setupPhoto();
+	setUpmanual();
 }
 
 void GameEngine::setupPhoto()

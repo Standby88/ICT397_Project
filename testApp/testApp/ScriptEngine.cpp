@@ -61,6 +61,7 @@ void ScriptEngine::expFuncToLua(lua_State * L)
 	EnvironmentObject::scriptRegister(L);
 	Model::scriptRegister(L);
 	Shader::scriptRegister(L);
+	GameWorld::scriptRegister(L);
 	//PhysicsFacade::scriptRegister(L);
 	
 }
