@@ -155,7 +155,8 @@
     <ClCompile Include="EnvironmentObjManager.cpp" />
     <ClCompile Include="GameObject.cpp" />
     <ClCompile Include="GameObject3D.cpp" />
-    <ClCompile Include="GraphicsEngine.cpp" />
+    <ClCompile Include="GameEngine.cpp" />
+    <ClCompile Include="GameWorld.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="Mesh.cpp" />
     <ClCompile Include="Model.cpp" />
@@ -176,6 +177,7 @@
     <ClCompile Include="WorldTerrain.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <None Include="ClassDiagram.cd" />
     <None Include="core.frag" />
     <None Include="core.vs" />
     <None Include="packages.config" />
@@ -189,7 +191,8 @@
     <ClInclude Include="GameAssetFactory.h" />
     <ClInclude Include="GameObject.h" />
     <ClInclude Include="GameObject3D.h" />
-    <ClInclude Include="GraphicsEngine.h" />
+    <ClInclude Include="GameEngine.h" />
+    <ClInclude Include="GameWorld.h" />
     <ClInclude Include="Mesh.h" />
     <ClInclude Include="Model.h" />
     <ClInclude Include="ModelManager.h" />

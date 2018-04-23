@@ -2,13 +2,13 @@
 
 #include <iostream>
 #include "ScriptEngine.h"
-#include "GraphicsEngine.h"
+#include "GameEngine.h"
 
 int main()
 {
 
 
-	GraphicsEngine gameLoop;
+	GameEngine gameLoop;
 	gameLoop.GLFWpro();
 	
 	return 0;
