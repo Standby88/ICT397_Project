@@ -1,6 +1,5 @@
 #include "ScriptEngine.h"
 
-#include "TerrainManager.h"
 ScriptEngine::~ScriptEngine()
 {
 	lua_close(MainLuaState); 

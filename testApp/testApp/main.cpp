@@ -6,8 +6,6 @@
 
 int main()
 {
-
-
 	GameEngine gameLoop;
 	gameLoop.GLFWpro();
 	

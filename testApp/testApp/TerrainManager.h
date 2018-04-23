@@ -1,3 +1,4 @@
+#pragma once
 #include <Vector>
 #include "WorldTerrain.h"
 

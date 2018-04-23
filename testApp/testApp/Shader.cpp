@@ -2,7 +2,7 @@
 #include <GL\glew.h>
 
 //Shader::Shader(const GLchar *vertexPath, const GLchar *fragPath)
-Shader::Shader(const char *vertexPath, const char *fragPath)
+Shader::Shader(const std::string vertexPath, const std::string fragPath)
 {
 
 	std::string vertexCode;
@@ -83,6 +83,9 @@ Shader::Shader(const char *vertexPath, const char *fragPath)
 	glDeleteShader(vertexShader);
 	glDeleteShader(fragShader);
 }
+
+
+
 
 void Shader::Use()
 {

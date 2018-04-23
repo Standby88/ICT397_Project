@@ -1,13 +1,30 @@
 #include "SceneRender.h"
 #include <glm\gtc\type_ptr.hpp>
 
-SceneRender::SceneRender()
+
+SceneRender::SceneRender(GameWorld * gw)
 {
+	gameWorld = gw;
 }
 
+void SceneRender::addShader(std::string ver, std::string frag, std::string name)
+{
+	Shader * s = new Shader(ver, frag);
+	typedef std::pair<std::string, Shader*> temp;
+	shaders.insert(temp(name, s));
+}
 
 SceneRender::~SceneRender()
 {
+}
+
+void SceneRender::renderScene(glm::mat4 view, glm::mat4 projection)
+{
+	
+	EnvironmentObjManager *Eom = gameWorld->getEnvironment();
+	TerrainManager *Tm = gameWorld->getTerrain();
+	renderEnvironmentObj(*Eom, view, projection, *shaders["environment"]);
+	renderTerrain(*Tm, view, projection, *shaders["terrain"]);
 }
 
 void SceneRender::renderEnvironmentObj(EnvironmentObjManager& EM, glm::mat4 view, glm::mat4 projection, Shader &S)

@@ -3,6 +3,7 @@
 #include <glm\gtc\type_ptr.hpp>
 GameEngine::GameEngine()
 {
+
 }
 
 bool GameEngine::GLFWpro()
@@ -35,18 +36,12 @@ bool GameEngine::GLFWpro()
 	glfwMakeContextCurrent(window);
 	glfwGetFramebufferSize(window, &SCREEN_WIDTH, &SCREEN_HEIGHT);
 	//std::cout << "2. Window context creation complete" << std::endl;
-
+	render = new SceneRender(gameWorld);
 	camera = Camera::GetCameraInstance();
 	
 	PlayerInput playerInput = PlayerInput::getCurrentPlayerInput();
 	playerInput.SetAttributes(camera);
 	playerInput.SetCallbacks();
-
-
-	// GLFW Options
-	//glfwSetInputMode(window, GLFW_CURSOR, GLFW_CURSOR_DISABLED);
-
-	///std::cout << "3. Input - keyboard complete" << std::endl << "4. Input - mouse complete" << std::endl;
 
 	// Set this to true so GLEW knows to use a modern approach to retrieving function pointers and extensions
 	glewExperimental = GL_TRUE;
@@ -71,19 +66,19 @@ bool GameEngine::GLFWpro()
 
 	// Setup and compile our shaders
 	Shader Tshader("Shaders/terrainvertex.vs", "Shaders/terrainfrag.frag");
-	Shader S("Shaders/3dvsShaderTEMP.vs", "Shaders/3dfragShaderTEMP.frag");
 	Shader Pshader("Shaders/coreImage.vs","Shaders/coreImage.frag");
-
+	
 	//extents position of the window
 
-	EnvironmentObjManager *Etest = NULL;
-	Etest = getGlobal(LuaEn->getLuaState(), "EnObjMan");
-	TerrainManager *Ttest = NULL;
-	Ttest = getGlobal(LuaEn->getLuaState(), "TerManager");
 
+	Eom = getGlobal(LuaEn->getLuaState(), "EnObjMan");
+	Tm = getGlobal(LuaEn->getLuaState(), "TerManager");
 
+	gameWorld = new GameWorld(Tm, Eom);
+	render = new SceneRender(gameWorld);
 	glm::mat4 projection = glm::perspective(camera->GetZoom(), (float)SCREEN_WIDTH / (float)SCREEN_HEIGHT, 0.1f, 1000.0f);
-
+	render->addShader("Shaders/3dvsShaderTEMP.vs", "Shaders/3dfragShaderTEMP.frag", "environment");
+	render->addShader("Shaders/terrainvertex.vs", "Shaders/terrainfrag.frag", "terrain");
 	// Game loop
 	while (!glfwWindowShouldClose(window))
 	{
@@ -101,8 +96,8 @@ bool GameEngine::GLFWpro()
 		glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 		camera = Camera::GetCameraInstance();
 		glm::mat4 view = camera->GetViewMatrix();
-		SceneRender::renderEnvironmentObj(*Etest,view, projection, S);
-		SceneRender::renderTerrain(*Ttest, view, projection, Tshader);
+		render->renderScene(view, projection);
+		//SceneRender::renderTerrain(*Tm, view, projection, Tshader);
 
 		if (PlayerInput::getCurrentPlayerInput().photo == true)
 		{
@@ -195,6 +190,66 @@ void GameEngine::drawPhoto(Shader S)
 	glDrawElements(GL_TRIANGLES, 6, GL_UNSIGNED_INT, 0);
 	glBindVertexArray(0); 
 }
+
+void GameEngine::setUpmanual()
+{
+	GLfloat points[] =
+	{
+		// Positions          // Colors           // Texture Coords
+		1.0f,  1.0f, 0.0f,   1.0f, 0.0f, 0.0f,   1.0f, 1.0f, // Top Right
+		1.0f, -1.0f, 0.0f,   0.0f, 1.0f, 0.0f,   1.0f, 0.0f, // Bottom Right
+		-1.0f, -1.0f, 0.0f,   0.0f, 0.0f, 1.0f,   0.0f, 0.0f, // Bottom Left
+		-1.0f,  1.0f, 0.0f,   1.0f, 1.0f, 0.0f,   0.0f, 1.0f  // Top Left
+	};
+
+	GLuint indices[] =
+	{
+		0, 1, 3,
+		1, 2, 3
+	};
+
+
+	glGenVertexArrays(1, &VAO);
+	glGenBuffers(1, &VBO);
+	glGenBuffers(1, &EBO);
+
+	glBindVertexArray(VAO);
+
+	glBindBuffer(GL_ARRAY_BUFFER, VBO);
+	glBufferData(GL_ARRAY_BUFFER, sizeof(points), points, GL_STATIC_DRAW);
+
+	glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, EBO);
+	glBufferData(GL_ELEMENT_ARRAY_BUFFER, sizeof(indices), indices, GL_STATIC_DRAW);
+
+	// Position attribute
+	glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 8 * sizeof(GLfloat), (GLvoid *)0);
+	glEnableVertexAttribArray(0);
+	// Color attribute
+	glVertexAttribPointer(1, 3, GL_FLOAT, GL_FALSE, 8 * sizeof(GLfloat), (GLvoid *)(3 * sizeof(GLfloat)));
+	glEnableVertexAttribArray(1);
+	// Texture Coordinate attribute
+	glVertexAttribPointer(2, 2, GL_FLOAT, GL_FALSE, 8 * sizeof(GLfloat), (GLvoid *)(6 * sizeof(GLfloat)));
+	glEnableVertexAttribArray(2);
+
+	glBindVertexArray(0); // Unbind VAO
+
+	m_TextureMan = TextureManager::GetTextureManager();
+	m_TextureMan.AddTexture("assets/images/manual.png");
+
+	texture2 = m_TextureMan.GetTexture("assets/images/manual.png");
+}
+
+void GameEngine::drawMaunal(Shader S)
+{
+	S.Use();
+	glUniform1i(glGetUniformLocation(S.Program, "texture2"), 0);
+	glActiveTexture(GL_TEXTURE0);
+	glBindTexture(GL_TEXTURE_2D, texture2);
+	glBindVertexArray(VAO);
+	glDrawElements(GL_TRIANGLES, 6, GL_UNSIGNED_INT, 0);
+	glBindVertexArray(0);
+}
+
 
 GameEngine::~GameEngine()
 {

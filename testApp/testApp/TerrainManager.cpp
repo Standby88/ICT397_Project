@@ -1,11 +1,8 @@
 #include "TerrainManager.h"
 
-
-
 TerrainManager::TerrainManager()
 {
 }
-
 
 TerrainManager::~TerrainManager()
 {
@@ -27,7 +24,6 @@ void TerrainManager::DrawTerrain(Shader S)
 	{
 		(*TerrainList[i]).Draw(S);
 	}
-
 }
 void TerrainManager::RemoveTerrain(int i)
 {

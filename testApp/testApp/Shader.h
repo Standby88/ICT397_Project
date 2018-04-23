@@ -35,7 +35,7 @@ public:
 	*
 	*@param const char *vertexPath, const char *fragPath
 	*/
-	Shader(const char *vertexPath, const char *fragPath);
+	Shader(const std::string vertexPath, const std::string fragPath);
 
 	/**
 	* @brief Use shader program
