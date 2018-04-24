@@ -1,4 +1,5 @@
 print ("Game script loaded")
+
 -- Create ModelManager
 ModManager = MM.ModelManager();
 -- Throw to the Model script which will load
@@ -58,4 +59,10 @@ EnObjMan:addObject(A9, "asteroid_9")
 
 
 World = GW.GameWorld(TerManager, EnObjMan)
+
+Scene = SR.SceneRender(World)
+Scene:addShader("Shaders/3dvsShaderTEMP.vs", "Shaders/3dfragShaderTEMP.frag", "environment")
+Scene:addShader("Shaders/terrainvertex.vs", "Shaders/terrainfrag.frag", "terrain")
+Scene:addShader("Shaders/coreImage.vs", "Shaders/coreImage.frag", "menuOption")
+
 print ("Game script end")

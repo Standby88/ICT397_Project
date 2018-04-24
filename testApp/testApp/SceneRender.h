@@ -5,6 +5,7 @@
 #include <glm\gtc\matrix_transform.hpp>
 #include "Shader.h"
 #include "GameWorld.h"
+#include "Menu.h"
 #include <map>
 /**
 * @class SceneRender
@@ -21,8 +22,10 @@
 class SceneRender
 {
 private:
+	//ModelManager m_Models;
 	GameWorld* gameWorld;
 	std::map<std::string, Shader*> shaders;
+	Menu * menu;
 public:
 
 	/**
@@ -35,6 +38,7 @@ public:
 	* @brief desstructor for SceneRender
 	*/
 	~SceneRender();
+
 	void renderScene(glm::mat4 view, glm::mat4 projection);
 	/**
 	* @brief used to render environment objects
@@ -47,5 +51,10 @@ public:
 	*@param EnvironmentObjManager& EM, glm::mat4 view, glm::mat4 projection, Shader &S
 	*/
 	 void renderTerrain(TerrainManager & TM, glm::mat4 view, glm::mat4 projection, Shader &S);
+
+	 void renderMenu(Shader& s);
+
+	 static void scriptRegister(lua_State * L);
+
 };
 

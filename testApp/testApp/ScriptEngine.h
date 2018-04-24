@@ -5,7 +5,7 @@
 #include "GameAssetFactory.h"
 #include "GameAssetCreator.h"
 #include "ModelManager.h"
-
+#include "SceneRender.h"
 
 extern "C"
 {

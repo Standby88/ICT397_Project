@@ -1,8 +1,4 @@
-#include "RAwIMGLoader.h"
-
-
-
-
+#include "RawIMGLoader.h"
 
 unsigned char * RawIMGLoader::loadRaw(const char * filename, const int size)
 {

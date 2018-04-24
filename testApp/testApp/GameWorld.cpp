@@ -2,6 +2,9 @@
 
 GameWorld::GameWorld(/*CharacterManager * cha,*/ TerrainManager * ter, EnvironmentObjManager * en)
 {
+	photo = false;
+	manual = false;
+	worldDisplay = true;
 	//this->characters = cha;
 	this->terrain = ter;
 	this->environment = en;
@@ -35,4 +38,34 @@ void GameWorld::scriptRegister(lua_State * L)
 
 GameWorld::~GameWorld()
 {
+}
+
+void GameWorld::setManual(bool man)
+{
+	manual = man;
+}
+
+void GameWorld::setPhoto(bool pho)
+{
+	photo = pho;
+}
+
+void GameWorld::setWorldDisplay(bool wor)
+{
+	worldDisplay = wor;
+}
+
+bool GameWorld::getManual()
+{
+	return manual;
+}
+
+bool GameWorld::getPhoto()
+{
+	return photo;
+}
+
+bool GameWorld::getWorldDisplay()
+{
+	return worldDisplay;
 }

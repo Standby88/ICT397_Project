@@ -7,7 +7,7 @@
 int main()
 {
 	GameEngine gameLoop;
-	gameLoop.GLFWpro();
+	gameLoop.GameLoop();
 	
 	return 0;
 }

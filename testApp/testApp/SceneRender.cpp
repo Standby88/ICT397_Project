@@ -5,6 +5,7 @@
 SceneRender::SceneRender(GameWorld * gw)
 {
 	gameWorld = gw;
+	menu = new Menu();
 }
 
 void SceneRender::addShader(std::string ver, std::string frag, std::string name)
@@ -20,11 +21,18 @@ SceneRender::~SceneRender()
 
 void SceneRender::renderScene(glm::mat4 view, glm::mat4 projection)
 {
+	if (gameWorld->getWorldDisplay() == false)
+	{
+		renderMenu(*shaders["menuOption"]);
+	}
+	else 
+	{
+		EnvironmentObjManager *Eom = gameWorld->getEnvironment();
+		TerrainManager *Tm = gameWorld->getTerrain();
+		renderEnvironmentObj(*Eom, view, projection, *shaders["environment"]);
+		renderTerrain(*Tm, view, projection, *shaders["terrain"]);
+	}
 	
-	EnvironmentObjManager *Eom = gameWorld->getEnvironment();
-	TerrainManager *Tm = gameWorld->getTerrain();
-	renderEnvironmentObj(*Eom, view, projection, *shaders["environment"]);
-	renderTerrain(*Tm, view, projection, *shaders["terrain"]);
 }
 
 void SceneRender::renderEnvironmentObj(EnvironmentObjManager& EM, glm::mat4 view, glm::mat4 projection, Shader &S)
@@ -72,4 +80,30 @@ void SceneRender::renderTerrain(TerrainManager & TM, glm::mat4 view, glm::mat4 p
 		glUniformMatrix4fv(glGetUniformLocation(S.Program, "model"), 1, GL_FALSE, glm::value_ptr(model));
 		(*itr)->Draw(S);
 	}
+}
+
+void SceneRender::renderMenu(Shader& s)
+{
+	if (gameWorld->getManual() == true)
+	{
+		menu->drawMaunal(s);
+	}
+	else 
+		if (gameWorld->getPhoto() == true)
+		{
+			menu->drawPhoto(s);
+		}
+	
+}
+
+void SceneRender::scriptRegister(lua_State * L)
+{
+	using namespace luabridge;
+	getGlobalNamespace(L)
+		.beginNamespace("SR")
+		.beginClass<SceneRender>("SceneRender")
+		.addConstructor<void(*) (GameWorld*)>()
+		.addFunction("addShader", &SceneRender::addShader)
+		.endClass()
+		.endNamespace();
 }

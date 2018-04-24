@@ -1,6 +1,6 @@
 #pragma once
 #include "GameObject.h"
-#include "RAwIMGLoader.h"
+#include "RawIMGLoader.h"
 #include "Mesh.h"
 #include "TextureManager.h"
 #include "SOIL2/SOIL2.h"
