@@ -45,14 +45,8 @@ public:
 	* @brief Draw all the objects stored in the list
 	*
 	*/
-	void drawAllObjects(Shader & S)
-	{
-		std::unordered_map<std::string, EnvironmentObject* >::iterator itr;
-		for (itr = environmentObjList.begin(); itr != environmentObjList.end(); ++itr)
-		{
-			(*itr).second->Draw(S);
-		}
-	}
+	void drawAllObjects(Shader & S);
+
 	/**
 	* @brief remove an npc from the list
 	*

@@ -90,13 +90,15 @@ public:
 	*/
 	static void WrapScrollCallback(GLFWwindow *window, double xOffset, double yOffset);
 
-	///end photo display variable
-	bool photo = false;
+	bool getPhoto();
+	
 
-	///draw wireframe
-	bool wire = false;
-	///draw manual
-	bool Manual = false;
+	bool getManual();
+
+	bool getWorldDisplay();
+
+
+	bool getWire();
 
 	GLfloat m_time;
 
@@ -138,5 +140,15 @@ private:
 	*@param GLFWwindow *window, double xOffset, double yOffset
 	*/
 	void ScrollCallback(GLFWwindow *window, double xOffset, double yOffset);
+
+	///end photo display variable
+	bool photo;
+
+	///draw wireframe
+	bool wire ;
+	///draw manual
+	bool manual;
+
+	bool worldDisplay;
 };
 

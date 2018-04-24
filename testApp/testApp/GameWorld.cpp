@@ -5,6 +5,7 @@ GameWorld::GameWorld(/*CharacterManager * cha,*/ TerrainManager * ter, Environme
 	photo = false;
 	manual = false;
 	worldDisplay = true;
+	wire = false;
 	//this->characters = cha;
 	this->terrain = ter;
 	this->environment = en;
@@ -38,6 +39,12 @@ void GameWorld::scriptRegister(lua_State * L)
 
 GameWorld::~GameWorld()
 {
+	characters = nullptr;
+	delete characters;
+	terrain = nullptr;
+	delete terrain;
+	environment = nullptr;
+	delete environment;
 }
 
 void GameWorld::setManual(bool man)
@@ -55,6 +62,16 @@ void GameWorld::setWorldDisplay(bool wor)
 	worldDisplay = wor;
 }
 
+void GameWorld::setWire(bool wir)
+{
+	wire = wir;
+}
+
+bool GameWorld::getWire()
+{
+	return wire;
+}
+
 bool GameWorld::getManual()
 {
 	return manual;
@@ -68,4 +85,38 @@ bool GameWorld::getPhoto()
 bool GameWorld::getWorldDisplay()
 {
 	return worldDisplay;
+}
+
+void GameWorld::setScreenHW(int w, int h)
+{
+	SCREEN_HEIGHT = h;
+	SCREEN_WIDTH = w;
+}
+
+int GameWorld::getScreenH()
+{
+	return SCREEN_HEIGHT;
+}
+int GameWorld::getScreenW()
+{
+	return SCREEN_WIDTH;
+}
+void GameWorld::setView(glm::mat4 v)
+{
+	view = v;
+}
+
+void GameWorld::setProjection(glm::mat4 p)
+{
+	projection = p;
+}
+
+glm::mat4 GameWorld::getView()
+{
+	return view;
+}
+
+glm::mat4 GameWorld::getProjection()
+{
+	return projection;
 }

@@ -8,53 +8,17 @@ GameEngine::GameEngine()
 
 bool GameEngine::GameLoop()
 {
-	
-	
-	// Game loop
 	while (!glfwWindowShouldClose(window))
 	{
 		// Set frame time
 		GLfloat currentFrame = (float)glfwGetTime();
 		deltaTime = currentFrame - lastFrame;
 		lastFrame = currentFrame;
-
-		// Check and call events
-		glfwPollEvents();
-		playerInput.DoMovement(deltaTime);
-		
-		// Clear the colorbuffer
 		glClearColor(0.2f, 0.3f, 0.3f, 1.0f);
 		glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
-		camera = Camera::GetCameraInstance();
-		view = camera->GetViewMatrix();
-		render->renderScene(view, projection);
+		gameController->update(deltaTime);
+		render->renderScene();
 
-		/*if (PlayerInput::getCurrentPlayerInput().photo == true)
-		{
-			glPolygonMode(GL_FRONT_AND_BACK, GL_FILL);
-
-			PlayerInput::getCurrentPlayerInput().wire = true;
-
-			drawPhoto(Pshader);
-		}
-		if (PlayerInput::getCurrentPlayerInput().Manual == true)
-		{
-			glPolygonMode(GL_FRONT_AND_BACK, GL_FILL);
-
-			PlayerInput::getCurrentPlayerInput().wire = true;
-
-			drawMaunal(Pshader);
-		}
-		if (PlayerInput::getCurrentPlayerInput().wire == true)
-		{
-			glPolygonMode(GL_FRONT_AND_BACK, GL_LINE);
-		}
-		else
-		{
-			glPolygonMode(GL_FRONT_AND_BACK, GL_FILL);
-		}*/
-		
-		// Swap the buffers
 		glfwSwapBuffers(window);
 	}
 
@@ -81,23 +45,26 @@ void GameEngine::initilize()
 	glewInit();
 	glViewport(0, 0, SCREEN_WIDTH, SCREEN_HEIGHT);
 	glEnable(GL_DEPTH_TEST);
-	
-	camera = Camera::GetCameraInstance();
-	projection = glm::perspective(camera->GetZoom(), (float)SCREEN_WIDTH / (float)SCREEN_HEIGHT, 0.1f, 1000.0f);
 
-
-	playerInput = PlayerInput::getCurrentPlayerInput();
-	playerInput.SetAttributes(camera);
-	playerInput.SetCallbacks();
 	ScriptEngine * LuaEn = new ScriptEngine();
 	ScriptEngine::expFuncToLua(LuaEn->getLuaState());
 	LuaEn->doLuaScript("Scripts/GameManager.lua");
 	gameWorld = getGlobal(LuaEn->getLuaState(), "World");
-
+	gameWorld->setScreenHW(SCREEN_WIDTH, SCREEN_HEIGHT);
 	render = getGlobal(LuaEn->getLuaState(), "Scene");
+	gameController = new GameController(gameWorld);
+
 }
 
 
 GameEngine::~GameEngine()
 {
+	gameWorld = nullptr;
+	delete gameWorld;
+	render = nullptr;
+	delete render;
+	window = nullptr;
+	delete window;
+	gameController = nullptr;
+	delete gameController;
 }

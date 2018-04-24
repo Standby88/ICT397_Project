@@ -26,6 +26,21 @@ private:
 	GameWorld* gameWorld;
 	std::map<std::string, Shader*> shaders;
 	Menu * menu;
+
+	/**
+	* @brief used to render environment objects
+	*@param EnvironmentObjManager& EM, glm::mat4 view, glm::mat4 projection, Shader &S
+	*/
+	void renderEnvironmentObj(EnvironmentObjManager& EM, glm::mat4 view, glm::mat4 projection, Shader &S);
+
+	/**
+	* @brief used to render terrain
+	*@param EnvironmentObjManager& EM, glm::mat4 view, glm::mat4 projection, Shader &S
+	*/
+	void renderTerrain(TerrainManager & TM, glm::mat4 view, glm::mat4 projection, Shader &S);
+
+	void renderMenu(Shader& s);
+
 public:
 
 	/**
@@ -39,20 +54,8 @@ public:
 	*/
 	~SceneRender();
 
-	void renderScene(glm::mat4 view, glm::mat4 projection);
-	/**
-	* @brief used to render environment objects
-	*@param EnvironmentObjManager& EM, glm::mat4 view, glm::mat4 projection, Shader &S
-	*/
-	void renderEnvironmentObj(EnvironmentObjManager& EM, glm::mat4 view, glm::mat4 projection, Shader &S);
+	void renderScene();
 
-	/**
-	* @brief used to render terrain
-	*@param EnvironmentObjManager& EM, glm::mat4 view, glm::mat4 projection, Shader &S
-	*/
-	 void renderTerrain(TerrainManager & TM, glm::mat4 view, glm::mat4 projection, Shader &S);
-
-	 void renderMenu(Shader& s);
 
 	 static void scriptRegister(lua_State * L);
 

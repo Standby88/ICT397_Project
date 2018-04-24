@@ -153,6 +153,7 @@
     <ClCompile Include="CharacterManager.cpp" />
     <ClCompile Include="EnvironmentObject.cpp" />
     <ClCompile Include="EnvironmentObjManager.cpp" />
+    <ClCompile Include="GameController.cpp" />
     <ClCompile Include="GameObject.cpp" />
     <ClCompile Include="GameObject3D.cpp" />
     <ClCompile Include="GameEngine.cpp" />
@@ -190,6 +191,7 @@
     <ClInclude Include="EnvironmentObjManager.h" />
     <ClInclude Include="GameAssetCreator.h" />
     <ClInclude Include="GameAssetFactory.h" />
+    <ClInclude Include="GameController.h" />
     <ClInclude Include="GameObject.h" />
     <ClInclude Include="GameObject3D.h" />
     <ClInclude Include="GameEngine.h" />

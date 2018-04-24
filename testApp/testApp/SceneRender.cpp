@@ -17,10 +17,33 @@ void SceneRender::addShader(std::string ver, std::string frag, std::string name)
 
 SceneRender::~SceneRender()
 {
+	gameWorld = nullptr;
+	delete gameWorld;
+
+	menu = nullptr;
+	delete menu;
+
+	std::map<std::string, Shader*>::iterator itr;
+	for (itr = shaders.begin(); itr != shaders.end(); ++itr)
+	{
+		itr->second = nullptr;
+		delete itr->second;
+	}
+
 }
 
-void SceneRender::renderScene(glm::mat4 view, glm::mat4 projection)
+void SceneRender::renderScene()
 {
+	if (gameWorld->getWire() == true)
+	{
+		glPolygonMode(GL_FRONT_AND_BACK, GL_LINE);
+	}
+	else 
+	{
+		glPolygonMode(GL_FRONT_AND_BACK, GL_FILL);
+	}
+
+
 	if (gameWorld->getWorldDisplay() == false)
 	{
 		renderMenu(*shaders["menuOption"]);
@@ -29,8 +52,8 @@ void SceneRender::renderScene(glm::mat4 view, glm::mat4 projection)
 	{
 		EnvironmentObjManager *Eom = gameWorld->getEnvironment();
 		TerrainManager *Tm = gameWorld->getTerrain();
-		renderEnvironmentObj(*Eom, view, projection, *shaders["environment"]);
-		renderTerrain(*Tm, view, projection, *shaders["terrain"]);
+		renderEnvironmentObj(*Eom, gameWorld->getView(), gameWorld->getProjection(), *shaders["environment"]);
+		renderTerrain(*Tm, gameWorld->getView(), gameWorld->getProjection(), *shaders["terrain"]);
 	}
 	
 }
@@ -86,13 +109,15 @@ void SceneRender::renderMenu(Shader& s)
 {
 	if (gameWorld->getManual() == true)
 	{
+		glPolygonMode(GL_FRONT_AND_BACK, GL_FILL);
 		menu->drawMaunal(s);
 	}
 	else 
-		if (gameWorld->getPhoto() == true)
-		{
-			menu->drawPhoto(s);
-		}
+	if (gameWorld->getPhoto() == true)
+	{
+		glPolygonMode(GL_FRONT_AND_BACK, GL_FILL);
+		menu->drawPhoto(s);
+	}
 	
 }
 

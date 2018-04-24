@@ -7,7 +7,10 @@ PlayerInput::PlayerInput()
 	glfwGetWindowSize(glfwGetCurrentContext(), &w, &h);
 	lastX = w / 2;
 	lastY = h / 2;
-
+	photo = false;
+	manual = false;
+	wire = false;
+	worldDisplay = true;
 	m_time = glfwGetTime();
 
 }
@@ -20,6 +23,10 @@ PlayerInput::PlayerInput(int width, int height, Camera *cam, GLfloat* deltaTime)
 	lastY = height / 2;
 	camera = cam;
 	m_time = *deltaTime;
+	photo = false;
+	manual = false;
+	wire = false;
+	worldDisplay = true;
 }
 
 void PlayerInput::destroyCurrentPlayerInput()
@@ -117,6 +124,7 @@ void PlayerInput::KeyCallback(GLFWwindow *window, int key, int scancode, int act
 		if (photo == false)
 		{
 			photo = true;
+			worldDisplay = false;
 		}
 		else if(photo == true)
 		{
@@ -126,13 +134,15 @@ void PlayerInput::KeyCallback(GLFWwindow *window, int key, int scancode, int act
 
 	if (key == GLFW_KEY_M && action == GLFW_PRESS)
 	{
-		if (Manual == false)
+		if (manual == false)
 		{
-			Manual = true;
+			manual = true;
+			worldDisplay = false;
 		}
-		else if (Manual == true)
+		else if (manual == true)
 		{
-			Manual = false;
+			manual = false;
+			worldDisplay = true;
 		}
 	}if (key == GLFW_KEY_K && action == GLFW_PRESS)
 	{
@@ -180,7 +190,7 @@ void PlayerInput::MouseCallback(GLFWwindow *window, double xPos, double yPos)
 	lastX = xPos;
 	lastY = yPos;
 	//if (xOffset > 0.0f || yOffset > 0.0f)
-		camera->ProcessMouseMovement(xOffset, yOffset);
+	camera->ProcessMouseMovement(xOffset, yOffset);
 }
 
 void PlayerInput::WrapScrollCallback(GLFWwindow *window, double xOffset, double yOffset)
@@ -189,6 +199,24 @@ void PlayerInput::WrapScrollCallback(GLFWwindow *window, double xOffset, double 
 	p->ScrollCallback(glfwGetCurrentContext(), xOffset, yOffset);
 }
 
+bool PlayerInput::getPhoto()
+{
+	return photo;
+}
+
+bool PlayerInput::getManual()
+{
+	return manual;
+}
+
+bool PlayerInput::getWorldDisplay()
+{
+	return worldDisplay;
+}
+bool PlayerInput::getWire()
+{
+	return wire;
+}
 void PlayerInput::ScrollCallback(GLFWwindow *window, double xOffset, double yOffset)
 {
 	camera->ProcessMouseScroll(yOffset);

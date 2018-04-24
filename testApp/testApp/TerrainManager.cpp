@@ -9,6 +9,7 @@ TerrainManager::~TerrainManager()
 	std::vector<WorldTerrain*>::iterator itr;
 	for (itr = TerrainList.begin(); itr != TerrainList.end(); ++itr)
 	{
+		*itr = nullptr;
 		delete (*itr);
 	} 
 }

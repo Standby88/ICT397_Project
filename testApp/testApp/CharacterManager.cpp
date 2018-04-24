@@ -14,6 +14,7 @@ CharacterManager::~CharacterManager()
 	NPCL::iterator itr;
 	for (itr = nPCList.begin(); itr != nPCList.end(); ++itr)
 	{
+		itr->second = nullptr;
 		delete itr->second;
 	}
 }

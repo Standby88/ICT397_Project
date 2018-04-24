@@ -30,8 +30,6 @@ private:
 public:
 	Menu();
 	~Menu();
-
-
 	void drawPhoto(Shader S);
 	void drawMaunal(Shader S);
 };
