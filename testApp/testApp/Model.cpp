@@ -88,7 +88,7 @@ Mesh Model::processMesh(aiMesh *mesh, const aiScene *scene)
 	for (GLuint i = 0; i < mesh->mNumVertices; i++)
 	{
 		Vertex vertex;
-		//placeholder vector since assimp's vector doesn't play nice with glm vec3
+		//placeholder vector since assimp's vector doesn't play nice with V3
 		V3 vector;
 
 						  // Positions
