@@ -12,8 +12,8 @@ private:
 	bool manual;
 	bool worldDisplay;
 	bool wire;
-	glm::mat4 view;
-	glm::mat4 projection;
+	M4 view;
+	M4 projection;
 
 	int SCREEN_WIDTH, SCREEN_HEIGHT;
 public:
@@ -38,16 +38,16 @@ public:
 
 	int getScreenW();
 
-	void setView(glm::mat4 v);
+	void setView(M4 v);
 
 
-	void setProjection(glm::mat4 p);
+	void setProjection(M4 p);
 
 
-	glm::mat4 getView();
+	M4 getView();
 
 
-	glm::mat4 getProjection();
+	M4 getProjection();
 
 };
 

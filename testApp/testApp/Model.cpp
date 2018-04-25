@@ -89,7 +89,7 @@ Mesh Model::processMesh(aiMesh *mesh, const aiScene *scene)
 	{
 		Vertex vertex;
 		//placeholder vector since assimp's vector doesn't play nice with glm vec3
-		glm::vec3 vector;
+		V3 vector;
 
 						  // Positions
 		vector.x = mesh->mVertices[i].x;
@@ -106,7 +106,7 @@ Mesh Model::processMesh(aiMesh *mesh, const aiScene *scene)
 		// if tex coords process them otherwise set tex coords to zero
 		if (mesh->mTextureCoords[0])
 		{
-			glm::vec2 vec;
+			V2 vec;
 			// A vertex can contain up to 8 different texture coordinates. We thus make the assumption that we won't
 			// use models where a vertex can have multiple texture coordinates so we always take the first set (0).
 			vec.x = mesh->mTextureCoords[0][i].x;
@@ -115,7 +115,7 @@ Mesh Model::processMesh(aiMesh *mesh, const aiScene *scene)
 		}
 		else
 		{
-			vertex.TexCoords = glm::vec2(0.0f, 0.0f);
+			vertex.TexCoords = V2(0.0f, 0.0f);
 		}
 
 		vertices.push_back(vertex);

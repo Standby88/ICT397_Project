@@ -1,5 +1,5 @@
 #include "SceneRender.h"
-#include <glm\gtc\type_ptr.hpp>
+
 
 
 SceneRender::SceneRender(GameWorld * gw)
@@ -58,49 +58,50 @@ void SceneRender::renderScene()
 	
 }
 
-void SceneRender::renderEnvironmentObj(EnvironmentObjManager& EM, glm::mat4 view, glm::mat4 projection, Shader &S)
+void SceneRender::renderEnvironmentObj(EnvironmentObjManager& EM, M4 view, M4 projection, Shader &S)
 {
 	std::unordered_map<std::string, EnvironmentObject* > drawMap = EM.getEnObjMap();
-	glm::vec3 posVec;
-	glm::vec3 rotateAxis;
+	V3 posVec;
+	V3 rotateAxis;
 	float angle;
+
 	S.Use();
-	glUniformMatrix4fv(glGetUniformLocation(S.Program, "projection"), 1, GL_FALSE, glm::value_ptr(projection));
-	glUniformMatrix4fv(glGetUniformLocation(S.Program, "view"), 1, GL_FALSE, glm::value_ptr(view));
+	glUniformMatrix4fv(glGetUniformLocation(S.Program, "projection"), 1, GL_FALSE, MathLib::value_ptr<const float *>(projection));
+	glUniformMatrix4fv(glGetUniformLocation(S.Program, "view"), 1, GL_FALSE, MathLib::value_ptr<const float *>(view));
 	
 	std::unordered_map<std::string, EnvironmentObject* >::iterator itr;
 	int i = 0;
 	for (itr = drawMap.begin(); itr != drawMap.end(); ++itr)
 	{
-		glm::mat4 model;
+		M4 model;
 		posVec = (*itr).second->getObjectPos();
 		angle = (*itr).second->getObjectAngle();
 		rotateAxis = (*itr).second->getObjectRotation();
 		if (angle > 0.0f)
-			model = glm::rotate(model, angle, rotateAxis);
-		model = glm::translate(model, posVec); // Translate it down a bit so it's at the center of the scene
-		model = glm::scale(model, glm::vec3(1.0f, 1.0f, 1.0f));	// It's a bit too big for our scene, so scale it down
-		glUniformMatrix4fv(glGetUniformLocation(S.Program, "model"), 1, GL_FALSE, glm::value_ptr(model));
+			model = MathLib::rotate(model, angle, rotateAxis);
+		model = MathLib::translate(model, posVec); // Translate it down a bit so it's at the center of the scene
+		model = MathLib::scale(model, V3(1.0f, 1.0f, 1.0f));	// It's a bit too big for our scene, so scale it down
+		glUniformMatrix4fv(glGetUniformLocation(S.Program, "model"), 1, GL_FALSE, MathLib::value_ptr<const float *>(model));
 		(*itr).second->Draw(S);
 	}
 }
 
-void SceneRender::renderTerrain(TerrainManager & TM, glm::mat4 view, glm::mat4 projection, Shader & S)
+void SceneRender::renderTerrain(TerrainManager & TM, M4 view, M4 projection, Shader & S)
 {
 	std::vector<WorldTerrain*> Tlist = TM.getTerrainList();
-	glm::vec3 posVec;
+	V3 posVec;
 	S.Use();
-	glm::mat4 model;
-	glUniformMatrix4fv(glGetUniformLocation(S.Program, "projection"), 1, GL_FALSE, glm::value_ptr(projection));
-	glUniformMatrix4fv(glGetUniformLocation(S.Program, "view"), 1, GL_FALSE, glm::value_ptr(view));
+	M4 model;
+	glUniformMatrix4fv(glGetUniformLocation(S.Program, "projection"), 1, GL_FALSE, MathLib::value_ptr<const float *>(projection));
+	glUniformMatrix4fv(glGetUniformLocation(S.Program, "view"), 1, GL_FALSE, MathLib::value_ptr<const float *>(view));
 	std::vector<WorldTerrain*>::iterator itr;
 	for (itr = Tlist.begin(); itr != Tlist.end(); ++itr)
 	{
 		posVec = (*itr)->getObjectPos();
 		// Draw the loaded model
-		model = glm::translate(model, posVec); // Translate it down a bit so it's at the center of the scene
-		model = glm::scale(model, glm::vec3(1.0f, 1.0f, 1.0f));	// It's a bit too big for our scene, so scale it down
-		glUniformMatrix4fv(glGetUniformLocation(S.Program, "model"), 1, GL_FALSE, glm::value_ptr(model));
+		model = MathLib::translate(model, posVec); // Translate it down a bit so it's at the center of the scene
+		model = MathLib::scale(model, V3(1.0f, 1.0f, 1.0f));	// It's a bit too big for our scene, so scale it down
+		glUniformMatrix4fv(glGetUniformLocation(S.Program, "model"), 1, GL_FALSE, MathLib::value_ptr<const float *>(model));
 		(*itr)->Draw(S);
 	}
 }

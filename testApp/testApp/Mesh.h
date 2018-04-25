@@ -20,11 +20,11 @@ using namespace std;
 struct Vertex
 {
 	// Position
-	glm::vec3 Position;
+	V3 Position;
 	// Normal
-	glm::vec3 Normal;
+	V3 Normal;
 	// TexCoords
-	glm::vec2 TexCoords;
+	V2 TexCoords;
 	//height of point
 	float height;
 };
