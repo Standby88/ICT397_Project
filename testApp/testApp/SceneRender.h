@@ -1,11 +1,10 @@
 #pragma once
 #include <GL/glew.h>
 #include <GLFW/glfw3.h>
-#include <glm\glm.hpp>
-#include <glm\gtc\matrix_transform.hpp>
 #include "Shader.h"
 #include "GameWorld.h"
 #include "Menu.h"
+#include "MathLib.h"
 #include <map>
 /**
 * @class SceneRender
@@ -29,15 +28,15 @@ private:
 
 	/**
 	* @brief used to render environment objects
-	*@param EnvironmentObjManager& EM, glm::mat4 view, glm::mat4 projection, Shader &S
+	*@param EnvironmentObjManager& EM, M4 view, M4 projection, Shader &S
 	*/
-	void renderEnvironmentObj(EnvironmentObjManager& EM, glm::mat4 view, glm::mat4 projection, Shader &S);
+	void renderEnvironmentObj(EnvironmentObjManager& EM, M4 view, M4 projection, Shader &S);
 
 	/**
 	* @brief used to render terrain
-	*@param EnvironmentObjManager& EM, glm::mat4 view, glm::mat4 projection, Shader &S
+	*@param EnvironmentObjManager& EM, M4 view, M4 projection, Shader &S
 	*/
-	void renderTerrain(TerrainManager & TM, glm::mat4 view, glm::mat4 projection, Shader &S);
+	void renderTerrain(TerrainManager & TM, M4 view, M4 projection, Shader &S);
 
 	void renderMenu(Shader& s);
 

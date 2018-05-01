@@ -3,13 +3,10 @@
 #include <vector>
 
 #include "PhysicsFacade.h"
-
 #include <GL/glew.h>
-
-#include <glm/glm.hpp>
 #include <GLFW\glfw3.h>
+#include "MathLib.h"
 
-#include <glm/gtc/matrix_transform.hpp>
 
 enum Camera_Move
 {
@@ -49,8 +46,8 @@ public:
 	*
 	* @param vec3 position, vec3 up, vec3 yaw, vec3 pitch
 	*/
-	Camera(glm::vec3 position = glm::vec3(0.0f, 0.0f, 0.0f), glm::vec3 up = glm::vec3(0.0f, 1.0f, 0.0f), GLfloat yaw = YAW
-		, GLfloat pitch = PITCH) : front(glm::vec3(0.0f, 0.0f, -1.0f)), movementSpeed(SPEED), mouseSensitivity(SENSITIVTY), zoom(ZOOM)
+	Camera(V3 position = V3(0.0f, 0.0f, 0.0f), V3 up = V3(0.0f, 1.0f, 0.0f), GLfloat yaw = YAW
+		, GLfloat pitch = PITCH) : front(V3(0.0f, 0.0f, -1.0f)), movementSpeed(SPEED), mouseSensitivity(SENSITIVTY), zoom(ZOOM)
 	{
 		this->position = position;
 		this->worldUp = up;
@@ -77,7 +74,7 @@ public:
 	* @param
 	* @return looAt Matrix
 	*/
-	glm::mat4 GetViewMatrix();
+	M4 GetViewMatrix();
 
 	/**
 	* @brief process keyboard input to change camera position
@@ -114,11 +111,11 @@ public:
 
 private:
 	// Camera Attributes
-	glm::vec3 position;
-	glm::vec3 front;
-	glm::vec3 up;
-	glm::vec3 right;
-	glm::vec3 worldUp;
+	V3 position;
+	V3 front;
+	V3 up;
+	V3 right;
+	V3 worldUp;
 
 	// Eular Angles
 	GLfloat yaw;

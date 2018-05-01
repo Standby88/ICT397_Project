@@ -101,22 +101,22 @@ int GameWorld::getScreenW()
 {
 	return SCREEN_WIDTH;
 }
-void GameWorld::setView(glm::mat4 v)
+void GameWorld::setView(M4 v)
 {
 	view = v;
 }
 
-void GameWorld::setProjection(glm::mat4 p)
+void GameWorld::setProjection(M4 p)
 {
 	projection = p;
 }
 
-glm::mat4 GameWorld::getView()
+M4 GameWorld::getView()
 {
 	return view;
 }
 
-glm::mat4 GameWorld::getProjection()
+M4 GameWorld::getProjection()
 {
 	return projection;
 }

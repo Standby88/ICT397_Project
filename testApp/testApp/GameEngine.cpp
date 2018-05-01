@@ -1,6 +1,5 @@
 #include "GameEngine.h"
 
-#include <glm\gtc\type_ptr.hpp>
 GameEngine::GameEngine()
 {
 	initilize();
@@ -53,9 +52,7 @@ void GameEngine::initilize()
 	gameWorld->setScreenHW(SCREEN_WIDTH, SCREEN_HEIGHT);
 	render = getGlobal(LuaEn->getLuaState(), "Scene");
 	gameController = new GameController(gameWorld);
-
 }
-
 
 GameEngine::~GameEngine()
 {

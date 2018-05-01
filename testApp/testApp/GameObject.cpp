@@ -30,12 +30,12 @@ float GameObject::getObjectAngle()
 	return angle;
 }
 
-glm::vec3 GameObject::getObjectRotation()
+V3 GameObject::getObjectRotation()
 {
 	return rotateAxis;
 }
 
-glm::vec3 GameObject::getObjectPos()
+V3 GameObject::getObjectPos()
 {
 	return objectPos;
 }

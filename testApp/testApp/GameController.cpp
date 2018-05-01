@@ -4,7 +4,7 @@ GameController::GameController(GameWorld * gw)
 {
 	gameWorld = gw;
 	camera = Camera::GetCameraInstance();
-	gameWorld->setProjection(glm::perspective(camera->GetZoom(), (float)gameWorld->getScreenW() / (float)gameWorld->getScreenH(), 0.1f, 1000.0f));
+	gameWorld->setProjection(MathLib::perspective(camera->GetZoom(), (float)gameWorld->getScreenW() / (float)gameWorld->getScreenH(), 0.1f, 1000.0f));
 	playerInput = PlayerInput::getCurrentPlayerInput();
 	playerInput.SetAttributes(camera);
 	playerInput.SetCallbacks();

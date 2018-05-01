@@ -8,8 +8,7 @@
 #include <vector>
 
 #include <GL/glew.h>
-#include <glm/glm.hpp>
-#include <glm/gtc/matrix_transform.hpp>
+#include "MathLib.h"
 #include "SOIL2/SOIL2.h"
 #include <assimp/Importer.hpp>
 #include <assimp/scene.h>
@@ -27,7 +26,7 @@ extern "C"
 }
 #include <LuaBridge.h>
 #include <string>
-#include <glm\glm.hpp>
+
 
 /**
 * @class Model

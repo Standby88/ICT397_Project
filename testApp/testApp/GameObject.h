@@ -8,7 +8,7 @@ extern "C"
 }
 #include <LuaBridge.h>
 #include <string>
-#include <glm\glm.hpp>
+#include "MathLib.h"
 
 /**
 * @class GameObject
@@ -27,9 +27,9 @@ class GameObject
 protected:
 
 	///Stores where the object is located in the scene
-	glm::vec3 objectPos;
+	V3 objectPos;
 
-	glm::vec3 rotateAxis;
+	V3 rotateAxis;
 	float angle;
 public:
 
@@ -61,14 +61,14 @@ public:
 	*
 	*@pretun vec3
 	*/
-	glm::vec3 getObjectPos();
+	V3 getObjectPos();
 
 	/**
 	* @brief used to access objects rotation
 	*
 	*@pretun vec3
 	*/
-	glm::vec3 getObjectRotation();
+	V3 getObjectRotation();
 
 	/**
 	* @brief used to access objects angle of rotation

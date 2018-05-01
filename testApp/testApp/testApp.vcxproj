@@ -159,6 +159,7 @@
     <ClCompile Include="GameEngine.cpp" />
     <ClCompile Include="GameWorld.cpp" />
     <ClCompile Include="main.cpp" />
+    <ClCompile Include="MathLib.cpp" />
     <ClCompile Include="Menu.cpp" />
     <ClCompile Include="Mesh.cpp" />
     <ClCompile Include="Model.cpp" />
@@ -196,6 +197,7 @@
     <ClInclude Include="GameObject3D.h" />
     <ClInclude Include="GameEngine.h" />
     <ClInclude Include="GameWorld.h" />
+    <ClInclude Include="MathLib.h" />
     <ClInclude Include="Menu.h" />
     <ClInclude Include="Mesh.h" />
     <ClInclude Include="Model.h" />

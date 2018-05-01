@@ -25,7 +25,7 @@ private:
 	///store terrain mesh data
 	Mesh terMesh;
 	unsigned char *terrainData;
-	glm::vec3 scale;
+	V3 scale;
 	int size;
 	
 	///access PhysicsFacade
