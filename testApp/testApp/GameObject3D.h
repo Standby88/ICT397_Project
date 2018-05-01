@@ -1,6 +1,7 @@
 #pragma once
 #include "GameObject.h"
 #include "Model.h"
+#include "PhysicsFacade.h"
 
 /**
 * @class GameObject3D
@@ -10,6 +11,11 @@
 * @author Desmond Ma
 * @version 1
 * @date
+*
+* @author Kieron van der Kwast
+* @version 2
+* @date 27/04/2018, Added PhysicsFacade instance, as well as a facaded rigidBody so all objects
+					have a rigidBody. Also provided setter and getter methods for the rigidBody
 *
 * @todo
 *
@@ -24,6 +30,10 @@ protected:
 
 	///used to store what type of object the inherited type is
 	std::string objectType;
+
+	///facaded rigidbody variable
+	rigidBody* gameObjBody;
+
 public:
 
 	/**
@@ -63,6 +73,30 @@ public:
 	*@param unsigned char * Path
 	*/
 	void addModel(Model* model);
+
+	/**
+	* @brief sets gameObjBody
+	*
+	*
+	*
+	* @param rigidBody*
+	* @return void
+	* @pre
+	* @post
+	*/
+	void SetRigidBody(rigidBody* body);
+
+	/**
+	* @brief returns gameObjBody
+	*
+	*
+	*
+	* @param void
+	* @return rigidBody*
+	* @pre
+	* @post
+	*/
+	rigidBody* GetRigidBody();
 
 	/**
 	* @brief register all functions to lua to be used.

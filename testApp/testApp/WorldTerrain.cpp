@@ -135,5 +135,6 @@ int WorldTerrain::getSize()
 
 void WorldTerrain::CreateTerrainRigidBody()
 {
-	wPhysFac->CreateHeightFieldRigidBody(size, size, terrainData, scale.y, 1, false, false);
+	terrainBody = wPhysFac->CreateHeightFieldRigidBody(size, size, terrainData, scale.y, 1, false, false);
+	std::cout << "rigidBodyID for WorldTerrain: " << terrainBody->getUserIndex() << std::endl;
 }

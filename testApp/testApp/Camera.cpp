@@ -12,10 +12,15 @@ Camera::Camera(GLfloat posX, GLfloat posY, GLfloat posZ, GLfloat upX, GLfloat up
 	this->updateCameraVectors();
 }
 
+V3& Camera::GetCameraPosition()
+{
+	return position;
+}
+
 Camera* Camera::GetCameraInstance()
 {
 	if (instance == 0) {
-		instance = new Camera(V3(0.0f, 0.0f, 3.0f));
+		instance = new Camera(V3(0.0f, 1.75f, 3.0f));
 		std::cout << "First camera instance created" << std::endl;
 	}
 
@@ -128,8 +133,8 @@ void Camera::updateCameraVectors()
 	this->up = MathLib::normalize(MathLib::cross(this->right, this->front));
 }
 
-void Camera::CreateCameraRigidBodyBox()
+void Camera::CreateCameraRigidBody()
 {
-	//cPhysFac.CreateBoxRigidBody(1.75, 1.5, 1.5, 60, position.x, position.y, position.z, 0, 0, 0);
-	cPhysFac->CreateSphereRigidBody(1.75, 60, position.x, position.y, position.z, 0, 0, 0);
+	camBody = cPhysFac->CreatePlayerRigidBody(1.5, 1.75, 60, position, glm::vec3(0, 0, 0));
+	std::cout << "rigidBodyID for Camera: " << camBody->getUserIndex() << std::endl;
 }

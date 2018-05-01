@@ -5,6 +5,7 @@
 #include "TextureManager.h"
 #include "SOIL2/SOIL2.h"
 #include "PhysicsFacade.h"
+
 /**
 * @class WorldTerrain
 * @brief used to represent terrain of the world
@@ -14,7 +15,11 @@
 * @version 1
 * @date
 *
-* @todo
+* @author Kieron van der Kwast
+* @version 2
+* @date 1/05/2018, added a rigidbody variable so the terrain is collidable
+*
+* @todo properly map terrain to collision shape
 *
 * @bug
 */
@@ -30,6 +35,9 @@ private:
 	
 	///access PhysicsFacade
 	PhysicsFacade* wPhysFac = PhysicsFacade::GetPhysicsInstance();
+
+	///facaded rigidbody variable
+	rigidBody* terrainBody;
 
 	/**
 	* @brief helper function used to check if x and z pos is in heightmap

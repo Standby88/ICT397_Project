@@ -29,8 +29,14 @@ const GLfloat ZOOM = 45.0f;
 *
 *
 * @author Alex
-* @version
+* @version 1
 * @date
+*
+* @author Kieron van der Kwast
+* @version 2
+* @date 1/05/2018, Added set and get methods for position of camera, also
+					implemented a static function so that only one camera 
+					instance is created.
 *
 * @todo
 *
@@ -58,7 +64,7 @@ public:
 		int x, y;
 		glfwGetWindowSize(win, &x, &y);
 		glfwSetCursorPos(win, (double)x / 2, (double)y / 2);
-		CreateCameraRigidBodyBox();
+		CreateCameraRigidBody();
 	}
 
 	/**
@@ -67,6 +73,22 @@ public:
 	* @param GLfloat posX, GLfloat posY, GLfloat posZ, GLfloat upX, GLfloat upY, GLfloat upZ, GLfloat yaw, GLfloat pitch
 	*/
 	Camera(GLfloat posX, GLfloat posY, GLfloat posZ, GLfloat upX, GLfloat upY, GLfloat upZ, GLfloat yaw, GLfloat pitch);
+
+	/**
+	* @brief returns the camera's position coordinates
+	*
+	* @param void
+	* @return V3&
+	*/
+	V3& GetCameraPosition();
+
+	/**
+	* @brief sets the camera's position coordinates
+	*
+	* @param V3
+	* @return void
+	*/
+	void SetCameraPosition(V3 pos)	{position = pos;};
 
 	/**
 	* @brief accessor for view matrix
@@ -83,7 +105,12 @@ public:
 	*/
 	void ProcessKeyboard(Camera_Move direction, GLfloat deltaTime);
 
-
+	/**
+	* @brief returns a singleton instance of Camera class
+	*
+	* @param void
+	* @return Camera*
+	*/
 	static Camera* GetCameraInstance();
 
 	/**
@@ -107,7 +134,13 @@ public:
 	*/
 	GLfloat GetZoom();
 
-	void CreateCameraRigidBodyBox();
+	/**
+	* @brief Creates a rigid body for camera
+	*
+	* @param void
+	* @return void
+	*/
+	void CreateCameraRigidBody();
 
 private:
 	// Camera Attributes
@@ -129,6 +162,8 @@ private:
 	static Camera* instance;
 
 	PhysicsFacade* cPhysFac = PhysicsFacade::GetPhysicsInstance();
+
+	rigidBody* camBody;
 
 	/**
 	* @brief helper function that is used to update the camera when a parameter is changed

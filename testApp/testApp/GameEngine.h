@@ -51,7 +51,7 @@ public:
 	GameEngine();
 	~GameEngine();
 	bool GameLoop();
-	void initilize();
+	void initialize();
 
 
 };

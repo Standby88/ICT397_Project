@@ -13,7 +13,7 @@
 #include "BulletCollision\Gimpact\btGImpactCollisionAlgorithm.h"
 #include "BulletCollision\CollisionShapes\btHeightfieldTerrainShape.h"
 #include "BulletCollision\CollisionDispatch\btGhostObject.h"
-#include "BulletDynamics\Character\btKinematicCharacterController.h"
+#include "MathLib.h"
 #include <vector>
 #include <iostream>	//only included to check values
 
@@ -43,6 +43,8 @@ typedef struct PhysicsVector
 	float z;
 };
 
+typedef btRigidBody rigidBody;
+
 //---------------------------------------------------------------------------------
 
 /**
@@ -56,8 +58,12 @@ typedef struct PhysicsVector
 * @version 01
 * @date 1/04/2018 Kieron van der Kwast, Started,
 *
+* @author Kieron van der Kwast
+* @version 02
+* @date 24/04/2018 Trying to fix player rigid body movement problems
+* 
 * @todo complete the facade
-* @todo make sure the functions to create necessary collision bodies are working
+* @todo fix collision body locations and interactions
 *
 * @bug none
 */
@@ -81,15 +87,14 @@ private:
 	btDiscreteDynamicsWorld* dynamicsWorld;
 	
 	static PhysicsFacade* instance;
-	/*
-	//std::vector<btCollisionObject> collisionObjects;
+	
+	btVector3 playerPosition;
 
-	btKinematicCharacterController* playerCharacter;
-	btConvexShape* pShape;
-	btRigidBody* pBody;*/
+	btVector3 playerForce;
 
+	int playerID;
 
-	//int bodyIndex;
+	int bodyID;
 
 	/**
 	* @brief
@@ -101,7 +106,8 @@ private:
 	* @pre
 	* @post
 	*/
-	//int AssignObjectIndex();
+	int AssignObjectIndex();
+
 protected:
 
 public:
@@ -136,35 +142,48 @@ public:
 	*/
 	void SetGravity(float grav);
 
-	//PhysicsFacade(PhysicsFacade const &) = delete;
-
-	//static PhysicsFacade& GetInstance();
-
 	/**
-	* @brief
+	* @brief Gets X position of a rigidbody
 	*
 	*
 	*
-	* @param
-	* @return
+	* @param int
+	* @return float
 	* @pre
 	* @post
 	*/
-	//void InitPhysics(PhysicsVector& grav);
-
-	//void CharacterSetup(float charW, float charH, float xPosition, float yPosition, float zPosition, float mass);
+	float GetXPosition(int index);
 
 	/**
-	* @brief
+	* @brief Gets Y position of a rigidbody
 	*
 	*
 	*
-	* @param
-	* @return
+	* @param int
+	* @return float
 	* @pre
 	* @post
 	*/
-	//int CreateKinematicCharacter();
+	float GetYPosition(int index);
+
+	/**
+	* @brief Gets Z position of a rigidbody
+	*
+	*
+	*
+	* @param int
+	* @return float
+	* @pre
+	* @post
+	*/
+	float GetZPosition(int index);
+
+	//Exclude dynamicsWorld->addRigidBody from Create.. functions functions as they are created 
+	//in scripts, then added in constructors
+	void AddRigidBody(rigidBody* body) {
+		dynamicsWorld->addRigidBody(body);
+		dynamicsWorld->getCollisionObjectArray().size();
+	}
 
 	/**
 	* @brief 
@@ -188,7 +207,7 @@ public:
 	* @pre
 	* @post
 	*/
-	void CreateHeightFieldRigidBody(int heightStickWidth, int heightStickLength,
+	rigidBody* CreateHeightFieldRigidBody(int heightStickWidth, int heightStickLength,
 		const void * heightfieldData, float scaleHeight, int upAxis,
 		bool useFloatData, bool flipQuadEdges);
 
@@ -202,7 +221,7 @@ public:
 	* @pre
 	* @post
 	*/
-	void CreateSphereRigidBody(float radius, float mass, float xPosition, float yPosition, float zPosition, 
+	rigidBody* CreateSphereRigidBody(float radius, float mass, float xPosition, float yPosition, float zPosition, 
 		float xInertia, float yInertia, float zInertia);
 
 	/**
@@ -210,12 +229,24 @@ public:
 	*
 	*
 	*
-	* @param int, int, int, int, int, int, int, int, int, int
+	* @param int, int, int, int, int, int, int
 	* @return
 	* @pre
 	* @post
 	*/
-	void CreateBoxRigidBody(int height, int width, int length, int mass, int xPosition, int yPosition, int zPosition, int xInertia, int yInertia, int zInertia);
+	rigidBody* CreateBoxRigidBody(int height, int width, int length, int mass, int xPosition, int yPosition, int zPosition);
+
+	/**
+	* @brief
+	*
+	*
+	*
+	* @param
+	* @return
+	* @pre
+	* @post
+	*/
+	rigidBody* CreatePlayerRigidBody(float radius, float height, float mass, V3 position, V3 inertia);
 
 	/**
 	* @brief 
@@ -253,14 +284,17 @@ public:
 	*/
 	int CreateFallingConeRigidBody(float radius, float height);
 
-
-	//void AddRigidBody(btRigidBody* body);
-
-	//void RemoveRigidBody(btRigidBody* body);
-
-	//void RemoveCollisionShape(btCollisionShape* colShape);
-
-	void CharacterMovement(int characterIndex, float dt, int moveDirection);
+	/**
+	* @brief Updates the rigid bodies within the world
+	*
+	*
+	*
+	* @param float, int
+	* @return void
+	* @pre
+	* @post
+	*/
+	void StepSimulation(float tStep, int maxSubSteps, V3 &playerPos);
 
 	/**
 	* @brief Updates the rigid bodies within the world
@@ -272,43 +306,7 @@ public:
 	* @pre
 	* @post
 	*/
-	void StepSimulation(float tStep, int maxSubSteps);
-
-	/**
-	* @brief Returns the X value of a body
-	*
-	*
-	*
-	* @param int
-	* @return float
-	* @pre
-	* @post
-	*/
-	float GetXOrigin(int i);
-
-	/**
-	* @brief Returns the Y value of a body
-	*
-	*
-	*
-	* @param int 
-	* @return float
-	* @pre
-	* @post
-	*/
-	float GetYOrigin(int i);
-
-	/**
-	* @brief Returns the Z value of a body
-	*
-	*
-	*
-	* @param int 
-	* @return float
-	* @pre
-	* @post
-	*/
-	float GetZOrigin(int i);
+	void SetObjectActivation();
 
 	/**
 	* @brief Exposes the class methods to Lua
@@ -321,6 +319,9 @@ public:
 	* @post
 	*/
 	static void scriptRegister(lua_State * L);
+
+	///Used for testing 
+	void print() { std::cout << "printing" << std::endl; }
 
 };
 

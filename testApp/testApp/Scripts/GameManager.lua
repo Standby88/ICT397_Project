@@ -1,5 +1,8 @@
 print ("Game script loaded")
 
+-- Create Physics Instance
+PhysicsManager = PF.PhysicsFacade()
+
 -- Create ModelManager
 ModManager = MM.ModelManager();
 -- Throw to the Model script which will load
