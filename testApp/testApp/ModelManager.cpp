@@ -25,7 +25,6 @@ bool ModelManager::addModel(std::string modelPath/*char * modelPath*/)
 	if (models.count(modelPath) != 1)
 	{
 		Model* temp = new Model(modelPath);
-		//models.insert(std::pair<std::string, Model*>(modelPath, temp));
 		models[modelPath] = temp;
 		return true;
 	}

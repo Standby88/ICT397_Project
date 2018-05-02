@@ -36,7 +36,7 @@ public:
 	*@param string modelpath
 	*@return bool
 	*/
-	bool addModel(std::string modelPath/*char * modelPath*/);
+	bool addModel(std::string modelPath);
 
 	/**
 	* @brief returns a model from list

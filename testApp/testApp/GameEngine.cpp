@@ -52,6 +52,7 @@ void GameEngine::initialize()
 	gameWorld->setScreenHW(SCREEN_WIDTH, SCREEN_HEIGHT);
 	render = getGlobal(LuaEn->getLuaState(), "Scene");
 	gameController = new GameController(gameWorld);
+	gameController->saveGame();
 	PhysFac->SetObjectActivation();
 }
 

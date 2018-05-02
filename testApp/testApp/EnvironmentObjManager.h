@@ -21,7 +21,6 @@ class EnvironmentObjManager
 private:
 	/// used to store a lsit of enviromnet objects
 	std::unordered_map<std::string, EnvironmentObject* > environmentObjList;
-	 ;
 public:
 
 	/**

@@ -1,13 +1,12 @@
 
 
 #include <iostream>
-#include "ScriptEngine.h"
 #include "GameEngine.h"
+#include "Serialization.h"
+#include "MathLib.h"
 int main()
 {
-	GameEngine gameLoop;
-	gameLoop.GameLoop();
+	GameEngine Game;
+	Game.GameLoop();
 
-	return 0;
 }
-
