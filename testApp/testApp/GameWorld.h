@@ -2,12 +2,14 @@
 #include "EnvironmentObjManager.h"
 #include "TerrainManager.h"
 #include "CharacterManager.h"
+#include "ModelManager.h"
 class GameWorld
 {
 private:
 	CharacterManager * characters;
 	TerrainManager * terrain;
 	EnvironmentObjManager * environment;
+	ModelManager * models;
 	bool photo;
 	bool manual;
 	bool worldDisplay;
@@ -21,6 +23,19 @@ public:
 	CharacterManager* getCharacters();
 	TerrainManager* getTerrain();
 	EnvironmentObjManager* getEnvironment();
+	void setEnvironment(EnvironmentObjManager * en)
+	{
+		environment = nullptr;
+		environment = en;
+	}
+	void setModels(ModelManager * models)
+	{
+		this->models = models;
+	}
+	ModelManager * getModels()
+	{
+		return this->models;
+	}
 	static void scriptRegister(lua_State * L);
 	~GameWorld();
 	void setManual(bool man);

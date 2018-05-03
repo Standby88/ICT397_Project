@@ -4,6 +4,8 @@
 #include "PlayerInput.h"
 #include <iostream>
 #include "Serialization.h"
+#include "GameAssetFactory.h"
+#include "ModelManager.h"
 /**
 * @class GameController
 * @brief
@@ -62,6 +64,7 @@ public:
 	~GameController();
 
 	void update(GLfloat deltaTime);
+	
 	void saveGame()
 	{
 		std::vector<enObj> enList;
@@ -78,14 +81,28 @@ public:
 			holder.RotAxis.y = (*itr).second->getObjectRotation().y;
 			holder.RotAxis.z = (*itr).second->getObjectRotation().z;
 			holder.modelName = (*itr).second->getModel()->getName();
-
+			std::cout << holder.modelName << std::endl;
 			enList.push_back(holder);
 		}
 		Serialization::saveData(enList, "SaveGame.xml");
 	}
 	void loadGame()
 	{
-		
+		std::vector<enObj> enList = Serialization::loadData<std::vector<enObj>>("SaveGame.xml");
+		EnvironmentObjManager * enManager = new EnvironmentObjManager();
+		GameAssetFactory<GameObject, std::string > factory;
+		factory.Register("enObjCreator", new GameAssetCreator<EnvironmentObject, GameObject>);
+		for (int i = 0; i < enList.size(); i++)
+		{
+			EnvironmentObject *temp = dynamic_cast<EnvironmentObject*>(factory.Create("enObjCreator"));
+			temp->updateObject(enList[i].Pos.x, enList[i].Pos.y, enList[i].Pos.z);
+			temp->updateObjectRotation(enList[i].angle, enList[i].RotAxis.x, enList[i].RotAxis.y, enList[i].RotAxis.z);
+			temp->addModel(gameWorld->getModels()->GetModel(enList[i].modelName));
+			enManager->addObject(temp, to_string(i));
+		}
+		gameWorld->setEnvironment(enManager);
+		enManager = nullptr;
+		delete enManager;
 	}
 };
 

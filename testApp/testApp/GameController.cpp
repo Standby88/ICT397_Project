@@ -45,17 +45,17 @@ void GameController::update(GLfloat deltaTime)
 
 	//updating physics
 	//Running the step simulation function to update rigidbodies in the physics environment
-	PhysFac->StepSimulation(1 / 60.f, 10, camera->GetCameraPosition());
+	//PhysFac->StepSimulation(1 / 60.f, 10, camera->GetCameraPosition());
 	//the camera's position is updated in physics and based on collisions the new position is 
 	//now set for the user.
-	camera->SetCameraPosition(camera->GetCameraPosition());
+	//camera->SetCameraPosition(camera->GetCameraPosition());
 	//a temporary index is made for getting the UserIndex of a collision object in the physics environment
 	//that index is used to make sure we update the correct position for an object.
 	//currently this is only used to test for "asteroid_1"
-	int tempInd = gameWorld->getEnvironment()->getObject("asteroid_1")->GetRigidBody()->getUserIndex();
+	//int tempInd = gameWorld->getEnvironment()->getObject("asteroid_1")->GetRigidBody()->getUserIndex();
 	//This is to update the position of the object for drawing.
-	gameWorld->getEnvironment()->getObject("asteroid_1")->updateObject(
-		PhysFac->GetXPosition(tempInd), PhysFac->GetYPosition(tempInd), PhysFac->GetZPosition(tempInd));
+	//gameWorld->getEnvironment()->getObject("asteroid_1")->updateObject(
+		//PhysFac->GetXPosition(tempInd), PhysFac->GetYPosition(tempInd), PhysFac->GetZPosition(tempInd));
 
 	/*tempInd = gameWorld->getEnvironment()->getObject("asteroid_2")->GetRigidBody()->getUserIndex();
 	//This is to update the position of the object for drawing.
