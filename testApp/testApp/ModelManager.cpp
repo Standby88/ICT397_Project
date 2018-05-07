@@ -19,13 +19,12 @@ ModelManager & ModelManager::GetModelManager()
 }
 
 
-bool ModelManager::addModel(std::string modelPath/*char * modelPath*/)
+bool ModelManager::addModel(std::string modelPath)
 {
 	
 	if (models.count(modelPath) != 1)
 	{
 		Model* temp = new Model(modelPath);
-		//models.insert(std::pair<std::string, Model*>(modelPath, temp));
 		models[modelPath] = temp;
 		return true;
 	}
@@ -38,10 +37,11 @@ Model* ModelManager::GetModel(std::string modelPath)
 
 	while (it != models.end())
 	{
-		//std::cout << "Model at ";
-		//std::cout << models[modelPath]->getName() << endl;
-		if(models[modelPath]->getName().compare(modelPath) == 0)
+		if (models[modelPath]->getName().compare(modelPath) == 0)
+		{
 			return models.at(modelPath);
+		}
+			
 	}
 
 	return NULL;

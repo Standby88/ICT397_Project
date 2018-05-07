@@ -33,6 +33,7 @@ void GameWorld::scriptRegister(lua_State * L)
 		.beginNamespace("GW")
 		.beginClass<GameWorld>("GameWorld")
 		.addConstructor<void(*) (TerrainManager*, EnvironmentObjManager*)>()
+		.addFunction("setModels", &GameWorld::setModels)
 		.endClass()
 		.endNamespace();
 }

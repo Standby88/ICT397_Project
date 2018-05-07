@@ -170,6 +170,7 @@
     <ClCompile Include="RawIMGLoader.cpp" />
     <ClCompile Include="SceneRender.cpp" />
     <ClCompile Include="ScriptEngine.cpp" />
+    <ClCompile Include="Serialization.cpp" />
     <ClCompile Include="Shader.cpp" />
     <ClCompile Include="SOIL2\etc1_utils.c" />
     <ClCompile Include="SOIL2\image_DXT.c" />
@@ -208,6 +209,7 @@
     <ClInclude Include="RawIMGLoader.h" />
     <ClInclude Include="SceneRender.h" />
     <ClInclude Include="ScriptEngine.h" />
+    <ClInclude Include="Serialization.h" />
     <ClInclude Include="Shader.h" />
     <ClInclude Include="SOIL2\etc1_utils.h" />
     <ClInclude Include="SOIL2\image_DXT.h" />

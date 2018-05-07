@@ -28,9 +28,9 @@ protected:
 
 	///Stores where the object is located in the scene
 	V3 objectPos;
-
 	V3 rotateAxis;
 	float angle;
+
 public:
 
 	/**

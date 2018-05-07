@@ -62,7 +62,7 @@ EnObjMan:addObject(A9, "asteroid_9")
 
 
 World = GW.GameWorld(TerManager, EnObjMan)
-
+World:setModels(ModManager);
 Scene = SR.SceneRender(World)
 Scene:addShader("Shaders/3dvsShaderTEMP.vs", "Shaders/3dfragShaderTEMP.frag", "environment")
 Scene:addShader("Shaders/terrainvertex.vs", "Shaders/terrainfrag.frag", "terrain")
