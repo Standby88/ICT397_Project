@@ -5,7 +5,7 @@
 #include "TextureManager.h"
 #include "SOIL2/SOIL2.h"
 #include "PhysicsFacade.h"
-
+#include <SDL.h>
 /**
 * @class WorldTerrain
 * @brief used to represent terrain of the world
@@ -101,6 +101,31 @@ public:
 	*@param float x, float y, float z
 	*/
 	void setScalingFactor(float x, float y, float z);
+	std::vector<float> heights;
+	void load(std::string file, int size)
+	{
+		this->size = size;
+		const char* name = file.c_str();
+		SDL_Surface* img = SDL_LoadBMP(name);
+
+		if (!img)
+		{
+			std::cout << "image not loaded" << std::endl;
+		}
+		std::vector<float> tmp;
+		for (int i = 0; i < img->h; i++)
+		{
+			for (int j = 0; j < img->w; j++)
+			{
+				Uint32 pixel = ((Uint32*)img->pixels)[i*img->pitch / 4+j];
+				Uint8 r, g, b;
+				SDL_GetRGB(pixel, img->format,&r,&g,&b);
+				heights.push_back((float)r);
+			}
+
+		}
+
+	}
 
 	/**
 	* @brief convert a GameObjectBase to Worldterrain

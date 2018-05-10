@@ -68,7 +68,7 @@ void SceneRender::renderEnvironmentObj(EnvironmentObjManager& EM, M4 view, M4 pr
 	S.Use();
 	glUniformMatrix4fv(glGetUniformLocation(S.Program, "projection"), 1, GL_FALSE, MathLib::value_ptr<const float *>(projection));
 	glUniformMatrix4fv(glGetUniformLocation(S.Program, "view"), 1, GL_FALSE, MathLib::value_ptr<const float *>(view));
-	
+	std::cout << drawMap.size();
 	std::unordered_map<std::string, EnvironmentObject* >::iterator itr;
 	int i = 0;
 	for (itr = drawMap.begin(); itr != drawMap.end(); ++itr)

@@ -41,6 +41,7 @@ void Camera::ProcessKeyboard(Camera_Move direction, GLfloat deltaTime)
 	{
 		this->position.x += this->front.x * velocity;
 		this->position.z += this->front.z * velocity;
+		this->position.y += this->front.y * velocity;
 	}
 
 	if (direction == BACKWARD)

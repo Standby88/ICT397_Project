@@ -6,6 +6,7 @@
 #include "Menu.h"
 #include "MathLib.h"
 #include <map>
+#include "Water.h"
 /**
 * @class SceneRender
 * @brief USed to render scene onjects
@@ -25,7 +26,7 @@ private:
 	GameWorld* gameWorld;
 	std::map<std::string, Shader*> shaders;
 	Menu * menu;
-
+	Water *test;
 	/**
 	* @brief used to render environment objects
 	*@param EnvironmentObjManager& EM, M4 view, M4 projection, Shader &S
@@ -54,8 +55,15 @@ public:
 	~SceneRender();
 
 	void renderScene();
+	void addWater(Water * w)
+	{
+		test = w;
+	}
+	void renderWater()
+	{
+		test->drawWater(*shaders["water"], gameWorld->getView(), gameWorld->getProjection());
 
-
+	}
 	 static void scriptRegister(lua_State * L);
 
 };

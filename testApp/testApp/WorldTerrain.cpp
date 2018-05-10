@@ -1,4 +1,5 @@
 #include "WorldTerrain.h"
+
 bool WorldTerrain::inbounds(int xpos, int zpos)
 {
 	return (xpos >= 0 && xpos <= size && zpos >= 0 && zpos <= size);
@@ -7,7 +8,7 @@ unsigned char WorldTerrain::getHeightColor(int xpos, int zpos)
 {
 	if (inbounds(xpos, zpos))
 	{
-		return terrainData[zpos*size + xpos];
+		return heights[zpos*size + xpos];//terrainData[zpos*size + xpos];
 	}
 	return 1;
 }
@@ -16,7 +17,8 @@ float WorldTerrain::getHeight(int xpos, int zpos)
 
 	if (inbounds(xpos, zpos))
 	{
-		return ((float)(terrainData[(zpos*size) + xpos])*scale.y);
+		//return ((float)(terrainData[(zpos*size) + xpos])*scale.y);
+		return ((float)(heights[(zpos*size) + xpos])*scale.y);
 	}
 
 	return 0;
@@ -54,6 +56,7 @@ void WorldTerrain::scriptRegister(lua_State * L)
 		.addFunction("Draw", &WorldTerrain::Draw)
 		.addFunction("SetTerrainVariable", &WorldTerrain::SetTerrainVariable)
 		.addFunction("loadHeightfield", &WorldTerrain::loadHeightfield)
+		.addFunction("load", &WorldTerrain::load)
 		.addFunction("setScallingFactor", &WorldTerrain::setScalingFactor)
 		.addFunction("convert", &WorldTerrain::convert)
 		.addFunction("getHeightAt", &WorldTerrain::getHeight)
@@ -77,13 +80,14 @@ void WorldTerrain::SetTerrainVariable(std::string tex1, std::string tex2, std::s
 			temp.height = (float)getHeightColor(x, z);
 
 			temp.Position.x = ((float)x*scale.x) + objectPos.x;
-			temp.Position.y = (getHeight(x, z)) + objectPos.y;
+			temp.Position.y =  (getHeight(x, z)) + objectPos.y;
 			temp.Position.z = ((float)(z)*scale.z) + objectPos.z;
 
 			terMesh.vertices.push_back(temp);
+			
 		}
 	}
-
+	std::cout <<"height point: "<< terMesh.vertices[0].Position.y;
 	TextureManager::GetTextureManager().AddTexture(tex1);
 	TextureManager::GetTextureManager().AddTexture(tex2);
 	TextureManager::GetTextureManager().AddTexture(tex3);
@@ -94,7 +98,7 @@ void WorldTerrain::SetTerrainVariable(std::string tex1, std::string tex2, std::s
 	terMesh.terrainTex[2] = TextureManager::GetTextureManager().GetTexture(tex3);
 	terMesh.terrainTex[3] = TextureManager::GetTextureManager().GetTexture(tex4);
 	
-	std::cout << terMesh.terrainTex[0] << std::endl;
+
 	for (int y = 0; y < getSize() - 1; ++y)
 	{
 		for (int x = 0; x < getSize() - 1; ++x)
@@ -110,6 +114,7 @@ void WorldTerrain::SetTerrainVariable(std::string tex1, std::string tex2, std::s
 	}
 	terMesh.setMesh();
 	CreateTerrainRigidBody();
+	
 }
 
 bool WorldTerrain::loadHeightfield(std::string filename, const int size)
@@ -135,6 +140,11 @@ int WorldTerrain::getSize()
 
 void WorldTerrain::CreateTerrainRigidBody()
 {
-	terrainBody = wPhysFac->CreateHeightFieldRigidBody(size, size, terrainData, scale.y, 1, false, false);
+	terrainData = new unsigned char[size*size];
+	for (int i = 0; i < heights.size(); i++)
+	{
+		terrainData[i] = heights[i];
+	}
+	terrainBody = wPhysFac->CreateHeightFieldRigidBody(size, size,terrainData, scale.y, 1, false, false);
 	std::cout << "rigidBodyID for WorldTerrain: " << terrainBody->getUserIndex() << std::endl;
 }
