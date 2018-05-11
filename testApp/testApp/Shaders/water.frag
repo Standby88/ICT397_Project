@@ -6,9 +6,10 @@ out vec4 color;
 
 // Texture samplers
 uniform sampler2D ourTexture1;
-
+uniform sampler2D ourTexture2;
 void main()
 {
-    // Linearly interpolate between both textures (second texture is only slightly combined)
-    color = texture(ourTexture1, TexCoord);
+	vec4 reflect = texture(ourTexture1, TexCoord);
+	vec4 refract = texture(ourTexture1, TexCoord);
+    color = mix(refract,reflect, 0.5);
 }

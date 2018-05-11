@@ -64,7 +64,11 @@ public:
 	~GameController();
 
 	void update(GLfloat deltaTime);
-	
+	Camera* getGameCamera()
+	{
+		return Camera::GetCameraInstance();
+	}
+
 	void saveGame()
 	{
 		std::vector<enObj> enList;

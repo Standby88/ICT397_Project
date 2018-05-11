@@ -142,6 +142,10 @@ public:
 	*/
 	void CreateCameraRigidBody();
 
+	float& getPitch()
+	{
+		return pitch;
+	}
 private:
 	// Camera Attributes
 	V3 position;

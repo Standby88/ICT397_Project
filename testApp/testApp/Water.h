@@ -10,7 +10,7 @@ private:
 	TextureManager m_TextureMan;
 	GLuint VBO, VAO, EBO;
 	GLuint t1;
-	GLuint texture2;
+	GLuint t2;
 
 	GLfloat points[32] =
 	{
@@ -28,9 +28,9 @@ private:
 	};
 public:
 
-	Water(GLuint textureid)
+	Water(GLuint reflect, GLuint refract)
 	{
-		std::cout << textureid << std::endl;
+		
 		glGenVertexArrays(1, &VAO);
 		glGenBuffers(1, &VBO);
 		glGenBuffers(1, &EBO);
@@ -55,7 +55,8 @@ public:
 
 		glBindVertexArray(0); // Unbind VAO
 
-		t1 = textureid;
+		t1 = reflect;
+		t2 = refract;
 	}
 	void drawWater(Shader S, M4 view, M4 projection)
 	{
@@ -66,12 +67,18 @@ public:
 		glUniformMatrix4fv(glGetUniformLocation(S.Program, "view"), 1, GL_FALSE, MathLib::value_ptr<const float *>(view));
 		model = MathLib::translate(model, V3(10.0f, 0.1f, 50));
 		model = MathLib::scale(model, V3(50.0f, 50.0f, 50.0f));
+		model = MathLib::rotate(model, 90.0 ,V3(0, 1, 0));
 		glUniformMatrix4fv(glGetUniformLocation(S.Program, "model"), 1, GL_FALSE, MathLib::value_ptr<const float *>(model));
 
 		glUniform1i(glGetUniformLocation(S.Program, "t1"), 0);
 		glActiveTexture(GL_TEXTURE0);
 		glBindTexture(GL_TEXTURE_2D, t1);
 		glUniform1i(t1, 0);
+
+		glUniform1i(glGetUniformLocation(S.Program, "t2"), 0);
+		glActiveTexture(GL_TEXTURE1);
+		glBindTexture(GL_TEXTURE_2D, t2);
+		glUniform1i(t2, 0);
 		glBindVertexArray(VAO);
 		glDrawElements(GL_TRIANGLES, 6, GL_UNSIGNED_INT, 0);
 		glBindVertexArray(0);

@@ -12,7 +12,7 @@ GameController::GameController(GameWorld * gw)
 	playerInput.SetCallbacks();
 
 	//need to create a function that recursively does this for all objects.
-	PhysFac->AddRigidBody(gameWorld->getEnvironment()->getObject("asteroid_1")->GetRigidBody());
+	//PhysFac->AddRigidBody(gameWorld->getEnvironment()->getObject("asteroid_1")->GetRigidBody());
 	/*PhysFac->AddRigidBody(gameWorld->getEnvironment()->getObject("asteroid_2")->GetRigidBody());
 	PhysFac->AddRigidBody(gameWorld->getEnvironment()->getObject("asteroid_3")->GetRigidBody());
 	PhysFac->AddRigidBody(gameWorld->getEnvironment()->getObject("asteroid_4")->GetRigidBody());

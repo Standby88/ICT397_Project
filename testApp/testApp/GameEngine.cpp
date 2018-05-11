@@ -70,7 +70,7 @@ bool GameEngine::GameLoop()
 	glFramebufferRenderbuffer(GL_FRAMEBUFFER, GL_DEPTH_ATTACHMENT, GL_RENDERBUFFER, depthBuffer);*/
 
 	//glFramebufferTexture(GL_FRAMEBUFFER, GL_COLOR_ATTACHMENT0, texture, 0);
-	//Water test(fbos.getReflectionTexture());
+	//Water test(fbos.getReflectionTexture(), fbos.getRefractionTexture());
 	//render->addWater(&test);
 	while (!glfwWindowShouldClose(window))
 	{
@@ -79,17 +79,33 @@ bool GameEngine::GameLoop()
 		deltaTime = currentFrame - lastFrame;
 		lastFrame = currentFrame;
 		gameController->update(deltaTime);
+	
+		glClearColor(0.2f, 0.3f, 0.3f, 1.0f);
+		glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
+		render->renderScene();
 		//glEnable(GL_CLIP_DISTANCE0);
 		//glEnable(GL_CLIP_DISTANCE2);
 		//glEnable(GL_CLIP_DISTANCE1);
+		/*fbos.bindReflectionFrameBuffer();
+		
+		float distance = 2 * (gameController->getGameCamera()->GetCameraPosition().y - 0.1);
+		gameController->getGameCamera()->GetCameraPosition().y -= distance;
+		gameController->getGameCamera()->getPitch() = -gameController->getGameCamera()->getPitch();
+		render->renderScene();
+		gameController->getGameCamera()->GetCameraPosition().y += distance;
+		gameController->getGameCamera()->getPitch() = -gameController->getGameCamera()->getPitch();
+		glBindFramebuffer(GL_FRAMEBUFFER, 0);
+		glViewport(0, 0, SCREEN_WIDTH, SCREEN_HEIGHT);
+
 		glClearColor(0.2f, 0.3f, 0.3f, 1.0f);
 		glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
-		//fbos.bindReflectionFrameBuffer();
-		//render->renderScene();
-		//glBindFramebuffer(GL_FRAMEBUFFER, 0);
-		//glViewport(0, 0, SCREEN_WIDTH, SCREEN_HEIGHT);
-
+		fbos.bindRefractionFrameBuffer();
 		render->renderScene();
+
+		glBindFramebuffer(GL_FRAMEBUFFER, 0);
+		glViewport(0, 0, SCREEN_WIDTH, SCREEN_HEIGHT);*/
+
+		
 		//render->renderWater();
 		glfwSwapBuffers(window);
 	}
@@ -125,7 +141,7 @@ void GameEngine::initialize()
 	gameWorld->setScreenHW(SCREEN_WIDTH, SCREEN_HEIGHT);
 	render = getGlobal(LuaEn->getLuaState(), "Scene");
 	gameController = new GameController(gameWorld);
-	gameController->loadGame();
+	//gameController->loadGame();
 	PhysFac->SetObjectActivation();
 }
 

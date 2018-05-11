@@ -3,8 +3,8 @@ c:\users\desmond\documents\github\ict397_project\ext_libs\bullet\src\linearmath\
 c:\users\desmond\documents\github\ict397_project\ext_libs\bullet\src\linearmath\btidebugdraw.h(170): warning C4305: 'argument': truncation from 'double' to 'const btScalar'
 c:\users\desmond\documents\github\ict397_project\ext_libs\bullet\src\linearmath\btidebugdraw.h(171): warning C4305: 'argument': truncation from 'double' to 'const btScalar'
 c:\users\desmond\documents\github\ict397_project\testapp\testapp\physicsfacade.h(44): warning C4091: 'typedef ': ignored on left of 'PhysicsVector' when no variable is declared
-c:\users\desmond\documents\github\ict397_project\testapp\testapp\gamecontroller.h(95): warning C4018: '<': signed/unsigned mismatch
-c:\users\desmond\documents\github\ict397_project\testapp\testapp\gameengine.cpp(139): warning C4150: deletion of pointer to incomplete type 'GLFWwindow'; no destructor called
+c:\users\desmond\documents\github\ict397_project\testapp\testapp\gamecontroller.h(99): warning C4018: '<': signed/unsigned mismatch
+c:\users\desmond\documents\github\ict397_project\testapp\testapp\gameengine.cpp(155): warning C4150: deletion of pointer to incomplete type 'GLFWwindow'; no destructor called
   c:\users\desmond\documents\github\ict397_project\ext_libs\glfw\include\glfw\glfw3.h(789): note: see declaration of 'GLFWwindow'
   testApp.vcxproj -> C:\Users\Desmond\Documents\GitHub\ICT397_Project\testApp\Debug\testApp.exe
   testApp.vcxproj -> C:\Users\Desmond\Documents\GitHub\ICT397_Project\testApp\Debug\testApp.pdb (Full PDB)
