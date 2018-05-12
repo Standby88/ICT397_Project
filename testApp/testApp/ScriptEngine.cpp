@@ -47,6 +47,10 @@ void ScriptEngine::expFuncToLua(lua_State * L)
 		.addConstructor<void(*) (void)>()
 		.addFunction("Create", &GameAssetCreator<Player, GameObject>::Create)
 		.endClass()
+		.deriveClass<GameAssetCreator<NPC, GameObject>, BaseCreator<GameObject>>("NPCCreator")
+		.addConstructor<void(*) (void)>()
+		.addFunction("Create", &GameAssetCreator<NPC, GameObject>::Create)
+		.endClass()
 		.endNamespace();
 
 	TerrainManager::scriptRegister(L);
@@ -59,6 +63,7 @@ void ScriptEngine::expFuncToLua(lua_State * L)
 	Player::scriptRegister(L);
 	WorldTerrain::scriptRegister(L);
 	EnvironmentObject::scriptRegister(L);
+	NPC::scriptRegister(L);
 	Model::scriptRegister(L);
 	Shader::scriptRegister(L);
 	GameWorld::scriptRegister(L);

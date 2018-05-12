@@ -68,7 +68,6 @@ public:
 	{
 		return Camera::GetCameraInstance();
 	}
-
 	void saveGame()
 	{
 		std::vector<enObj> enList;

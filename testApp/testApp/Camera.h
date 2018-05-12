@@ -142,9 +142,13 @@ public:
 	*/
 	void CreateCameraRigidBody();
 
-	float& getPitch()
+	void flipPitch()
 	{
-		return pitch;
+		std::cout<<"1: " << pitch << std::endl;
+		pitch = -pitch;
+		updateCameraVectors();
+	std::cout <<"2: "<< pitch << std::endl;
+		
 	}
 private:
 	// Camera Attributes

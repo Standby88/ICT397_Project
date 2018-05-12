@@ -8,7 +8,7 @@ unsigned char WorldTerrain::getHeightColor(int xpos, int zpos)
 {
 	if (inbounds(xpos, zpos))
 	{
-		return heights[zpos*size + xpos];//terrainData[zpos*size + xpos];
+		return heights[zpos*size + xpos];
 	}
 	return 1;
 }
@@ -17,7 +17,6 @@ float WorldTerrain::getHeight(int xpos, int zpos)
 
 	if (inbounds(xpos, zpos))
 	{
-		//return ((float)(terrainData[(zpos*size) + xpos])*scale.y);
 		return ((float)(heights[(zpos*size) + xpos])*scale.y);
 	}
 
@@ -87,7 +86,6 @@ void WorldTerrain::SetTerrainVariable(std::string tex1, std::string tex2, std::s
 			
 		}
 	}
-	std::cout <<"height point: "<< terMesh.vertices[0].Position.y;
 	TextureManager::GetTextureManager().AddTexture(tex1);
 	TextureManager::GetTextureManager().AddTexture(tex2);
 	TextureManager::GetTextureManager().AddTexture(tex3);

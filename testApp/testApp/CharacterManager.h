@@ -1,6 +1,7 @@
 #pragma once
 #include <unordered_map>
 #include "Player.h"
+#include "NPC.h"
 /**
 * @class ChacterManager
 * @brief Used to manage character objects like player, enemies and NPC
@@ -21,8 +22,7 @@ private:
 	Player* p;
 
 	///used to store NPC 
-	typedef std::unordered_map<std::string, int* > NPCL;
-	NPCL nPCList;
+	std::unordered_map<std::string, NPC* > nPCList;
 public:
 
 	/**
@@ -48,31 +48,19 @@ public:
 	*currently no NPC are used so store int pointer for test
 	* @param string key, int* in
 	*/
-	void addNPC(std::string key, int* in );
-	/*void CharacterManager::DrawPlayer(Shader & S)
-	{
-		p->Draw(S);
-	}*/
-	/*void CharacterManager::DrawNPCs(Shader & s)
-	{
-	NPCL::iterator itr;
-	for (itr = nPCList.begin(); itr != nPCList.end(); ++itr)
-	{
-		(*itr).second->Draw();
-	}
-	}*/
+	void addNPC( GameObject* in,std::string key );
+
 
 	/**
 	* @brief used to render the player from the model details
 	*
 	*/
-	void drawPlayer();
-
+	void DrawPlayer(Shader & S);
 	/**
 	* @brief Draw all the NPCs stored in the list
 	*
 	*/
-	void drawNPCs();
+	void drawNPCs(Shader &s);
 
 	/**
 	* @brief accessor for the player
@@ -87,7 +75,7 @@ public:
 	* @param string key
 	* @return NPC*
 	*/
-	int* getNPC(std::string);
+	NPC* getNPC(std::string);
 
 	/**
 	* @brief remove an npc from the list
@@ -108,6 +96,8 @@ public:
 	* @param lua_State * L
 	*/
 	static void scriptRegister(lua_State * L);
+
+	std::unordered_map<std::string, NPC* >& getCharMap();
 	
 };
 

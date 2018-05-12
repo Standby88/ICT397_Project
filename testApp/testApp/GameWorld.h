@@ -3,6 +3,7 @@
 #include "TerrainManager.h"
 #include "CharacterManager.h"
 #include "ModelManager.h"
+#include "Camera.h"
 class GameWorld
 {
 private:
@@ -10,6 +11,7 @@ private:
 	TerrainManager * terrain;
 	EnvironmentObjManager * environment;
 	ModelManager * models;
+	Camera * camera;
 	bool photo;
 	bool manual;
 	bool worldDisplay;
@@ -19,7 +21,7 @@ private:
 
 	int SCREEN_WIDTH, SCREEN_HEIGHT;
 public:
-	GameWorld(/*CharacterManager * cha,*/ TerrainManager * ter, EnvironmentObjManager * en);
+	GameWorld(CharacterManager * cha, TerrainManager * ter, EnvironmentObjManager * en);
 	CharacterManager* getCharacters();
 	TerrainManager* getTerrain();
 	EnvironmentObjManager* getEnvironment();
@@ -64,5 +66,9 @@ public:
 
 	M4 getProjection();
 
+	Camera* getCam()
+	{
+		return camera;
+	}
 };
 

@@ -1,12 +1,13 @@
 #include "GameWorld.h"
 
-GameWorld::GameWorld(/*CharacterManager * cha,*/ TerrainManager * ter, EnvironmentObjManager * en)
+GameWorld::GameWorld(CharacterManager * cha, TerrainManager * ter, EnvironmentObjManager * en)
 {
 	photo = false;
 	manual = false;
 	worldDisplay = true;
 	wire = false;
-	//this->characters = cha;
+	camera = Camera::GetCameraInstance();
+	this->characters = cha;
 	this->terrain = ter;
 	this->environment = en;
 }
@@ -32,7 +33,7 @@ void GameWorld::scriptRegister(lua_State * L)
 	getGlobalNamespace(L)
 		.beginNamespace("GW")
 		.beginClass<GameWorld>("GameWorld")
-		.addConstructor<void(*) (TerrainManager*, EnvironmentObjManager*)>()
+		.addConstructor<void(*) (CharacterManager*,TerrainManager*, EnvironmentObjManager*)>()
 		.addFunction("setModels", &GameWorld::setModels)
 		.endClass()
 		.endNamespace();

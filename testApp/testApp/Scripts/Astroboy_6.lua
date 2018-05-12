@@ -1,7 +1,7 @@
 --asteroid object
 --print ("First Environmental Object")
-Astronaut_6 = Factory:Create("EnvironObj")
-Astronaut_6 = test:convert(Astronaut_6)
+Astronaut_6 = Factory:Create("NPCObj")
+Astronaut_6 = test3:convert(Astronaut_6)
 Astronaut_6:addModel(astroboy)
 --E2:addRigidbody()
 x = 7.0

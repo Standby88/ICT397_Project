@@ -11,16 +11,15 @@ private:
 	GLuint VBO, VAO, EBO;
 	GLuint t1;
 	GLuint t2;
-
 	GLfloat points[32] =
 	{
-		// Positions          // Colors           // Texture Coords
-		1.0f,  1.0f, 0.0f,   1.0f, 0.0f, 0.0f,   1.0f, 1.0f, // Top Right
-		1.0f, -1.0f, 0.0f,   0.0f, 1.0f, 0.0f,   1.0f, 0.0f, // Bottom Right
-		-1.0f, -1.0f, 0.0f,   0.0f, 0.0f, 1.0f,   0.0f, 0.0f, // Bottom Left
-		-1.0f,  1.0f, 0.0f,   1.0f, 1.0f, 0.0f,   0.0f, 1.0f  // Top Left
+		        
+		100.0f,  0.0f, 100.0f,   1.0f, 0.0f, 0.0f,   1.0f, 1.0f, // Top Right
+		100.0f, 0.0f, -100.0f,   0.0f, 1.0f, 0.0f,   1.0f, 0.0f, // Bottom Right
+		-100.0f, 0.0f, -100.0f,   0.0f, 0.0f, 1.0f,   0.0f, 0.0f, // Bottom Left
+		-100.0f,  0.0f, 100.0f,   1.0f, 1.0f, 0.0f,   0.0f, 1.0f  // Top Left
 	};
-
+	
 	GLuint indices[6] =
 	{
 		0, 1, 3,
@@ -65,9 +64,9 @@ public:
 
 		glUniformMatrix4fv(glGetUniformLocation(S.Program, "projection"), 1, GL_FALSE, MathLib::value_ptr<const float *>(projection));
 		glUniformMatrix4fv(glGetUniformLocation(S.Program, "view"), 1, GL_FALSE, MathLib::value_ptr<const float *>(view));
-		model = MathLib::translate(model, V3(10.0f, 0.1f, 50));
-		model = MathLib::scale(model, V3(50.0f, 50.0f, 50.0f));
-		model = MathLib::rotate(model, 90.0 ,V3(0, 1, 0));
+		model = MathLib::translate(model, V3(50.0f,0.0f,50));
+		model = MathLib::scale(model, V3(0.5f, 0.5f, 0.5f));
+		//model = MathLib::rotate(model, 4.71239,V3(0, 1.0, 0));
 		glUniformMatrix4fv(glGetUniformLocation(S.Program, "model"), 1, GL_FALSE, MathLib::value_ptr<const float *>(model));
 
 		glUniform1i(glGetUniformLocation(S.Program, "t1"), 0);
@@ -78,6 +77,8 @@ public:
 		glUniform1i(glGetUniformLocation(S.Program, "t2"), 0);
 		glActiveTexture(GL_TEXTURE1);
 		glBindTexture(GL_TEXTURE_2D, t2);
+
+
 		glUniform1i(t2, 0);
 		glBindVertexArray(VAO);
 		glDrawElements(GL_TRIANGLES, 6, GL_UNSIGNED_INT, 0);

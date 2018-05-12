@@ -11,7 +11,7 @@ CharacterManager::~CharacterManager()
 {
 	p = NULL;
 	delete p;
-	NPCL::iterator itr;
+	std::unordered_map<std::string, NPC* >::iterator itr;
 	for (itr = nPCList.begin(); itr != nPCList.end(); ++itr)
 	{
 		itr->second = nullptr;
@@ -25,25 +25,24 @@ void CharacterManager::addPlayer(GameObject * in)
 	p = pl;
 }
 
-void CharacterManager::addNPC(std::string key, int * in )
+void CharacterManager::addNPC(GameObject * in,  std::string key)
 {
-	typedef std::pair<std::string,int*> temp;
-	nPCList.insert(temp(key, in));
+	NPC*c = dynamic_cast<NPC*>(in);
+	typedef std::pair<std::string,NPC*> temp;
+	nPCList.insert(temp(key,c));
 }
 
 
-void CharacterManager::drawPlayer()
+void CharacterManager::DrawPlayer(Shader & S)
 {
-	//std::cout << p->getObjectType() << std::endl;
+	p->Draw(S);
 }
-
-void CharacterManager::drawNPCs()
+void CharacterManager::drawNPCs(Shader &s)
 {
-	NPCL::iterator itr;
+	std::unordered_map<std::string, NPC* >::iterator itr;
 	for (itr = nPCList.begin(); itr != nPCList.end(); ++itr)
 	{
-		int * i = (*itr).second;
-		std::cout << *i << std::endl;
+		(*itr).second->Draw(s);
 	}
 }
 
@@ -52,7 +51,7 @@ Player * CharacterManager::getPlayer()
 	return p;
 }
 
-int * CharacterManager::getNPC(std::string K)
+NPC * CharacterManager::getNPC(std::string K)
 {
 	return nPCList[K];
 }
@@ -78,7 +77,7 @@ void CharacterManager::scriptRegister(lua_State * L)
 		.addConstructor<void(*) (void)>()
 		.addFunction("addPlayer", &CharacterManager::addPlayer)
 		.addFunction("addNPC", &CharacterManager::addNPC)
-		.addFunction("drawPlayer", &CharacterManager::drawPlayer)
+		.addFunction("drawPlayer", &CharacterManager::DrawPlayer)
 		.addFunction("drawNPC", &CharacterManager::drawNPCs)
 		.addFunction("getPlayer", &CharacterManager::getPlayer)
 		.addFunction("getNPC", &CharacterManager::getNPC)
@@ -86,4 +85,9 @@ void CharacterManager::scriptRegister(lua_State * L)
 		.addFunction("removePlayer", &CharacterManager::removePlayer)
 		.endClass()
 		.endNamespace();
+}
+
+std::unordered_map<std::string, NPC*>& CharacterManager::getCharMap()
+{
+	return nPCList;
 }

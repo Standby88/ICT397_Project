@@ -1,6 +1,7 @@
 #pragma once
 #include "TextureManager.h"
 #include "Shader.h"
+#include "MathLib.h"
 class Menu
 {
 private:

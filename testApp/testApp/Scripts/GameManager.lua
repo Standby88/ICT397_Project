@@ -9,18 +9,22 @@ ModManager = MM.ModelManager();
 -- all the models into the modelmanager
 require "Scripts/ModelScript"
 
---space_car = ModManager:GetModel("assets/MMSEV/MMSEV.obj")
+
 -- create factory to create objects on gameobjects
 Factory = GAF.GameAssetFactory()
 test = GA.EnvironmentObject()
 test2 = GA.WorldTerrain()
+test3 = GA.NPC()
+
 -- declare creators
 EOC = GAC.EOCreator()
 WTC = GAC.WTCreator()
+NPCC = GAC.NPCCreator()
 
 --EnvironObj specifies an environment Object to be created
 Factory:Register("EnvironObj", EOC)
 Factory:Register("WorldTerrain", WTC)
+Factory:Register("NPCObj", NPCC)
 
 require "Scripts/Terrain"
 
@@ -46,25 +50,26 @@ require "Scripts/Astroboy_6"
 
 EnObjMan = EOM.EnvironmentObjManager()
 EnObjMan:addObject(A1, "asteroid_1")
---EnObjMan:addObject(A2, "asteroid_2")
---EnObjMan:addObject(Astronaut_1, "Astroboy_1")
---EnObjMan:addObject(A3, "asteroid_3")
---EnObjMan:addObject(A4, "asteroid_4")
---EnObjMan:addObject(A5, "asteroid_5")
---EnObjMan:addObject(Astronaut_2, "Astroboy_2")
---EnObjMan:addObject(Astronaut_3, "Astroboy_3")
---EnObjMan:addObject(Astronaut_4, "Astroboy_4")
---EnObjMan:addObject(Astronaut_5, "Astroboy_5")
---EnObjMan:addObject(Astronaut_6, "Astroboy_6")
---EnObjMan:addObject(A6, "asteroid_6")
---EnObjMan:addObject(A7, "asteroid_7")
---EnObjMan:addObject(A8, "asteroid_8")
---EnObjMan:addObject(A9, "asteroid_9")
+EnObjMan:addObject(A2, "asteroid_2")
+EnObjMan:addObject(A3, "asteroid_3")
+EnObjMan:addObject(A4, "asteroid_4")
+EnObjMan:addObject(A5, "asteroid_5")
+EnObjMan:addObject(A6, "asteroid_6")
+EnObjMan:addObject(A7, "asteroid_7")
+EnObjMan:addObject(A8, "asteroid_8")
+EnObjMan:addObject(A9, "asteroid_9")
+
+CharacterMan = CM.CharacterManager()
+CharacterMan:addNPC(Astronaut_1, "Astroboy_1")
+CharacterMan:addNPC(Astronaut_2, "Astroboy_2")
+CharacterMan:addNPC(Astronaut_3, "Astroboy_3")
+CharacterMan:addNPC(Astronaut_4, "Astroboy_4")
+CharacterMan:addNPC(Astronaut_5, "Astroboy_5")
+CharacterMan:addNPC(Astronaut_6, "Astroboy_6")
 
 
 
-
-World = GW.GameWorld(TerManager, EnObjMan)
+World = GW.GameWorld(CharacterMan,TerManager, EnObjMan)
 World:setModels(ModManager);
 Scene = SR.SceneRender(World)
 Scene:addShader("Shaders/3dvsShaderTEMP.vs", "Shaders/3dfragShaderTEMP.frag", "environment")

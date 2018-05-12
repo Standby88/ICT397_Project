@@ -93,8 +93,10 @@ float PhysicsFacade::GetZPosition(int i)
 }
 
 //uses a heightmap to generate a collidable terrain
-rigidBody* PhysicsFacade::CreateHeightFieldRigidBody(int heightStickWidth, int heightStickLength,
-	const void * heightfieldData, float scaleHeight, int upAxis,
+rigidBody* PhysicsFacade::CreateHeightFieldRigidBody(
+	int heightStickWidth, int heightStickLength,
+	const void * heightfieldData, 
+	float scaleHeight, int upAxis,
 	bool useFloatData, bool flipQuadEdges)
 {
 	btScalar scaleH = (btScalar)scaleHeight;

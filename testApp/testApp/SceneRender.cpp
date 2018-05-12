@@ -6,6 +6,7 @@ SceneRender::SceneRender(GameWorld * gw)
 {
 	gameWorld = gw;
 	menu = new Menu();
+	water = new Water(fbos.getReflectionTexture(), fbos.getRefractionTexture());
 }
 
 void SceneRender::addShader(std::string ver, std::string frag, std::string name)
@@ -50,10 +51,8 @@ void SceneRender::renderScene()
 	}
 	else 
 	{
-		EnvironmentObjManager *Eom = gameWorld->getEnvironment();
-		TerrainManager *Tm = gameWorld->getTerrain();
-		renderEnvironmentObj(*Eom, gameWorld->getView(), gameWorld->getProjection(), *shaders["environment"]);
-		renderTerrain(*Tm, gameWorld->getView(), gameWorld->getProjection(), *shaders["terrain"]);
+		renderWater();
+		renderGameScene();
 	}
 	
 }
@@ -68,7 +67,6 @@ void SceneRender::renderEnvironmentObj(EnvironmentObjManager& EM, M4 view, M4 pr
 	S.Use();
 	glUniformMatrix4fv(glGetUniformLocation(S.Program, "projection"), 1, GL_FALSE, MathLib::value_ptr<const float *>(projection));
 	glUniformMatrix4fv(glGetUniformLocation(S.Program, "view"), 1, GL_FALSE, MathLib::value_ptr<const float *>(view));
-	std::cout << drawMap.size();
 	std::unordered_map<std::string, EnvironmentObject* >::iterator itr;
 	int i = 0;
 	for (itr = drawMap.begin(); itr != drawMap.end(); ++itr)
@@ -120,6 +118,34 @@ void SceneRender::renderMenu(Shader& s)
 		menu->drawPhoto(s);
 	}
 	
+}
+
+void SceneRender::renderCharacters(CharacterManager & TM, M4 view, M4 projection,Shader & S)
+{
+
+	std::unordered_map<std::string, NPC* > drawMap = TM.getCharMap();
+	V3 posVec;
+	V3 rotateAxis;
+	float angle;
+
+	S.Use();
+	glUniformMatrix4fv(glGetUniformLocation(S.Program, "projection"), 1, GL_FALSE, MathLib::value_ptr<const float *>(projection));
+	glUniformMatrix4fv(glGetUniformLocation(S.Program, "view"), 1, GL_FALSE, MathLib::value_ptr<const float *>(view));
+	std::unordered_map<std::string, NPC* >::iterator itr;
+	int i = 0;
+	for (itr = drawMap.begin(); itr != drawMap.end(); ++itr)
+	{
+		M4 model;
+		posVec = (*itr).second->getObjectPos();
+		angle = (*itr).second->getObjectAngle();
+		rotateAxis = (*itr).second->getObjectRotation();
+		if (angle > 0.0f)
+			model = MathLib::rotate(model, angle, rotateAxis);
+		model = MathLib::translate(model, posVec); // Translate it down a bit so it's at the center of the scene
+		model = MathLib::scale(model, V3(1.0f, 1.0f, 1.0f));	// It's a bit too big for our scene, so scale it down
+		glUniformMatrix4fv(glGetUniformLocation(S.Program, "model"), 1, GL_FALSE, MathLib::value_ptr<const float *>(model));
+		(*itr).second->Draw(S);
+	}
 }
 
 void SceneRender::scriptRegister(lua_State * L)
