@@ -22,6 +22,7 @@ WTC = GAC.WTCreator()
 Factory:Register("EnvironObj", EOC)
 Factory:Register("WorldTerrain", WTC)
 
+
 require "Scripts/Terrain"
 
 TerManager = TM.TerrainManager()
@@ -60,12 +61,22 @@ EnObjMan:addObject(A7, "asteroid_7")
 EnObjMan:addObject(A8, "asteroid_8")
 EnObjMan:addObject(A9, "asteroid_9")
 
+sky = SKY.skybox()
+sky:AddSkyboxPath("assets/skybox/indigo_rt.jpg")
+sky:AddSkyboxPath("assets/skybox/indigo_lt.jpg")
+sky:AddSkyboxPath("assets/skybox/indigo_up.jpg")
+sky:AddSkyboxPath("assets/skybox/indigo_dn.jpg")
+sky:AddSkyboxPath("assets/skybox/indigo_bk.jpg")
+sky:AddSkyboxPath("assets/skybox/indigo_ft.jpg")
 
-World = GW.GameWorld(TerManager, EnObjMan)
+sky:GenSkybox()
+
+World = GW.GameWorld(TerManager, EnObjMan, sky)
 
 Scene = SR.SceneRender(World)
 Scene:addShader("Shaders/3dvsShaderTEMP.vs", "Shaders/3dfragShaderTEMP.frag", "environment")
 Scene:addShader("Shaders/terrainvertex.vs", "Shaders/terrainfrag.frag", "terrain")
 Scene:addShader("Shaders/coreImage.vs", "Shaders/coreImage.frag", "menuOption")
+Scene:addShader("Shaders/skybox.vs", "Shaders/skybox.frag", "skybox")
 
 print ("Game script end")

@@ -6,6 +6,7 @@
 #include "GameAssetCreator.h"
 #include "ModelManager.h"
 #include "SceneRender.h"
+#include "Skybox.h"
 
 extern "C"
 {

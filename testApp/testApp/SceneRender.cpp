@@ -52,8 +52,10 @@ void SceneRender::renderScene()
 	{
 		EnvironmentObjManager *Eom = gameWorld->getEnvironment();
 		TerrainManager *Tm = gameWorld->getTerrain();
+		Skybox *sky = gameWorld->getSkybox();
 		renderEnvironmentObj(*Eom, gameWorld->getView(), gameWorld->getProjection(), *shaders["environment"]);
 		renderTerrain(*Tm, gameWorld->getView(), gameWorld->getProjection(), *shaders["terrain"]);
+		renderSkybox(*sky, gameWorld->getView(), gameWorld->getProjection(), *shaders["skybox"]);
 	}
 	
 }
@@ -104,6 +106,20 @@ void SceneRender::renderTerrain(TerrainManager & TM, M4 view, M4 projection, Sha
 		glUniformMatrix4fv(glGetUniformLocation(S.Program, "model"), 1, GL_FALSE, MathLib::value_ptr<const float *>(model));
 		(*itr)->Draw(S);
 	}
+}
+
+void SceneRender::renderSkybox(Skybox & sky, M4 view, M4 projection, Shader & S)
+{
+	glDepthFunc(GL_LEQUAL);  // Change depth function so depth test passes when values are equal to depth buffer's content
+	S.Use();
+	//----------- need to get camera viewmatrix
+	view = M4(M3( Camera::GetCameraInstance()->GetViewMatrix()));
+	glUniformMatrix4fv(glGetUniformLocation(S.Program, "projection"), 1, GL_FALSE, MathLib::value_ptr<const float *>(projection));
+	glUniformMatrix4fv(glGetUniformLocation(S.Program, "view"), 1, GL_FALSE, MathLib::value_ptr<const float *>(view));
+	
+	sky.Draw(S);
+
+	glDepthFunc(GL_LESS); // reset depth test
 }
 
 void SceneRender::renderMenu(Shader& s)
