@@ -40,7 +40,7 @@ void EnvironmentObjManager::removeObject(std::string k)
 
 EnvironmentObject * EnvironmentObjManager::getObject(std::string k)
 {
-	std::cout << environmentObjList.size()<<std::endl;
+	//std::cout << environmentObjList.size()<<std::endl;
 	return environmentObjList[k];
 }
 

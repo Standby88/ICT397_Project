@@ -79,7 +79,7 @@ void TextureManager::DestroyTextureManager()
 //Skybox is loaded and stored differently than normal images
 //the vector of imagepaths needs to be in order
 //right, left, top, bottom, back, front
-GLuint TextureManager::LoadSkyboxCubeMap(std::vector<std::string> faces)
+const GLuint TextureManager::LoadSkyboxCubeMap(std::vector<const GLchar*> faces)
 {
 	GLuint textureID;
 	glGenTextures(1, &textureID);
@@ -91,7 +91,10 @@ GLuint TextureManager::LoadSkyboxCubeMap(std::vector<std::string> faces)
 
 	for (GLuint i = 0; i < faces.size(); i++)
 	{
-		image = SOIL_load_image(faces[i].c_str(), &imageWidth, &imageHeight, 0, SOIL_LOAD_RGB);
+		if (image = SOIL_load_image(faces[i], &imageWidth, &imageHeight, 0, SOIL_LOAD_RGB))
+			std::cout << faces[i] << " loaded successfully" << std::endl;
+		else
+			std::cout << faces[i] << " failed to load" << std::endl;
 		glTexImage2D(GL_TEXTURE_CUBE_MAP_POSITIVE_X + i, 0, GL_RGB, imageWidth, imageHeight, 0, GL_RGB, GL_UNSIGNED_BYTE, image);
 		SOIL_free_image_data(image);
 	}
@@ -102,6 +105,7 @@ GLuint TextureManager::LoadSkyboxCubeMap(std::vector<std::string> faces)
 	glTexParameteri(GL_TEXTURE_CUBE_MAP, GL_TEXTURE_WRAP_R, GL_CLAMP_TO_EDGE);
 	glBindTexture(GL_TEXTURE_CUBE_MAP, 0);
 
+	skybox = textureID;
 	return textureID;
 }
 

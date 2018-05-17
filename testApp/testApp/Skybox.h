@@ -3,12 +3,12 @@
 #include "GameObject.h"
 
 #include "GL\glew.h"
-#include "Shader.h"
+
 #include "TextureManager.h"
 
 #include <vector>
 
-class Skybox : public GameObject
+class Skybox
 {
 public:
 	Skybox();
@@ -20,19 +20,19 @@ public:
 	*/
 	static void scriptRegister(lua_State * L);
 
-	void AddSkyboxPath(std::string path);
+	void AddSkyboxPath(const GLchar * path);
 
 	bool ClearSkyboxPath();
 
 	void GenSkybox();
 
-	void Draw(Shader &S);
+	void Draw();
 
 
 	~Skybox();
 
 private:
-	std::vector<std::string> faces;
+	std::vector<const GLchar *> faces;
 
 	GLuint skyboxVAO, skyboxVBO;
 

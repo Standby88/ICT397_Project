@@ -1,51 +1,8 @@
 #include "Skybox.h"
 
 Skybox::Skybox()
-{/*
-	skyboxVertices = new GLfloat[
-		// Positions
-		-1.0f,  1.0f, -1.0f,
-		-1.0f, -1.0f, -1.0f,
-		1.0f, -1.0f, -1.0f,
-		1.0f, -1.0f, -1.0f,
-		1.0f,  1.0f, -1.0f,
-		-1.0f,  1.0f, -1.0f,
-
-		-1.0f, -1.0f,  1.0f,
-		-1.0f, -1.0f, -1.0f,
-		-1.0f,  1.0f, -1.0f,
-		-1.0f,  1.0f, -1.0f,
-		-1.0f,  1.0f,  1.0f,
-		-1.0f, -1.0f,  1.0f,
-
-		1.0f, -1.0f, -1.0f,
-		1.0f, -1.0f,  1.0f,
-		1.0f,  1.0f,  1.0f,
-		1.0f,  1.0f,  1.0f,
-		1.0f,  1.0f, -1.0f,
-		1.0f, -1.0f, -1.0f,
-
-		-1.0f, -1.0f,  1.0f,
-		-1.0f,  1.0f,  1.0f,
-		1.0f,  1.0f,  1.0f,
-		1.0f,  1.0f,  1.0f,
-		1.0f, -1.0f,  1.0f,
-		-1.0f, -1.0f,  1.0f,
-
-		-1.0f,  1.0f, -1.0f,
-		1.0f,  1.0f, -1.0f,
-		1.0f,  1.0f,  1.0f,
-		1.0f,  1.0f,  1.0f,
-		-1.0f,  1.0f,  1.0f,
-		-1.0f,  1.0f, -1.0f,
-
-		-1.0f, -1.0f, -1.0f,
-		-1.0f, -1.0f,  1.0f,
-		1.0f, -1.0f, -1.0f,
-		1.0f, -1.0f, -1.0f,
-		-1.0f, -1.0f,  1.0f,
-		1.0f, -1.0f,  1.0f
-	];*/
+{
+	
 }
 
 
@@ -64,10 +21,10 @@ void Skybox::scriptRegister(lua_State * L)
 		.endNamespace();
 }
 
-void Skybox::AddSkyboxPath(std::string path)
+void Skybox::AddSkyboxPath(const GLchar * path)
 {
 	faces.push_back(path);
-	std::cout << "image at " << path << "  added"<< std::endl;
+	//std::cout << "image at " << path << "  added"<< std::endl;
 }
 
 bool Skybox::ClearSkyboxPath()
@@ -135,10 +92,10 @@ void Skybox::GenSkybox()
 
 	TextureManager texMan = TextureManager::GetTextureManager();
 
-	skyboxTex = texMan.LoadSkyboxCubeMap(faces);
+	this->skyboxTex = texMan.LoadCubemap(faces);
 }
 
-void Skybox::Draw(Shader &S)
+void Skybox::Draw()
 {
 	glBindVertexArray(skyboxVAO);
 	glBindTexture(GL_TEXTURE_CUBE_MAP, skyboxTex);

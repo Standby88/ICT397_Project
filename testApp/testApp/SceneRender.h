@@ -45,7 +45,7 @@ private:
 	* @brief used to render the skybox
 	*@param skybox& sky, M4 view, M4 projection, Shader &S
 	*/
-	void renderSkybox(Skybox & sky, M4 view, M4 projection, Shader &S);
+	void renderSkybox(Skybox & sky, M4 projection, Shader &S);
 
 	void renderMenu(Shader& s);
 

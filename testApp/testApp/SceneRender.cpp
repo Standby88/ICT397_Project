@@ -13,6 +13,7 @@ void SceneRender::addShader(std::string ver, std::string frag, std::string name)
 	Shader * s = new Shader(ver, frag);
 	typedef std::pair<std::string, Shader*> temp;
 	shaders.insert(temp(name, s));
+
 }
 
 SceneRender::~SceneRender()
@@ -53,11 +54,10 @@ void SceneRender::renderScene()
 		EnvironmentObjManager *Eom = gameWorld->getEnvironment();
 		TerrainManager *Tm = gameWorld->getTerrain();
 		Skybox *sky = gameWorld->getSkybox();
+		renderSkybox(*sky, gameWorld->getProjection(), *shaders["skybox"]);
 		renderEnvironmentObj(*Eom, gameWorld->getView(), gameWorld->getProjection(), *shaders["environment"]);
 		renderTerrain(*Tm, gameWorld->getView(), gameWorld->getProjection(), *shaders["terrain"]);
-		renderSkybox(*sky, gameWorld->getView(), gameWorld->getProjection(), *shaders["skybox"]);
 	}
-	
 }
 
 void SceneRender::renderEnvironmentObj(EnvironmentObjManager& EM, M4 view, M4 projection, Shader &S)
@@ -108,16 +108,17 @@ void SceneRender::renderTerrain(TerrainManager & TM, M4 view, M4 projection, Sha
 	}
 }
 
-void SceneRender::renderSkybox(Skybox & sky, M4 view, M4 projection, Shader & S)
+void SceneRender::renderSkybox(Skybox & sky, M4 projection, Shader & S)
 {
 	glDepthFunc(GL_LEQUAL);  // Change depth function so depth test passes when values are equal to depth buffer's content
 	S.Use();
-	//----------- need to get camera viewmatrix
-	view = M4(M3( Camera::GetCameraInstance()->GetViewMatrix()));
-	glUniformMatrix4fv(glGetUniformLocation(S.Program, "projection"), 1, GL_FALSE, MathLib::value_ptr<const float *>(projection));
-	glUniformMatrix4fv(glGetUniformLocation(S.Program, "view"), 1, GL_FALSE, MathLib::value_ptr<const float *>(view));
+
+	M4 view = M4(M3( Camera::GetCameraInstance()->GetViewMatrix()));
 	
-	sky.Draw(S);
+	glUniformMatrix4fv(glGetUniformLocation(S.Program, "view"), 1, GL_FALSE, glm::value_ptr(view));
+	glUniformMatrix4fv(glGetUniformLocation(S.Program, "projection"), 1, GL_FALSE, glm::value_ptr(projection));
+
+	sky.Draw();
 
 	glDepthFunc(GL_LESS); // reset depth test
 }
