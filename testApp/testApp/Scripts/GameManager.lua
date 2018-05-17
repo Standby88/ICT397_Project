@@ -63,7 +63,7 @@ EnObjMan:addObject(A9, "asteroid_9")
 
 sky = SKY.skybox()
 sky:AddSkyboxPath("assets/skybox/indigo_rt.jpg")
-sky:AddSkyboxPath("assets/skybox/indigo_lf.jpg")
+sky:AddSkyboxPath("assets/skybox/indigo_lf2.jpg")
 sky:AddSkyboxPath("assets/skybox/indigo_up.jpg")
 sky:AddSkyboxPath("assets/skybox/indigo_dn.jpg")
 sky:AddSkyboxPath("assets/skybox/indigo_bk.jpg")
