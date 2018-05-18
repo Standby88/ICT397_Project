@@ -2,12 +2,14 @@
 #include "EnvironmentObjManager.h"
 #include "TerrainManager.h"
 #include "CharacterManager.h"
+#include "Skybox.h"
 class GameWorld
 {
 private:
 	CharacterManager * characters;
 	TerrainManager * terrain;
 	EnvironmentObjManager * environment;
+	Skybox * skybox;
 	bool photo;
 	bool manual;
 	bool worldDisplay;
@@ -17,10 +19,11 @@ private:
 
 	int SCREEN_WIDTH, SCREEN_HEIGHT;
 public:
-	GameWorld(/*CharacterManager * cha,*/ TerrainManager * ter, EnvironmentObjManager * en);
+	GameWorld(/*CharacterManager * cha,*/ TerrainManager * ter, EnvironmentObjManager * en, Skybox * sky);
 	CharacterManager* getCharacters();
 	TerrainManager* getTerrain();
 	EnvironmentObjManager* getEnvironment();
+	Skybox * getSkybox();
 	static void scriptRegister(lua_State * L);
 	~GameWorld();
 	void setManual(bool man);

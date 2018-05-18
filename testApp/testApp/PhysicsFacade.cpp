@@ -343,8 +343,8 @@ void PhysicsFacade::StepSimulation(float tStep, int maxSubSteps, V3 &playerPos)
 
 
 		}
-		std::cout << "world pos object " << i << " " << float(trans.getOrigin().getX()) << " "
-			<< float(trans.getOrigin().getY()) << " " << float(trans.getOrigin().getZ()) << std::endl;
+		/*std::cout << "world pos object " << i << " " << float(trans.getOrigin().getX()) << " "
+			<< float(trans.getOrigin().getY()) << " " << float(trans.getOrigin().getZ()) << std::endl;*/
 	}
 	
 }

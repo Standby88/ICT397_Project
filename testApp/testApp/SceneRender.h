@@ -5,6 +5,7 @@
 #include "GameWorld.h"
 #include "Menu.h"
 #include "MathLib.h"
+
 #include <map>
 /**
 * @class SceneRender
@@ -37,6 +38,12 @@ private:
 	*@param EnvironmentObjManager& EM, M4 view, M4 projection, Shader &S
 	*/
 	void renderTerrain(TerrainManager & TM, M4 view, M4 projection, Shader &S);
+
+	/**
+	* @brief used to render the skybox
+	*@param skybox& sky, M4 view, M4 projection, Shader &S
+	*/
+	void renderSkybox(Skybox & sky, M4 view, M4 projection, Shader &S);
 
 	void renderMenu(Shader& s);
 

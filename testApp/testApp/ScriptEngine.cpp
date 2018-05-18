@@ -53,6 +53,7 @@ void ScriptEngine::expFuncToLua(lua_State * L)
 	EnvironmentObjManager::scriptRegister(L);
 	CharacterManager::scriptRegister(L);
 	ModelManager::scriptRegister(L);
+	Skybox::scriptRegister(L);
 
 	GameObject::scriptRegister(L);
 	GameObject3D::scriptRegister(L);

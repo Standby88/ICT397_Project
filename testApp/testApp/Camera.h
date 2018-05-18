@@ -94,7 +94,7 @@ public:
 	* @brief accessor for view matrix
 	*
 	* @param
-	* @return looAt Matrix
+	* @return lookAt Matrix
 	*/
 	M4 GetViewMatrix();
 

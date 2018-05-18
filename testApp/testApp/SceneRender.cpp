@@ -13,6 +13,7 @@ void SceneRender::addShader(std::string ver, std::string frag, std::string name)
 	Shader * s = new Shader(ver, frag);
 	typedef std::pair<std::string, Shader*> temp;
 	shaders.insert(temp(name, s));
+
 }
 
 SceneRender::~SceneRender()
@@ -52,10 +53,11 @@ void SceneRender::renderScene()
 	{
 		EnvironmentObjManager *Eom = gameWorld->getEnvironment();
 		TerrainManager *Tm = gameWorld->getTerrain();
+		Skybox *sky = gameWorld->getSkybox();
+		renderSkybox(*sky, gameWorld->getView(), gameWorld->getProjection(), *shaders["skybox"]);
 		renderEnvironmentObj(*Eom, gameWorld->getView(), gameWorld->getProjection(), *shaders["environment"]);
 		renderTerrain(*Tm, gameWorld->getView(), gameWorld->getProjection(), *shaders["terrain"]);
 	}
-	
 }
 
 void SceneRender::renderEnvironmentObj(EnvironmentObjManager& EM, M4 view, M4 projection, Shader &S)
@@ -104,6 +106,20 @@ void SceneRender::renderTerrain(TerrainManager & TM, M4 view, M4 projection, Sha
 		glUniformMatrix4fv(glGetUniformLocation(S.Program, "model"), 1, GL_FALSE, MathLib::value_ptr<const float *>(model));
 		(*itr)->Draw(S);
 	}
+}
+
+void SceneRender::renderSkybox(Skybox & sky, M4 view, M4 projection, Shader & S)
+{
+	glDepthFunc(GL_LEQUAL);  // Change depth function so depth test passes when values are equal to depth buffer's content
+	S.Use();
+
+	view = M4(M3(gameWorld->getView()));
+	glUniformMatrix4fv(glGetUniformLocation(S.Program, "view"), 1, GL_FALSE, glm::value_ptr(view));
+	glUniformMatrix4fv(glGetUniformLocation(S.Program, "projection"), 1, GL_FALSE, glm::value_ptr(projection));
+
+	sky.Draw();
+
+	glDepthFunc(GL_LESS); // reset depth test
 }
 
 void SceneRender::renderMenu(Shader& s)

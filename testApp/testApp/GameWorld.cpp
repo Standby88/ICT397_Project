@@ -1,6 +1,6 @@
 #include "GameWorld.h"
 
-GameWorld::GameWorld(/*CharacterManager * cha,*/ TerrainManager * ter, EnvironmentObjManager * en)
+GameWorld::GameWorld(/*CharacterManager * cha,*/ TerrainManager * ter, EnvironmentObjManager * en, Skybox * sky)
 {
 	photo = false;
 	manual = false;
@@ -9,6 +9,18 @@ GameWorld::GameWorld(/*CharacterManager * cha,*/ TerrainManager * ter, Environme
 	//this->characters = cha;
 	this->terrain = ter;
 	this->environment = en;
+	this->skybox = sky;
+
+	/*Skybox *sk = new Skybox;
+	sk->AddSkyboxPath("assets/skybox/indigo_rt.jpg");
+	sk->AddSkyboxPath("assets/skybox/indigo_lt.jpg");
+	sk->AddSkyboxPath("assets/skybox/indigo_up.jpg");
+	sk->AddSkyboxPath("assets/skybox/indigo_dn.jpg");
+	sk->AddSkyboxPath("assets/skybox/indigo_bk.jpg");
+	sk->AddSkyboxPath("assets/skybox/indigo_ft.jpg");
+	sk->GenSkybox();
+
+	this->skybox = sk;*/
 }
 
 CharacterManager * GameWorld::getCharacters()
@@ -26,13 +38,18 @@ EnvironmentObjManager * GameWorld::getEnvironment()
 	return environment;
 }
 
+Skybox * GameWorld::getSkybox()
+{
+	return skybox;
+}
+
 void GameWorld::scriptRegister(lua_State * L)
 {
 	using namespace luabridge;
 	getGlobalNamespace(L)
 		.beginNamespace("GW")
 		.beginClass<GameWorld>("GameWorld")
-		.addConstructor<void(*) (TerrainManager*, EnvironmentObjManager*)>()
+		.addConstructor<void(*) (TerrainManager*, EnvironmentObjManager*, Skybox*)>()
 		.endClass()
 		.endNamespace();
 }

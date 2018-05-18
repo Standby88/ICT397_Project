@@ -4,6 +4,7 @@
 #include <glm\gtc\matrix_transform.hpp>
 typedef glm::vec3 V3;
 typedef glm::vec2 V2;
+typedef glm::mat3 M3;
 typedef glm::mat4 M4;
 class MathLib
 {
