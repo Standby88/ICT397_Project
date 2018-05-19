@@ -79,10 +79,18 @@ void Model::processNode(aiNode* node, const aiScene* scene)
 
 Mesh Model::processMesh(aiMesh *mesh, const aiScene *scene)
 {
+	int WEIGHTS_PER_VERTEX = 4;
+	int boneArraysSize = mesh->mNumVertices*WEIGHTS_PER_VERTEX;
 	// Data to fill and passed to a mesh
 	vector<Vertex> vertices;
 	vector<GLuint> indices;
 	vector<Texture> textures;
+	//used to store bone weights and ids
+	std::vector<int> boneIDs;
+	boneIDs.resize(boneArraysSize);
+	std::vector<float> boneWeights;
+	boneWeights.resize(boneArraysSize);
+
 
 	// Walk through each of the mesh's vertices
 	for (GLuint i = 0; i < mesh->mNumVertices; i++)
@@ -121,6 +129,51 @@ Mesh Model::processMesh(aiMesh *mesh, const aiScene *scene)
 		vertices.push_back(vertex);
 	}
 
+	for (int i = 0; i<mesh->mNumBones; i++)
+	{
+		//(above) NOTE THAT mesh IS NOT OF TYPE Mesh,
+		//IT IS A POINTER TO THE CURRENT MESH, OF TYPE aiMesh
+
+		aiBone* aiBone = mesh->mBones[i]; //CREATING A POINTER TO THE CURRENT BONE
+										  //IT'S IMPORTANT TO NOTE THAT i IS JUST THE ID OF THE CURRENT BONE.
+
+		for (int j = 0; j<aiBone->mNumWeights; j++)
+		{
+			aiVertexWeight weight = aiBone->mWeights[j];
+
+			//THIS WILL TELL US WHERE, IN OUR ARRAY, TO START READING THE VERTEX'S WEIGHTS
+			unsigned int vertexStart = weight.mVertexId * WEIGHTS_PER_VERTEX;
+
+			//HERE WE'LL ACTUALLY FILL THE ARRAYS, WITH BOTH INDICES AND WEIGHTS.
+			for (int k = 0; k<WEIGHTS_PER_VERTEX; k++)
+			{
+				if (boneWeights.at(vertexStart + k) == 0)
+				{
+					//(above) IF THE CURRENT BONE WEIGHT IS EQUAL TO 0,
+					//THEN IT HASN'T BEEN FILLED YET WITH AN ACTUAL WEIGHT.
+					boneWeights.at(vertexStart + k) = weight.mWeight;
+					boneIDs.at(vertexStart + k) = i; //REMEMBER THAT i IS JUST THE ID OF THE CURRENT BONE.
+
+													 //NOTE THAT data IS JUST AN ARRAY OF TYPE Vertex, WHERE I STORE ALL OF THE VERTEX INFO.
+													 //EACH Vertex CLASS HAS SPACE FOR A POSITION, A UV, A NORMAL, AND 4 INDICES, AND 4 WEIGHTS.
+													 //EACH Mesh IS THEN CREATED WITH THIS THIS ARRAY OF Vertex (THIS ARRAY BEING data).
+
+					vertices.at(weight.mVertexId).id[k] = i;
+					//SETTING THE ID
+					//AT k, OF
+					//THE VERTEX AT THIS WEIGHT'S ID,
+					//TO THE CURRENT BONE ID.
+
+					vertices.at(weight.mVertexId).weight[k] = weight.mWeight;
+					//SETTING THE WEIGHT
+					//AT k, OF
+					//THE VERTEX AT THIS WEIGHT'S ID,
+					//TO THIS WEIGHT'S WEIGHT.
+					break;
+				}
+			}
+		}
+	}
 	for (GLuint i = 0; i < mesh->mNumFaces; i++)
 	{
 		aiFace face = mesh->mFaces[i];
@@ -145,6 +198,8 @@ Mesh Model::processMesh(aiMesh *mesh, const aiScene *scene)
 		textures.insert(textures.end(), specularMaps.begin(), specularMaps.end());
 	}
 
+
+	
 	// Return a mesh object created from the extracted mesh data
 	return Mesh(vertices, indices, textures);
 }

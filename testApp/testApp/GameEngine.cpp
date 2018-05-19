@@ -8,16 +8,15 @@ GameEngine::GameEngine()
 
 bool GameEngine::GameLoop()
 {
-	while (!glfwWindowShouldClose(window))
+	while (!window.windowShouldClose())
 	{
 		GLfloat currentFrame = (float)glfwGetTime();
 		deltaTime = currentFrame - lastFrame;
 		lastFrame = currentFrame;
 		gameController->update(deltaTime);
-		glClearColor(0.2f, 0.3f, 0.3f, 1.0f);
-		glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
+		window.clearBufferNColor();
 		render->renderScene();
-		glfwSwapBuffers(window);
+		window.swapBuffers();
 	}
 
 	glfwTerminate();
@@ -26,24 +25,8 @@ bool GameEngine::GameLoop()
 
 void GameEngine::initialize()
 {
-	// Init GLFW
-	glfwInit();
-	// Set all the required options for GLFW
-	glfwWindowHint(GLFW_CONTEXT_VERSION_MAJOR, 3);
-	glfwWindowHint(GLFW_CONTEXT_VERSION_MINOR, 3);
-	glfwWindowHint(GLFW_OPENGL_PROFILE, GLFW_OPENGL_CORE_PROFILE);
-	glfwWindowHint(GLFW_OPENGL_FORWARD_COMPAT, GL_TRUE);
-	glfwWindowHint(GLFW_RESIZABLE, GL_FALSE);
-
-	window = glfwCreateWindow(WIDTH, HEIGHT, "Space Dust", nullptr, nullptr);
-
-	glfwMakeContextCurrent(window);
-	glfwGetFramebufferSize(window, &SCREEN_WIDTH, &SCREEN_HEIGHT);
-	glewExperimental = GL_TRUE;
-	glewInit();
-	glViewport(0, 0, SCREEN_WIDTH, SCREEN_HEIGHT);
-	glEnable(GL_DEPTH_TEST);
-
+	SCREEN_WIDTH = window.getScreenWidth();
+	SCREEN_HEIGHT = window.getScreenHeight();
 	ScriptEngine * LuaEn = new ScriptEngine();
 	ScriptEngine::expFuncToLua(LuaEn->getLuaState());
 	LuaEn->doLuaScript("Scripts/GameManager.lua");
@@ -60,8 +43,6 @@ GameEngine::~GameEngine()
 	delete gameWorld;
 	render = nullptr;
 	delete render;
-	window = nullptr;
-	delete window;
 	gameController = nullptr;
 	delete gameController;
 }

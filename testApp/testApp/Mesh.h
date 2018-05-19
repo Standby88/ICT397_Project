@@ -26,6 +26,9 @@ struct Vertex
 	V2 TexCoords;
 	//height of point
 	float height;
+
+	float weight[4];
+	unsigned int id[4];
 };
 
 ///holds the assimp information a texture

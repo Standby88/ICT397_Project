@@ -18,12 +18,12 @@ void main()
 	vec2 reflectTexCoords = vec2(ndc.x, 1-ndc.y);
 	vec2 refractTexCoords = vec2(ndc.x, ndc.y);
 	
-	vec2 distortion1 = (texture2D(dudvTex, vec2(textureC.x, textureC.y)).rg*2.0 - 1.0);
+	vec2 distortion1 = (texture(dudvTex, vec2(textureC.x, textureC.y)).rg*2.0 - 1.0);
 	//reflectTexCoords += distortion1;
 	//refractTexCoords += distortion1;
 	
-	vec4 reflect = texture2D(reflectTex, reflectTexCoords);
-	vec4 refract = texture2D(reflectTex, refractTexCoords);
+	vec4 reflect = texture(reflectTex, reflectTexCoords);
+	vec4 refract = texture(reflectTex, refractTexCoords);
 	
     color = mix(reflect,refract,0.5);
 }

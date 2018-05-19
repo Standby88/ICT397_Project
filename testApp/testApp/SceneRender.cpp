@@ -57,6 +57,34 @@ void SceneRender::renderScene()
 	
 }
 
+void SceneRender::renderGameScene()
+{
+	EnvironmentObjManager *Eom = gameWorld->getEnvironment();
+	TerrainManager *Tm = gameWorld->getTerrain();
+	CharacterManager *Cm = gameWorld->getCharacters();
+	renderCharacters(*Cm, gameWorld->getView(), gameWorld->getProjection(), *shaders["Animation"]);
+	renderEnvironmentObj(*Eom, gameWorld->getView(), gameWorld->getProjection(), *shaders["environment"]);
+	renderTerrain(*Tm, gameWorld->getView(), gameWorld->getProjection(), *shaders["terrain"]);
+}
+
+void SceneRender::renderWater()
+{
+	fbos.bindReflectionFrameBuffer();
+	float distance = 2 * (gameWorld->getCam()->GetCameraPosition().y - 0);
+	gameWorld->getCam()->GetCameraPosition().y -= distance;
+	gameWorld->getCam()->flipPitch();
+	renderGameScene();
+	gameWorld->getCam()->GetCameraPosition().y += distance;
+	gameWorld->getCam()->flipPitch();
+	fbos.unbindCurrentFrameBuffer();
+
+	fbos.bindRefractionFrameBuffer();
+	renderGameScene();
+	fbos.unbindCurrentFrameBuffer();
+
+	//water->drawWater(*shaders["water"], gameWorld->getView(), gameWorld->getProjection());
+
+}
 void SceneRender::renderEnvironmentObj(EnvironmentObjManager& EM, M4 view, M4 projection, Shader &S)
 {
 	std::unordered_map<std::string, EnvironmentObject* > drawMap = EM.getEnObjMap();
@@ -97,7 +125,6 @@ void SceneRender::renderTerrain(TerrainManager & TM, M4 view, M4 projection, Sha
 	{
 		posVec = (*itr)->getObjectPos();
 		// Draw the loaded model
-		model = MathLib::translate(model, posVec); // Translate it down a bit so it's at the center of the scene
 		model = MathLib::scale(model, V3(1.0f, 1.0f, 1.0f));	// It's a bit too big for our scene, so scale it down
 		glUniformMatrix4fv(glGetUniformLocation(S.Program, "model"), 1, GL_FALSE, MathLib::value_ptr<const float *>(model));
 		(*itr)->Draw(S);

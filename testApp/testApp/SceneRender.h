@@ -59,34 +59,10 @@ public:
 
 	void renderScene();
 
-	void renderGameScene()
-	{
-		EnvironmentObjManager *Eom = gameWorld->getEnvironment();
-		TerrainManager *Tm = gameWorld->getTerrain();
-		CharacterManager *Cm = gameWorld->getCharacters();
-		renderCharacters(*Cm, gameWorld->getView(), gameWorld->getProjection(), *shaders["environment"]);
-		renderEnvironmentObj(*Eom, gameWorld->getView(), gameWorld->getProjection(), *shaders["environment"]);
-		renderTerrain(*Tm, gameWorld->getView(), gameWorld->getProjection(), *shaders["terrain"]);
-	}
+	void renderGameScene();
 	
-	void renderWater()
-	{
-		fbos.bindReflectionFrameBuffer(); 
-		float distance = 2 * (gameWorld->getCam()->GetCameraPosition().y - 0);
-		gameWorld->getCam()->GetCameraPosition().y -= distance;
-		gameWorld->getCam()->flipPitch();
-		renderGameScene();
-		gameWorld->getCam()->GetCameraPosition().y += distance;
-		gameWorld->getCam()->flipPitch();
-		fbos.unbindCurrentFrameBuffer();
-
-		fbos.bindRefractionFrameBuffer();
-		renderGameScene();
-		fbos.unbindCurrentFrameBuffer();
-
-		water->drawWater(*shaders["water"], gameWorld->getView(), gameWorld->getProjection());
-
-	}
+	void renderWater();
+	
 	 static void scriptRegister(lua_State * L);
 
 };

@@ -144,10 +144,8 @@ public:
 
 	void flipPitch()
 	{
-		std::cout<<"1: " << pitch << std::endl;
 		pitch = -pitch;
 		updateCameraVectors();
-	std::cout <<"2: "<< pitch << std::endl;
 		
 	}
 private:
