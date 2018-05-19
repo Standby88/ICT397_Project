@@ -62,7 +62,7 @@ void SceneRender::renderGameScene()
 	EnvironmentObjManager *Eom = gameWorld->getEnvironment();
 	TerrainManager *Tm = gameWorld->getTerrain();
 	CharacterManager *Cm = gameWorld->getCharacters();
-	renderCharacters(*Cm, gameWorld->getView(), gameWorld->getProjection(), *shaders["Animation"]);
+	renderCharacters(*Cm, gameWorld->getView(), gameWorld->getProjection(), *shaders["Animation"], *shaders["environment"]);
 	renderEnvironmentObj(*Eom, gameWorld->getView(), gameWorld->getProjection(), *shaders["environment"]);
 	renderTerrain(*Tm, gameWorld->getView(), gameWorld->getProjection(), *shaders["terrain"]);
 }
@@ -147,21 +147,29 @@ void SceneRender::renderMenu(Shader& s)
 	
 }
 
-void SceneRender::renderCharacters(CharacterManager & TM, M4 view, M4 projection,Shader & S)
+void SceneRender::renderCharacters(CharacterManager & TM, M4 view, M4 projection, Shader & animation, Shader & deflt)
 {
 
 	std::unordered_map<std::string, NPC* > drawMap = TM.getCharMap();
 	V3 posVec;
 	V3 rotateAxis;
 	float angle;
-
-	S.Use();
-	glUniformMatrix4fv(glGetUniformLocation(S.Program, "projection"), 1, GL_FALSE, MathLib::value_ptr<const float *>(projection));
-	glUniformMatrix4fv(glGetUniformLocation(S.Program, "view"), 1, GL_FALSE, MathLib::value_ptr<const float *>(view));
+	Shader* active;
+	
 	std::unordered_map<std::string, NPC* >::iterator itr;
-	int i = 0;
 	for (itr = drawMap.begin(); itr != drawMap.end(); ++itr)
 	{
+		if ((*itr).second->anim == true)
+		{
+			active = &animation;
+		}
+		else
+		{
+			active = &deflt;
+		}
+		active->Use();
+		glUniformMatrix4fv(glGetUniformLocation(active->Program, "projection"), 1, GL_FALSE, MathLib::value_ptr<const float *>(projection));
+		glUniformMatrix4fv(glGetUniformLocation(active->Program, "view"), 1, GL_FALSE, MathLib::value_ptr<const float *>(view));
 		M4 model;
 		posVec = (*itr).second->getObjectPos();
 		angle = (*itr).second->getObjectAngle();
@@ -170,8 +178,8 @@ void SceneRender::renderCharacters(CharacterManager & TM, M4 view, M4 projection
 			model = MathLib::rotate(model, angle, rotateAxis);
 		model = MathLib::translate(model, posVec); // Translate it down a bit so it's at the center of the scene
 		model = MathLib::scale(model, V3(1.0f, 1.0f, 1.0f));	// It's a bit too big for our scene, so scale it down
-		glUniformMatrix4fv(glGetUniformLocation(S.Program, "model"), 1, GL_FALSE, MathLib::value_ptr<const float *>(model));
-		(*itr).second->Draw(S);
+		glUniformMatrix4fv(glGetUniformLocation(active->Program, "model"), 1, GL_FALSE, MathLib::value_ptr<const float *>(model));
+		(*itr).second->Draw(*active);
 	}
 }
 

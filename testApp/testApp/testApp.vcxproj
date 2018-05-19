@@ -149,10 +149,12 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="Bone.cpp" />
     <ClCompile Include="Camera.cpp" />
     <ClCompile Include="CharacterManager.cpp" />
     <ClCompile Include="EnvironmentObject.cpp" />
     <ClCompile Include="EnvironmentObjManager.cpp" />
+    <ClCompile Include="FrameTime.cpp" />
     <ClCompile Include="GameController.cpp" />
     <ClCompile Include="GameObject.cpp" />
     <ClCompile Include="GameObject3D.cpp" />
@@ -191,10 +193,12 @@
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="Bone.h" />
     <ClInclude Include="Camera.h" />
     <ClInclude Include="CharacterManager.h" />
     <ClInclude Include="EnvironmentObject.h" />
     <ClInclude Include="EnvironmentObjManager.h" />
+    <ClInclude Include="FrameTime.h" />
     <ClInclude Include="GameAssetCreator.h" />
     <ClInclude Include="GameAssetFactory.h" />
     <ClInclude Include="GameController.h" />

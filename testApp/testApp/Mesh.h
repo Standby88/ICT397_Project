@@ -14,7 +14,8 @@
 #include "Shader.h"
 
 using namespace std;
-
+class Skeleton;
+class GameObject3D;
 ///holds all the information about a single vertex point
 struct Vertex
 {
@@ -59,7 +60,7 @@ public:
 	vector<GLuint> indices;
 	vector<Texture> textures;
 	GLuint terrainTex[4];
-
+	Skeleton* sceneLoaderSkeleton;
 	
 	/*  Functions  */
 	// Constructor
@@ -70,7 +71,7 @@ public:
 	*/
 	Mesh(vector<Vertex> vertices, vector<GLuint> indices, vector<Texture> textures);
 	
-
+	void DrawCharacter(Shader shader, GameObject3D * parentGObj);
 	/**
 	* @brief Mesh default constructor constructor 
 	*
@@ -106,6 +107,7 @@ public:
 private:
 	/*  Render data  */
 	GLuint VAO, VBO, EBO;
+
 
 	/**
 	* @brief Initializes all the buffer objects/arrays

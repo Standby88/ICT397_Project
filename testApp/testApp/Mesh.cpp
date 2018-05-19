@@ -1,7 +1,9 @@
 #include "Mesh.h"
-
+#include "Bone.h"
+#include "GameObject3D.h"
 Mesh::Mesh(vector<Vertex> vertices, vector<GLuint> indices, vector<Texture> textures)
 {
+	sceneLoaderSkeleton = new Skeleton();
 	this->vertices = vertices;
 
 	this->indices = indices;
@@ -13,9 +15,55 @@ Mesh::Mesh(vector<Vertex> vertices, vector<GLuint> indices, vector<Texture> text
 	this->setupMesh();
 }
 
+void Mesh::DrawCharacter(Shader shader, GameObject3D * parentGObj)
+{
+	// Bind appropriate textures
+	GLuint diffuseNormal = 1;
+	GLuint specularNormal = 1;
+
+	for (int i = 0; i < this->textures.size(); i++)
+	{
+		glActiveTexture(GL_TEXTURE0 + i); // Active proper texture unit before binding
+		stringstream ss;
+		string number;
+		string name = this->textures[i].type;
+
+		if (name == "texture_diffuse")
+		{
+			ss << diffuseNormal++; // Transfer GLuint to stream
+		}
+		else if (name == "texture_specular")
+		{
+			ss << specularNormal++; // Transfer GLuint to stream
+		}
+
+		number = ss.str();
+		// Now set the sampler to the correct texture unit
+		glUniform1i(glGetUniformLocation(shader.Program, (name + number).c_str()), i);
+		// And finally bind the texture active texture
+		glBindTexture(GL_TEXTURE_2D, this->textures[i].id);
+	}
+	parentGObj->skeleton->boneMats.size();
+	glUniformMatrix4fv(glGetUniformLocation(shader.Program, "gBones"), parentGObj->skeleton->boneMats.size(),GL_FALSE, glm::value_ptr(parentGObj->skeleton->boneMats[0]));
+
+	glUniform1f(glGetUniformLocation(shader.Program, "material.shininess"), 16.0f);
+
+	// Draw mesh
+	glBindVertexArray(this->VAO);
+	glDrawElements(GL_TRIANGLES, this->indices.size(), GL_UNSIGNED_INT, 0);
+	glBindVertexArray(0);
+
+	//set every active texture to zero
+	for (GLuint i = 0; i < this->textures.size(); i++)
+	{
+		glActiveTexture(GL_TEXTURE0 + i);
+		glBindTexture(GL_TEXTURE_2D, 0);
+	}
+}
+
 Mesh::Mesh()
 {
-
+	sceneLoaderSkeleton = nullptr;
 }
 
 void Mesh::setMesh()
@@ -95,6 +143,7 @@ void Mesh::Draw(Shader shader)
 		glBindTexture(GL_TEXTURE_2D, 0);
 	}
 }
+
 
 void Mesh::setupMesh()
 {

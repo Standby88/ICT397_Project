@@ -3,6 +3,7 @@
 #include "Model.h"
 #include "PhysicsFacade.h"
 
+class Skeleton;
 /**
 * @class GameObject3D
 * @brief USed as base for all objects that use 3D shaders
@@ -35,6 +36,10 @@ protected:
 	rigidBody* gameObjBody;
 
 public:
+
+	bool anim;
+	Skeleton * skeleton;
+	virtual void UpdateSkeleton();
 
 	/**
 	* @brief Constructor for GameObject3D

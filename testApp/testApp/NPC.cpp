@@ -9,6 +9,8 @@ NPC::NPC()
 	objectPos.y = 0;
 	objectPos.z = 0;
 	objectModel = NULL;
+	anim = false;
+	skeleton = new Skeleton();
 }
 
 
@@ -20,7 +22,16 @@ NPC::~NPC()
 
 void NPC::Draw(Shader & S)
 {
-	objectModel->Draw(S);
+	if (anim == true)
+	{
+		UpdateSkeleton();
+		objectModel->DrawAnimtated(S, this);
+	}
+	else
+	{
+		objectModel->Draw(S);
+	}
+	
 }
 
 void NPC::scriptRegister(lua_State * L)

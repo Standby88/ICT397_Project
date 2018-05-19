@@ -1,5 +1,10 @@
 #include "GameObject3D.h"
 
+void GameObject3D::UpdateSkeleton()
+{
+	skeleton->Update();
+}
+
 GameObject3D::GameObject3D()
 {
 }
@@ -17,6 +22,11 @@ Model * GameObject3D::getModel()
 void GameObject3D::addModel(Model * model)
 {
 	objectModel = model;
+	if (objectModel->checkMeshSize() == true)
+	{
+		skeleton = objectModel->getFirstMesh().sceneLoaderSkeleton;
+	}
+	
 }
 
 void GameObject3D::SetRigidBody(rigidBody* body)

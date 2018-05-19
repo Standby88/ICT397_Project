@@ -43,7 +43,7 @@ private:
 
 	void renderMenu(Shader& s);
 
-	void renderCharacters(CharacterManager & TM, M4 view, M4 projection, Shader& s);
+	void renderCharacters(CharacterManager & TM, M4 view, M4 projection, Shader & animation, Shader & deflt);
 public:
 
 	/**

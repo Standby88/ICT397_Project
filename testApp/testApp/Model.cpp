@@ -1,5 +1,5 @@
 #include "Model.h"
-
+#include "GameObject3D.h"
 Model::Model()
 {
 
@@ -37,12 +37,87 @@ void Model::scriptRegister(lua_State * L)
 		.endNamespace();
 }
 
+void Model::DrawAnimtated(Shader & s, GameObject3D * parentGObj)
+{
+
+	for (GLuint i = 0; i < this->m_meshes.size(); i++)
+	{
+		this->m_meshes[i].DrawCharacter(s, parentGObj);
+	}
+}
+
+void Model::recursiveNodeProcess(aiNode * node)
+{
+	ai_nodes.push_back(node);
+
+	for (int i = 0; i < node->mNumChildren; i++)
+		recursiveNodeProcess(node->mChildren[i]);
+}
+
+void Model::AnimNodeProcess()
+{
+	if (scene->mNumAnimations == 0)
+		return;
+
+	for (int i = 0; i < scene->mAnimations[0]->mNumChannels; i++)
+		ai_nodes_anim.push_back(scene->mAnimations[0]->mChannels[i]);
+
+	//We only get data from the first mAnimation because 
+	//Assimp crushes all of the animation data into one
+	//large sequence of data known as mAnimation.
+	//Assimp does not support multiple mAnimations, surprisingly.
+}
+
+Bone * Model::FindBone(std::string name)
+{
+	for (int i = 0; i < bones.size(); i++)
+	{
+		if (bones.at(i).name == name)
+			return &bones.at(i);
+	}
+	//This function simply scans our vector bones and checks if
+	//any name matches the name we're looking for, if it doesn't
+	//find any, we return nullptr.
+	//Keep in mind, the bones vector is empty at the point of writing this,
+	//but when this function is called it will already be filled up.
+	return nullptr;
+}
+
+aiNode * Model::FindAiNode(std::string name)
+{
+	for (int i = 0; i < ai_nodes.size(); i++)
+	{
+		if (ai_nodes.at(i)->mName.data == name)
+			return ai_nodes.at(i);
+	}
+	//This function's purpose is identical, except that instead of Bones,
+	//it's looking for an aiNode* inside our ai_nodes vector.
+	//This vector has already been filled by our recursiveNodeProcess() function.
+	return nullptr;
+}
+
+aiNodeAnim * Model::FindAiNodeAnim(std::string name)
+{
+	for (int i = 0; i < ai_nodes_anim.size(); i++)
+	{
+		if (ai_nodes_anim.at(i)->mNodeName.data == name)
+			return ai_nodes_anim.at(i);
+	}
+	//This function finds the animation with the name we pass in, we called it
+	//right after calling our recursiveNodeProcess() function, but this function
+	//will only really come into play during the next tutorial, where we cover
+	//the actual animation portion of skeletal animation.
+	return nullptr;
+}
+
 void Model::loadModel(string path)
 {
 	// Read file via ASSIMP
 	Assimp::Importer importer;
-	const aiScene *scene = importer.ReadFile(path, aiProcess_Triangulate | aiProcess_FlipUVs);
-
+	//scene = importer.ReadFile(path, aiProcess_Triangulate | aiProcess_FlipUVs);
+	scene = importer.ReadFile(path, aiProcess_GenSmoothNormals | aiProcess_Triangulate |
+		aiProcess_CalcTangentSpace | aiProcess_FlipUVs |
+		aiProcess_JoinIdenticalVertices);
 	// Check for errors
 	if (!scene || scene->mFlags == AI_SCENE_FLAGS_INCOMPLETE || !scene->mRootNode) // if is Not Zero
 	{
@@ -52,13 +127,84 @@ void Model::loadModel(string path)
 	// Retrieve the directory path of the filepath
 	this->m_directory = path.substr(0, path.find_last_of('/'));
 
-	// Process ASSIMP's root node recursively
-	this->processNode(scene->mRootNode, scene);
+	if (scene != nullptr)
+	{
+		error = false;
+		m_RootNode = scene->mRootNode;
+		recursiveNodeProcess(m_RootNode);
+		AnimNodeProcess();
+		globalInverseTransform = glm::inverse(AiToGLMMat4(m_RootNode->mTransformation));
+		// Process ASSIMP's root node recursively
+		this->processNode(m_RootNode, scene, error);
+
+
+		for (int i = 0; i < scene->mNumMeshes; i++)
+		{
+			for (int j = 0; j < scene->mMeshes[i]->mNumBones; j++)
+			{
+				//Here we're just storing the bone information that we loaded
+				//with ASSIMP into the formats our Bone class will recognize.
+				std::string b_name = scene->mMeshes[i]->mBones[j]->mName.data;
+				glm::mat4 b_mat = glm::transpose(AiToGLMMat4(scene->mMeshes[i]->mBones[j]->mOffsetMatrix));
+
+				//Just because I like debugging...
+				std::cout << "Bone " << j << " " << b_name << std::endl;
+
+
+				//Here we create a Bone Object with the information we've
+				//gathered so far, but wait, there's more!
+				Bone bone(&m_meshes.at(i), i, b_name, b_mat);
+				//These next parts are simple, we just fill up the bone's
+				//remaining data using the functions we defined earlier.
+				bone.node = FindAiNode(b_name);
+				bone.animNode = FindAiNodeAnim(b_name);
+				if (bone.animNode == nullptr)
+					std::cout << "No Animations were found for " + b_name << std::endl;
+
+				//Finally, we push the Bone into our vector. Yay.
+				bones.push_back(bone);
+
+			}
+		}
+			
+		//Now we have to fill up the remaining ... remaining data within the
+		//bone object, specifically: the pointers to the bone's parent bone.
+		for (int i = 0; i < bones.size(); i++)
+		{
+			//Here we cycle through the existing bones and match them up with
+			//their parents, the code here is pretty self explanatory.
+			std::string b_name = bones.at(i).name;
+			std::string parent_name = FindAiNode(b_name)->mParent->mName.data;
+			Bone* p_bone = FindBone(parent_name);
+
+			bones.at(i).parent_bone = p_bone;
+			if (p_bone == nullptr)
+				std::cout << "Parent Bone for " << b_name << " does not exist (is nullptr)" << std::endl;
+		}
+		//Here we only need to give the first Mesh in meshes the skeleton data
+		//because in order to initialize the GameObject that will encapsulate this
+		//Mesh, we only need one skeleton. The GameObject will copy the skeleton
+		//of the first Mesh in its meshes vector and use this as its own.
+		//Did that not make sense?
+		//Shit.
+		//It will later on though, so don't worry.
+		if (m_meshes.size() > 0)
+		{
+			m_meshes.at(0).sceneLoaderSkeleton->Init(bones, globalInverseTransform);
+		}
+			
+	}
+	else
+	{
+		error = true;
+		std::cout << "Unable to load mesh: " <<path << std::endl;
+	}
+
 }
 
 // Processes an assimp node in a recursive fashion. 
 //Processes each individual mesh located at the node and repeats this process on its children nodes (if any).
-void Model::processNode(aiNode* node, const aiScene* scene)
+void Model::processNode(aiNode* node, const aiScene* scene, bool error)
 {
 	// Process each mesh located in the current node
 	for (GLuint i = 0; i < node->mNumMeshes; i++)
@@ -73,7 +219,7 @@ void Model::processNode(aiNode* node, const aiScene* scene)
 	// After we've processed all of the meshes then we recursively process each child node
 	for (GLuint i = 0; i < node->mNumChildren; i++)
 	{
-		this->processNode(node->mChildren[i], scene);
+		this->processNode(node->mChildren[i], scene, error);
 	}
 }
 
