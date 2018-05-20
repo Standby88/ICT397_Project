@@ -1,59 +1,16 @@
-﻿  CharacterManager.cpp
-c:\users\desmond\documents\github\ict397_project\testapp\testapp\bone.h(88): warning C4018: '<': signed/unsigned mismatch
-c:\users\desmond\documents\github\ict397_project\testapp\testapp\bone.h(94): warning C4018: '<': signed/unsigned mismatch
-c:\users\desmond\documents\github\ict397_project\testapp\testapp\bone.h(132): warning C4018: '>': signed/unsigned mismatch
-c:\users\desmond\documents\github\ict397_project\testapp\testapp\model.h(111): warning C4018: '<': signed/unsigned mismatch
-c:\users\desmond\documents\github\ict397_project\ext_libs\bullet\src\linearmath\btidebugdraw.h(169): warning C4305: 'argument': truncation from 'double' to 'const btScalar'
-c:\users\desmond\documents\github\ict397_project\ext_libs\bullet\src\linearmath\btidebugdraw.h(170): warning C4305: 'argument': truncation from 'double' to 'const btScalar'
-c:\users\desmond\documents\github\ict397_project\ext_libs\bullet\src\linearmath\btidebugdraw.h(171): warning C4305: 'argument': truncation from 'double' to 'const btScalar'
-c:\users\desmond\documents\github\ict397_project\testapp\testapp\physicsfacade.h(44): warning C4091: 'typedef ': ignored on left of 'PhysicsVector' when no variable is declared
-  Generating Code...
-  Compiling...
-  Model.cpp
-c:\users\desmond\documents\github\ict397_project\testapp\testapp\bone.h(88): warning C4018: '<': signed/unsigned mismatch
-c:\users\desmond\documents\github\ict397_project\testapp\testapp\bone.h(94): warning C4018: '<': signed/unsigned mismatch
-c:\users\desmond\documents\github\ict397_project\testapp\testapp\bone.h(132): warning C4018: '>': signed/unsigned mismatch
-c:\users\desmond\documents\github\ict397_project\testapp\testapp\model.h(111): warning C4018: '<': signed/unsigned mismatch
-c:\users\desmond\documents\github\ict397_project\ext_libs\bullet\src\linearmath\btidebugdraw.h(169): warning C4305: 'argument': truncation from 'double' to 'const btScalar'
-c:\users\desmond\documents\github\ict397_project\ext_libs\bullet\src\linearmath\btidebugdraw.h(170): warning C4305: 'argument': truncation from 'double' to 'const btScalar'
-c:\users\desmond\documents\github\ict397_project\ext_libs\bullet\src\linearmath\btidebugdraw.h(171): warning C4305: 'argument': truncation from 'double' to 'const btScalar'
-c:\users\desmond\documents\github\ict397_project\testapp\testapp\physicsfacade.h(44): warning C4091: 'typedef ': ignored on left of 'PhysicsVector' when no variable is declared
-c:\users\desmond\documents\github\ict397_project\testapp\testapp\model.cpp(53): warning C4018: '<': signed/unsigned mismatch
-c:\users\desmond\documents\github\ict397_project\testapp\testapp\model.cpp(62): warning C4018: '<': signed/unsigned mismatch
-c:\users\desmond\documents\github\ict397_project\testapp\testapp\model.cpp(73): warning C4018: '<': signed/unsigned mismatch
-c:\users\desmond\documents\github\ict397_project\testapp\testapp\model.cpp(88): warning C4018: '<': signed/unsigned mismatch
-c:\users\desmond\documents\github\ict397_project\testapp\testapp\model.cpp(101): warning C4018: '<': signed/unsigned mismatch
-c:\users\desmond\documents\github\ict397_project\testapp\testapp\model.cpp(141): warning C4018: '<': signed/unsigned mismatch
-c:\users\desmond\documents\github\ict397_project\testapp\testapp\model.cpp(143): warning C4018: '<': signed/unsigned mismatch
-c:\users\desmond\documents\github\ict397_project\testapp\testapp\model.cpp(172): warning C4018: '<': signed/unsigned mismatch
-c:\users\desmond\documents\github\ict397_project\testapp\testapp\model.cpp(278): warning C4018: '<': signed/unsigned mismatch
-c:\users\desmond\documents\github\ict397_project\testapp\testapp\model.cpp(286): warning C4018: '<': signed/unsigned mismatch
-  Mesh.cpp
-c:\users\desmond\documents\github\ict397_project\testapp\testapp\bone.h(88): warning C4018: '<': signed/unsigned mismatch
-c:\users\desmond\documents\github\ict397_project\testapp\testapp\bone.h(94): warning C4018: '<': signed/unsigned mismatch
-c:\users\desmond\documents\github\ict397_project\testapp\testapp\bone.h(132): warning C4018: '>': signed/unsigned mismatch
-c:\users\desmond\documents\github\ict397_project\testapp\testapp\model.h(111): warning C4018: '<': signed/unsigned mismatch
+﻿  Mesh.cpp
+c:\users\desmond\documents\github\ict397_project\testapp\testapp\animation.h(7): warning C4305: 'initializing': truncation from 'double' to 'float'
+c:\users\desmond\documents\github\ict397_project\testapp\testapp\animation.h(15): warning C4305: 'initializing': truncation from 'double' to 'float'
+c:\users\desmond\documents\github\ict397_project\testapp\testapp\bone.h(117): warning C4018: '<': signed/unsigned mismatch
+c:\users\desmond\documents\github\ict397_project\testapp\testapp\bone.h(166): warning C4018: '<': signed/unsigned mismatch
+c:\users\desmond\documents\github\ict397_project\testapp\testapp\bone.h(204): warning C4018: '>': signed/unsigned mismatch
+c:\users\desmond\documents\github\ict397_project\testapp\testapp\bone.h(257): warning C4018: '<': signed/unsigned mismatch
+c:\users\desmond\documents\github\ict397_project\testapp\testapp\model.h(115): warning C4018: '<': signed/unsigned mismatch
 c:\users\desmond\documents\github\ict397_project\ext_libs\bullet\src\linearmath\btidebugdraw.h(169): warning C4305: 'argument': truncation from 'double' to 'const btScalar'
 c:\users\desmond\documents\github\ict397_project\ext_libs\bullet\src\linearmath\btidebugdraw.h(170): warning C4305: 'argument': truncation from 'double' to 'const btScalar'
 c:\users\desmond\documents\github\ict397_project\ext_libs\bullet\src\linearmath\btidebugdraw.h(171): warning C4305: 'argument': truncation from 'double' to 'const btScalar'
 c:\users\desmond\documents\github\ict397_project\testapp\testapp\physicsfacade.h(44): warning C4091: 'typedef ': ignored on left of 'PhysicsVector' when no variable is declared
 c:\users\desmond\documents\github\ict397_project\testapp\testapp\mesh.cpp(24): warning C4018: '<': signed/unsigned mismatch
-c:\users\desmond\documents\github\ict397_project\testapp\testapp\mesh.cpp(107): warning C4018: '<': signed/unsigned mismatch
-  Generating Code...
-  Skipping... (no relevant changes detected)
-  main.cpp
-  WorldTerrain.cpp
-  TerrainManager.cpp
-  ScriptEngine.cpp
-  SceneRender.cpp
-  Player.cpp
-  NPC.cpp
-  ModelManager.cpp
-  GameWorld.cpp
-  GameObject3D.cpp
-  GameEngine.cpp
-  GameController.cpp
-  EnvironmentObject.cpp
-  EnvironmentObjManager.cpp
+c:\users\desmond\documents\github\ict397_project\testapp\testapp\mesh.cpp(110): warning C4018: '<': signed/unsigned mismatch
   testApp.vcxproj -> C:\Users\Desmond\Documents\GitHub\ICT397_Project\testApp\Debug\testApp.exe
   testApp.vcxproj -> C:\Users\Desmond\Documents\GitHub\ICT397_Project\testApp\Debug\testApp.pdb (Full PDB)

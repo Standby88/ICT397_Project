@@ -8,13 +8,12 @@
 
 #include <GL/glew.h>
 #include "MathLib.h"
-
+#include "Bone.h"
 #include <assimp/Importer.hpp>
 
 #include "Shader.h"
 
 using namespace std;
-class Skeleton;
 class GameObject3D;
 ///holds all the information about a single vertex point
 struct Vertex
@@ -60,7 +59,7 @@ public:
 	vector<GLuint> indices;
 	vector<Texture> textures;
 	GLuint terrainTex[4];
-	Skeleton* sceneLoaderSkeleton;
+	Skeleton sceneLoaderSkeleton;
 	
 	/*  Functions  */
 	// Constructor

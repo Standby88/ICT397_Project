@@ -9,6 +9,7 @@ Model::Model(std::string path)
 {
 	this->loadModel(path);
 	m_path = path;
+	m_meshes.at(0);
 }
 
 void Model::Draw(Shader shader)
@@ -113,7 +114,7 @@ aiNodeAnim * Model::FindAiNodeAnim(std::string name)
 void Model::loadModel(string path)
 {
 	// Read file via ASSIMP
-	Assimp::Importer importer;
+	
 	//scene = importer.ReadFile(path, aiProcess_Triangulate | aiProcess_FlipUVs);
 	scene = importer.ReadFile(path, aiProcess_GenSmoothNormals | aiProcess_Triangulate |
 		aiProcess_CalcTangentSpace | aiProcess_FlipUVs |
@@ -142,6 +143,7 @@ void Model::loadModel(string path)
 		{
 			for (int j = 0; j < scene->mMeshes[i]->mNumBones; j++)
 			{
+				std::cout << scene->mMeshes[i]->mNumBones << std::endl;
 				//Here we're just storing the bone information that we loaded
 				//with ASSIMP into the formats our Bone class will recognize.
 				std::string b_name = scene->mMeshes[i]->mBones[j]->mName.data;
@@ -162,6 +164,7 @@ void Model::loadModel(string path)
 					std::cout << "No Animations were found for " + b_name << std::endl;
 
 				//Finally, we push the Bone into our vector. Yay.
+				
 				bones.push_back(bone);
 
 			}
@@ -190,7 +193,12 @@ void Model::loadModel(string path)
 		//It will later on though, so don't worry.
 		if (m_meshes.size() > 0)
 		{
-			m_meshes.at(0).sceneLoaderSkeleton->Init(bones, globalInverseTransform);
+			m_meshes.at(0).sceneLoaderSkeleton.Init(bones, globalInverseTransform);
+			
+				std::cout<<"loadModel: " << &m_meshes.at(0).sceneLoaderSkeleton << std::endl;
+				
+				outMesh.push_back(m_meshes.at(0));
+				outMesh.push_back(m_meshes.at(1));
 		}
 			
 	}

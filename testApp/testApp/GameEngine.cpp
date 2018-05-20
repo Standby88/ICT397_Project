@@ -1,6 +1,7 @@
 #include "GameEngine.h"
 #include "WaterFrameBuffer.h"
 #include "Water.h"
+#include "MathLib.h"
 GameEngine::GameEngine()
 {
 	initialize();
@@ -8,11 +9,14 @@ GameEngine::GameEngine()
 
 bool GameEngine::GameLoop()
 {
+	gameWorld->getCharacters()->getNPC("Mon1")->skeleton.SetIdleAnimation(&Anim_Test_Idle);
+	gameWorld->getCharacters()->getNPC("Mon1")->PlayAnimation(Anim_Test_Walk, true, true);
 	while (!window.windowShouldClose())
 	{
 		GLfloat currentFrame = (float)glfwGetTime();
 		deltaTime = currentFrame - lastFrame;
 		lastFrame = currentFrame;
+		dt->setDeltaTime(deltaTime);
 		gameController->update(deltaTime);
 		window.clearBufferNColor();
 		render->renderScene();
@@ -35,6 +39,8 @@ void GameEngine::initialize()
 	render = getGlobal(LuaEn->getLuaState(), "Scene");
 	gameController = new GameController(gameWorld);
 	PhysFac->SetObjectActivation();
+	dt = FrameTime::getInstance();
+	gameWorld->getCharacters()->getNPC("Mon1")->AddAnimation(Anim_Test_Walk);
 }
 
 GameEngine::~GameEngine()

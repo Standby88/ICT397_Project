@@ -10,7 +10,6 @@ NPC::NPC()
 	objectPos.z = 0;
 	objectModel = NULL;
 	anim = false;
-	skeleton = new Skeleton();
 }
 
 

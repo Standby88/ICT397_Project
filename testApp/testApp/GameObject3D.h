@@ -3,7 +3,6 @@
 #include "Model.h"
 #include "PhysicsFacade.h"
 
-class Skeleton;
 /**
 * @class GameObject3D
 * @brief USed as base for all objects that use 3D shaders
@@ -38,9 +37,13 @@ protected:
 public:
 
 	bool anim;
-	Skeleton * skeleton;
+	Skeleton skeleton;
+	std::vector<Animation> animations;
 	virtual void UpdateSkeleton();
-
+	void AddAnimation(Animation& in_anim);
+	Animation* FindAnimation(std::string anim_to_find);
+	void PlayAnimation(Animation& anim, bool loop = false, bool reset_to_start = false);
+	void StopAnimating();
 	/**
 	* @brief Constructor for GameObject3D
 	*/

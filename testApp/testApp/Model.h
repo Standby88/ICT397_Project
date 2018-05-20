@@ -74,8 +74,9 @@ public:
 	*@param lua_State * L
 	*/
 	static void scriptRegister(lua_State * L);
-	Mesh& getFirstMesh()
+	Mesh getFirstMesh()
 	{
+		std::cout << "get first mesh: "<<&m_meshes.at(0).sceneLoaderSkeleton << std::endl;
 		return m_meshes.at(0);
 	}
 	bool checkMeshSize()
@@ -88,14 +89,17 @@ public:
 		}
 	}
 	void DrawAnimtated(Shader&s, GameObject3D * parentGObj);
+	std::vector<Mesh> outMesh;
 private:
 	std::vector<aiNode*> ai_nodes;
+	Assimp::Importer importer;
 	std::vector<aiNodeAnim*> ai_nodes_anim;
 	void recursiveNodeProcess(aiNode* node);
 	void AnimNodeProcess();
 	const aiScene *scene;
 	std::string m_path;
 	bool error;
+	
 	/*  Model Data  */
 	vector<Mesh> m_meshes;
 	string m_directory;

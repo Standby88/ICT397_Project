@@ -9,6 +9,6 @@ uniform sampler2D ourTexture1;
 void main()
 {
 	//vec4 texColor = texture(ourTexture1,TexCoords);
-	vec4 weightsColor = vec4(we.xyz,1.0);
-    color = weightsColor;//texture(ourTexture1, TexCoords);
+	//vec4 weightsColor = vec4(we.xyz,1.0);
+    color = texture(ourTexture1, TexCoords);
 }

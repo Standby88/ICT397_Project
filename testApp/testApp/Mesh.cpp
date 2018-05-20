@@ -1,9 +1,9 @@
 #include "Mesh.h"
 #include "Bone.h"
 #include "GameObject3D.h"
+#include <glm/gtx/string_cast.hpp>
 Mesh::Mesh(vector<Vertex> vertices, vector<GLuint> indices, vector<Texture> textures)
 {
-	sceneLoaderSkeleton = new Skeleton();
 	this->vertices = vertices;
 
 	this->indices = indices;
@@ -43,8 +43,11 @@ void Mesh::DrawCharacter(Shader shader, GameObject3D * parentGObj)
 		// And finally bind the texture active texture
 		glBindTexture(GL_TEXTURE_2D, this->textures[i].id);
 	}
-	parentGObj->skeleton->boneMats.size();
-	glUniformMatrix4fv(glGetUniformLocation(shader.Program, "gBones"), parentGObj->skeleton->boneMats.size(),GL_FALSE, glm::value_ptr(parentGObj->skeleton->boneMats[0]));
+
+		std::cout << glm::to_string(parentGObj->skeleton.boneMats[0]) << std::endl;
+
+	
+	glUniformMatrix4fv(glGetUniformLocation(shader.Program, "gBones"), parentGObj->skeleton.boneMats.size(),GL_FALSE, glm::value_ptr(parentGObj->skeleton.boneMats[0]));
 
 	glUniform1f(glGetUniformLocation(shader.Program, "material.shininess"), 16.0f);
 
@@ -63,7 +66,7 @@ void Mesh::DrawCharacter(Shader shader, GameObject3D * parentGObj)
 
 Mesh::Mesh()
 {
-	sceneLoaderSkeleton = nullptr;
+
 }
 
 void Mesh::setMesh()

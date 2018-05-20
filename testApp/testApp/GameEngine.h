@@ -6,6 +6,7 @@
 #include "SceneRender.h"
 #include "GameController.h"
 #include "Window.h"
+#include "FrameTime.h"
 /**
 * @class Graphics engine
 * @brief USed to setup openGl and rednering
@@ -18,6 +19,8 @@
 *
 * @bug
 */
+static Animation Anim_Test_Walk("Walk", FramesToTime(glm::vec2(1, 45)), 2);
+static Animation Anim_Test_Idle("Idle", FramesToTime(glm::vec2(51, 110)), 2);
 class GameEngine
 {
 private:
@@ -26,7 +29,7 @@ private:
 	Window window;
 	GameController *gameController;
 	PhysicsFacade* PhysFac = PhysicsFacade::GetPhysicsInstance();
-
+	FrameTime *dt;
 	int SCREEN_WIDTH, SCREEN_HEIGHT;
 
 

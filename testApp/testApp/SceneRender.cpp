@@ -82,7 +82,7 @@ void SceneRender::renderWater()
 	renderGameScene();
 	fbos.unbindCurrentFrameBuffer();
 
-	//water->drawWater(*shaders["water"], gameWorld->getView(), gameWorld->getProjection());
+	water->drawWater(*shaders["water"], gameWorld->getView(), gameWorld->getProjection());
 
 }
 void SceneRender::renderEnvironmentObj(EnvironmentObjManager& EM, M4 view, M4 projection, Shader &S)

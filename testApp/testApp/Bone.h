@@ -3,7 +3,7 @@
 #define BONE_H
 #include "MathLib.h"
 #include "FrameTime.h"
-//#include "Animation.h"
+#include "Animation.h"
 #include <string>
 #include <vector>
 
@@ -11,7 +11,7 @@
 #include <iostream> 
 
 class Mesh;
-//class Animation;
+class Animation;
 class GameObject;
 class Skeleton;
 static aiMatrix4x4 GLMMat4ToAi(glm::mat4 mat)
@@ -25,6 +25,7 @@ static aiMatrix4x4 GLMMat4ToAi(glm::mat4 mat)
 static glm::mat4 AiToGLMMat4(aiMatrix4x4& in_mat)
 {
 	glm::mat4 tmp;
+
 	tmp[0][0] = in_mat.a1;
 	tmp[1][0] = in_mat.b1;
 	tmp[2][0] = in_mat.c1;
@@ -57,10 +58,21 @@ public:
 	glm::mat4 parent_transform;
 	glm::mat4 offset_matrix;
 	Skeleton* parent_skeleton;
+	glm::vec3 pos;
+	glm::quat rot;
+	glm::vec3 scale;
+	glm::vec3 p1;
+	glm::vec3 p2;
 	int id;
+
+	unsigned int FindPosition(float time);
+	glm::vec3 CalcInterpolatedPosition(float time);
+	unsigned int FindRotation(float time);
+	glm::quat CalcInterpolatedRotation(float time);
 	Bone();
 	Bone(Mesh* in_mesh, unsigned int in_id, std::string in_name, aiMatrix4x4 in_o_mat);
 	Bone(Mesh* in_mesh, unsigned int in_id, std::string in_name, glm::mat4 in_o_mat);
+	void UpdateKeyframeTransform(float time);
 	glm::mat4 GetParentTransforms();
 
 };
@@ -70,10 +82,22 @@ public:
 	std::vector<Bone> bones;
 	glm::mat4 globalInverseTransform;
 	std::vector<glm::mat4> boneMats;
+	float time;
 
+	float start_time;
+	float end_time;
+
+	Animation* active_animation;
+	Animation* idle_animation;
+
+	bool anim_play;
+	bool anim_loop;
 	Skeleton()
 	{
+		time = start_time = end_time = 0;
+		active_animation = nullptr;
 
+		anim_loop = false;
 	}
 
 	Skeleton(std::vector<Bone> in_bones, glm::mat4 in_globalInverseTransform)
@@ -83,10 +107,58 @@ public:
 	void Init(std::vector<Bone> in_bones, glm::mat4 in_globalInverseTransform)
 	{
 		bones = in_bones;
+	
 		globalInverseTransform = in_globalInverseTransform;
+		time = start_time = end_time = 0;
+		active_animation = nullptr;
+		idle_animation = nullptr;
 
+		anim_loop = false;
 		for (int i = 0; i < bones.size(); i++)
 			bones.at(i).parent_skeleton = this;
+	}
+
+
+	void PlayAnimation(Animation& anim, bool loop, bool reset_to_start)
+	{
+		//If there's an animation currently playing
+		if (active_animation != nullptr)
+		{
+			//And this animation is more important than the current one
+			if (anim.priority < active_animation->priority)
+				//Set the current animation to the one passed in.
+				active_animation = &anim;
+			else
+				//Do nothing.
+				return;
+		}
+		else
+			//Set the current animation to the one passed in.
+			active_animation = &anim;
+
+		start_time = active_animation->start_time;
+		end_time = active_animation->end_time;
+
+		anim_play = true;
+		anim_loop = loop;
+
+		//The reset_to_start variable determines whether or not the animation
+		//should restart upon playing.
+		if (reset_to_start)
+			time = active_animation->start_time;
+	}
+
+	//This function stops animating
+	void StopAnimating()
+	{
+		time = end_time;
+		active_animation = nullptr;
+		anim_play = false;
+	}
+
+	void SetIdleAnimation(Animation* in_anim)
+	{
+		idle_animation = in_anim;
 	}
 	//This next function is pretty self-explanatory...
 	Bone* FindBone(std::string name)
@@ -100,7 +172,7 @@ public:
 	}
 
 	//This one isn't really...
-	void UpdateBoneMatsVector()
+void UpdateBoneMatsVector()
 	{
 		//The purpose of this function is to gather all of the bones'
 		//global transformations (which we calculate below) and place them, in order,
@@ -118,7 +190,7 @@ public:
 		boneMats.clear();
 
 
-
+		
 		//Here we must update the matrices to the shader until the MAX_BONES constant
 		//in the shader, which is 100. You could set this as an engine variable but
 		//for the purposes of this tutorial simply typing i < 100 will do.
@@ -158,6 +230,32 @@ public:
 		//when we start implementing animations, but for now all we have to do is
 		//update the vector of bone matrices.
 		UpdateBoneMatsVector();
+		if (!anim_play)
+			//If we're not playing an animation, then just give up, do nothing.
+			return;
+
+		//Update the time variable by adding the delta time of the last frame
+		//It's * 0.001f because the delta time is in milliseconds, and we 
+		//need it in seconds.
+		time += FrameTime::getInstance()->getDeltaTime() *0.001f;
+
+		//Make sure the time can't be less than our animation's start time.
+		if (time < start_time)
+			time = start_time;
+
+		//Make sure the time can't be greater than our animation's end time.
+		if (time > end_time)
+		{
+			if (anim_loop)
+				//If looping is set, then loop!
+				time = start_time;
+			else
+				//Else, give up.
+				StopAnimating();
+		}
+
+		for (int i = 0; i < bones.size(); i++)
+			bones.at(i).UpdateKeyframeTransform(time);
 	}
 };
 

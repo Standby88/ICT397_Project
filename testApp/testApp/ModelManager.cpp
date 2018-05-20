@@ -39,6 +39,7 @@ Model* ModelManager::GetModel(std::string modelPath)
 	{
 		if (models[modelPath]->getName().compare(modelPath) == 0)
 		{
+
 			return models.at(modelPath);
 		}
 			
