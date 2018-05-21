@@ -20,7 +20,7 @@ V3& Camera::GetCameraPosition()
 Camera* Camera::GetCameraInstance()
 {
 	if (instance == 0) {
-		instance = new Camera(V3(0.0f, 1.75f, 3.0f));
+		instance = new Camera(V3(10.0f, 240.0f, 10.0f));
 		std::cout << "First camera instance created" << std::endl;
 	}
 
@@ -29,7 +29,7 @@ Camera* Camera::GetCameraInstance()
 
 M4 Camera::GetViewMatrix()
 {
-	V3 a= this->position + this->front;
+	V3 a = this->position + this->front;
 	return MathLib::lookAt(this->position, a, this->up);
 }
 
@@ -137,6 +137,6 @@ void Camera::updateCameraVectors()
 
 void Camera::CreateCameraRigidBody()
 {
-	camBody = cPhysFac->CreatePlayerRigidBody(1.5, 1.75, 60, position, glm::vec3(0, 0, 0));
+	camBody = cPhysFac->CreatePlayerRigidBody(0.5f, 1.75f, 60.0f, position, V3(0, 0, 0));
 	std::cout << "rigidBodyID for Camera: " << camBody->getUserIndex() << std::endl;
 }

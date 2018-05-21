@@ -1,6 +1,6 @@
+c:\users\ducku\documents\ict397 - game\work\ict397_project\testapp\testapp\debug\vc140.pdb
 c:\users\desmond\documents\github\ict397_project\testapp\testapp\debug\vc140.pdb
 c:\users\desmond\documents\github\ict397_project\testapp\testapp\debug\vc140.idb
-c:\users\desmond\documents\github\ict397_project\testapp\testapp\debug\mathlib.obj
 c:\users\desmond\documents\github\ict397_project\testapp\testapp\debug\menu.obj
 c:\users\desmond\documents\github\ict397_project\testapp\testapp\debug\mesh.obj
 c:\users\desmond\documents\github\ict397_project\testapp\testapp\debug\model.obj
@@ -14,6 +14,7 @@ c:\users\desmond\documents\github\ict397_project\testapp\testapp\debug\scenerend
 c:\users\desmond\documents\github\ict397_project\testapp\testapp\debug\scriptengine.obj
 c:\users\desmond\documents\github\ict397_project\testapp\testapp\debug\serialization.obj
 c:\users\desmond\documents\github\ict397_project\testapp\testapp\debug\shader.obj
+c:\users\desmond\documents\github\ict397_project\testapp\testapp\debug\skybox.obj
 c:\users\desmond\documents\github\ict397_project\testapp\testapp\debug\terrainmanager.obj
 c:\users\desmond\documents\github\ict397_project\testapp\testapp\debug\texturemanager.obj
 c:\users\desmond\documents\github\ict397_project\testapp\testapp\debug\water.obj
@@ -33,11 +34,16 @@ c:\users\desmond\documents\github\ict397_project\testapp\testapp\debug\gameobjec
 c:\users\desmond\documents\github\ict397_project\testapp\testapp\debug\gameengine.obj
 c:\users\desmond\documents\github\ict397_project\testapp\testapp\debug\gameworld.obj
 c:\users\desmond\documents\github\ict397_project\testapp\testapp\debug\main.obj
+c:\users\desmond\documents\github\ict397_project\testapp\testapp\debug\mathlib.obj
+c:\users\desmond\documents\github\ict397_project\testapp\testapp\debug\soil2.obj
 c:\users\desmond\documents\github\ict397_project\testapp\testapp\debug\etc1_utils.obj
 c:\users\desmond\documents\github\ict397_project\testapp\testapp\debug\image_dxt.obj
 c:\users\desmond\documents\github\ict397_project\testapp\testapp\debug\image_helper.obj
-c:\users\desmond\documents\github\ict397_project\testapp\testapp\debug\soil2.obj
+c:\users\ducku\documents\ict397 - game\work\ict397_project\testapp\debug\testapp.ilk
+c:\users\ducku\documents\ict397 - game\work\ict397_project\testapp\debug\testapp.exe
+c:\users\ducku\documents\ict397 - game\work\ict397_project\testapp\debug\testapp.pdb
 c:\users\desmond\documents\github\ict397_project\testapp\debug\testapp.pdb
+c:\users\desmond\documents\github\ict397_project\testapp\debug\testapp.exe
 c:\users\desmond\documents\github\ict397_project\testapp\debug\testapp.ilk
 c:\users\desmond\documents\github\ict397_project\testapp\testapp\debug\testapp.tlog\cl.command.1.tlog
 c:\users\desmond\documents\github\ict397_project\testapp\testapp\debug\testapp.tlog\cl.read.1.tlog

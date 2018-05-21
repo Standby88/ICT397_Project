@@ -29,20 +29,6 @@ extern "C"
 
 using namespace luabridge;
 
-typedef struct PhysicsVector
-{
-	PhysicsVector(float xCoord, float yCoord, float zCoord)
-	{
-		x = xCoord;
-		y = yCoord;
-		z = zCoord;
-	}
-
-	float x;
-	float y;
-	float z;
-};
-
 typedef btRigidBody rigidBody;
 
 //---------------------------------------------------------------------------------
@@ -61,8 +47,11 @@ typedef btRigidBody rigidBody;
 * @author Kieron van der Kwast
 * @version 02
 * @date 24/04/2018 Trying to fix player rigid body movement problems
-* 
-* @todo complete the facade
+*
+* @author Kieron van der Kwast
+* @version 03
+* @date 13/05/2018 Implementing new heightfield terrain function, implementing creation of capsule rigidbodies
+*
 * @todo fix collision body locations and interactions
 *
 * @bug none
@@ -73,21 +62,21 @@ typedef btRigidBody rigidBody;
 class PhysicsFacade
 {
 private:
-		/// btDefaultCollisionConfiguration object pointer
+	/// btDefaultCollisionConfiguration object pointer
 	btDefaultCollisionConfiguration* collisionConfiguration;
-		/// btCollisionDispatcher object pointer
+	/// btCollisionDispatcher object pointer
 	btCollisionDispatcher* dispatcher;
-		/// btBroadphaseInterface object pointer
+	/// btBroadphaseInterface object pointer
 	btBroadphaseInterface* overLappingPairCache;
-		/// btSequentialImpulseConstraintSolver object pointer
+	/// btSequentialImpulseConstraintSolver object pointer
 	btSequentialImpulseConstraintSolver* solver;
-		/// used to keep track of shapes
+	/// used to keep track of shapes
 	btAlignedObjectArray<btCollisionShape*> collisionShapes;
-		/// btDiscreteDynamicsWorld object pointer
+	/// btDiscreteDynamicsWorld object pointer
 	btDiscreteDynamicsWorld* dynamicsWorld;
-	
+
 	static PhysicsFacade* instance;
-	
+
 	btVector3 playerPosition;
 
 	btVector3 playerForce;
@@ -111,11 +100,11 @@ private:
 protected:
 
 public:
-		
+
 	///Default constructor to initiailise class member variables
 	PhysicsFacade();
 
-		///Default destructor to free memory
+	///Default destructor to free memory
 	~PhysicsFacade();
 
 	/**
@@ -133,7 +122,7 @@ public:
 	/**
 	* @brief Sets the gravity
 	*
-	*	
+	*
 	*
 	* @param float
 	* @return void
@@ -180,13 +169,10 @@ public:
 
 	//Exclude dynamicsWorld->addRigidBody from Create.. functions functions as they are created 
 	//in scripts, then added in constructors
-	void AddRigidBody(rigidBody* body) {
-		dynamicsWorld->addRigidBody(body);
-		dynamicsWorld->getCollisionObjectArray().size();
-	}
+	void AddRigidBody(rigidBody* body);
 
 	/**
-	* @brief 
+	* @brief
 	*
 	*
 	*
@@ -195,21 +181,21 @@ public:
 	* @pre
 	* @post
 	*/
-	int CreateRigidBodyPlane(const PhysicsVector& planeNorm, float offset);
+	int CreateRigidBodyPlane(const V3 planeNorm, float offset);
 
 	/**
 	* @brief Takes in a height field and creates a rigid body
 	*
-	* 
+	*
 	*
 	* @param int, int, const void*, float, int, bool, bool
-	* @return void 
+	* @return void
 	* @pre
 	* @post
 	*/
 	rigidBody* CreateHeightFieldRigidBody(int heightStickWidth, int heightStickLength,
-		const void * heightfieldData, float scaleHeight, int upAxis,
-		bool useFloatData, bool flipQuadEdges);
+		const void * heightfieldData, float scaleWidth, float scaleHeight, float scaleLength,
+		float heighestPoint, float lowestPoint);
 
 	/**
 	* @brief Creates a spherical rigid body
@@ -221,7 +207,7 @@ public:
 	* @pre
 	* @post
 	*/
-	rigidBody* CreateSphereRigidBody(float radius, float mass, float xPosition, float yPosition, float zPosition, 
+	rigidBody* CreateSphereRigidBody(float radius, float mass, float xPosition, float yPosition, float zPosition,
 		float xInertia, float yInertia, float zInertia);
 
 	/**
@@ -249,18 +235,6 @@ public:
 	rigidBody* CreatePlayerRigidBody(float radius, float height, float mass, V3 position, V3 inertia);
 
 	/**
-	* @brief 
-	*
-	*
-	*
-	* @param
-	* @return
-	* @pre
-	* @post
-	*/
-	int CreateFallingCylinderRigidBody(PhysicsVector& physVec);
-
-	/**
 	* @brief
 	*
 	*
@@ -270,19 +244,7 @@ public:
 	* @pre
 	* @post
 	*/
-	int CreateFallingCapsuleRigidBody(float radius, float height);
-
-	/**
-	* @brief
-	*
-	*
-	*
-	* @param
-	* @return
-	* @pre
-	* @post
-	*/
-	int CreateFallingConeRigidBody(float radius, float height);
+	rigidBody* CreateCapsuleRigidBody(float radius, float height, float m, float xPos, float yPos, float zPos);
 
 	/**
 	* @brief Updates the rigid bodies within the world

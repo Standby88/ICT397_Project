@@ -64,7 +64,7 @@ public:
 
 		glUniformMatrix4fv(glGetUniformLocation(S.Program, "projection"), 1, GL_FALSE, MathLib::value_ptr<const float *>(projection));
 		glUniformMatrix4fv(glGetUniformLocation(S.Program, "view"), 1, GL_FALSE, MathLib::value_ptr<const float *>(view));
-		model = MathLib::translate(model, V3(50.0f,0.0f,50));
+		model = MathLib::translate(model, V3(50.0f,200.0f,50));
 		model = MathLib::scale(model, V3(0.5f, 0.5f, 0.5f));
 		//model = MathLib::rotate(model, 4.71239,V3(0, 1.0, 0));
 		glUniformMatrix4fv(glGetUniformLocation(S.Program, "model"), 1, GL_FALSE, MathLib::value_ptr<const float *>(model));
