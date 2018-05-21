@@ -41,6 +41,7 @@ void Model::scriptRegister(lua_State * L)
 void Model::DrawAnimtated(Shader & s, GameObject3D * parentGObj)
 {
 
+	glUniformMatrix4fv(glGetUniformLocation(s.Program, "gBones"), parentGObj->skeleton.boneMats.size(), GL_FALSE, glm::value_ptr(parentGObj->skeleton.boneMats[0]));
 	for (GLuint i = 0; i < this->m_meshes.size(); i++)
 	{
 		this->m_meshes[i].DrawCharacter(s, parentGObj);
@@ -196,9 +197,6 @@ void Model::loadModel(string path)
 			m_meshes.at(0).sceneLoaderSkeleton.Init(bones, globalInverseTransform);
 			
 				std::cout<<"loadModel: " << &m_meshes.at(0).sceneLoaderSkeleton << std::endl;
-				
-				outMesh.push_back(m_meshes.at(0));
-				outMesh.push_back(m_meshes.at(1));
 		}
 			
 	}

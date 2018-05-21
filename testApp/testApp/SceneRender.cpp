@@ -171,13 +171,6 @@ void SceneRender::renderCharacters(CharacterManager & TM, M4 view, M4 projection
 		glUniformMatrix4fv(glGetUniformLocation(active->Program, "projection"), 1, GL_FALSE, MathLib::value_ptr<const float *>(projection));
 		glUniformMatrix4fv(glGetUniformLocation(active->Program, "view"), 1, GL_FALSE, MathLib::value_ptr<const float *>(view));
 		M4 model;
-		posVec = (*itr).second->getObjectPos();
-		angle = (*itr).second->getObjectAngle();
-		rotateAxis = (*itr).second->getObjectRotation();
-		if (angle > 0.0f)
-			model = MathLib::rotate(model, angle, rotateAxis);
-		model = MathLib::translate(model, posVec); // Translate it down a bit so it's at the center of the scene
-		model = MathLib::scale(model, V3(1.0f, 1.0f, 1.0f));	// It's a bit too big for our scene, so scale it down
 		glUniformMatrix4fv(glGetUniformLocation(active->Program, "model"), 1, GL_FALSE, MathLib::value_ptr<const float *>(model));
 		(*itr).second->Draw(*active);
 	}

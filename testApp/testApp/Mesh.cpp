@@ -10,7 +10,6 @@ Mesh::Mesh(vector<Vertex> vertices, vector<GLuint> indices, vector<Texture> text
 
 	this->textures = textures;
 	
-	
 	// Now that we have all the required data, set the vertex buffers and its attribute pointers.
 	this->setupMesh();
 }
@@ -42,12 +41,8 @@ void Mesh::DrawCharacter(Shader shader, GameObject3D * parentGObj)
 		glUniform1i(glGetUniformLocation(shader.Program, (name + number).c_str()), i);
 		// And finally bind the texture active texture
 		glBindTexture(GL_TEXTURE_2D, this->textures[i].id);
-	}
-
-		std::cout << glm::to_string(parentGObj->skeleton.boneMats[0]) << std::endl;
-
+	}	
 	
-	glUniformMatrix4fv(glGetUniformLocation(shader.Program, "gBones"), parentGObj->skeleton.boneMats.size(),GL_FALSE, glm::value_ptr(parentGObj->skeleton.boneMats[0]));
 
 	glUniform1f(glGetUniformLocation(shader.Program, "material.shininess"), 16.0f);
 

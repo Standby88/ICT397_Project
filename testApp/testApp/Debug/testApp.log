@@ -1,4 +1,4 @@
-﻿  Mesh.cpp
+﻿  Model.cpp
 c:\users\desmond\documents\github\ict397_project\testapp\testapp\animation.h(7): warning C4305: 'initializing': truncation from 'double' to 'float'
 c:\users\desmond\documents\github\ict397_project\testapp\testapp\animation.h(15): warning C4305: 'initializing': truncation from 'double' to 'float'
 c:\users\desmond\documents\github\ict397_project\testapp\testapp\bone.h(117): warning C4018: '<': signed/unsigned mismatch
@@ -10,7 +10,15 @@ c:\users\desmond\documents\github\ict397_project\ext_libs\bullet\src\linearmath\
 c:\users\desmond\documents\github\ict397_project\ext_libs\bullet\src\linearmath\btidebugdraw.h(170): warning C4305: 'argument': truncation from 'double' to 'const btScalar'
 c:\users\desmond\documents\github\ict397_project\ext_libs\bullet\src\linearmath\btidebugdraw.h(171): warning C4305: 'argument': truncation from 'double' to 'const btScalar'
 c:\users\desmond\documents\github\ict397_project\testapp\testapp\physicsfacade.h(44): warning C4091: 'typedef ': ignored on left of 'PhysicsVector' when no variable is declared
-c:\users\desmond\documents\github\ict397_project\testapp\testapp\mesh.cpp(24): warning C4018: '<': signed/unsigned mismatch
-c:\users\desmond\documents\github\ict397_project\testapp\testapp\mesh.cpp(110): warning C4018: '<': signed/unsigned mismatch
+c:\users\desmond\documents\github\ict397_project\testapp\testapp\model.cpp(55): warning C4018: '<': signed/unsigned mismatch
+c:\users\desmond\documents\github\ict397_project\testapp\testapp\model.cpp(64): warning C4018: '<': signed/unsigned mismatch
+c:\users\desmond\documents\github\ict397_project\testapp\testapp\model.cpp(75): warning C4018: '<': signed/unsigned mismatch
+c:\users\desmond\documents\github\ict397_project\testapp\testapp\model.cpp(90): warning C4018: '<': signed/unsigned mismatch
+c:\users\desmond\documents\github\ict397_project\testapp\testapp\model.cpp(103): warning C4018: '<': signed/unsigned mismatch
+c:\users\desmond\documents\github\ict397_project\testapp\testapp\model.cpp(143): warning C4018: '<': signed/unsigned mismatch
+c:\users\desmond\documents\github\ict397_project\testapp\testapp\model.cpp(145): warning C4018: '<': signed/unsigned mismatch
+c:\users\desmond\documents\github\ict397_project\testapp\testapp\model.cpp(176): warning C4018: '<': signed/unsigned mismatch
+c:\users\desmond\documents\github\ict397_project\testapp\testapp\model.cpp(284): warning C4018: '<': signed/unsigned mismatch
+c:\users\desmond\documents\github\ict397_project\testapp\testapp\model.cpp(292): warning C4018: '<': signed/unsigned mismatch
   testApp.vcxproj -> C:\Users\Desmond\Documents\GitHub\ICT397_Project\testApp\Debug\testApp.exe
   testApp.vcxproj -> C:\Users\Desmond\Documents\GitHub\ICT397_Project\testApp\Debug\testApp.pdb (Full PDB)

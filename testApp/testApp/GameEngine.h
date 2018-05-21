@@ -19,7 +19,7 @@
 *
 * @bug
 */
-static Animation Anim_Test_Walk("Walk", FramesToTime(glm::vec2(1, 45)), 2);
+static Animation Anim_Test_Walk("Walk", FramesToTime(glm::vec2(1, 45)), 1);
 static Animation Anim_Test_Idle("Idle", FramesToTime(glm::vec2(51, 110)), 2);
 class GameEngine
 {

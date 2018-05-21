@@ -10,7 +10,7 @@ GameEngine::GameEngine()
 bool GameEngine::GameLoop()
 {
 	gameWorld->getCharacters()->getNPC("Mon1")->skeleton.SetIdleAnimation(&Anim_Test_Idle);
-	gameWorld->getCharacters()->getNPC("Mon1")->PlayAnimation(Anim_Test_Walk, true, true);
+	gameWorld->getCharacters()->getNPC("Mon1")->PlayAnimation(Anim_Test_Idle, true, true);
 	while (!window.windowShouldClose())
 	{
 		GLfloat currentFrame = (float)glfwGetTime();
