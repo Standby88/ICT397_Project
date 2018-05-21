@@ -19,7 +19,7 @@
 * @version 2
 * @date 1/05/2018, added a rigidbody variable so the terrain is collidable
 *
-* @todo properly map terrain to collision shape
+* @todo
 *
 * @bug
 */
@@ -101,6 +101,7 @@ public:
 	*@param float x, float y, float z
 	*/
 	void setScalingFactor(float x, float y, float z);
+
 	std::vector<float> heights;
 	void load(std::string file, int size)
 	{

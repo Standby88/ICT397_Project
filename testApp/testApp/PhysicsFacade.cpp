@@ -92,22 +92,45 @@ float PhysicsFacade::GetZPosition(int i)
 	}
 }
 
-//uses a heightmap to generate a collidable terrain
-rigidBody* PhysicsFacade::CreateHeightFieldRigidBody(
-	int heightStickWidth, int heightStickLength,
-	const void * heightfieldData, 
-	float scaleHeight, int upAxis,
-	bool useFloatData, bool flipQuadEdges)
+void PhysicsFacade::AddRigidBody(rigidBody* body)
 {
-	btScalar scaleH = (btScalar)scaleHeight;
+	if (body)
+	{
+		body->setUserIndex(AssignObjectIndex());
+		dynamicsWorld->addRigidBody(body);
+	}
+	else
+	{
+		std::cout << body->getUserIndex() << std::endl;
+	}
+}
+
+//uses a heightmap to generate a collidable terrain
+rigidBody* PhysicsFacade::CreateHeightFieldRigidBody(int heightStickWidth, int heightStickLength,
+	const void * heightfieldData, float scaleWidth, float scaleHeight, float scaleLength,
+	float heighestPoint, float lowestPoint)
+{
+	std::cout << "minimum height: " << lowestPoint << std::endl;
+	std::cout << "maximum height: " << heighestPoint << std::endl;
+
+	btScalar scaleX = (btScalar)scaleWidth;
+	btScalar scaleY = (btScalar)scaleHeight;
+	btScalar scaleZ = (btScalar)scaleLength;
+	btScalar minH = (btScalar)lowestPoint;
+	btScalar maxH = (btScalar)heighestPoint;
 	btCollisionShape* hFieldShape = new btHeightfieldTerrainShape(heightStickWidth, heightStickLength,
-		heightfieldData, scaleH, upAxis, useFloatData, flipQuadEdges);
+		heightfieldData, scaleY, minH, maxH, 1, PHY_UCHAR, true);
+
+	// scale the heightfield to match terrain mesh
+	hFieldShape->setLocalScaling(btVector3(scaleX, 1.0, scaleZ));
+
 	this->collisionShapes.push_back(hFieldShape);
 
 	btTransform terrainTransform;
 	terrainTransform.setIdentity();
 
-	terrainTransform.setOrigin(btVector3(0, 0, 0));
+	// translate heightfield to match terrain mesh
+	terrainTransform.setOrigin(btVector3((heightStickWidth * scaleX) / 2.f, ((heighestPoint + lowestPoint)) / 2.f, (heightStickLength * scaleZ) / 2.f));
 
 	btDefaultMotionState* hFieldMotionState = new btDefaultMotionState(terrainTransform);
 	//has 0 mass, it's static, won't move.
@@ -154,11 +177,12 @@ rigidBody* PhysicsFacade::CreateSphereRigidBody(float rad, float m, float xPos, 
 	sphereBody->setUserIndex(AssignObjectIndex());
 
 	//dynamicsWorld->addRigidBody(sphereBody);
-	std::cout << "hey boys" << std::endl;
+	//std::cout << "hey boys" << std::endl;
 
 	return sphereBody;
 }
 
+//doesn't appear to collide with terrain, will use capsules instead
 rigidBody* PhysicsFacade::CreateBoxRigidBody(int h, int w, int l, int m, int xPos, int yPos, int zPos)
 {
 	btCollisionShape* boxShape = new btBoxShape(btVector3(btScalar(w), btScalar(h), btScalar(l)));
@@ -186,12 +210,12 @@ rigidBody* PhysicsFacade::CreateBoxRigidBody(int h, int w, int l, int m, int xPo
 	boxBody->setUserIndex(AssignObjectIndex());
 
 	//dynamicsWorld->addRigidBody(body);
-	std::cout << "box made" << std::endl;
+	//std::cout << "box made" << std::endl;
 
 	return boxBody;
 }
 
-rigidBody* PhysicsFacade::CreatePlayerRigidBody(float radius, float height, float m, glm::vec3 pos, glm::vec3 iner)
+rigidBody* PhysicsFacade::CreatePlayerRigidBody(float radius, float height, float m, V3 pos, V3 iner)
 {
 	btCollisionShape* capsuleShape = new btCapsuleShape(radius, height);
 	this->collisionShapes.push_back(capsuleShape);
@@ -228,66 +252,38 @@ rigidBody* PhysicsFacade::CreatePlayerRigidBody(float radius, float height, floa
 	return capsuleRigidBody;
 }
 
-//not really use atm
-/*int PhysicsFacade::CreateRigidBodyPlane(const PhysicsVector& planeNorm, float oSet)
+rigidBody* PhysicsFacade::CreateCapsuleRigidBody(float radius, float height, float m, float xPos, float yPos, float zPos)
 {
-	btCollisionShape* planeShape = new btStaticPlaneShape(btVector3(planeNorm.x, planeNorm.y, planeNorm.z), oSet);
-	btVector3 planeNormal = btVector3(planeNorm.x, planeNorm.y, planeNorm.z);
-	btScalar offSet = (btScalar)oSet;
+	btCollisionShape* capsuleShape = new btCapsuleShape(radius, height);
+	this->collisionShapes.push_back(capsuleShape);
+	btTransform capsuleTransform;
+	capsuleTransform.setIdentity();
 
-	btDefaultMotionState* planeMotionShape = new btDefaultMotionState(btTransform(btQuaternion(0, 0, 0, 1), btVector3(0, -1, 0)));
-	btRigidBody::btRigidBodyConstructionInfo planeRigidBodyCI(0, planeMotionShape, planeShape, btVector3(0, 0, 0));
-	btRigidBody* planeRigidBody = new btRigidBody(planeRigidBodyCI);
-	dynamicsWorld->addRigidBody(planeRigidBody);
-	//collisionObjects.push_back(*planeRigidBody);
-	return AssignObjectIndex();
-}
-//not really use atm
-int PhysicsFacade::CreateFallingCylinderRigidBody(PhysicsVector& physVec)
-{
-	btCollisionShape* fallShape = new btCylinderShape(btVector3(physVec.x, physVec.y, physVec.z));
-	
-	btDefaultMotionState* fallMotionState = new btDefaultMotionState(btTransform(btQuaternion(0, 0, 0, 1), btVector3(0, 50, 0)));
-	btScalar mass = 1;
-	btVector3 fallInertia(0, 0, 0);
-	fallShape->calculateLocalInertia(mass, fallInertia);
-	btRigidBody::btRigidBodyConstructionInfo fallRigidBodyCI(mass, fallMotionState, fallShape, fallInertia);
-	btRigidBody* fallRigidBody = new btRigidBody(fallRigidBodyCI);
-	dynamicsWorld->addRigidBody(fallRigidBody);
-	//collisionObjects.push_back(*fallRigidBody);
-	return AssignObjectIndex();
-}
-//not really use atm
-int PhysicsFacade::CreateFallingCapsuleRigidBody(float radius, float height)
-{
-	btCollisionShape* fallShape = new btCapsuleShape(radius, height);
+	capsuleTransform.setOrigin(btVector3(xPos, yPos, zPos));
+	btScalar capsuleMass(m);
 
-	btDefaultMotionState* fallMotionState = new btDefaultMotionState(btTransform(btQuaternion(0, 0, 0, 1), btVector3(0, 50, 0)));
-	btScalar mass = 1;
-	btVector3 fallInertia(0, 0, 0);
-	fallShape->calculateLocalInertia(mass, fallInertia);
-	btRigidBody::btRigidBodyConstructionInfo fallRigidBodyCI(mass, fallMotionState, fallShape, fallInertia);
-	btRigidBody* fallRigidBody = new btRigidBody(fallRigidBodyCI);
-	dynamicsWorld->addRigidBody(fallRigidBody);
-	//collisionObjects.push_back(*fallRigidBody);
-	return AssignObjectIndex();
-}
-//not really use atm
-int PhysicsFacade::CreateFallingConeRigidBody(float radius, float height)
-{
-	btCollisionShape* fallShape = new btConeShape(radius, height);
-	
-	btDefaultMotionState* fallMotionState = new btDefaultMotionState(btTransform(btQuaternion(0, 0, 0, 1), btVector3(0, 50, 0)));
-	btScalar mass = 1;
-	btVector3 fallInertia(0, 0, 0);
-	fallShape->calculateLocalInertia(mass, fallInertia);
-	btRigidBody::btRigidBodyConstructionInfo fallRigidBodyCI(mass, fallMotionState, fallShape, fallInertia);
-	btRigidBody* fallRigidBody = new btRigidBody(fallRigidBodyCI);
-	dynamicsWorld->addRigidBody(fallRigidBody);
-	//collisionObjects.push_back(*fallRigidBody);
-	return AssignObjectIndex();
-}*/
+	bool isDynamic = (capsuleMass != 0.f);
 
+	btVector3 localInertia(btVector3(0.f, 0.f, 0.f));
+
+	if (isDynamic)
+	{
+		capsuleShape->calculateLocalInertia(capsuleMass, localInertia);
+	}
+
+	btDefaultMotionState* capsuleMotionState = new btDefaultMotionState(capsuleTransform);
+
+	btRigidBody::btRigidBodyConstructionInfo capsuleRigidBodyCI(capsuleMass, capsuleMotionState, capsuleShape, localInertia);
+	btRigidBody* capsuleRigidBody = new btRigidBody(capsuleRigidBodyCI);
+
+	capsuleRigidBody->setUserIndex(AssignObjectIndex());
+
+	//capsuleRigidBody->setGravity(btVector3(0, -10, 0));
+
+	//dynamicsWorld->addRigidBody(capsuleRigidBody);
+
+	return capsuleRigidBody;
+}
 
 void PhysicsFacade::StepSimulation(float tStep, int maxSubSteps, V3 &playerPos)
 {
@@ -343,10 +339,10 @@ void PhysicsFacade::StepSimulation(float tStep, int maxSubSteps, V3 &playerPos)
 			//std::cout << "y after: " << playerPos.y << std::endl;
 			//std::cout << "z after: " << playerPos.z << std::endl;
 
-
+			std::cout << "world pos object " << i << " " << float(trans.getOrigin().getX()) << " "
+				<< float(trans.getOrigin().getY()) << " " << float(trans.getOrigin().getZ()) << std::endl;
 		}
-		std::cout << "world pos object " << i << " " << float(trans.getOrigin().getX()) << " "
-			<< float(trans.getOrigin().getY()) << " " << float(trans.getOrigin().getZ()) << std::endl;
+
 	}
 	
 }
@@ -372,7 +368,7 @@ void PhysicsFacade::scriptRegister(lua_State * L)
 		.addFunction("CreateHeightFieldRigidBody", &PhysicsFacade::CreateHeightFieldRigidBody)
 		.addFunction("CreateSphereRigidBody", &PhysicsFacade::CreateSphereRigidBody)
 		.addFunction("CreatePlayerRigidBody", &PhysicsFacade::CreatePlayerRigidBody)
-		.addFunction("CreateBoxRigidBody", &PhysicsFacade::CreateBoxRigidBody)
+		.addFunction("CreateCapsuleRigidBody", &PhysicsFacade::CreateBoxRigidBody)
 		.addFunction("SetGravity", &PhysicsFacade::SetGravity)
 		.addFunction("print", &PhysicsFacade::print)
 		.endClass()

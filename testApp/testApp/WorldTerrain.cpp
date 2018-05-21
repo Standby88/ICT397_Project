@@ -138,11 +138,29 @@ int WorldTerrain::getSize()
 
 void WorldTerrain::CreateTerrainRigidBody()
 {
-	terrainData = new unsigned char[size*size];
+	terrainData = new unsigned char[size * size];
+	float total = 0, aveH = 0, maxH = 0, minH = 1000;
 	for (int i = 0; i < heights.size(); i++)
 	{
 		terrainData[i] = heights[i];
+		if (maxH < terMesh.vertices[i].Position.y)
+		{
+			maxH = terMesh.vertices[i].Position.y;
+		}
+		if (minH > terMesh.vertices[i].Position.y)
+		{
+			minH = terMesh.vertices[i].Position.y;
+		}
+
 	}
-	terrainBody = wPhysFac->CreateHeightFieldRigidBody(size, size,terrainData, scale.y, 1, false, false);
-	std::cout << "rigidBodyID for WorldTerrain: " << terrainBody->getUserIndex() << std::endl;
+
+	/*std::cout << "minimum height: " << minH << std::endl;
+	std::cout << "maximum height: " << maxH << std::endl;*/
+
+	terrainBody = wPhysFac->CreateHeightFieldRigidBody(size, size, terrainData, scale.x, scale.y, scale.z, maxH, minH);
+
+	/*std::cout << "rigidBodyID for WorldTerrain: " << terrainBody->getUserIndex() << std::endl;
+	std::cout << "Centrepoint for WorldTerrain: " << terrainBody->getCenterOfMassPosition().getX() << " "
+	<< terrainBody->getCenterOfMassPosition().getY() << " "
+			<< terrainBody->getCenterOfMassPosition().getZ() << std::endl;*/
 }

@@ -137,6 +137,6 @@ void Camera::updateCameraVectors()
 
 void Camera::CreateCameraRigidBody()
 {
-	camBody = cPhysFac->CreatePlayerRigidBody(1.5, 1.75, 60, position, glm::vec3(0, 0, 0));
+	camBody = cPhysFac->CreatePlayerRigidBody(0.5f, 1.75f, 60.0f, position, V3(0, 0, 0));
 	std::cout << "rigidBodyID for Camera: " << camBody->getUserIndex() << std::endl;
 }
