@@ -1,7 +1,7 @@
 --asteroid object
 --print ("First Environmental Object")
-posX = 10.0
-posY = 0.0
+posX = 20.0
+posY = 200.0
 posZ = 0.0
 A2 = Factory:Create("EnvironObj")
 A2 = test:convert(A2)

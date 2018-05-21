@@ -60,6 +60,9 @@ private:
 	std::unordered_map<std::string, EnvironmentObject* > environmentObjList;
 	std::unordered_map<std::string, EnvironmentObject* >::iterator envItr;
 
+	std::unordered_map<std::string, NPC* > nPCList;
+	std::unordered_map<std::string, NPC* >::iterator nPCItr;
+
 public:
 
 	GameController(GameWorld* gw);
@@ -67,6 +70,7 @@ public:
 	~GameController();
 
 	void update(GLfloat deltaTime);
+
 	Camera* getGameCamera();
 	
 	void saveGame();

@@ -130,7 +130,7 @@ rigidBody* PhysicsFacade::CreateHeightFieldRigidBody(int heightStickWidth, int h
 	terrainTransform.setIdentity();
 
 	// translate heightfield to match terrain mesh
-	terrainTransform.setOrigin(btVector3((heightStickWidth * scaleX) / 2.f, ((heighestPoint + lowestPoint)) / 2.f, (heightStickLength * scaleZ) / 2.f));
+	terrainTransform.setOrigin(btVector3(((heightStickWidth * scaleX) / 2.f) - 1, (((heighestPoint + lowestPoint)) / 2.f) + 1, ((heightStickLength * scaleZ) / 2.f) - 1));
 
 	btDefaultMotionState* hFieldMotionState = new btDefaultMotionState(terrainTransform);
 	//has 0 mass, it's static, won't move.
@@ -142,7 +142,9 @@ rigidBody* PhysicsFacade::CreateHeightFieldRigidBody(int heightStickWidth, int h
 		std::cout << "HeightfieldData is not NULL" << std::endl;
 	}
 
-	hFieldRigidBody->setUserIndex(AssignObjectIndex());
+	terrainID = AssignObjectIndex();
+	hFieldRigidBody->setUserIndex(terrainID);
+	hFieldRigidBody->setFriction(btScalar(10));
 
 	dynamicsWorld->addRigidBody(hFieldRigidBody);
 
@@ -287,6 +289,13 @@ rigidBody* PhysicsFacade::CreateCapsuleRigidBody(float radius, float height, flo
 
 void PhysicsFacade::StepSimulation(float tStep, int maxSubSteps, V3 &playerPos)
 {
+	bool notMoved = false;
+	//check that the camera is being moved through input
+	if (playerPos.x == playerPosition.getX() && playerPos.y == playerPosition.getY() && playerPos.z == playerPosition.getZ())
+	{
+		notMoved = true;
+	}
+
 	dynamicsWorld->stepSimulation(tStep, maxSubSteps);
 
 	//update positions of all objects in dynamicsWorld
@@ -296,12 +305,22 @@ void PhysicsFacade::StepSimulation(float tStep, int maxSubSteps, V3 &playerPos)
 		btRigidBody* body = btRigidBody::upcast(obj);
 		btTransform trans;
 
+		//Checks if the player is colliding with terrain, and if they are, stops vertical sliding
 		//reset forces on player before next step simulation
 		if (body->getUserIndex() == playerID)
 		{
+			if (notMoved)
+			{
+				//btVector3 tempV = body->getLinearVelocity();
+				body->setLinearVelocity(btVector3(0, 0, 0));
+			}
+			else
+			{
+				btVector3 tempV = body->getLinearVelocity();
+				body->setLinearVelocity(btVector3(0, tempV.getY(), 0));
+			}
 			//body->clearForces();
-			btVector3 tempV = body->getLinearVelocity();
-			body->setLinearVelocity(btVector3(0, tempV.getY(), 0));
+			
 		}
 
 		//update bodies

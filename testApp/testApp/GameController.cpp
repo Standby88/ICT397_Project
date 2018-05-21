@@ -10,6 +10,35 @@ GameController::GameController(GameWorld * gw)
 	playerInput = PlayerInput::getCurrentPlayerInput();
 	playerInput.SetAttributes(camera);
 	playerInput.SetCallbacks();
+
+	environmentObjList = gameWorld->getEnvironment()->getEnObjMap();
+
+	//for loop that uses an iterator to go through and add object's rigidbodies to the physics world
+	for (envItr = environmentObjList.begin(); envItr != environmentObjList.end(); envItr++)
+	{
+		if ((*envItr).second->GetRigidBody())
+		{
+			PhysFac->AddRigidBody((*envItr).second->GetRigidBody());
+		}
+		else
+		{
+			cout << "No rigid body for " << (*envItr).first << std::endl;
+		}
+	}
+
+	nPCList = gameWorld->getCharacters()->getCharMap();
+
+	for (nPCItr = nPCList.begin(); nPCItr != nPCList.end(); nPCItr++)
+	{
+		if ((*nPCItr).second->GetRigidBody())
+		{
+			PhysFac->AddRigidBody((*nPCItr).second->GetRigidBody());
+		}
+		else
+		{
+			cout << "No rigid body for " << (*nPCItr).first << std::endl;
+		}
+	}
 }
 
 GameController::~GameController()
@@ -58,9 +87,27 @@ void GameController::update(GLfloat deltaTime)
 		}
 		else
 		{
-			cout << "No rigid body " << std::endl;
+			std::cout << "No rigid body " << std::endl;
 		}
 
+	}
+
+	nPCList = gameWorld->getCharacters()->getCharMap();
+	tempInd = 0;
+
+	for (nPCItr = nPCList.begin(); nPCItr != nPCList.end(); nPCItr++)
+	{
+		if ((*nPCItr).second->GetRigidBody())
+		{
+			tempInd = (*nPCItr).second->GetRigidBody()->getUserIndex();
+			(*nPCItr).second->updateObject(PhysFac->GetXPosition(tempInd),
+				PhysFac->GetYPosition(tempInd),
+				PhysFac->GetZPosition(tempInd));
+		}
+		else
+		{
+			std::cout << "No rigid body" << std::endl;
+		}
 	}
 }
 

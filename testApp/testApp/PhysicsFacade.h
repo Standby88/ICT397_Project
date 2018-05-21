@@ -83,6 +83,8 @@ private:
 
 	int playerID;
 
+	int terrainID;
+
 	int bodyID;
 
 	/**
