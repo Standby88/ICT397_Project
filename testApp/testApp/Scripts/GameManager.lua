@@ -26,10 +26,10 @@ Factory:Register("EnvironObj", EOC)
 Factory:Register("WorldTerrain", WTC)
 Factory:Register("NPCObj", NPCC)
 
---require "Scripts/Terrain"
+require "Scripts/Terrain"
 
 TerManager = TM.TerrainManager()
---TerManager:AddTerrain(T1)
+TerManager:AddTerrain(T1)
 
 
 --require "Scripts/Asteriod_1"
@@ -69,8 +69,17 @@ CharacterMan = CM.CharacterManager()
 --CharacterMan:addNPC(Astronaut_6, "Astroboy_6")
 CharacterMan:addNPC(Monster, "Mon1")
 
+sky = SKY.skybox()
+sky:AddSkyboxPath("assets/skybox/indigo_rt.jpg")
+sky:AddSkyboxPath("assets/skybox/indigo_lf2.jpg")
+sky:AddSkyboxPath("assets/skybox/indigo_up.jpg")
+sky:AddSkyboxPath("assets/skybox/indigo_dn.jpg")
+sky:AddSkyboxPath("assets/skybox/indigo_bk.jpg")
+sky:AddSkyboxPath("assets/skybox/indigo_ft.jpg")
 
-World = GW.GameWorld(CharacterMan,TerManager, EnObjMan)
+sky:GenSkybox()
+
+World = GW.GameWorld(CharacterMan,TerManager, EnObjMan, sky)
 World:setModels(ModManager);
 Scene = SR.SceneRender(World)
 print ("en")
@@ -82,4 +91,5 @@ Scene:addShader("Shaders/coreImage.vs", "Shaders/coreImage.frag", "menuOption")
 Scene:addShader("Shaders/water.vs", "Shaders/water.frag", "water")
 print ("ani")
 Scene:addShader("Shaders/Animation.vs", "Shaders/Animation.frag", "Animation")
+Scene:addShader("Shaders/skybox.vs", "Shaders/skybox.frag", "skybox")
 print ("Game script end")

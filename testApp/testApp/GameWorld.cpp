@@ -1,12 +1,13 @@
 #include "GameWorld.h"
 
-GameWorld::GameWorld(CharacterManager * cha, TerrainManager * ter, EnvironmentObjManager * en)
+GameWorld::GameWorld(CharacterManager * cha, TerrainManager * ter, EnvironmentObjManager * en, Skybox * sky)
 {
 	photo = false;
 	manual = false;
 	worldDisplay = true;
 	wire = false;
 	camera = Camera::GetCameraInstance();
+	this->skybox = sky;
 	this->characters = cha;
 	this->terrain = ter;
 	this->environment = en;
@@ -27,13 +28,19 @@ EnvironmentObjManager * GameWorld::getEnvironment()
 	return environment;
 }
 
+Skybox * GameWorld::getSkybox()
+{
+	return skybox;
+}
+
+
 void GameWorld::scriptRegister(lua_State * L)
 {
 	using namespace luabridge;
 	getGlobalNamespace(L)
 		.beginNamespace("GW")
 		.beginClass<GameWorld>("GameWorld")
-		.addConstructor<void(*) (CharacterManager*,TerrainManager*, EnvironmentObjManager*)>()
+		.addConstructor<void(*) (CharacterManager*,TerrainManager*, EnvironmentObjManager*, Skybox *)>()
 		.addFunction("setModels", &GameWorld::setModels)
 		.endClass()
 		.endNamespace();

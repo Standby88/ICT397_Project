@@ -110,7 +110,8 @@ void WorldTerrain::SetTerrainVariable(std::string tex1, std::string tex2, std::s
 			terMesh.indices.push_back((short)(start + getSize()));
 		}
 	}
-	terMesh.setMesh();
+	//terMesh.setMesh();
+	terMesh.setTerrainMesh();
 	CreateTerrainRigidBody();
 	
 }

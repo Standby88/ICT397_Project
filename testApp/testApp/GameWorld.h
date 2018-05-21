@@ -4,6 +4,7 @@
 #include "CharacterManager.h"
 #include "ModelManager.h"
 #include "Camera.h"
+#include "Skybox.h"
 class GameWorld
 {
 private:
@@ -12,6 +13,7 @@ private:
 	EnvironmentObjManager * environment;
 	ModelManager * models;
 	Camera * camera;
+	Skybox * skybox;
 	bool photo;
 	bool manual;
 	bool worldDisplay;
@@ -21,10 +23,11 @@ private:
 
 	int SCREEN_WIDTH, SCREEN_HEIGHT;
 public:
-	GameWorld(CharacterManager * cha, TerrainManager * ter, EnvironmentObjManager * en);
+	GameWorld(CharacterManager * cha, TerrainManager * ter, EnvironmentObjManager * en, Skybox *in);
 	CharacterManager* getCharacters();
 	TerrainManager* getTerrain();
 	EnvironmentObjManager* getEnvironment();
+	Skybox * getSkybox();
 	void setEnvironment(EnvironmentObjManager * en)
 	{
 		environment = nullptr;

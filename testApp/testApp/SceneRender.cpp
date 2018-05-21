@@ -1,6 +1,18 @@
 #include "SceneRender.h"
 
+void SceneRender::renderSkybox(Skybox & sky, M4 view, M4 projection, Shader & S)
+{
+	glDepthFunc(GL_LEQUAL);  // Change depth function so depth test passes when values are equal to depth buffer's content
+	S.Use();
 
+	view = M4(glm::mat3(gameWorld->getView()));
+	glUniformMatrix4fv(glGetUniformLocation(S.Program, "view"), 1, GL_FALSE, glm::value_ptr(view));
+	glUniformMatrix4fv(glGetUniformLocation(S.Program, "projection"), 1, GL_FALSE, glm::value_ptr(projection));
+
+	sky.Draw();
+
+	glDepthFunc(GL_LESS); // reset depth test
+}
 
 SceneRender::SceneRender(GameWorld * gw)
 {
@@ -62,7 +74,9 @@ void SceneRender::renderGameScene()
 	EnvironmentObjManager *Eom = gameWorld->getEnvironment();
 	TerrainManager *Tm = gameWorld->getTerrain();
 	CharacterManager *Cm = gameWorld->getCharacters();
-	renderCharacters(*Cm, gameWorld->getView(), gameWorld->getProjection(), *shaders["Animation"], *shaders["environment"]);
+	Skybox *sky = gameWorld->getSkybox();
+	//renderSkybox(*sky, gameWorld->getView(), gameWorld->getProjection(), *shaders["skybox"]);
+	//renderCharacters(*Cm, gameWorld->getView(), gameWorld->getProjection(), *shaders["Animation"], *shaders["environment"]);
 	renderEnvironmentObj(*Eom, gameWorld->getView(), gameWorld->getProjection(), *shaders["environment"]);
 	renderTerrain(*Tm, gameWorld->getView(), gameWorld->getProjection(), *shaders["terrain"]);
 }

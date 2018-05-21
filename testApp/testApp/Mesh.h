@@ -132,7 +132,7 @@ public:
 	*@param Shader shader
 	*/
 	void Draw(Shader shader);
-	
+	void setTerrainMesh();
 
 private:
 	/*  Render data  */
@@ -140,7 +140,9 @@ private:
 	GLuint VAO;
 	GLuint VBO_vertices;
 	GLuint VBO_bones;
-	GLuint EBO_indices; //GLuint VAO, VBO, EBO;
+	GLuint EBO_indices; 
+	
+	GLuint VAOT, VBOT, EBOT;
 
 
 	/**

@@ -91,7 +91,7 @@ void Mesh::drawTerrain(Shader shader)
 	glActiveTexture(GL_TEXTURE3);
 	glBindTexture(GL_TEXTURE_2D, t4);
 	// Draw mesh
-	glBindVertexArray(this->VAO);
+	glBindVertexArray(this->VAOT);
 	glDrawElements(GL_TRIANGLES, this->indices.size(), GL_UNSIGNED_INT, 0);
 	glBindVertexArray(0);
 }
@@ -142,6 +142,40 @@ void Mesh::Draw(Shader shader)
 	}
 }
 
+void Mesh::setTerrainMesh()
+{
+	// Create buffers/arrays
+	glGenVertexArrays(1, &this->VAOT);
+	glGenBuffers(1, &this->VBOT);
+	glGenBuffers(1, &this->EBOT);
+
+	glBindVertexArray(this->VAO);
+	// Load data into vertex buffers
+	glBindBuffer(GL_ARRAY_BUFFER, this->VBOT);
+
+	glBufferData(GL_ARRAY_BUFFER, this->vertices.size() * sizeof(Vertex), &this->vertices[0], GL_STATIC_DRAW);
+
+	glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, this->EBOT);
+	glBufferData(GL_ELEMENT_ARRAY_BUFFER, this->indices.size() * sizeof(GLuint), &this->indices[0], GL_STATIC_DRAW);
+
+	// Set the vertex attribute pointers
+	// Vertex Positions
+	glEnableVertexAttribArray(0);
+	glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, sizeof(Vertex), (GLvoid *)0);
+	// Vertex Normals
+	glEnableVertexAttribArray(1);
+	glVertexAttribPointer(1, 3, GL_FLOAT, GL_FALSE, sizeof(Vertex), (GLvoid *)offsetof(Vertex, Normal));
+	// Vertex Texture Coords
+	glEnableVertexAttribArray(2);
+	glVertexAttribPointer(2, 2, GL_FLOAT, GL_FALSE, sizeof(Vertex), (GLvoid *)offsetof(Vertex, TexCoords));
+	//height value
+	glEnableVertexAttribArray(3);
+	glVertexAttribPointer(3, 4, GL_FLOAT, GL_FALSE, sizeof(Vertex), (GLvoid *)offsetof(Vertex, height));
+
+
+	glBindVertexArray(0);
+}
+
 
 void Mesh::setupMesh()
 {
@@ -153,10 +187,14 @@ void Mesh::setupMesh()
 	glBindBuffer(GL_ARRAY_BUFFER, 0);
 
 	//bone data
-	glGenBuffers(1, &VBO_bones);
-	glBindBuffer(GL_ARRAY_BUFFER, VBO_bones);
-	glBufferData(GL_ARRAY_BUFFER, bones_id_weights_for_each_vertex.size() * sizeof(bones_id_weights_for_each_vertex[0]), &bones_id_weights_for_each_vertex[0], GL_STATIC_DRAW);
-	glBindBuffer(GL_ARRAY_BUFFER, 0);
+	if (bones_id_weights_for_each_vertex.size() > 0)
+	{
+		glGenBuffers(1, &VBO_bones);
+		glBindBuffer(GL_ARRAY_BUFFER, VBO_bones);
+		glBufferData(GL_ARRAY_BUFFER, bones_id_weights_for_each_vertex.size() * sizeof(bones_id_weights_for_each_vertex[0]), &bones_id_weights_for_each_vertex[0], GL_STATIC_DRAW);
+		glBindBuffer(GL_ARRAY_BUFFER, 0);
+	}
+	
 
 	//numbers for sequence indices
 	glGenBuffers(1, &EBO_indices);
@@ -218,11 +256,6 @@ void Mesh::setupMesh()
 	glEnableVertexAttribArray(3);
 	glVertexAttribPointer(3, 4, GL_FLOAT, GL_FALSE, sizeof(Vertex), (GLvoid *)offsetof(Vertex, height));
 
-	glEnableVertexAttribArray(4);
-	glVertexAttribPointer(4, 4, GL_FLOAT, GL_FALSE, sizeof(Vertex), (GLvoid *)offsetof(Vertex,id));
-
-	glEnableVertexAttribArray(5);
-	glVertexAttribPointer(5, 4, GL_FLOAT, GL_FALSE, sizeof(Vertex), (GLvoid *)offsetof(Vertex, weight));
 
 	glBindVertexArray(0);*/
 }

@@ -176,6 +176,7 @@
     <ClCompile Include="ScriptEngine.cpp" />
     <ClCompile Include="Serialization.cpp" />
     <ClCompile Include="Shader.cpp" />
+    <ClCompile Include="Skybox.cpp" />
     <ClCompile Include="SOIL2\etc1_utils.c" />
     <ClCompile Include="SOIL2\image_DXT.c" />
     <ClCompile Include="SOIL2\image_helper.c" />
@@ -222,6 +223,7 @@
     <ClInclude Include="ScriptEngine.h" />
     <ClInclude Include="Serialization.h" />
     <ClInclude Include="Shader.h" />
+    <ClInclude Include="Skybox.h" />
     <ClInclude Include="SOIL2\etc1_utils.h" />
     <ClInclude Include="SOIL2\image_DXT.h" />
     <ClInclude Include="SOIL2\image_helper.h" />
