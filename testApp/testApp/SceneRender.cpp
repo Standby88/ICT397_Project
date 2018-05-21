@@ -5,6 +5,8 @@
 SceneRender::SceneRender(GameWorld * gw)
 {
 	gameWorld = gw;
+	gameWorld->setMainMenu(false);
+	gameWorld->setWorldDisplay(false);
 	menu = new Menu();
 }
 
@@ -42,7 +44,6 @@ void SceneRender::renderScene()
 	{
 		glPolygonMode(GL_FRONT_AND_BACK, GL_FILL);
 	}
-
 
 	if (gameWorld->getWorldDisplay() == false)
 	{
@@ -108,6 +109,12 @@ void SceneRender::renderTerrain(TerrainManager & TM, M4 view, M4 projection, Sha
 
 void SceneRender::renderMenu(Shader& s)
 {
+	if (gameWorld->getMainMenu() == true)
+	{
+		glPolygonMode(GL_FRONT_AND_BACK, GL_FILL);
+		menu->drawMainMenu(s);
+	}
+	else
 	if (gameWorld->getManual() == true)
 	{
 		glPolygonMode(GL_FRONT_AND_BACK, GL_FILL);

@@ -9,6 +9,7 @@ private:
 	GLuint VBO, VAO, EBO;
 	GLuint texture1;
 	GLuint texture2;
+	GLuint texture3;
 
 	GLfloat points[32] =
 	{
@@ -26,11 +27,14 @@ private:
 	};
 
 	void setupPhoto();
+	//void setupPhoto(const char* filePath);
 	void setUpmanual();
+	void setUpMainMenu();
 public:
 	Menu();
 	~Menu();
 	void drawPhoto(Shader S);
 	void drawMaunal(Shader S);
+	void drawMainMenu(Shader S);
 };
 

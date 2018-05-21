@@ -10,7 +10,8 @@ PlayerInput::PlayerInput()
 	photo = false;
 	manual = false;
 	wire = false;
-	worldDisplay = true;
+	mainMenu = true;
+	worldDisplay = false;
 	m_time = glfwGetTime();
 
 }
@@ -26,7 +27,8 @@ PlayerInput::PlayerInput(int width, int height, Camera *cam, GLfloat* deltaTime)
 	photo = false;
 	manual = false;
 	wire = false;
-	worldDisplay = true;
+	worldDisplay = false;
+	mainMenu = true;
 }
 
 void PlayerInput::destroyCurrentPlayerInput()
@@ -119,51 +121,81 @@ void PlayerInput::WrapKeyCallback(GLFWwindow *window, int key, int scancode, int
 
 void PlayerInput::KeyCallback(GLFWwindow *window, int key, int scancode, int action, int mode)
 {
-	if (key == GLFW_KEY_X && action == GLFW_PRESS)
+	if (mainMenu)
 	{
-		if (photo == false)
+		if (key == GLFW_KEY_N && action == GLFW_PRESS)
 		{
-			photo = true;
-			worldDisplay = false;
-		}
-		else if(photo == true)
-		{
-			glfwSetWindowShouldClose(glfwGetCurrentContext(), GL_TRUE);
-		}
-	}
-
-	if (key == GLFW_KEY_M && action == GLFW_PRESS)
-	{
-		if (manual == false)
-		{
-			manual = true;
-			worldDisplay = false;
-		}
-		else if (manual == true)
-		{
-			manual = false;
+			mainMenu = false;
 			worldDisplay = true;
 		}
-	}if (key == GLFW_KEY_K && action == GLFW_PRESS)
-	{
-		if (wire == false)
+		if (key == GLFW_KEY_L && action == GLFW_PRESS)
 		{
-			wire = true;
+			std::cout << "Load." << "\n";
 		}
-		else if (wire == true)
+		if (key == GLFW_KEY_ESCAPE && action == GLFW_PRESS)
 		{
-			wire = false;
+			std::cout << "Escape.\n";
+			glfwSetWindowShouldClose(glfwGetCurrentContext(), GL_TRUE);
 		}
+		if (key == GLFW_KEY_S && action == GLFW_PRESS)
+		{
+			std::cout << "Save.\n";
+		}
+
 	}
-	if (key >= 0 && key < 1024)
+	else
 	{
-		if (action == GLFW_PRESS)
+		if (key == GLFW_KEY_ESCAPE && action == GLFW_PRESS)
 		{
-			keys[key] = true;
+			mainMenu = true;
+			worldDisplay = false;
 		}
-		else if (action == GLFW_RELEASE)
+		if (key == GLFW_KEY_X && action == GLFW_PRESS)
 		{
-			keys[key] = false;
+			if (photo == false)
+			{
+				photo = true;
+				worldDisplay = false;
+			}
+			else if (photo == true)
+			{
+				glfwSetWindowShouldClose(glfwGetCurrentContext(), GL_TRUE);
+			}
+		}
+
+		if (key == GLFW_KEY_M && action == GLFW_PRESS)
+		{
+			if (manual == false)
+			{
+				manual = true;
+				worldDisplay = false;
+			}
+			else if (manual == true)
+			{
+				manual = false;
+				worldDisplay = true;
+			}
+		}if (key == GLFW_KEY_K && action == GLFW_PRESS)
+		{
+			if (wire == false)
+			{
+				wire = true;
+			}
+			else if (wire == true)
+			{
+				wire = false;
+			}
+		}
+		if (key >= 0 && key < 1024)
+		{
+			if (action == GLFW_PRESS)
+			{
+				keys[key] = true;
+			}
+			else if (action == GLFW_RELEASE)
+			{
+				keys[key] = false;
+			}
 		}
 	}
 }
@@ -197,6 +229,11 @@ void PlayerInput::WrapScrollCallback(GLFWwindow *window, double xOffset, double 
 {
 	PlayerInput *p = &getCurrentPlayerInput();
 	p->ScrollCallback(glfwGetCurrentContext(), xOffset, yOffset);
+}
+
+bool PlayerInput::getMainMenu()
+{
+	return mainMenu;
 }
 
 bool PlayerInput::getPhoto()

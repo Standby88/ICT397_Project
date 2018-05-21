@@ -9,6 +9,7 @@ private:
 	TerrainManager * terrain;
 	EnvironmentObjManager * environment;
 	bool photo;
+	bool mainMenu;
 	bool manual;
 	bool worldDisplay;
 	bool wire;
@@ -24,12 +25,14 @@ public:
 	static void scriptRegister(lua_State * L);
 	~GameWorld();
 	void setManual(bool man);
+	void setMainMenu(bool main);
 	void setPhoto(bool pho);
 	void setWorldDisplay(bool wor);
 	void setWire(bool wir);
 
 	bool getWire();
 	bool getManual();
+	bool getMainMenu();
 	bool getPhoto();
 	bool getWorldDisplay();
 	void setScreenHW(int w, int h);

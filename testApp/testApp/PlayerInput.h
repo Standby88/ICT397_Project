@@ -91,6 +91,8 @@ public:
 	static void WrapScrollCallback(GLFWwindow *window, double xOffset, double yOffset);
 
 	bool getPhoto();
+
+	bool getMainMenu();
 	
 
 	bool getManual();
@@ -150,5 +152,7 @@ private:
 	bool manual;
 
 	bool worldDisplay;
+
+	bool mainMenu;
 };
 

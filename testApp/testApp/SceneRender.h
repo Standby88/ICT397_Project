@@ -40,6 +40,8 @@ private:
 
 	void renderMenu(Shader& s);
 
+	//void renderMainMenu(Shader & s);
+
 public:
 
 	/**

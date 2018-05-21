@@ -4,6 +4,7 @@ GameWorld::GameWorld(/*CharacterManager * cha,*/ TerrainManager * ter, Environme
 {
 	photo = false;
 	manual = false;
+	mainMenu = true;
 	worldDisplay = true;
 	wire = false;
 	//this->characters = cha;
@@ -52,6 +53,11 @@ void GameWorld::setManual(bool man)
 	manual = man;
 }
 
+void GameWorld::setMainMenu(bool main)
+{
+	mainMenu = main;
+}
+
 void GameWorld::setPhoto(bool pho)
 {
 	photo = pho;
@@ -75,6 +81,11 @@ bool GameWorld::getWire()
 bool GameWorld::getManual()
 {
 	return manual;
+}
+
+bool GameWorld::getMainMenu()
+{
+	return mainMenu;
 }
 
 bool GameWorld::getPhoto()
