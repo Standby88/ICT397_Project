@@ -48,7 +48,7 @@ require "Scripts/Astroboy_1"
 --require "Scripts/Astroboy_4"
 --require "Scripts/Astroboy_5"
 --require "Scripts/Astroboy_6"
-require "Scripts/Monster"
+--require "Scripts/Monster"
 
 print ("hello 2")
 
@@ -70,7 +70,7 @@ CharacterMan:addNPC(Astronaut_1, "Astroboy_1")
 --CharacterMan:addNPC(Astronaut_4, "Astroboy_4")
 --CharacterMan:addNPC(Astronaut_5, "Astroboy_5")
 --CharacterMan:addNPC(Astronaut_6, "Astroboy_6")
-CharacterMan:addNPC(Monster, "Mon1")
+--CharacterMan:addNPC(Monster, "Mon1")
 
 sky = SKY.skybox()
 sky:AddSkyboxPath("assets/skybox/indigo_rt.jpg")

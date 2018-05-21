@@ -257,13 +257,16 @@ Model::Model(std::string path)
 void Model::Draw(Shader shader)
 {
 	std::vector<aiMatrix4x4> transforms;
-	boneTransform((double)FrameTime::getInstance()->getDeltaTime() / 1000.0f, transforms);
-
-	for (int i = 0; i < transforms.size(); i++)
+	if (scene->HasAnimations() == true)
 	{
-		glUniformMatrix4fv(m_bone_location[i], 1, GL_TRUE, (const GLfloat*)&transforms[i]);
-	}
+		boneTransform((double)FrameTime::getInstance()->getDeltaTime() / 1000.0f, transforms);
 
+		for (int i = 0; i < transforms.size(); i++)
+		{
+			glUniformMatrix4fv(m_bone_location[i], 1, GL_TRUE, (const GLfloat*)&transforms[i]);
+		}
+	}
+	
 	for (GLuint i = 0; i < this->m_meshes.size(); i++)
 	{
 		this->m_meshes[i].Draw(shader);
@@ -392,28 +395,32 @@ void Model::loadModel(string path)
 	m_RootNode = scene->mRootNode;
 	m_global_inverse_transform = scene->mRootNode->mTransformation;
 	m_global_inverse_transform.Inverse();
-
-	if (scene->mAnimations[0]->mTicksPerSecond != 0.0)
+	if (scene->HasAnimations() == true)
 	{
-		ticks_per_second = scene->mAnimations[0]->mTicksPerSecond;
+		if (scene->mAnimations[0]->mTicksPerSecond != 0.0)
+		{
+			ticks_per_second = scene->mAnimations[0]->mTicksPerSecond;
+		}
+		else
+		{
+			ticks_per_second = 25.0f;
+		}
+		cout << "scene->HasAnimations() 1: " << scene->HasAnimations() << endl;
+		cout << "scene->mNumMeshes 1: " << scene->mNumMeshes << endl;
+		cout << "scene->mAnimations[0]->mNumChannels 1: " << scene->mAnimations[0]->mNumChannels << endl;
+		cout << "scene->mAnimations[0]->mDuration 1: " << scene->mAnimations[0]->mDuration << endl;
+		cout << "scene->mAnimations[0]->mTicksPerSecond 1: " << scene->mAnimations[0]->mTicksPerSecond << endl << endl;
 	}
-	else
-	{
-		ticks_per_second = 25.0f;
-	}
+	
 
-	cout << "scene->HasAnimations() 1: " << scene->HasAnimations() << endl;
-	cout << "scene->mNumMeshes 1: " << scene->mNumMeshes << endl;
-	cout << "scene->mAnimations[0]->mNumChannels 1: " << scene->mAnimations[0]->mNumChannels << endl;
-	cout << "scene->mAnimations[0]->mDuration 1: " << scene->mAnimations[0]->mDuration << endl;
-	cout << "scene->mAnimations[0]->mTicksPerSecond 1: " << scene->mAnimations[0]->mTicksPerSecond << endl << endl;
+
 
 	processNode(m_RootNode, scene);
-
+	/*
 	for (uint i = 0; i < scene->mAnimations[0]->mNumChannels; i++)
 	{
 		cout << scene->mAnimations[0]->mChannels[i]->mNodeName.C_Str() << endl;
-	}
+	}*/
 
 
 

@@ -358,8 +358,8 @@ void PhysicsFacade::StepSimulation(float tStep, int maxSubSteps, V3 &playerPos)
 			//std::cout << "y after: " << playerPos.y << std::endl;
 			//std::cout << "z after: " << playerPos.z << std::endl;
 
-			std::cout << "world pos object " << i << " " << float(trans.getOrigin().getX()) << " "
-				<< float(trans.getOrigin().getY()) << " " << float(trans.getOrigin().getZ()) << std::endl;
+			//std::cout << "world pos object " << i << " " << float(trans.getOrigin().getX()) << " "<< float(trans.getOrigin().getY()) << " " << float(trans.getOrigin().getZ()) << std::endl;
+				
 		}
 
 	}
@@ -387,7 +387,7 @@ void PhysicsFacade::scriptRegister(lua_State * L)
 		.addFunction("CreateHeightFieldRigidBody", &PhysicsFacade::CreateHeightFieldRigidBody)
 		.addFunction("CreateSphereRigidBody", &PhysicsFacade::CreateSphereRigidBody)
 		.addFunction("CreatePlayerRigidBody", &PhysicsFacade::CreatePlayerRigidBody)
-		.addFunction("CreateCapsuleRigidBody", &PhysicsFacade::CreateBoxRigidBody)
+		.addFunction("CreateCapsuleRigidBody", &PhysicsFacade::CreateCapsuleRigidBody)
 		.addFunction("SetGravity", &PhysicsFacade::SetGravity)
 		.addFunction("print", &PhysicsFacade::print)
 		.endClass()
