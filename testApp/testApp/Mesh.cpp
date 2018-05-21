@@ -149,7 +149,7 @@ void Mesh::setTerrainMesh()
 	glGenBuffers(1, &this->VBOT);
 	glGenBuffers(1, &this->EBOT);
 
-	glBindVertexArray(this->VAO);
+	glBindVertexArray(this->VAOT);
 	// Load data into vertex buffers
 	glBindBuffer(GL_ARRAY_BUFFER, this->VBOT);
 

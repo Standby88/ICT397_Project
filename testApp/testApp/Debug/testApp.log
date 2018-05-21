@@ -1,15 +1,15 @@
 ﻿  SceneRender.cpp
-c:\users\h3mster\documents\github\ict397_project\testapp\testapp\animation.h(7): warning C4305: 'initializing': truncation from 'double' to 'float'
-c:\users\h3mster\documents\github\ict397_project\testapp\testapp\animation.h(15): warning C4305: 'initializing': truncation from 'double' to 'float'
-c:\users\h3mster\documents\github\ict397_project\testapp\testapp\bone.h(117): warning C4018: '<': signed/unsigned mismatch
-c:\users\h3mster\documents\github\ict397_project\testapp\testapp\bone.h(166): warning C4018: '<': signed/unsigned mismatch
-c:\users\h3mster\documents\github\ict397_project\testapp\testapp\bone.h(204): warning C4018: '>': signed/unsigned mismatch
-c:\users\h3mster\documents\github\ict397_project\testapp\testapp\bone.h(257): warning C4018: '<': signed/unsigned mismatch
-c:\users\h3mster\documents\github\ict397_project\testapp\testapp\model.h(194): warning C4018: '<': signed/unsigned mismatch
-c:\users\h3mster\documents\github\ict397_project\ext_libs\bullet\src\linearmath\btidebugdraw.h(169): warning C4305: 'argument': truncation from 'double' to 'const btScalar'
-c:\users\h3mster\documents\github\ict397_project\ext_libs\bullet\src\linearmath\btidebugdraw.h(170): warning C4305: 'argument': truncation from 'double' to 'const btScalar'
-c:\users\h3mster\documents\github\ict397_project\ext_libs\bullet\src\linearmath\btidebugdraw.h(171): warning C4305: 'argument': truncation from 'double' to 'const btScalar'
-c:\users\h3mster\documents\github\ict397_project\testapp\testapp\physicsfacade.h(44): warning C4091: 'typedef ': ignored on left of 'PhysicsVector' when no variable is declared
-c:\users\h3mster\documents\github\ict397_project\testapp\testapp\scenerender.cpp(170): warning C4101: 'angle': unreferenced local variable
-  testApp.vcxproj -> C:\Users\h3mster\Documents\GitHub\ICT397_Project\testApp\Debug\testApp.exe
-  testApp.vcxproj -> C:\Users\h3mster\Documents\GitHub\ICT397_Project\testApp\Debug\testApp.pdb (Full PDB)
+c:\users\ducku\documents\ict397 - game\work\ict397_project\testapp\testapp\animation.h(7): warning C4305: 'initializing': truncation from 'double' to 'float'
+c:\users\ducku\documents\ict397 - game\work\ict397_project\testapp\testapp\animation.h(15): warning C4305: 'initializing': truncation from 'double' to 'float'
+c:\users\ducku\documents\ict397 - game\work\ict397_project\testapp\testapp\bone.h(117): warning C4018: '<': signed/unsigned mismatch
+c:\users\ducku\documents\ict397 - game\work\ict397_project\testapp\testapp\bone.h(166): warning C4018: '<': signed/unsigned mismatch
+c:\users\ducku\documents\ict397 - game\work\ict397_project\testapp\testapp\bone.h(204): warning C4018: '>': signed/unsigned mismatch
+c:\users\ducku\documents\ict397 - game\work\ict397_project\testapp\testapp\bone.h(257): warning C4018: '<': signed/unsigned mismatch
+c:\users\ducku\documents\ict397 - game\work\ict397_project\testapp\testapp\model.h(194): warning C4018: '<': signed/unsigned mismatch
+c:\users\ducku\documents\ict397 - game\work\ict397_project\ext_libs\bullet\src\linearmath\btidebugdraw.h(169): warning C4305: 'argument': truncation from 'double' to 'const btScalar'
+c:\users\ducku\documents\ict397 - game\work\ict397_project\ext_libs\bullet\src\linearmath\btidebugdraw.h(170): warning C4305: 'argument': truncation from 'double' to 'const btScalar'
+c:\users\ducku\documents\ict397 - game\work\ict397_project\ext_libs\bullet\src\linearmath\btidebugdraw.h(171): warning C4305: 'argument': truncation from 'double' to 'const btScalar'
+c:\users\ducku\documents\ict397 - game\work\ict397_project\testapp\testapp\physicsfacade.h(44): warning C4091: 'typedef ': ignored on left of 'PhysicsVector' when no variable is declared
+c:\users\ducku\documents\ict397 - game\work\ict397_project\testapp\testapp\scenerender.cpp(170): warning C4101: 'angle': unreferenced local variable
+  testApp.vcxproj -> C:\Users\Ducku\Documents\ICT397 - game\Work\ICT397_Project\testApp\Debug\testApp.exe
+  testApp.vcxproj -> C:\Users\Ducku\Documents\ICT397 - game\Work\ICT397_Project\testApp\Debug\testApp.pdb (Full PDB)
