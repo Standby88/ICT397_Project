@@ -15,6 +15,8 @@
 
 using namespace std;
 class GameObject3D;
+typedef unsigned int uint;
+#define NUM_BONES_PER_VEREX 4
 ///holds all the information about a single vertex point
 struct Vertex
 {
@@ -26,9 +28,6 @@ struct Vertex
 	V2 TexCoords;
 	//height of point
 	float height;
-
-	float weight[4];
-	unsigned int id[4];
 };
 
 ///holds the assimp information a texture
@@ -38,7 +37,36 @@ struct Texture
 	string type;
 	aiString path;
 };
+struct BoneMatrix
+{
+	aiMatrix4x4 offset_matrix;
+	aiMatrix4x4 final_world_transform;
 
+};
+struct VertexBoneData
+{
+	uint ids[NUM_BONES_PER_VEREX];   // we have 4 bone ids for EACH vertex & 4 weights for EACH vertex
+	float weights[NUM_BONES_PER_VEREX];
+
+	VertexBoneData()
+	{
+		memset(ids, 0, sizeof(ids));    // init all values in array = 0
+		memset(weights, 0, sizeof(weights));
+	}
+
+	void addBoneData(uint bone_id, float weight)
+	{
+		for (uint i = 0; i < NUM_BONES_PER_VEREX; i++)
+		{
+			if (weights[i] == 0.0)
+			{
+				ids[i] = bone_id;
+				weights[i] = weight;
+				return;
+			}
+		}
+	}
+};
 /**
 * @class Mesh
 * @brief Used to store mesh details and handle mesh use
@@ -59,8 +87,11 @@ public:
 	vector<GLuint> indices;
 	vector<Texture> textures;
 	GLuint terrainTex[4];
-	Skeleton sceneLoaderSkeleton;
 	
+	vector<VertexBoneData> bones_id_weights_for_each_vertex;
+
+
+	Skeleton sceneLoaderSkeleton;
 	/*  Functions  */
 	// Constructor
 	/**
@@ -68,7 +99,7 @@ public:
 	*
 	*@param vector<Vertex> vertices, vector<GLuint> indices, vector<Texture> texture
 	*/
-	Mesh(vector<Vertex> vertices, vector<GLuint> indices, vector<Texture> textures);
+	Mesh(vector<Vertex> vertices, vector<GLuint> indices, vector<Texture> textures, vector<VertexBoneData> bone_id_weights);
 	
 	void DrawCharacter(Shader shader, GameObject3D * parentGObj);
 	/**
@@ -105,7 +136,11 @@ public:
 
 private:
 	/*  Render data  */
-	GLuint VAO, VBO, EBO;
+	
+	GLuint VAO;
+	GLuint VBO_vertices;
+	GLuint VBO_bones;
+	GLuint EBO_indices; //GLuint VAO, VBO, EBO;
 
 
 	/**
