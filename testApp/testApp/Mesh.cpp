@@ -220,7 +220,7 @@ void Mesh::setupMesh()
 	glBindBuffer(GL_ARRAY_BUFFER, VBO_bones);
 	glEnableVertexAttribArray(4);
 	glVertexAttribIPointer(4, 4, GL_INT, sizeof(VertexBoneData), (GLvoid*)0); // for INT Ipointer
-	glEnableVertexAttribArray(5;
+	glEnableVertexAttribArray(5);
 	glVertexAttribPointer(5, 4, GL_FLOAT, GL_FALSE, sizeof(VertexBoneData), (GLvoid*)offsetof(VertexBoneData, weights));
 	glBindBuffer(GL_ARRAY_BUFFER, 0);
 
