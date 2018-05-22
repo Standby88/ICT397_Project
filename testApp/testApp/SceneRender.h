@@ -70,7 +70,8 @@ public:
 	
 	void renderWater();
 	
-	 static void scriptRegister(lua_State * L);
+	static void scriptRegister(lua_State * L);
 
+	Shader* getShader(std::string name);
 };
 

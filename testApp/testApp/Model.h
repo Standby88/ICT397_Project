@@ -57,7 +57,7 @@ public:
 
 	static const uint MAX_BONES = 100;
 	
-	void initShaders(Shader &s);
+	void initShaders(Shader *s);
 
 	/**
 	* @brief Draws the model, and thus all its meshes

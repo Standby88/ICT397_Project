@@ -28,6 +28,7 @@ GameController::GameController(GameWorld * gw)
 
 	nPCList = gameWorld->getCharacters()->getCharMap();
 
+	/*
 	for (nPCItr = nPCList.begin(); nPCItr != nPCList.end(); nPCItr++)
 	{
 		if ((*nPCItr).second->GetRigidBody())
@@ -38,7 +39,7 @@ GameController::GameController(GameWorld * gw)
 		{
 			cout << "No rigid body for " << (*nPCItr).first << std::endl;
 		}
-	}
+	}*/
 }
 
 GameController::~GameController()
@@ -63,6 +64,7 @@ void GameController::update(GLfloat deltaTime)
 
 	if (gameWorld->getWorldDisplay() == true)
 	{
+		/*
 		//updating physics
 		//Running the step simulation function to update rigidbodies in the physics environment
 		PhysFac->StepSimulation(1 / 60.f, 10, camera->GetCameraPosition());
@@ -111,7 +113,7 @@ void GameController::update(GLfloat deltaTime)
 			{
 				std::cout << "No rigid body" << std::endl;
 			}
-		}
+		}*/
 	}
 	
 }

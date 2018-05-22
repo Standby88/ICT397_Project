@@ -259,7 +259,7 @@ void Model::Draw(Shader shader)
 	std::vector<aiMatrix4x4> transforms;
 	if (scene->HasAnimations() == true)
 	{
-		boneTransform((double)FrameTime::getInstance()->getDeltaTime() / 1000.0f, transforms);
+		boneTransform((double)FrameTime::getInstance()->getElapsedTime() , transforms);
 
 		for (int i = 0; i < transforms.size(); i++)
 		{
@@ -287,6 +287,7 @@ void Model::scriptRegister(lua_State * L)
 		.addConstructor<void(*) (GLchar *)>()
 		.addFunction("Draw", &Model::Draw)
 		.addFunction("getName", &Model::getName)
+		.addFunction("initShdaer", &Model::initShaders)
 		.endClass()
 		.endNamespace();
 }
@@ -301,12 +302,12 @@ void Model::DrawAnimtated(Shader & s, GameObject3D * parentGObj)
 	}
 }
 
-void Model::initShaders(Shader & s)
+void Model::initShaders(Shader * s)
 {
 	for (uint i = 0; i < MAX_BONES; i++) // get location all matrices of bones
 	{
 		string name = "bones[" + to_string(i) + "]";// name like in shader
-		m_bone_location[i] = glGetUniformLocation(s.Program, name.c_str());
+		m_bone_location[i] = glGetUniformLocation(s->Program, name.c_str());
 	}
 }
 

@@ -23,8 +23,8 @@ void NPC::Draw(Shader & S)
 {
 	if (anim == true)
 	{
-		UpdateSkeleton();
-		objectModel->DrawAnimtated(S, this);
+		//objectModel->DrawAnimtated(S, this);
+		objectModel->Draw(S);
 	}
 	else
 	{
