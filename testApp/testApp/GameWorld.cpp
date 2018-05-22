@@ -5,6 +5,7 @@ GameWorld::GameWorld(CharacterManager * cha, TerrainManager * ter, EnvironmentOb
 	photo = false;
 	manual = false;
 	worldDisplay = true;
+	mainMenu = false;
 	wire = false;
 	camera = Camera::GetCameraInstance();
 	this->skybox = sky;
@@ -76,9 +77,19 @@ void GameWorld::setWire(bool wir)
 	wire = wir;
 }
 
+void GameWorld::setMainmenu(bool menu)
+{
+	mainMenu = menu;
+}
+
 bool GameWorld::getWire()
 {
 	return wire;
+}
+
+bool GameWorld::getMainMenu()
+{
+	return mainMenu;
 }
 
 bool GameWorld::getManual()

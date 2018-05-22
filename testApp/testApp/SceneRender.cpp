@@ -158,6 +158,12 @@ void SceneRender::renderMenu(Shader& s)
 		glPolygonMode(GL_FRONT_AND_BACK, GL_FILL);
 		menu->drawPhoto(s);
 	}
+	else
+	if(gameWorld->getMainMenu() == true)
+	{
+		glPolygonMode(GL_FRONT_AND_BACK, GL_FILL);
+		menu->drawMainMenu(s);
+	}
 	
 }
 

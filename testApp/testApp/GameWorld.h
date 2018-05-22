@@ -17,6 +17,7 @@ private:
 	bool photo;
 	bool manual;
 	bool worldDisplay;
+	bool mainMenu;
 	bool wire;
 	M4 view;
 	M4 projection;
@@ -47,8 +48,10 @@ public:
 	void setPhoto(bool pho);
 	void setWorldDisplay(bool wor);
 	void setWire(bool wir);
+	void setMainmenu(bool menu);
 
 	bool getWire();
+	bool getMainMenu();
 	bool getManual();
 	bool getPhoto();
 	bool getWorldDisplay();

@@ -100,7 +100,7 @@ public:
 
 	bool getWire();
 
-	
+	bool getMainMenu();
 
 	
 
@@ -152,5 +152,6 @@ private:
 	bool manual;
 
 	bool worldDisplay;
+	bool mainMenu;
 };
 

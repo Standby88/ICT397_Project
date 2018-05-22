@@ -59,56 +59,61 @@ void GameController::update(GLfloat deltaTime)
 	gameWorld->setManual(PlayerInput::getCurrentPlayerInput().getManual());
 	gameWorld->setWorldDisplay(PlayerInput::getCurrentPlayerInput().getWorldDisplay());
 	gameWorld->setWire(PlayerInput::getCurrentPlayerInput().getWire());
+	gameWorld->setMainmenu(PlayerInput::getCurrentPlayerInput().getMainMenu());
 
-	//updating physics
-	//Running the step simulation function to update rigidbodies in the physics environment
-	PhysFac->StepSimulation(1 / 60.f, 10, camera->GetCameraPosition());
-
-	//the camera's position is updated in physics and based on collisions the new position is 
-	//now set for the user.
-	camera->SetCameraPosition(camera->GetCameraPosition());
-	environmentObjList = gameWorld->getEnvironment()->getEnObjMap();
-	//initialise an int to store userIndex so that the value doesn't need to be constantly retrieved
-	//also takes up less space and looks a little neater.
-	int tempInd = 0;
-	//for loop the uses an iterator to go through and update the positions of all environment objects and their rigidbodies
-	for (envItr = environmentObjList.begin(); envItr != environmentObjList.end(); envItr++)
+	if (gameWorld->getWorldDisplay() == true)
 	{
-		if ((*envItr).second->GetRigidBody())
+		//updating physics
+		//Running the step simulation function to update rigidbodies in the physics environment
+		PhysFac->StepSimulation(1 / 60.f, 10, camera->GetCameraPosition());
+
+		//the camera's position is updated in physics and based on collisions the new position is 
+		//now set for the user.
+		camera->SetCameraPosition(camera->GetCameraPosition());
+		environmentObjList = gameWorld->getEnvironment()->getEnObjMap();
+		//initialise an int to store userIndex so that the value doesn't need to be constantly retrieved
+		//also takes up less space and looks a little neater.
+		int tempInd = 0;
+		//for loop the uses an iterator to go through and update the positions of all environment objects and their rigidbodies
+		for (envItr = environmentObjList.begin(); envItr != environmentObjList.end(); envItr++)
 		{
-			//a temporary index is made for getting the UserIndex of a collision object in the physics environment
-			//that index is used to make sure we update the correct position for an object.
-			tempInd = (*envItr).second->GetRigidBody()->getUserIndex();
-			//std::cout << "UserIndex for object: " << tempInd << std::endl;
-			//This is to update the position of the object for drawing.
-			(*envItr).second->updateObject(PhysFac->GetXPosition(tempInd),
-				PhysFac->GetYPosition(tempInd),
-				PhysFac->GetZPosition(tempInd));
-		}
-		else
-		{
-			std::cout << "No rigid body " << std::endl;
+			if ((*envItr).second->GetRigidBody())
+			{
+				//a temporary index is made for getting the UserIndex of a collision object in the physics environment
+				//that index is used to make sure we update the correct position for an object.
+				tempInd = (*envItr).second->GetRigidBody()->getUserIndex();
+				//std::cout << "UserIndex for object: " << tempInd << std::endl;
+				//This is to update the position of the object for drawing.
+				(*envItr).second->updateObject(PhysFac->GetXPosition(tempInd),
+					PhysFac->GetYPosition(tempInd),
+					PhysFac->GetZPosition(tempInd));
+			}
+			else
+			{
+				std::cout << "No rigid body " << std::endl;
+			}
+
 		}
 
+		nPCList = gameWorld->getCharacters()->getCharMap();
+		tempInd = 0;
+
+		for (nPCItr = nPCList.begin(); nPCItr != nPCList.end(); nPCItr++)
+		{
+			if ((*nPCItr).second->GetRigidBody())
+			{
+				tempInd = (*nPCItr).second->GetRigidBody()->getUserIndex();
+				(*nPCItr).second->updateObject(PhysFac->GetXPosition(tempInd),
+					PhysFac->GetYPosition(tempInd),
+					PhysFac->GetZPosition(tempInd));
+			}
+			else
+			{
+				std::cout << "No rigid body" << std::endl;
+			}
+		}
 	}
-
-	nPCList = gameWorld->getCharacters()->getCharMap();
-	tempInd = 0;
-
-	for (nPCItr = nPCList.begin(); nPCItr != nPCList.end(); nPCItr++)
-	{
-		if ((*nPCItr).second->GetRigidBody())
-		{
-			tempInd = (*nPCItr).second->GetRigidBody()->getUserIndex();
-			(*nPCItr).second->updateObject(PhysFac->GetXPosition(tempInd),
-				PhysFac->GetYPosition(tempInd),
-				PhysFac->GetZPosition(tempInd));
-		}
-		else
-		{
-			std::cout << "No rigid body" << std::endl;
-		}
-	}
+	
 }
 
 Camera * GameController::getGameCamera()
