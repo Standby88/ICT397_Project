@@ -10,6 +10,10 @@ NPC::NPC()
 	objectPos.z = 0;
 	objectModel = NULL;
 	anim = false;
+
+	m_StateMachine = new StateMachine<NPC>(this);
+
+	m_StateMachine->SetCurrentState(Idle::Instance());
 }
 
 
@@ -48,4 +52,38 @@ void NPC::scriptRegister(lua_State * L)
 NPC * NPC::convert(GameObject * a)
 {
 	return dynamic_cast<NPC*>(a);
+}
+
+V3 NPC::getIdlePos()
+{
+	return this->m_IdlePos;
+}
+
+void NPC::setIdlePos(V3 newPos)
+{
+	this->m_IdlePos = newPos;
+}
+
+void NPC::setIdlePos(float x, float y, float z)
+{
+	V3 temp(x, y, z);
+
+	this->m_IdlePos = temp;
+}
+
+V3 NPC::getMovePos()
+{
+	return this->m_movePos;
+}
+
+void NPC::setMovePos(V3 newPos)
+{
+	this->m_movePos = newPos;
+}
+
+void NPC::setMovePos(float x, float y, float z)
+{
+	V3 temp(x, y, z);
+
+	this->m_movePos = temp;
 }

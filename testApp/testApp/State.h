@@ -1,0 +1,20 @@
+#ifndef STATE_H
+#define STATE_H
+template<class entity_type>
+
+#include "NPC.h"
+
+class State
+{
+public:
+	virtual ~State() {}
+
+	virtual void Enter(entity_type*) = 0;
+
+	virtual void Execute(entity_type*) = 0;
+
+	virtual void Exit(entity_type*) = 0;
+
+};
+
+#endif

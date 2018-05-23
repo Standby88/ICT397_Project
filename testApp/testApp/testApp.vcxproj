@@ -168,6 +168,7 @@
     <ClCompile Include="Model.cpp" />
     <ClCompile Include="ModelManager.cpp" />
     <ClCompile Include="NPC.cpp" />
+    <ClCompile Include="NPC_States.cpp" />
     <ClCompile Include="PhysicsFacade.cpp" />
     <ClCompile Include="Player.cpp" />
     <ClCompile Include="PlayerInput.cpp" />
@@ -215,6 +216,7 @@
     <ClInclude Include="Model.h" />
     <ClInclude Include="ModelManager.h" />
     <ClInclude Include="NPC.h" />
+    <ClInclude Include="NPC_States.h" />
     <ClInclude Include="PhysicsFacade.h" />
     <ClInclude Include="Player.h" />
     <ClInclude Include="PlayerInput.h" />
@@ -241,6 +243,8 @@
     <ClInclude Include="SOIL2\stbi_pvr_c.h" />
     <ClInclude Include="SOIL2\stb_image.h" />
     <ClInclude Include="SOIL2\stb_image_write.h" />
+    <ClInclude Include="State.h" />
+    <ClInclude Include="StateMachine.h" />
     <ClInclude Include="TerrainManager.h" />
     <ClInclude Include="TextureManager.h" />
     <ClInclude Include="Water.h" />
