@@ -96,7 +96,7 @@ void SceneRender::renderWater()
 	renderGameScene();
 	fbos.unbindCurrentFrameBuffer();
 
-	water->drawWater(*shaders["water"], gameWorld->getView(), gameWorld->getProjection());
+	//water->drawWater(*shaders["water"], gameWorld->getView(), gameWorld->getProjection());
 
 }
 void SceneRender::renderEnvironmentObj(EnvironmentObjManager& EM, M4 view, M4 projection, Shader &S)
@@ -196,6 +196,7 @@ void SceneRender::renderCharacters(CharacterManager & TM, M4 view, M4 projection
 		M4 model;
 		posVec = (*itr).second->getObjectPos();
 		angle = (*itr).second->getObjectAngle();
+		angle = MathLib::radians(angle);
 		rotateAxis = (*itr).second->getObjectRotation();
 		if (angle > 0.0f)
 			model = MathLib::rotate(model, angle, rotateAxis);

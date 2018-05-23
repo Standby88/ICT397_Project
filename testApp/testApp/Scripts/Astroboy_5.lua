@@ -10,10 +10,9 @@ height = 1.8
 mass = 60.0
 Astronaut_5 = Factory:Create("NPCObj")
 Astronaut_5 = test3:convert(Astronaut_5)
-Astronaut_5:addModel(astroboy)
+Astronaut_5:addModel(mon)
 astro5RigidBody = PhysicsManager:CreateCapsuleRigidBody(radius, height, mass, posX, posY, posZ)
 Astronaut_5:SetRigidBody(astro5RigidBody)
 Astronaut_5:updateObject(posX, posY, posZ)
--- rotation moves model away from body
---Astronaut_5:updateObjectRotation(120.0,0.0, 1.0, 0.0)
+Astronaut_5:updateObjectRotation(270.0,1.0, 0.0, 0.0)
 --print ("Model finished ")
