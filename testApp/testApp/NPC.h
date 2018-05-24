@@ -23,5 +23,7 @@ public:
 	V3 getMovePos();
 	void setMovePos(V3 newPos);
 	void setMovePos(float x, float y, float z);
+
+	void ChangeState(State<NPC> *s);
 };
 

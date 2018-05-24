@@ -49,6 +49,15 @@ void NPC::scriptRegister(lua_State * L)
 		.endClass()
 		.endNamespace();
 }
+
+void NPC::ChangeState(State<NPC> *s)
+{
+	if (m_StateMachine->CurrentState() != s)
+	{
+		m_StateMachine->ChangeState(s);
+	}
+}
+
 NPC * NPC::convert(GameObject * a)
 {
 	return dynamic_cast<NPC*>(a);
