@@ -53,11 +53,7 @@ private:
 
 	void renderCharacters(CharacterManager & TM, M4 view, M4 projection, Shader & animation, Shader & deflt);
 
-	/**
-	* @brief used to render the skybox
-	*@param skybox& sky, M4 view, M4 projection, Shader &S
-	*/
-	void renderSkybox(Skybox & sky, M4 view, M4 projection, Shader &S);
+
 public:
 
 	/**

@@ -91,6 +91,9 @@ public:
 
 		return textureID;
 	}
+	void LoadSkyboxCubeMap(std::vector<const GLchar*> faces);
+
+	void GetSkyboxCubeMap();
 private:
 
 	/**

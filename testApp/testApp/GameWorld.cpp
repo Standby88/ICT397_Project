@@ -46,22 +46,15 @@ Skybox * GameWorld::getSkybox()
 	return skybox;
 }
 
-<<<<<<< HEAD
-=======
 
->>>>>>> mer
 void GameWorld::scriptRegister(lua_State * L)
 {
 	using namespace luabridge;
 	getGlobalNamespace(L)
 		.beginNamespace("GW")
 		.beginClass<GameWorld>("GameWorld")
-<<<<<<< HEAD
-		.addConstructor<void(*) (TerrainManager*, EnvironmentObjManager*, Skybox*)>()
-=======
 		.addConstructor<void(*) (CharacterManager*,TerrainManager*, EnvironmentObjManager*, Skybox *)>()
 		.addFunction("setModels", &GameWorld::setModels)
->>>>>>> mer
 		.endClass()
 		.endNamespace();
 }
