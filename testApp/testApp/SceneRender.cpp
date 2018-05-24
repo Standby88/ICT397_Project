@@ -170,36 +170,39 @@ void SceneRender::renderMenu(Shader& s)
 void SceneRender::renderCharacters(CharacterManager & TM, M4 view, M4 projection, Shader & animation, Shader & deflt)
 {
 
-	std::unordered_map<std::string, NPC* > drawMap = TM.getCharMap();
+	std:vector<NPC* > drawMap = TM.getUpdateList();
 	V3 posVec;
 	V3 rotateAxis;
 	float angle;
 	Shader* active;
 	
-	std::unordered_map<std::string, NPC* >::iterator itr;
-	for (itr = drawMap.begin(); itr != drawMap.end(); ++itr)
+
+	//std::unordered_map<std::string, NPC* >::iterator itr;
+	for (int i = 0; i<drawMap.size(); i++)
 	{
-		if ((*itr).second->anim == true)
-		{
+		
 			active = &animation;
-		}
-		else
-		{
-			active = &deflt;
-		}
+	
+			//active = &deflt;
+
 		active->Use();
+		V3 campos = Camera::GetCameraInstance()->GetCameraPosition();
+		glUniform3f(glGetUniformLocation(active->Program, "view_pos"),campos.x , campos.y, campos.z);
 		glUniformMatrix4fv(glGetUniformLocation(active->Program, "projection"), 1, GL_FALSE, MathLib::value_ptr<const float *>(projection));
 		glUniformMatrix4fv(glGetUniformLocation(active->Program, "view"), 1, GL_FALSE, MathLib::value_ptr<const float *>(view));
 		M4 model;
-		posVec = (*itr).second->getObjectPos();
-		angle = (*itr).second->getObjectAngle();
-		rotateAxis = (*itr).second->getObjectRotation();
+		posVec = drawMap[i]->getObjectPos();
+		angle = drawMap[i]->getObjectAngle();
+		angle = MathLib::radians(angle);
+		rotateAxis = drawMap[i]->getObjectRotation();
 		if (angle > 0.0f)
 			model = MathLib::rotate(model, angle, rotateAxis);
 		model = MathLib::translate(model, posVec); // Translate it down a bit so it's at the center of the scene
 		model = MathLib::scale(model, V3(1.0f, 1.0f, 1.0f));	// It's a bit too big for our scene, so scale it down
 		glUniformMatrix4fv(glGetUniformLocation(active->Program, "model"), 1, GL_FALSE, MathLib::value_ptr<const float *>(model));
-		(*itr).second->Draw(*active);
+		M4  matr_normals_cube = glm::mat4(glm::transpose(glm::inverse(model)));
+		glUniformMatrix4fv(glGetUniformLocation(active->Program, "normals_matrix"), 1, GL_FALSE, glm::value_ptr(matr_normals_cube));
+		drawMap[i]->Draw(*active);
 	}
 }
 
@@ -211,6 +214,12 @@ void SceneRender::scriptRegister(lua_State * L)
 		.beginClass<SceneRender>("SceneRender")
 		.addConstructor<void(*) (GameWorld*)>()
 		.addFunction("addShader", &SceneRender::addShader)
+		.addFunction("getShader", &SceneRender::getShader)
 		.endClass()
 		.endNamespace();
+}
+
+Shader * SceneRender::getShader(std::string name)
+{
+	return shaders[name];;
 }

@@ -30,6 +30,7 @@ void CharacterManager::addNPC(GameObject * in,  std::string key)
 	NPC*c = dynamic_cast<NPC*>(in);
 	typedef std::pair<std::string,NPC*> temp;
 	nPCList.insert(temp(key,c));
+	npcUpdateList.push_back(c);
 }
 
 
@@ -58,6 +59,14 @@ NPC * CharacterManager::getNPC(std::string K)
 
 void CharacterManager::removeNPC(std::string K)
 {
+	for (int i = 0; i < npcUpdateList.size(); i++)
+	{
+		if (nPCList[K] == npcUpdateList[i])
+		{
+			npcUpdateList.erase(npcUpdateList.begin()+i);
+		}
+	}
+	
 	nPCList.erase(K);
 }
 

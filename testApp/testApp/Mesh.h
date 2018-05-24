@@ -8,7 +8,6 @@
 
 #include <GL/glew.h>
 #include "MathLib.h"
-#include "Bone.h"
 #include <assimp/Importer.hpp>
 
 #include "Shader.h"
@@ -90,8 +89,6 @@ public:
 	
 	vector<VertexBoneData> bones_id_weights_for_each_vertex;
 
-
-	Skeleton sceneLoaderSkeleton;
 	/*  Functions  */
 	// Constructor
 	/**

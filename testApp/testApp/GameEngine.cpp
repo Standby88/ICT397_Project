@@ -15,6 +15,7 @@ bool GameEngine::GameLoop()
 		deltaTime = currentFrame - lastFrame;
 		lastFrame = currentFrame;
 		dt->setDeltaTime(deltaTime);
+		dt->setElapsedTime((float)glfwGetTime());
 		gameController->update(deltaTime);
 		window.clearBufferNColor();
 		render->renderScene();

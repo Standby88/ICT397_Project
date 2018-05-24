@@ -63,6 +63,8 @@ private:
 	std::unordered_map<std::string, NPC* > nPCList;
 	std::unordered_map<std::string, NPC* >::iterator nPCItr;
 
+	std::vector<NPC*> updateCharList;
+
 public:
 
 	GameController(GameWorld* gw);

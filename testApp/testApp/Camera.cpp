@@ -20,7 +20,7 @@ V3& Camera::GetCameraPosition()
 Camera* Camera::GetCameraInstance()
 {
 	if (instance == 0) {
-		instance = new Camera(V3(10.0f, 240.0f, 10.0f));
+		instance = new Camera(V3(210.0f, 205.0f, 210.0f));
 		std::cout << "First camera instance created" << std::endl;
 	}
 

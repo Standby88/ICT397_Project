@@ -23,8 +23,14 @@ private:
 
 	///used to store NPC 
 	std::unordered_map<std::string, NPC* > nPCList;
-public:
 
+	std::vector<NPC*> npcUpdateList;
+public:
+	
+	std::vector<NPC*>& getUpdateList()
+	{
+		return npcUpdateList;
+	}
 	/**
 	* @brief Constructor for charactermanager
 	*/

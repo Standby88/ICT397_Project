@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 ﻿  WorldTerrain.cpp
 c:\users\ducku\documents\ict397-game\work\ict397_project\testapp\testapp\animation.h(7): warning C4305: 'initializing': truncation from 'double' to 'float'
 c:\users\ducku\documents\ict397-game\work\ict397_project\testapp\testapp\animation.h(15): warning C4305: 'initializing': truncation from 'double' to 'float'
@@ -366,3 +367,17 @@ LinearMath_Debug.lib(btQuickprof.obj) : warning LNK4099: PDB 'LinearMath.pdb' wa
 LinearMath_Debug.lib(btVector3.obj) : warning LNK4099: PDB 'LinearMath.pdb' was not found with 'LinearMath_Debug.lib(btVector3.obj)' or at 'C:\Users\Ducku\Documents\ICT397-game\Work\ICT397_Project\testApp\Debug\LinearMath.pdb'; linking object as if no debug info
   testApp.vcxproj -> C:\Users\Ducku\Documents\ICT397-game\Work\ICT397_Project\testApp\Debug\testApp.exe
   testApp.vcxproj -> C:\Users\Ducku\Documents\ICT397-game\Work\ICT397_Project\testApp\Debug\testApp.pdb (Full PDB)
+=======
+﻿  PhysicsFacade.cpp
+c:\users\desmond\documents\github\ict397_project\ext_libs\bullet\src\linearmath\btidebugdraw.h(169): warning C4305: 'argument': truncation from 'double' to 'const btScalar'
+c:\users\desmond\documents\github\ict397_project\ext_libs\bullet\src\linearmath\btidebugdraw.h(170): warning C4305: 'argument': truncation from 'double' to 'const btScalar'
+c:\users\desmond\documents\github\ict397_project\ext_libs\bullet\src\linearmath\btidebugdraw.h(171): warning C4305: 'argument': truncation from 'double' to 'const btScalar'
+c:\users\desmond\documents\github\ict397_project\testapp\testapp\physicsfacade.cpp(42): warning C4316: 'PhysicsFacade': object allocated on the heap may not be aligned 16
+c:\users\desmond\documents\github\ict397_project\testapp\testapp\physicsfacade.cpp(195): warning C4244: 'argument': conversion from 'int' to 'const btScalar', possible loss of data
+c:\users\desmond\documents\github\ict397_project\testapp\testapp\physicsfacade.cpp(196): warning C4244: 'initializing': conversion from 'int' to 'btScalar', possible loss of data
+c:\users\desmond\documents\github\ict397_project\testapp\testapp\physicsfacade.cpp(69): warning C4715: 'PhysicsFacade::GetXPosition': not all control paths return a value
+c:\users\desmond\documents\github\ict397_project\testapp\testapp\physicsfacade.cpp(93): warning C4715: 'PhysicsFacade::GetZPosition': not all control paths return a value
+c:\users\desmond\documents\github\ict397_project\testapp\testapp\physicsfacade.cpp(81): warning C4715: 'PhysicsFacade::GetYPosition': not all control paths return a value
+  testApp.vcxproj -> C:\Users\Desmond\Documents\GitHub\ICT397_Project\testApp\Debug\testApp.exe
+  testApp.vcxproj -> C:\Users\Desmond\Documents\GitHub\ICT397_Project\testApp\Debug\testApp.pdb (Full PDB)
+>>>>>>> SD

@@ -36,14 +36,6 @@ protected:
 
 public:
 
-	bool anim;
-	Skeleton skeleton;
-	std::vector<Animation> animations;
-	virtual void UpdateSkeleton();
-	void AddAnimation(Animation& in_anim);
-	Animation* FindAnimation(std::string anim_to_find);
-	void PlayAnimation(Animation& anim, bool loop , bool reset_to_start);
-	void StopAnimating();
 	/**
 	* @brief Constructor for GameObject3D
 	*/
