@@ -96,7 +96,7 @@ void SceneRender::renderWater()
 	renderGameScene();
 	fbos.unbindCurrentFrameBuffer();
 
-	//water->drawWater(*shaders["water"], gameWorld->getView(), gameWorld->getProjection());
+	water->drawWater(*shaders["water"], gameWorld->getView(), gameWorld->getProjection());
 
 }
 void SceneRender::renderEnvironmentObj(EnvironmentObjManager& EM, M4 view, M4 projection, Shader &S)
@@ -170,34 +170,31 @@ void SceneRender::renderMenu(Shader& s)
 void SceneRender::renderCharacters(CharacterManager & TM, M4 view, M4 projection, Shader & animation, Shader & deflt)
 {
 
-	std::unordered_map<std::string, NPC* > drawMap = TM.getCharMap();
+	std:vector<NPC* > drawMap = TM.getUpdateList();
 	V3 posVec;
 	V3 rotateAxis;
 	float angle;
 	Shader* active;
 	
 
-	std::unordered_map<std::string, NPC* >::iterator itr;
-	for (itr = drawMap.begin(); itr != drawMap.end(); ++itr)
+	//std::unordered_map<std::string, NPC* >::iterator itr;
+	for (int i = 0; i<drawMap.size(); i++)
 	{
-		if ((*itr).second->anim == true)
-		{
+		
 			active = &animation;
-		}
-		else
-		{
-			active = &animation;
-		}
+	
+			//active = &deflt;
+
 		active->Use();
 		V3 campos = Camera::GetCameraInstance()->GetCameraPosition();
 		glUniform3f(glGetUniformLocation(active->Program, "view_pos"),campos.x , campos.y, campos.z);
 		glUniformMatrix4fv(glGetUniformLocation(active->Program, "projection"), 1, GL_FALSE, MathLib::value_ptr<const float *>(projection));
 		glUniformMatrix4fv(glGetUniformLocation(active->Program, "view"), 1, GL_FALSE, MathLib::value_ptr<const float *>(view));
 		M4 model;
-		posVec = (*itr).second->getObjectPos();
-		angle = (*itr).second->getObjectAngle();
+		posVec = drawMap[i]->getObjectPos();
+		angle = drawMap[i]->getObjectAngle();
 		angle = MathLib::radians(angle);
-		rotateAxis = (*itr).second->getObjectRotation();
+		rotateAxis = drawMap[i]->getObjectRotation();
 		if (angle > 0.0f)
 			model = MathLib::rotate(model, angle, rotateAxis);
 		model = MathLib::translate(model, posVec); // Translate it down a bit so it's at the center of the scene
@@ -205,7 +202,7 @@ void SceneRender::renderCharacters(CharacterManager & TM, M4 view, M4 projection
 		glUniformMatrix4fv(glGetUniformLocation(active->Program, "model"), 1, GL_FALSE, MathLib::value_ptr<const float *>(model));
 		M4  matr_normals_cube = glm::mat4(glm::transpose(glm::inverse(model)));
 		glUniformMatrix4fv(glGetUniformLocation(active->Program, "normals_matrix"), 1, GL_FALSE, glm::value_ptr(matr_normals_cube));
-		(*itr).second->Draw(*active);
+		drawMap[i]->Draw(*active);
 	}
 }
 

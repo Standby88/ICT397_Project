@@ -1,5 +1,4 @@
 #include "Mesh.h"
-#include "Bone.h"
 #include "GameObject3D.h"
 #include <glm/gtx/string_cast.hpp>
 

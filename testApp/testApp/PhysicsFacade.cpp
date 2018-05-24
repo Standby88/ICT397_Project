@@ -309,7 +309,7 @@ void PhysicsFacade::StepSimulation(float tStep, int maxSubSteps, V3 &playerPos)
 		//reset forces on player before next step simulation
 		if (body->getUserIndex() == playerID)
 		{
-			if (notMoved)
+			/*if (notMoved)
 			{
 				//btVector3 tempV = body->getLinearVelocity();
 				body->setLinearVelocity(btVector3(0, 0, 0));
@@ -318,9 +318,10 @@ void PhysicsFacade::StepSimulation(float tStep, int maxSubSteps, V3 &playerPos)
 			{
 				btVector3 tempV = body->getLinearVelocity();
 				body->setLinearVelocity(btVector3(0, tempV.getY(), 0));
-			}
+			}*/
 			//body->clearForces();
-			
+			btVector3 tempV = body->getLinearVelocity();
+			body->setLinearVelocity(btVector3(0, tempV.getY(), 0));
 		}
 
 		//update bodies

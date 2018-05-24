@@ -65,7 +65,7 @@ void GameController::update(GLfloat deltaTime)
 	if (gameWorld->getWorldDisplay() == true)
 	{
 		
-		/*//updating physics
+		//updating physics
 		//Running the step simulation function to update rigidbodies in the physics environment
 		PhysFac->StepSimulation(1 / 60.f, 10, camera->GetCameraPosition());
 
@@ -90,18 +90,17 @@ void GameController::update(GLfloat deltaTime)
 					PhysFac->GetZPosition(tempInd));
 		}
 
-		nPCList = gameWorld->getCharacters()->getCharMap();
+		updateCharList = gameWorld->getCharacters()->getUpdateList();
 		tempInd = 0;
-
-		for (nPCItr = nPCList.begin(); nPCItr != nPCList.end(); nPCItr++)
+		for (int i = 0; i<updateCharList.size(); i++)
 		{
 
-				tempInd = (*nPCItr).second->GetRigidBody()->getUserIndex();
-				(*nPCItr).second->updateObject(PhysFac->GetXPosition(tempInd),
+				tempInd = updateCharList[i]->GetRigidBody()->getUserIndex();
+				updateCharList[i]->updateObject(PhysFac->GetXPosition(tempInd),
 					PhysFac->GetYPosition(tempInd),
 					PhysFac->GetZPosition(tempInd));
 
-		}*/
+		}
 	}
 	
 }

@@ -17,7 +17,7 @@
 #include "TextureManager.h"
 
 #include "Mesh.h"
-#include "Bone.h"
+
 extern "C"
 {
 # include "lua.h"
@@ -40,7 +40,7 @@ extern "C"
 *
 * @bug
 */
-class GameObject3D;
+
 class Model
 {
 public:
@@ -67,19 +67,12 @@ public:
 	glm::mat4 aiToGlm(aiMatrix4x4 ai_matr);
 	aiQuaternion nlerp(aiQuaternion a, aiQuaternion b, float blend);
 
-
 	/**
 	* @brief Loads a model with supported ASSIMP extensions from file and stores the resulting meshes in the meshes vector.
 	*
 	*@param string path
 	*/
 	void loadModel(string path);
-
-	
-
-	
-	
-	
 	
 	
 	/**
@@ -95,24 +88,7 @@ public:
 	static void scriptRegister(lua_State * L);
 
 
-	/*******************************************************************************************************************/
-							//DONT USE
-	Mesh getFirstMesh()
-	{
-		std::cout << "get first mesh: "<<&m_meshes.at(0).sceneLoaderSkeleton << std::endl;
-		return m_meshes.at(0);
-	}
-	bool checkMeshSize()
-	{
-		if (m_meshes.size() != 0)
-			return true;
-		else
-		{
-			return false;
-		}
-	}
-	void DrawAnimtated(Shader&s, GameObject3D * parentGObj);
-	/***********************************************************************************************************************/
+
 
 private:
 
@@ -129,7 +105,7 @@ private:
 	GLuint m_bone_location[MAX_BONES];
 	float ticks_per_second = 0.0f;
 
-
+	bool animated;
 	/**
 	* @brief  Processes a node in a recursive fashion. Processes each individual mesh located at the node and repeats this process on its children nodes (if any).
 	*
@@ -164,20 +140,12 @@ private:
 	void boneTransform(double time_in_sec, vector<aiMatrix4x4>& transforms);
 	void readNodeHierarchy(float p_animation_time, const aiNode* p_node, const aiMatrix4x4 parent_transform);
 
-	glm::quat rotate_head_xz = glm::quat(cos(glm::radians(0.0f)), sin(glm::radians(0.0f)) * glm::vec3(1.0f, 0.0f, 0.0f)); // this quad do nothingggggg!!!!!
-	
-	
-	
-/*******************************************************************************************************************/
-												//DONT USE
+	glm::quat rotate_head_xz = glm::quat(cos(glm::radians(0.0f)), sin(glm::radians(0.0f)) * glm::vec3(1.0f, 0.0f, 0.0f));
+
 	std::vector<aiNode*> ai_nodes;
 	
 	std::vector<aiNodeAnim*> ai_nodes_anim;
 	void recursiveNodeProcess(aiNode* node);
-	void AnimNodeProcess();
-	
-
-	bool error;
 	
 	/*  Model Data  */
 
@@ -185,23 +153,6 @@ private:
 	vector<Texture> m_textures_loaded;	
 	aiNode* m_RootNode;
 	glm::mat4 globalInverseTransform;
-	std::vector<Bone> bones;
-	Bone* FindBone(std::string name);
-	aiNode* FindAiNode(std::string name);
-	aiNodeAnim* FindAiNodeAnim(std::string name);
-	int FindBoneIDByName(std::string name)
-	{
-		for (int i = 0; i < bones.size(); i++)
-		{
-			if (bones.at(i).name == name)
-				return i;
-		}
-		//This function finds the position of a certain bone within our bones vector.
-		//This position is equal to the bone's ID, which is vital to determining the
-		//rigging of our model within the vertex shader.
-		return -1;    //In case we don't find a bone ID, we return -1.
-					  //Just to avoid any confusion later on as to whether or not the
-					  //ID was found. (It serves the same purpose as returning nullptr).
-	}
-/*******************************************************************************************************************/
+
+
 };
