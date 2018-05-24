@@ -3,7 +3,6 @@
 #include <map>
 #include <iostream>
 #include <string>
-#include <vector>
 #include "GL\glew.h"
 #include <vector>
 
@@ -52,11 +51,11 @@ public:
 	*@return GLuint
 	*/
 	GLuint GetTexture(const std::string path);
-
+	
 	/**
 	* @brief return a textureManager instance
 	*
-	*@return TextureManager&
+	*@return TextureManager& 
 	*/
 	static TextureManager & GetTextureManager();
 
@@ -91,9 +90,6 @@ public:
 
 		return textureID;
 	}
-	void LoadSkyboxCubeMap(std::vector<const GLchar*> faces);
-
-	void GetSkyboxCubeMap();
 private:
 
 	/**
@@ -104,6 +100,5 @@ private:
 
 	///map used to store the textures mapped to a string
 	std::map <std::string, GLuint> textures;
-
-	GLuint skybox;
 };
+
