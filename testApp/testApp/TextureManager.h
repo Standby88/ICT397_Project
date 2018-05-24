@@ -5,7 +5,7 @@
 #include <string>
 #include <vector>
 #include "GL\glew.h"
-
+#include <vector>
 
 #include "SOIL2\SOIL2.h"
 
@@ -52,11 +52,11 @@ public:
 	*@return GLuint
 	*/
 	GLuint GetTexture(const std::string path);
-	
+
 	/**
 	* @brief return a textureManager instance
 	*
-	*@return TextureManager& 
+	*@return TextureManager&
 	*/
 	static TextureManager & GetTextureManager();
 
@@ -65,8 +65,6 @@ public:
 	*
 	*/
 	void DestroyTextureManager();
-
-	const GLuint LoadSkyboxCubeMap(std::vector<const GLchar*> faces);
 
 	static GLuint LoadCubemap(std::vector<const GLchar * > faces)
 	{
@@ -93,9 +91,6 @@ public:
 
 		return textureID;
 	}
-
-	GLuint GetSkyboxCubeMap();
-
 private:
 
 	/**
@@ -109,4 +104,3 @@ private:
 
 	GLuint skybox;
 };
-

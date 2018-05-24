@@ -1,6 +1,7 @@
 #pragma once
 #include "TextureManager.h"
 #include "Shader.h"
+#include "MathLib.h"
 class Menu
 {
 private:
@@ -9,7 +10,7 @@ private:
 	GLuint VBO, VAO, EBO;
 	GLuint texture1;
 	GLuint texture2;
-
+	GLuint texture3;
 	GLfloat points[32] =
 	{
 		// Positions          // Colors           // Texture Coords
@@ -26,11 +27,13 @@ private:
 	};
 
 	void setupPhoto();
+	void setUpMainMenu();
 	void setUpmanual();
 public:
 	Menu();
 	~Menu();
 	void drawPhoto(Shader S);
 	void drawMaunal(Shader S);
+	void drawMainMenu(Shader s);
 };
 

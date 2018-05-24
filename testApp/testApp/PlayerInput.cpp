@@ -11,6 +11,7 @@ PlayerInput::PlayerInput()
 	manual = false;
 	wire = false;
 	worldDisplay = true;
+	mainMenu = false;
 	m_time = glfwGetTime();
 
 }
@@ -27,6 +28,7 @@ PlayerInput::PlayerInput(int width, int height, Camera *cam, GLfloat* deltaTime)
 	manual = false;
 	wire = false;
 	worldDisplay = true;
+	mainMenu = false;
 }
 
 void PlayerInput::destroyCurrentPlayerInput()
@@ -144,7 +146,21 @@ void PlayerInput::KeyCallback(GLFWwindow *window, int key, int scancode, int act
 			manual = false;
 			worldDisplay = true;
 		}
-	}if (key == GLFW_KEY_K && action == GLFW_PRESS)
+	}
+	if (key == GLFW_KEY_P && action == GLFW_PRESS)
+	{
+		if (mainMenu == false)
+		{
+			mainMenu = true;
+			worldDisplay = false;
+		}
+		else if (mainMenu == true)
+		{
+			mainMenu = false;
+			worldDisplay = true;
+		}
+	}
+	if (key == GLFW_KEY_K && action == GLFW_PRESS)
 	{
 		if (wire == false)
 		{
@@ -216,6 +232,10 @@ bool PlayerInput::getWorldDisplay()
 bool PlayerInput::getWire()
 {
 	return wire;
+}
+bool PlayerInput::getMainMenu()
+{
+	return mainMenu;
 }
 void PlayerInput::ScrollCallback(GLFWwindow *window, double xOffset, double yOffset)
 {

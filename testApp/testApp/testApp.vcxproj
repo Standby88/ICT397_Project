@@ -88,14 +88,14 @@
       <WarningLevel>Level3</WarningLevel>
       <Optimization>Disabled</Optimization>
       <PreprocessorDefinitions>WIN32;_DEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
-      <AdditionalIncludeDirectories>$(SolutionDir)..\Ext_libs\glm;$(SolutionDir)..\Ext_libs\GLFW\include;$(SolutionDir)..\Ext_libs\GLEW\include;$(SolutionDir)..\Ext_libs\Lua\include;$(SolutionDir)..\Ext_libs\Lua\include\LuaBridge;$(SolutionDir)..\Ext_libs\bullet\src;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(SolutionDir)..\Ext_libs\glm;$(SolutionDir)..\Ext_libs\GLFW\include;$(SolutionDir)..\Ext_libs\GLEW\include;$(SolutionDir)..\Ext_libs\Lua\include;$(SolutionDir)..\Ext_libs\Lua\include\LuaBridge;$(SolutionDir)..\Ext_libs\bullet\src;$(SolutionDir)..\Ext_libs\sdl\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
       <GenerateDebugInformation>true</GenerateDebugInformation>
-      <AdditionalLibraryDirectories>$(SolutionDir)..\Ext_libs\GLFW\lib-vc2015;$(SolutionDir)..\Ext_libs\GLEW\lib\Release\Win32;$(SolutionDir)..\Ext_libs\Lua\lib;$(SolutionDir)..\Ext_libs\bullet\libs;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
-      <AdditionalDependencies>opengl32.lib;glfw3.lib;glew32.lib;lua5.1.4.lib;BulletCollision_Debug.lib;BulletDynamics_Debug.lib;LinearMath_Debug.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalLibraryDirectories>$(SolutionDir)..\Ext_libs\GLFW\lib-vc2015;$(SolutionDir)..\Ext_libs\GLEW\lib\Release\Win32;$(SolutionDir)..\Ext_libs\Lua\lib;$(SolutionDir)..\Ext_libs\bullet\libs;$(SolutionDir)..\Ext_libs\sdl\lib\x86;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <AdditionalDependencies>opengl32.lib;glfw3.lib;glew32.lib;lua5.1.4.lib;BulletCollision_Debug.lib;BulletDynamics_Debug.lib;LinearMath_Debug.lib;SDL2main.lib;SDL2.lib;SDL2_image.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
@@ -153,6 +153,7 @@
     <ClCompile Include="CharacterManager.cpp" />
     <ClCompile Include="EnvironmentObject.cpp" />
     <ClCompile Include="EnvironmentObjManager.cpp" />
+    <ClCompile Include="FrameTime.cpp" />
     <ClCompile Include="GameController.cpp" />
     <ClCompile Include="GameObject.cpp" />
     <ClCompile Include="GameObject3D.cpp" />
@@ -164,12 +165,14 @@
     <ClCompile Include="Mesh.cpp" />
     <ClCompile Include="Model.cpp" />
     <ClCompile Include="ModelManager.cpp" />
+    <ClCompile Include="NPC.cpp" />
     <ClCompile Include="PhysicsFacade.cpp" />
     <ClCompile Include="Player.cpp" />
     <ClCompile Include="PlayerInput.cpp" />
     <ClCompile Include="RawIMGLoader.cpp" />
     <ClCompile Include="SceneRender.cpp" />
     <ClCompile Include="ScriptEngine.cpp" />
+    <ClCompile Include="Serialization.cpp" />
     <ClCompile Include="Shader.cpp" />
     <ClCompile Include="Skybox.cpp" />
     <ClCompile Include="SOIL2\etc1_utils.c" />
@@ -178,6 +181,9 @@
     <ClCompile Include="SOIL2\SOIL2.c" />
     <ClCompile Include="TerrainManager.cpp" />
     <ClCompile Include="TextureManager.cpp" />
+    <ClCompile Include="Water.cpp" />
+    <ClCompile Include="WaterFrameBuffer.cpp" />
+    <ClCompile Include="Window.cpp" />
     <ClCompile Include="WorldTerrain.cpp" />
   </ItemGroup>
   <ItemGroup>
@@ -191,6 +197,7 @@
     <ClInclude Include="CharacterManager.h" />
     <ClInclude Include="EnvironmentObject.h" />
     <ClInclude Include="EnvironmentObjManager.h" />
+    <ClInclude Include="FrameTime.h" />
     <ClInclude Include="GameAssetCreator.h" />
     <ClInclude Include="GameAssetFactory.h" />
     <ClInclude Include="GameController.h" />
@@ -203,12 +210,14 @@
     <ClInclude Include="Mesh.h" />
     <ClInclude Include="Model.h" />
     <ClInclude Include="ModelManager.h" />
+    <ClInclude Include="NPC.h" />
     <ClInclude Include="PhysicsFacade.h" />
     <ClInclude Include="Player.h" />
     <ClInclude Include="PlayerInput.h" />
     <ClInclude Include="RawIMGLoader.h" />
     <ClInclude Include="SceneRender.h" />
     <ClInclude Include="ScriptEngine.h" />
+    <ClInclude Include="Serialization.h" />
     <ClInclude Include="Shader.h" />
     <ClInclude Include="Skybox.h" />
     <ClInclude Include="SOIL2\etc1_utils.h" />
@@ -230,6 +239,9 @@
     <ClInclude Include="SOIL2\stb_image_write.h" />
     <ClInclude Include="TerrainManager.h" />
     <ClInclude Include="TextureManager.h" />
+    <ClInclude Include="Water.h" />
+    <ClInclude Include="WaterFrameBuffer.h" />
+    <ClInclude Include="Window.h" />
     <ClInclude Include="WorldTerrain.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />

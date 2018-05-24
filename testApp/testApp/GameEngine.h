@@ -1,17 +1,12 @@
 #pragma once
 
 #include <iostream>
-
-#include <GL/glew.h>
-
-#include <GLFW/glfw3.h>
-
-
 #include "GameWorld.h"
 #include "ScriptEngine.h"
 #include "SceneRender.h"
 #include "GameController.h"
-
+#include "Window.h"
+#include "FrameTime.h"
 /**
 * @class Graphics engine
 * @brief USed to setup openGl and rednering
@@ -24,21 +19,21 @@
 *
 * @bug
 */
+
 class GameEngine
 {
 private:
 	GameWorld* gameWorld;
 	SceneRender* render;
-	GLFWwindow *window;
+	Window window;
 	GameController *gameController;
 	PhysicsFacade* PhysFac = PhysicsFacade::GetPhysicsInstance();
-
-	const GLint WIDTH = 800, HEIGHT = 600;
+	FrameTime *dt;
 	int SCREEN_WIDTH, SCREEN_HEIGHT;
 
 
-	GLdouble lastX = WIDTH / 2.0;
-	GLdouble lastY = HEIGHT / 2.0;
+	GLdouble lastX = SCREEN_WIDTH / 2.0;
+	GLdouble lastY = SCREEN_HEIGHT / 2.0;
 
 	bool keys[1024];
 	bool firstMouse = true;

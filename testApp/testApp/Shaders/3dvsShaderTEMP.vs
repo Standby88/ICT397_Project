@@ -11,6 +11,7 @@ uniform mat4 projection;
 
 void main()
 {
+    gl_ClipDistance[0] = 0;
     gl_Position = projection * view * model * vec4(position, 1.0f);
     TexCoords = texCoords;
 }

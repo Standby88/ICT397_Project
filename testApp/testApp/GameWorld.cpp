@@ -1,12 +1,15 @@
 #include "GameWorld.h"
 
-GameWorld::GameWorld(/*CharacterManager * cha,*/ TerrainManager * ter, EnvironmentObjManager * en, Skybox * sky)
+GameWorld::GameWorld(CharacterManager * cha, TerrainManager * ter, EnvironmentObjManager * en, Skybox * sky)
 {
 	photo = false;
 	manual = false;
 	worldDisplay = true;
+	mainMenu = false;
 	wire = false;
-	//this->characters = cha;
+	camera = Camera::GetCameraInstance();
+	this->skybox = sky;
+	this->characters = cha;
 	this->terrain = ter;
 	this->environment = en;
 	this->skybox = sky;
@@ -43,13 +46,22 @@ Skybox * GameWorld::getSkybox()
 	return skybox;
 }
 
+<<<<<<< HEAD
+=======
+
+>>>>>>> mer
 void GameWorld::scriptRegister(lua_State * L)
 {
 	using namespace luabridge;
 	getGlobalNamespace(L)
 		.beginNamespace("GW")
 		.beginClass<GameWorld>("GameWorld")
+<<<<<<< HEAD
 		.addConstructor<void(*) (TerrainManager*, EnvironmentObjManager*, Skybox*)>()
+=======
+		.addConstructor<void(*) (CharacterManager*,TerrainManager*, EnvironmentObjManager*, Skybox *)>()
+		.addFunction("setModels", &GameWorld::setModels)
+>>>>>>> mer
 		.endClass()
 		.endNamespace();
 }
@@ -84,9 +96,19 @@ void GameWorld::setWire(bool wir)
 	wire = wir;
 }
 
+void GameWorld::setMainmenu(bool menu)
+{
+	mainMenu = menu;
+}
+
 bool GameWorld::getWire()
 {
 	return wire;
+}
+
+bool GameWorld::getMainMenu()
+{
+	return mainMenu;
 }
 
 bool GameWorld::getManual()

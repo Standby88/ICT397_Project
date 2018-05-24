@@ -7,6 +7,9 @@
 #include "MathLib.h"
 
 #include <map>
+#include "Water.h"
+#include "WaterFrameBuffer.h"
+
 /**
 * @class SceneRender
 * @brief USed to render scene onjects
@@ -26,7 +29,8 @@ private:
 	GameWorld* gameWorld;
 	std::map<std::string, Shader*> shaders;
 	Menu * menu;
-
+	Water * water;
+	WaterFrameBuffer fbos;
 	/**
 	* @brief used to render environment objects
 	*@param EnvironmentObjManager& EM, M4 view, M4 projection, Shader &S
@@ -47,6 +51,13 @@ private:
 
 	void renderMenu(Shader& s);
 
+	void renderCharacters(CharacterManager & TM, M4 view, M4 projection, Shader & animation, Shader & deflt);
+
+	/**
+	* @brief used to render the skybox
+	*@param skybox& sky, M4 view, M4 projection, Shader &S
+	*/
+	void renderSkybox(Skybox & sky, M4 view, M4 projection, Shader &S);
 public:
 
 	/**
@@ -62,8 +73,12 @@ public:
 
 	void renderScene();
 
+	void renderGameScene();
+	
+	void renderWater();
+	
+	static void scriptRegister(lua_State * L);
 
-	 static void scriptRegister(lua_State * L);
-
+	Shader* getShader(std::string name);
 };
 

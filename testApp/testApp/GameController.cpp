@@ -5,22 +5,41 @@ GameController::GameController(GameWorld * gw)
 	PhysFac = PhysicsFacade::GetPhysicsInstance();
 	gameWorld = gw;
 	camera = Camera::GetCameraInstance();
+	
 	gameWorld->setProjection(MathLib::perspective(camera->GetZoom(), (float)gameWorld->getScreenW() / (float)gameWorld->getScreenH(), 0.1f, 1000.0f));
 	playerInput = PlayerInput::getCurrentPlayerInput();
 	playerInput.SetAttributes(camera);
 	playerInput.SetCallbacks();
 
-	//need to create a function that recursively does this for all objects.
-	PhysFac->AddRigidBody(gameWorld->getEnvironment()->getObject("asteroid_1")->GetRigidBody());
-	/*PhysFac->AddRigidBody(gameWorld->getEnvironment()->getObject("asteroid_2")->GetRigidBody());
-	PhysFac->AddRigidBody(gameWorld->getEnvironment()->getObject("asteroid_3")->GetRigidBody());
-	PhysFac->AddRigidBody(gameWorld->getEnvironment()->getObject("asteroid_4")->GetRigidBody());
-	PhysFac->AddRigidBody(gameWorld->getEnvironment()->getObject("asteroid_5")->GetRigidBody());
-	PhysFac->AddRigidBody(gameWorld->getEnvironment()->getObject("asteroid_6")->GetRigidBody());
-	PhysFac->AddRigidBody(gameWorld->getEnvironment()->getObject("asteroid_7")->GetRigidBody());
-	PhysFac->AddRigidBody(gameWorld->getEnvironment()->getObject("asteroid_8")->GetRigidBody());
-	PhysFac->AddRigidBody(gameWorld->getEnvironment()->getObject("asteroid_9")->GetRigidBody());
-	PhysFac->AddRigidBody(gameWorld->getEnvironment()->getObject("Astroboy_1")->GetRigidBody());*/
+	environmentObjList = gameWorld->getEnvironment()->getEnObjMap();
+
+	//for loop that uses an iterator to go through and add object's rigidbodies to the physics world
+	for (envItr = environmentObjList.begin(); envItr != environmentObjList.end(); envItr++)
+	{
+		if ((*envItr).second->GetRigidBody())
+		{
+			PhysFac->AddRigidBody((*envItr).second->GetRigidBody());
+		}
+		else
+		{
+			cout << "No rigid body for " << (*envItr).first << std::endl;
+		}
+	}
+
+	nPCList = gameWorld->getCharacters()->getCharMap();
+
+	
+	for (nPCItr = nPCList.begin(); nPCItr != nPCList.end(); nPCItr++)
+	{
+		if ((*nPCItr).second->GetRigidBody())
+		{
+			PhysFac->AddRigidBody((*nPCItr).second->GetRigidBody());
+		}
+		else
+		{
+			cout << "No rigid body for " << (*nPCItr).first << std::endl;
+		}
+	}
 }
 
 GameController::~GameController()
@@ -35,71 +54,99 @@ void GameController::update(GLfloat deltaTime)
 {
 	glfwPollEvents();
 	playerInput.DoMovement(deltaTime);
-	camera = Camera::GetCameraInstance();	//probably don't need this line (kieron)
+	camera = Camera::GetCameraInstance();
 	gameWorld->setView(camera->GetViewMatrix());
-
 	gameWorld->setPhoto(PlayerInput::getCurrentPlayerInput().getPhoto());
 	gameWorld->setManual(PlayerInput::getCurrentPlayerInput().getManual());
 	gameWorld->setWorldDisplay(PlayerInput::getCurrentPlayerInput().getWorldDisplay());
 	gameWorld->setWire(PlayerInput::getCurrentPlayerInput().getWire());
+	gameWorld->setMainmenu(PlayerInput::getCurrentPlayerInput().getMainMenu());
 
-	//updating physics
-	//Running the step simulation function to update rigidbodies in the physics environment
-	PhysFac->StepSimulation(1 / 60.f, 10, camera->GetCameraPosition());
-	//the camera's position is updated in physics and based on collisions the new position is 
-	//now set for the user.
-	camera->SetCameraPosition(camera->GetCameraPosition());
-	//a temporary index is made for getting the UserIndex of a collision object in the physics environment
-	//that index is used to make sure we update the correct position for an object.
-	//currently this is only used to test for "asteroid_1"
-	int tempInd = gameWorld->getEnvironment()->getObject("asteroid_1")->GetRigidBody()->getUserIndex();
-	//This is to update the position of the object for drawing.
-	gameWorld->getEnvironment()->getObject("asteroid_1")->updateObject(
-		PhysFac->GetXPosition(tempInd), PhysFac->GetYPosition(tempInd), PhysFac->GetZPosition(tempInd));
+	if (gameWorld->getWorldDisplay() == true)
+	{
+		
+		//updating physics
+		//Running the step simulation function to update rigidbodies in the physics environment
+		PhysFac->StepSimulation(1 / 60.f, 10, camera->GetCameraPosition());
 
-	/*tempInd = gameWorld->getEnvironment()->getObject("asteroid_2")->GetRigidBody()->getUserIndex();
-	//This is to update the position of the object for drawing.
-	gameWorld->getEnvironment()->getObject("asteroid_2")->updateObject(
-	PhysFac->GetXPosition(tempInd), PhysFac->GetYPosition(tempInd), PhysFac->GetZPosition(tempInd));
+		//the camera's position is updated in physics and based on collisions the new position is 
+		//now set for the user.
+		camera->SetCameraPosition(camera->GetCameraPosition());
+		environmentObjList = gameWorld->getEnvironment()->getEnObjMap();
+		//initialise an int to store userIndex so that the value doesn't need to be constantly retrieved
+		//also takes up less space and looks a little neater.
+		int tempInd = 0;
+		//for loop the uses an iterator to go through and update the positions of all environment objects and their rigidbodies
+		for (envItr = environmentObjList.begin(); envItr != environmentObjList.end(); envItr++)
+		{
 
-	tempInd = gameWorld->getEnvironment()->getObject("asteroid_3")->GetRigidBody()->getUserIndex();
-	//This is to update the position of the object for drawing.
-	gameWorld->getEnvironment()->getObject("asteroid_3")->updateObject(
-	PhysFac->GetXPosition(tempInd), PhysFac->GetYPosition(tempInd), PhysFac->GetZPosition(tempInd));
+				//a temporary index is made for getting the UserIndex of a collision object in the physics environment
+				//that index is used to make sure we update the correct position for an object.
+				tempInd = (*envItr).second->GetRigidBody()->getUserIndex();
+				//std::cout << "UserIndex for object: " << tempInd << std::endl;
+				//This is to update the position of the object for drawing.
+				(*envItr).second->updateObject(PhysFac->GetXPosition(tempInd),
+					PhysFac->GetYPosition(tempInd),
+					PhysFac->GetZPosition(tempInd));
+		}
 
-	tempInd = gameWorld->getEnvironment()->getObject("asteroid_4")->GetRigidBody()->getUserIndex();
-	//This is to update the position of the object for drawing.
-	gameWorld->getEnvironment()->getObject("asteroid_4")->updateObject(
-	PhysFac->GetXPosition(tempInd), PhysFac->GetYPosition(tempInd), PhysFac->GetZPosition(tempInd));
+		updateCharList = gameWorld->getCharacters()->getUpdateList();
+		tempInd = 0;
+		for (int i = 0; i<updateCharList.size(); i++)
+		{
 
-	tempInd = gameWorld->getEnvironment()->getObject("asteroid_5")->GetRigidBody()->getUserIndex();
-	//This is to update the position of the object for drawing.
-	gameWorld->getEnvironment()->getObject("asteroid_5")->updateObject(
-	PhysFac->GetXPosition(tempInd), PhysFac->GetYPosition(tempInd), PhysFac->GetZPosition(tempInd));
+				tempInd = updateCharList[i]->GetRigidBody()->getUserIndex();
+				updateCharList[i]->updateObject(PhysFac->GetXPosition(tempInd),
+					PhysFac->GetYPosition(tempInd),
+					PhysFac->GetZPosition(tempInd));
 
-	tempInd = gameWorld->getEnvironment()->getObject("asteroid_6")->GetRigidBody()->getUserIndex();
-	//This is to update the position of the object for drawing.
-	gameWorld->getEnvironment()->getObject("asteroid_6")->updateObject(
-	PhysFac->GetXPosition(tempInd), PhysFac->GetYPosition(tempInd), PhysFac->GetZPosition(tempInd));
+		}
+	}
+	
+}
 
-	tempInd = gameWorld->getEnvironment()->getObject("asteroid_7")->GetRigidBody()->getUserIndex();
-	//This is to update the position of the object for drawing.
-	gameWorld->getEnvironment()->getObject("asteroid_7")->updateObject(
-	PhysFac->GetXPosition(tempInd), PhysFac->GetYPosition(tempInd), PhysFac->GetZPosition(tempInd));
+Camera * GameController::getGameCamera()
+{
+	return Camera::GetCameraInstance();
+}
 
-	tempInd = gameWorld->getEnvironment()->getObject("asteroid_8")->GetRigidBody()->getUserIndex();
-	//This is to update the position of the object for drawing.
-	gameWorld->getEnvironment()->getObject("asteroid_8")->updateObject(
-	PhysFac->GetXPosition(tempInd), PhysFac->GetYPosition(tempInd), PhysFac->GetZPosition(tempInd));
+void GameController::saveGame()
+{
+	std::vector<enObj> enList;
+	std::unordered_map<std::string, EnvironmentObject* > temp = gameWorld->getEnvironment()->getEnObjMap();
+	std::unordered_map<std::string, EnvironmentObject* >::iterator itr;
+	for (itr = temp.begin(); itr != temp.end(); ++itr)
+	{
+		enObj holder;
+		holder.angle = (*itr).second->getObjectAngle();
+		holder.Pos.x = (*itr).second->getObjectPos().x;
+		holder.Pos.y = (*itr).second->getObjectPos().y;
+		holder.Pos.z = (*itr).second->getObjectPos().z;
+		holder.RotAxis.x = (*itr).second->getObjectRotation().x;
+		holder.RotAxis.y = (*itr).second->getObjectRotation().y;
+		holder.RotAxis.z = (*itr).second->getObjectRotation().z;
+		holder.modelName = (*itr).second->getModel()->getName();
+		std::cout << holder.modelName << std::endl;
+		enList.push_back(holder);
+	}
+	Serialization::saveData(enList, "SaveGame.xml");
+}
 
-	tempInd = gameWorld->getEnvironment()->getObject("asteroid_9")->GetRigidBody()->getUserIndex();
-	//This is to update the position of the object for drawing.
-	gameWorld->getEnvironment()->getObject("asteroid_9")->updateObject(
-	PhysFac->GetXPosition(tempInd), PhysFac->GetYPosition(tempInd), PhysFac->GetZPosition(tempInd));
-
-	tempInd = gameWorld->getEnvironment()->getObject("Astroboy_1")->GetRigidBody()->getUserIndex();
-	//This is to update the position of the object for drawing.
-	gameWorld->getEnvironment()->getObject("Astroboy_1")->updateObject(
-	PhysFac->GetXPosition(tempInd), PhysFac->GetYPosition(tempInd), PhysFac->GetZPosition(tempInd));
-	*/
+void GameController::loadGame()
+{
+	std::vector<enObj> enList = Serialization::loadData<std::vector<enObj>>("SaveGame.xml");
+	EnvironmentObjManager * enManager = new EnvironmentObjManager();
+	GameAssetFactory<GameObject, std::string > factory;
+	factory.Register("enObjCreator", new GameAssetCreator<EnvironmentObject, GameObject>);
+	for (int i = 0; i < enList.size(); i++)
+	{
+		EnvironmentObject *temp = dynamic_cast<EnvironmentObject*>(factory.Create("enObjCreator"));
+		temp->updateObject(enList[i].Pos.x, enList[i].Pos.y, enList[i].Pos.z);
+		temp->updateObjectRotation(enList[i].angle, enList[i].RotAxis.x, enList[i].RotAxis.y, enList[i].RotAxis.z);
+		temp->addModel(gameWorld->getModels()->GetModel(enList[i].modelName));
+		enManager->addObject(temp, to_string(i));
+	}
+	gameWorld->setEnvironment(enManager);
+	enManager = nullptr;
+	delete enManager;
 }

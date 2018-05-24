@@ -1,4 +1,5 @@
 #include "WorldTerrain.h"
+
 bool WorldTerrain::inbounds(int xpos, int zpos)
 {
 	return (xpos >= 0 && xpos <= size && zpos >= 0 && zpos <= size);
@@ -7,7 +8,7 @@ unsigned char WorldTerrain::getHeightColor(int xpos, int zpos)
 {
 	if (inbounds(xpos, zpos))
 	{
-		return terrainData[zpos*size + xpos];
+		return heights[zpos*size + xpos];
 	}
 	return 1;
 }
@@ -16,7 +17,7 @@ float WorldTerrain::getHeight(int xpos, int zpos)
 
 	if (inbounds(xpos, zpos))
 	{
-		return ((float)(terrainData[(zpos*size) + xpos])*scale.y);
+		return ((float)(heights[(zpos*size) + xpos])*scale.y);
 	}
 
 	return 0;
@@ -54,6 +55,7 @@ void WorldTerrain::scriptRegister(lua_State * L)
 		.addFunction("Draw", &WorldTerrain::Draw)
 		.addFunction("SetTerrainVariable", &WorldTerrain::SetTerrainVariable)
 		.addFunction("loadHeightfield", &WorldTerrain::loadHeightfield)
+		.addFunction("load", &WorldTerrain::load)
 		.addFunction("setScallingFactor", &WorldTerrain::setScalingFactor)
 		.addFunction("convert", &WorldTerrain::convert)
 		.addFunction("getHeightAt", &WorldTerrain::getHeight)
@@ -77,13 +79,13 @@ void WorldTerrain::SetTerrainVariable(std::string tex1, std::string tex2, std::s
 			temp.height = (float)getHeightColor(x, z);
 
 			temp.Position.x = ((float)x*scale.x) + objectPos.x;
-			temp.Position.y = (getHeight(x, z)) + objectPos.y;
+			temp.Position.y =  (getHeight(x, z)) + objectPos.y;
 			temp.Position.z = ((float)(z)*scale.z) + objectPos.z;
 
 			terMesh.vertices.push_back(temp);
+			
 		}
 	}
-
 	TextureManager::GetTextureManager().AddTexture(tex1);
 	TextureManager::GetTextureManager().AddTexture(tex2);
 	TextureManager::GetTextureManager().AddTexture(tex3);
@@ -94,22 +96,23 @@ void WorldTerrain::SetTerrainVariable(std::string tex1, std::string tex2, std::s
 	terMesh.terrainTex[2] = TextureManager::GetTextureManager().GetTexture(tex3);
 	terMesh.terrainTex[3] = TextureManager::GetTextureManager().GetTexture(tex4);
 	
-	std::cout << terMesh.terrainTex[0] << std::endl;
+
 	for (int y = 0; y < getSize() - 1; ++y)
 	{
 		for (int x = 0; x < getSize() - 1; ++x)
 		{
 			int start = y * getSize() + x;
-			terMesh.indices.push_back((short)start);
-			terMesh.indices.push_back((short)(start + 1));
-			terMesh.indices.push_back((short)(start + getSize()));
-			terMesh.indices.push_back((short)(start + 1));
-			terMesh.indices.push_back((short)(start + 1 + getSize()));
-			terMesh.indices.push_back((short)(start + getSize()));
+			terMesh.indices.push_back(start);
+			terMesh.indices.push_back((start + 1));
+			terMesh.indices.push_back((start + getSize()));
+			terMesh.indices.push_back((start + 1));
+			terMesh.indices.push_back((start + 1 + getSize()));
+			terMesh.indices.push_back((start + getSize()));
 		}
 	}
-	terMesh.setMesh();
+	terMesh.setTerrainMesh();
 	CreateTerrainRigidBody();
+	
 }
 
 bool WorldTerrain::loadHeightfield(std::string filename, const int size)
@@ -127,6 +130,35 @@ void WorldTerrain::setScalingFactor(float x, float y, float z)
 	scale.z = z;
 }
 
+void WorldTerrain::load(std::string file, int size)
+{
+	this->size = size;
+	const char* name = file.c_str();
+	SDL_Surface* img = SDL_LoadBMP(name);
+
+	if (!img)
+	{
+		std::cout << "image not loaded" << std::endl;
+	}
+	std::vector<float> tmp;
+	for (int i = 0; i < img->h; i++)
+	{
+		for (int j = 0; j < img->w; j++)
+		{
+			Uint32 pixel = ((Uint32*)img->pixels)[i*img->pitch / 4 + j];
+			Uint8 r, g, b;
+			SDL_GetRGB(pixel, img->format, &r, &g, &b);
+			heights.push_back((float)r);
+		}
+	}
+}
+
+
+WorldTerrain * WorldTerrain::convert(GameObject * a)
+{
+	return dynamic_cast<WorldTerrain*>(a);
+}
+
 
 int WorldTerrain::getSize()
 {
@@ -135,6 +167,29 @@ int WorldTerrain::getSize()
 
 void WorldTerrain::CreateTerrainRigidBody()
 {
-	terrainBody = wPhysFac->CreateHeightFieldRigidBody(size, size, terrainData, scale.y, 1, false, false);
-	std::cout << "rigidBodyID for WorldTerrain: " << terrainBody->getUserIndex() << std::endl;
+	terrainData = new unsigned char[size * size];
+	float total = 0, aveH = 0, maxH = 0, minH = 1000;
+	for (int i = 0; i < heights.size(); i++)
+	{
+		terrainData[i] = heights[i];
+		if (maxH < terMesh.vertices[i].Position.y)
+		{
+			maxH = terMesh.vertices[i].Position.y;
+		}
+		if (minH > terMesh.vertices[i].Position.y)
+		{
+			minH = terMesh.vertices[i].Position.y;
+		}
+
+	}
+
+	/*std::cout << "minimum height: " << minH << std::endl;
+	std::cout << "maximum height: " << maxH << std::endl;*/
+
+	terrainBody = wPhysFac->CreateHeightFieldRigidBody(size, size, terrainData, scale.x, scale.y, scale.z, maxH, minH);
+
+	/*std::cout << "rigidBodyID for WorldTerrain: " << terrainBody->getUserIndex() << std::endl;
+	std::cout << "Centrepoint for WorldTerrain: " << terrainBody->getCenterOfMassPosition().getX() << " "
+	<< terrainBody->getCenterOfMassPosition().getY() << " "
+	<< terrainBody->getCenterOfMassPosition().getZ() << std::endl;*/
 }

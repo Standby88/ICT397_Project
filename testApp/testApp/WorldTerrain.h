@@ -5,7 +5,7 @@
 #include "TextureManager.h"
 #include "SOIL2/SOIL2.h"
 #include "PhysicsFacade.h"
-
+#include <SDL.h>
 /**
 * @class WorldTerrain
 * @brief used to represent terrain of the world
@@ -101,16 +101,16 @@ public:
 	*@param float x, float y, float z
 	*/
 	void setScalingFactor(float x, float y, float z);
+	std::vector<float> heights;
+	void load(std::string file, int size);
+	
 
 	/**
 	* @brief convert a GameObjectBase to Worldterrain
 	*@param GameObject* a
 	*@return WorldTerrain*
 	*/
-	WorldTerrain* convert(GameObject* a)
-	{
-		return dynamic_cast<WorldTerrain*>(a);
-	}
+	WorldTerrain* convert(GameObject* a);
 
 	int getSize();
 

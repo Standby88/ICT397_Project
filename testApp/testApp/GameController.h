@@ -3,7 +3,9 @@
 #include "Camera.h"
 #include "PlayerInput.h"
 #include <iostream>
-
+#include "Serialization.h"
+#include "GameAssetFactory.h"
+#include "ModelManager.h"
 /**
 * @class GameController
 * @brief
@@ -20,6 +22,29 @@
 *
 * @bug
 */
+struct saveVec
+{
+	float x, y, z;
+
+	template<class Archive>
+	void serialize(Archive & save)
+	{
+		save(x,y,z);
+	}
+};
+struct enObj
+{
+	saveVec Pos;
+	saveVec RotAxis;
+	float angle;
+	std::string modelName;
+
+	template<class Archive>
+	void serialize(Archive & save)
+	{
+		save(Pos, RotAxis, angle, modelName);
+	}
+};
 class GameController
 {
 private:
@@ -32,6 +57,14 @@ private:
 
 	PhysicsFacade* PhysFac;
 
+	std::unordered_map<std::string, EnvironmentObject* > environmentObjList;
+	std::unordered_map<std::string, EnvironmentObject* >::iterator envItr;
+
+	std::unordered_map<std::string, NPC* > nPCList;
+	std::unordered_map<std::string, NPC* >::iterator nPCItr;
+
+	std::vector<NPC*> updateCharList;
+
 public:
 
 	GameController(GameWorld* gw);
@@ -39,5 +72,12 @@ public:
 	~GameController();
 
 	void update(GLfloat deltaTime);
+
+	Camera* getGameCamera();
+	
+	void saveGame();
+	
+	void loadGame();
+	
 };
 

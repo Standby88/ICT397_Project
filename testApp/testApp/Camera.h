@@ -18,7 +18,7 @@ enum Camera_Move
 
 const GLfloat YAW = -90.0f;
 const GLfloat PITCH = 0.0f;
-const GLfloat SPEED = 6.0f;
+const GLfloat SPEED = 50.0f;
 const GLfloat SENSITIVTY = 0.25f;
 const GLfloat ZOOM = 45.0f;
 
@@ -142,6 +142,12 @@ public:
 	*/
 	void CreateCameraRigidBody();
 
+	void flipPitch()
+	{
+		pitch = -pitch;
+		updateCameraVectors();
+		
+	}
 private:
 	// Camera Attributes
 	V3 position;

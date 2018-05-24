@@ -1,5 +1,8 @@
 #include "GameObject3D.h"
 
+
+
+
 GameObject3D::GameObject3D()
 {
 }
@@ -17,6 +20,8 @@ Model * GameObject3D::getModel()
 void GameObject3D::addModel(Model * model)
 {
 	objectModel = model;
+	//(objectModel->)
+	
 }
 
 void GameObject3D::SetRigidBody(rigidBody* body)

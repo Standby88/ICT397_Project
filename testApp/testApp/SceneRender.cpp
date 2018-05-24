@@ -1,11 +1,24 @@
 #include "SceneRender.h"
 
+void SceneRender::renderSkybox(Skybox & sky, M4 view, M4 projection, Shader & S)
+{
+	glDepthFunc(GL_LEQUAL);  // Change depth function so depth test passes when values are equal to depth buffer's content
+	S.Use();
 
+	view = M4(glm::mat3(gameWorld->getView()));
+	glUniformMatrix4fv(glGetUniformLocation(S.Program, "view"), 1, GL_FALSE, glm::value_ptr(view));
+	glUniformMatrix4fv(glGetUniformLocation(S.Program, "projection"), 1, GL_FALSE, glm::value_ptr(projection));
+
+	sky.Draw();
+
+	glDepthFunc(GL_LESS); // reset depth test
+}
 
 SceneRender::SceneRender(GameWorld * gw)
 {
 	gameWorld = gw;
 	menu = new Menu();
+	water = new Water(fbos.getReflectionTexture(), fbos.getRefractionTexture());
 }
 
 void SceneRender::addShader(std::string ver, std::string frag, std::string name)
@@ -39,7 +52,7 @@ void SceneRender::renderScene()
 	{
 		glPolygonMode(GL_FRONT_AND_BACK, GL_LINE);
 	}
-	else 
+	else
 	{
 		glPolygonMode(GL_FRONT_AND_BACK, GL_FILL);
 	}
@@ -49,17 +62,43 @@ void SceneRender::renderScene()
 	{
 		renderMenu(*shaders["menuOption"]);
 	}
-	else 
+	else
 	{
-		EnvironmentObjManager *Eom = gameWorld->getEnvironment();
-		TerrainManager *Tm = gameWorld->getTerrain();
-		Skybox *sky = gameWorld->getSkybox();
-		renderSkybox(*sky, gameWorld->getView(), gameWorld->getProjection(), *shaders["skybox"]);
-		renderEnvironmentObj(*Eom, gameWorld->getView(), gameWorld->getProjection(), *shaders["environment"]);
-		renderTerrain(*Tm, gameWorld->getView(), gameWorld->getProjection(), *shaders["terrain"]);
+		renderWater();
+		renderGameScene();
 	}
 }
 
+void SceneRender::renderGameScene()
+{
+	EnvironmentObjManager *Eom = gameWorld->getEnvironment();
+	TerrainManager *Tm = gameWorld->getTerrain();
+	CharacterManager *Cm = gameWorld->getCharacters();
+	Skybox *sky = gameWorld->getSkybox();
+	renderSkybox(*sky, gameWorld->getView(), gameWorld->getProjection(), *shaders["skybox"]);
+	renderCharacters(*Cm, gameWorld->getView(), gameWorld->getProjection(), *shaders["Animation"], *shaders["environment"]);
+	renderEnvironmentObj(*Eom, gameWorld->getView(), gameWorld->getProjection(), *shaders["environment"]);
+	renderTerrain(*Tm, gameWorld->getView(), gameWorld->getProjection(), *shaders["terrain"]);
+}
+
+void SceneRender::renderWater()
+{
+	fbos.bindReflectionFrameBuffer();
+	float distance = 2 * (gameWorld->getCam()->GetCameraPosition().y - 0);
+	gameWorld->getCam()->GetCameraPosition().y -= distance;
+	gameWorld->getCam()->flipPitch();
+	renderGameScene();
+	gameWorld->getCam()->GetCameraPosition().y += distance;
+	gameWorld->getCam()->flipPitch();
+	fbos.unbindCurrentFrameBuffer();
+
+	fbos.bindRefractionFrameBuffer();
+	renderGameScene();
+	fbos.unbindCurrentFrameBuffer();
+
+	water->drawWater(*shaders["water"], gameWorld->getView(), gameWorld->getProjection());
+
+}
 void SceneRender::renderEnvironmentObj(EnvironmentObjManager& EM, M4 view, M4 projection, Shader &S)
 {
 	std::unordered_map<std::string, EnvironmentObject* > drawMap = EM.getEnObjMap();
@@ -70,7 +109,6 @@ void SceneRender::renderEnvironmentObj(EnvironmentObjManager& EM, M4 view, M4 pr
 	S.Use();
 	glUniformMatrix4fv(glGetUniformLocation(S.Program, "projection"), 1, GL_FALSE, MathLib::value_ptr<const float *>(projection));
 	glUniformMatrix4fv(glGetUniformLocation(S.Program, "view"), 1, GL_FALSE, MathLib::value_ptr<const float *>(view));
-	
 	std::unordered_map<std::string, EnvironmentObject* >::iterator itr;
 	int i = 0;
 	for (itr = drawMap.begin(); itr != drawMap.end(); ++itr)
@@ -101,7 +139,6 @@ void SceneRender::renderTerrain(TerrainManager & TM, M4 view, M4 projection, Sha
 	{
 		posVec = (*itr)->getObjectPos();
 		// Draw the loaded model
-		model = MathLib::translate(model, posVec); // Translate it down a bit so it's at the center of the scene
 		model = MathLib::scale(model, V3(1.0f, 1.0f, 1.0f));	// It's a bit too big for our scene, so scale it down
 		glUniformMatrix4fv(glGetUniformLocation(S.Program, "model"), 1, GL_FALSE, MathLib::value_ptr<const float *>(model));
 		(*itr)->Draw(S);
@@ -129,13 +166,58 @@ void SceneRender::renderMenu(Shader& s)
 		glPolygonMode(GL_FRONT_AND_BACK, GL_FILL);
 		menu->drawMaunal(s);
 	}
-	else 
+	else
 	if (gameWorld->getPhoto() == true)
 	{
 		glPolygonMode(GL_FRONT_AND_BACK, GL_FILL);
 		menu->drawPhoto(s);
 	}
-	
+	else
+	if(gameWorld->getMainMenu() == true)
+	{
+		glPolygonMode(GL_FRONT_AND_BACK, GL_FILL);
+		menu->drawMainMenu(s);
+	}
+
+}
+
+void SceneRender::renderCharacters(CharacterManager & TM, M4 view, M4 projection, Shader & animation, Shader & deflt)
+{
+
+	std:vector<NPC* > drawMap = TM.getUpdateList();
+	V3 posVec;
+	V3 rotateAxis;
+	float angle;
+	Shader* active;
+
+
+	//std::unordered_map<std::string, NPC* >::iterator itr;
+	for (int i = 0; i<drawMap.size(); i++)
+	{
+
+			active = &animation;
+
+			//active = &deflt;
+
+		active->Use();
+		V3 campos = Camera::GetCameraInstance()->GetCameraPosition();
+		glUniform3f(glGetUniformLocation(active->Program, "view_pos"),campos.x , campos.y, campos.z);
+		glUniformMatrix4fv(glGetUniformLocation(active->Program, "projection"), 1, GL_FALSE, MathLib::value_ptr<const float *>(projection));
+		glUniformMatrix4fv(glGetUniformLocation(active->Program, "view"), 1, GL_FALSE, MathLib::value_ptr<const float *>(view));
+		M4 model;
+		posVec = drawMap[i]->getObjectPos();
+		angle = drawMap[i]->getObjectAngle();
+		angle = MathLib::radians(angle);
+		rotateAxis = drawMap[i]->getObjectRotation();
+		if (angle > 0.0f)
+			model = MathLib::rotate(model, angle, rotateAxis);
+		model = MathLib::translate(model, posVec); // Translate it down a bit so it's at the center of the scene
+		model = MathLib::scale(model, V3(1.0f, 1.0f, 1.0f));	// It's a bit too big for our scene, so scale it down
+		glUniformMatrix4fv(glGetUniformLocation(active->Program, "model"), 1, GL_FALSE, MathLib::value_ptr<const float *>(model));
+		M4  matr_normals_cube = glm::mat4(glm::transpose(glm::inverse(model)));
+		glUniformMatrix4fv(glGetUniformLocation(active->Program, "normals_matrix"), 1, GL_FALSE, glm::value_ptr(matr_normals_cube));
+		drawMap[i]->Draw(*active);
+	}
 }
 
 void SceneRender::scriptRegister(lua_State * L)
@@ -146,6 +228,12 @@ void SceneRender::scriptRegister(lua_State * L)
 		.beginClass<SceneRender>("SceneRender")
 		.addConstructor<void(*) (GameWorld*)>()
 		.addFunction("addShader", &SceneRender::addShader)
+		.addFunction("getShader", &SceneRender::getShader)
 		.endClass()
 		.endNamespace();
+}
+
+Shader * SceneRender::getShader(std::string name)
+{
+	return shaders[name];;
 }

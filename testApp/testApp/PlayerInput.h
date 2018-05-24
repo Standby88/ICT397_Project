@@ -100,13 +100,15 @@ public:
 
 	bool getWire();
 
-	GLfloat m_time;
+	bool getMainMenu();
 
-	///local camera points to existing camera
-	Camera *camera;
+	
 
 private:
-
+	
+	GLfloat m_time;
+///local camera points to existing camera
+	Camera *camera;
 	///width and height of screen
 	int w, h;
 
@@ -150,5 +152,6 @@ private:
 	bool manual;
 
 	bool worldDisplay;
+	bool mainMenu;
 };
 

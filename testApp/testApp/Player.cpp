@@ -7,6 +7,7 @@ Player::Player()
 	objectPos.y = 0;
 	objectPos.z = 0;
 	objectModel = NULL;
+
 }
 
 Player::~Player()
