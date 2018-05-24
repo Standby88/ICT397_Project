@@ -8,4 +8,7 @@
 *.log
 *.idb
 *.obj
+
 *.pdb
+*.VC.db
+*.sdf
