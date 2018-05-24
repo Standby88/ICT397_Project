@@ -102,12 +102,12 @@ void WorldTerrain::SetTerrainVariable(std::string tex1, std::string tex2, std::s
 		for (int x = 0; x < getSize() - 1; ++x)
 		{
 			int start = y * getSize() + x;
-			terMesh.indices.push_back((short)start);
-			terMesh.indices.push_back((short)(start + 1));
-			terMesh.indices.push_back((short)(start + getSize()));
-			terMesh.indices.push_back((short)(start + 1));
-			terMesh.indices.push_back((short)(start + 1 + getSize()));
-			terMesh.indices.push_back((short)(start + getSize()));
+			terMesh.indices.push_back(start);
+			terMesh.indices.push_back((start + 1));
+			terMesh.indices.push_back((start + getSize()));
+			terMesh.indices.push_back((start + 1));
+			terMesh.indices.push_back((start + 1 + getSize()));
+			terMesh.indices.push_back((start + getSize()));
 		}
 	}
 	terMesh.setTerrainMesh();

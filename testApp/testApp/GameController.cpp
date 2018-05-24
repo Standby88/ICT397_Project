@@ -65,7 +65,7 @@ void GameController::update(GLfloat deltaTime)
 	if (gameWorld->getWorldDisplay() == true)
 	{
 		
-		//updating physics
+		/*//updating physics
 		//Running the step simulation function to update rigidbodies in the physics environment
 		PhysFac->StepSimulation(1 / 60.f, 10, camera->GetCameraPosition());
 
@@ -79,8 +79,7 @@ void GameController::update(GLfloat deltaTime)
 		//for loop the uses an iterator to go through and update the positions of all environment objects and their rigidbodies
 		for (envItr = environmentObjList.begin(); envItr != environmentObjList.end(); envItr++)
 		{
-			if ((*envItr).second->GetRigidBody())
-			{
+
 				//a temporary index is made for getting the UserIndex of a collision object in the physics environment
 				//that index is used to make sure we update the correct position for an object.
 				tempInd = (*envItr).second->GetRigidBody()->getUserIndex();
@@ -89,12 +88,6 @@ void GameController::update(GLfloat deltaTime)
 				(*envItr).second->updateObject(PhysFac->GetXPosition(tempInd),
 					PhysFac->GetYPosition(tempInd),
 					PhysFac->GetZPosition(tempInd));
-			}
-			else
-			{
-				//std::cout << "No rigid body " << envItr->first<< std::endl;
-			}
-
 		}
 
 		nPCList = gameWorld->getCharacters()->getCharMap();
@@ -102,19 +95,13 @@ void GameController::update(GLfloat deltaTime)
 
 		for (nPCItr = nPCList.begin(); nPCItr != nPCList.end(); nPCItr++)
 		{
-			if ((*nPCItr).second->GetRigidBody())
-			{
+
 				tempInd = (*nPCItr).second->GetRigidBody()->getUserIndex();
 				(*nPCItr).second->updateObject(PhysFac->GetXPosition(tempInd),
 					PhysFac->GetYPosition(tempInd),
 					PhysFac->GetZPosition(tempInd));
-			}
-			else
-			{
-				//std::cout << "No rigid body" << nPCItr->first << std::endl;
 
-			}
-		}
+		}*/
 	}
 	
 }
