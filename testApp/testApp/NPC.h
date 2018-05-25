@@ -18,11 +18,11 @@ public:
 
 	V3 getIdlePos();
 	void setIdlePos(V3 newPos);
-	void setIdlePos(float x, float y, float z);
+	void SetIdlePos(float x, float y, float z);
 
 	V3 getMovePos();
 	void setMovePos(V3 newPos);
-	void setMovePos(float x, float y, float z);
+	void SetMovePos(float x, float y, float z);
 
 	void ChangeState(State<NPC> *s);
 };

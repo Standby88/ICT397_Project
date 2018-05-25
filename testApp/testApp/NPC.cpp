@@ -46,6 +46,8 @@ void NPC::scriptRegister(lua_State * L)
 		.addConstructor<void(*) (void)>()
 		.addFunction("Draw", &NPC::Draw)
 		.addFunction("convert", &NPC::convert)
+		.addFunction("SetIdlePos", &NPC::SetIdlePos)
+		.addFunction("SetMovePos", &NPC::SetMovePos)
 		.endClass()
 		.endNamespace();
 }
@@ -73,7 +75,7 @@ void NPC::setIdlePos(V3 newPos)
 	this->m_IdlePos = newPos;
 }
 
-void NPC::setIdlePos(float x, float y, float z)
+void NPC::SetIdlePos(float x, float y, float z)
 {
 	V3 temp(x, y, z);
 
@@ -90,7 +92,7 @@ void NPC::setMovePos(V3 newPos)
 	this->m_movePos = newPos;
 }
 
-void NPC::setMovePos(float x, float y, float z)
+void NPC::SetMovePos(float x, float y, float z)
 {
 	V3 temp(x, y, z);
 

@@ -1,1 +1,286 @@
-﻿
+﻿  WorldTerrain.cpp
+c:\users\ducku\documents\ict397-game\work\ict397_project\testapp\testapp\animation.h(7): warning C4305: 'initializing': truncation from 'double' to 'float'
+c:\users\ducku\documents\ict397-game\work\ict397_project\testapp\testapp\animation.h(15): warning C4305: 'initializing': truncation from 'double' to 'float'
+c:\users\ducku\documents\ict397-game\work\ict397_project\testapp\testapp\bone.h(117): warning C4018: '<': signed/unsigned mismatch
+c:\users\ducku\documents\ict397-game\work\ict397_project\testapp\testapp\bone.h(166): warning C4018: '<': signed/unsigned mismatch
+c:\users\ducku\documents\ict397-game\work\ict397_project\testapp\testapp\bone.h(204): warning C4018: '>': signed/unsigned mismatch
+c:\users\ducku\documents\ict397-game\work\ict397_project\testapp\testapp\bone.h(257): warning C4018: '<': signed/unsigned mismatch
+c:\users\ducku\documents\ict397-game\work\ict397_project\ext_libs\bullet\src\linearmath\btidebugdraw.h(169): warning C4305: 'argument': truncation from 'double' to 'const btScalar'
+c:\users\ducku\documents\ict397-game\work\ict397_project\ext_libs\bullet\src\linearmath\btidebugdraw.h(170): warning C4305: 'argument': truncation from 'double' to 'const btScalar'
+c:\users\ducku\documents\ict397-game\work\ict397_project\ext_libs\bullet\src\linearmath\btidebugdraw.h(171): warning C4305: 'argument': truncation from 'double' to 'const btScalar'
+c:\users\ducku\documents\ict397-game\work\ict397_project\testapp\testapp\worldterrain.cpp(11): warning C4244: 'return': conversion from 'float' to 'unsigned char', possible loss of data
+c:\users\ducku\documents\ict397-game\work\ict397_project\testapp\testapp\worldterrain.cpp(172): warning C4018: '<': signed/unsigned mismatch
+c:\users\ducku\documents\ict397-game\work\ict397_project\testapp\testapp\worldterrain.cpp(174): warning C4244: '=': conversion from 'float' to 'unsigned char', possible loss of data
+  Window.cpp
+  WaterFrameBuffer.cpp
+  Water.cpp
+  TextureManager.cpp
+  TerrainManager.cpp
+c:\users\ducku\documents\ict397-game\work\ict397_project\testapp\testapp\animation.h(7): warning C4305: 'initializing': truncation from 'double' to 'float'
+c:\users\ducku\documents\ict397-game\work\ict397_project\testapp\testapp\animation.h(15): warning C4305: 'initializing': truncation from 'double' to 'float'
+c:\users\ducku\documents\ict397-game\work\ict397_project\testapp\testapp\bone.h(117): warning C4018: '<': signed/unsigned mismatch
+c:\users\ducku\documents\ict397-game\work\ict397_project\testapp\testapp\bone.h(166): warning C4018: '<': signed/unsigned mismatch
+c:\users\ducku\documents\ict397-game\work\ict397_project\testapp\testapp\bone.h(204): warning C4018: '>': signed/unsigned mismatch
+c:\users\ducku\documents\ict397-game\work\ict397_project\testapp\testapp\bone.h(257): warning C4018: '<': signed/unsigned mismatch
+c:\users\ducku\documents\ict397-game\work\ict397_project\ext_libs\bullet\src\linearmath\btidebugdraw.h(169): warning C4305: 'argument': truncation from 'double' to 'const btScalar'
+c:\users\ducku\documents\ict397-game\work\ict397_project\ext_libs\bullet\src\linearmath\btidebugdraw.h(170): warning C4305: 'argument': truncation from 'double' to 'const btScalar'
+c:\users\ducku\documents\ict397-game\work\ict397_project\ext_libs\bullet\src\linearmath\btidebugdraw.h(171): warning C4305: 'argument': truncation from 'double' to 'const btScalar'
+c:\users\ducku\documents\ict397-game\work\ict397_project\testapp\testapp\terrainmanager.cpp(24): warning C4018: '<': signed/unsigned mismatch
+  Skybox.cpp
+  Shader.cpp
+  Serialization.cpp
+  ScriptEngine.cpp
+c:\users\ducku\documents\ict397-game\work\ict397_project\testapp\testapp\animation.h(7): warning C4305: 'initializing': truncation from 'double' to 'float'
+c:\users\ducku\documents\ict397-game\work\ict397_project\testapp\testapp\animation.h(15): warning C4305: 'initializing': truncation from 'double' to 'float'
+c:\users\ducku\documents\ict397-game\work\ict397_project\testapp\testapp\bone.h(117): warning C4018: '<': signed/unsigned mismatch
+c:\users\ducku\documents\ict397-game\work\ict397_project\testapp\testapp\bone.h(166): warning C4018: '<': signed/unsigned mismatch
+c:\users\ducku\documents\ict397-game\work\ict397_project\testapp\testapp\bone.h(204): warning C4018: '>': signed/unsigned mismatch
+c:\users\ducku\documents\ict397-game\work\ict397_project\testapp\testapp\bone.h(257): warning C4018: '<': signed/unsigned mismatch
+c:\users\ducku\documents\ict397-game\work\ict397_project\testapp\testapp\model.h(194): warning C4018: '<': signed/unsigned mismatch
+c:\users\ducku\documents\ict397-game\work\ict397_project\ext_libs\bullet\src\linearmath\btidebugdraw.h(169): warning C4305: 'argument': truncation from 'double' to 'const btScalar'
+c:\users\ducku\documents\ict397-game\work\ict397_project\ext_libs\bullet\src\linearmath\btidebugdraw.h(170): warning C4305: 'argument': truncation from 'double' to 'const btScalar'
+c:\users\ducku\documents\ict397-game\work\ict397_project\ext_libs\bullet\src\linearmath\btidebugdraw.h(171): warning C4305: 'argument': truncation from 'double' to 'const btScalar'
+c:\users\ducku\documents\ict397-game\work\ict397_project\testapp\testapp\statemachine.h(11): error C2143: syntax error: missing ';' before '<'
+  c:\users\ducku\documents\ict397-game\work\ict397_project\testapp\testapp\statemachine.h(83): note: see reference to class template instantiation 'StateMachine<entity_type>' being compiled
+c:\users\ducku\documents\ict397-game\work\ict397_project\testapp\testapp\statemachine.h(11): error C4430: missing type specifier - int assumed. Note: C++ does not support default-int
+c:\users\ducku\documents\ict397-game\work\ict397_project\testapp\testapp\statemachine.h(11): error C2238: unexpected token(s) preceding ';'
+c:\users\ducku\documents\ict397-game\work\ict397_project\testapp\testapp\statemachine.h(13): error C2143: syntax error: missing ';' before '<'
+c:\users\ducku\documents\ict397-game\work\ict397_project\testapp\testapp\statemachine.h(13): error C4430: missing type specifier - int assumed. Note: C++ does not support default-int
+c:\users\ducku\documents\ict397-game\work\ict397_project\testapp\testapp\statemachine.h(13): error C2238: unexpected token(s) preceding ';'
+c:\users\ducku\documents\ict397-game\work\ict397_project\testapp\testapp\statemachine.h(15): error C2143: syntax error: missing ';' before '<'
+c:\users\ducku\documents\ict397-game\work\ict397_project\testapp\testapp\statemachine.h(15): error C4430: missing type specifier - int assumed. Note: C++ does not support default-int
+c:\users\ducku\documents\ict397-game\work\ict397_project\testapp\testapp\statemachine.h(15): error C2238: unexpected token(s) preceding ';'
+c:\users\ducku\documents\ict397-game\work\ict397_project\testapp\testapp\statemachine.h(24): error C2061: syntax error: identifier 'State'
+c:\users\ducku\documents\ict397-game\work\ict397_project\testapp\testapp\statemachine.h(29): error C2061: syntax error: identifier 'State'
+c:\users\ducku\documents\ict397-game\work\ict397_project\testapp\testapp\statemachine.h(34): error C2061: syntax error: identifier 'State'
+c:\users\ducku\documents\ict397-game\work\ict397_project\testapp\testapp\statemachine.h(48): error C2061: syntax error: identifier 'State'
+c:\users\ducku\documents\ict397-game\work\ict397_project\testapp\testapp\statemachine.h(67): error C2143: syntax error: missing ';' before '<'
+c:\users\ducku\documents\ict397-game\work\ict397_project\testapp\testapp\statemachine.h(67): error C4430: missing type specifier - int assumed. Note: C++ does not support default-int
+c:\users\ducku\documents\ict397-game\work\ict397_project\testapp\testapp\statemachine.h(68): error C2334: unexpected token(s) preceding '{'; skipping apparent function body
+c:\users\ducku\documents\ict397-game\work\ict397_project\testapp\testapp\statemachine.h(72): error C2143: syntax error: missing ';' before '<'
+c:\users\ducku\documents\ict397-game\work\ict397_project\testapp\testapp\statemachine.h(72): error C4430: missing type specifier - int assumed. Note: C++ does not support default-int
+c:\users\ducku\documents\ict397-game\work\ict397_project\testapp\testapp\statemachine.h(73): error C2334: unexpected token(s) preceding '{'; skipping apparent function body
+c:\users\ducku\documents\ict397-game\work\ict397_project\testapp\testapp\statemachine.h(77): error C2143: syntax error: missing ';' before '<'
+c:\users\ducku\documents\ict397-game\work\ict397_project\testapp\testapp\statemachine.h(77): error C4430: missing type specifier - int assumed. Note: C++ does not support default-int
+c:\users\ducku\documents\ict397-game\work\ict397_project\testapp\testapp\statemachine.h(78): error C2334: unexpected token(s) preceding '{'; skipping apparent function body
+c:\users\ducku\documents\ict397-game\work\ict397_project\testapp\testapp\statemachine.h(82): error C4430: missing type specifier - int assumed. Note: C++ does not support default-int
+c:\users\ducku\documents\ict397-game\work\ict397_project\testapp\testapp\statemachine.h(82): error C2143: syntax error: missing ',' before '<'
+  SceneRender.cpp
+c:\users\ducku\documents\ict397-game\work\ict397_project\testapp\testapp\animation.h(7): warning C4305: 'initializing': truncation from 'double' to 'float'
+c:\users\ducku\documents\ict397-game\work\ict397_project\testapp\testapp\animation.h(15): warning C4305: 'initializing': truncation from 'double' to 'float'
+c:\users\ducku\documents\ict397-game\work\ict397_project\testapp\testapp\bone.h(117): warning C4018: '<': signed/unsigned mismatch
+c:\users\ducku\documents\ict397-game\work\ict397_project\testapp\testapp\bone.h(166): warning C4018: '<': signed/unsigned mismatch
+c:\users\ducku\documents\ict397-game\work\ict397_project\testapp\testapp\bone.h(204): warning C4018: '>': signed/unsigned mismatch
+c:\users\ducku\documents\ict397-game\work\ict397_project\testapp\testapp\bone.h(257): warning C4018: '<': signed/unsigned mismatch
+c:\users\ducku\documents\ict397-game\work\ict397_project\testapp\testapp\model.h(194): warning C4018: '<': signed/unsigned mismatch
+c:\users\ducku\documents\ict397-game\work\ict397_project\ext_libs\bullet\src\linearmath\btidebugdraw.h(169): warning C4305: 'argument': truncation from 'double' to 'const btScalar'
+c:\users\ducku\documents\ict397-game\work\ict397_project\ext_libs\bullet\src\linearmath\btidebugdraw.h(170): warning C4305: 'argument': truncation from 'double' to 'const btScalar'
+c:\users\ducku\documents\ict397-game\work\ict397_project\ext_libs\bullet\src\linearmath\btidebugdraw.h(171): warning C4305: 'argument': truncation from 'double' to 'const btScalar'
+c:\users\ducku\documents\ict397-game\work\ict397_project\testapp\testapp\statemachine.h(11): error C2143: syntax error: missing ';' before '<'
+  c:\users\ducku\documents\ict397-game\work\ict397_project\testapp\testapp\statemachine.h(83): note: see reference to class template instantiation 'StateMachine<entity_type>' being compiled
+c:\users\ducku\documents\ict397-game\work\ict397_project\testapp\testapp\statemachine.h(11): error C4430: missing type specifier - int assumed. Note: C++ does not support default-int
+c:\users\ducku\documents\ict397-game\work\ict397_project\testapp\testapp\statemachine.h(11): error C2238: unexpected token(s) preceding ';'
+c:\users\ducku\documents\ict397-game\work\ict397_project\testapp\testapp\statemachine.h(13): error C2143: syntax error: missing ';' before '<'
+c:\users\ducku\documents\ict397-game\work\ict397_project\testapp\testapp\statemachine.h(13): error C4430: missing type specifier - int assumed. Note: C++ does not support default-int
+c:\users\ducku\documents\ict397-game\work\ict397_project\testapp\testapp\statemachine.h(13): error C2238: unexpected token(s) preceding ';'
+c:\users\ducku\documents\ict397-game\work\ict397_project\testapp\testapp\statemachine.h(15): error C2143: syntax error: missing ';' before '<'
+c:\users\ducku\documents\ict397-game\work\ict397_project\testapp\testapp\statemachine.h(15): error C4430: missing type specifier - int assumed. Note: C++ does not support default-int
+c:\users\ducku\documents\ict397-game\work\ict397_project\testapp\testapp\statemachine.h(15): error C2238: unexpected token(s) preceding ';'
+c:\users\ducku\documents\ict397-game\work\ict397_project\testapp\testapp\statemachine.h(24): error C2061: syntax error: identifier 'State'
+c:\users\ducku\documents\ict397-game\work\ict397_project\testapp\testapp\statemachine.h(29): error C2061: syntax error: identifier 'State'
+c:\users\ducku\documents\ict397-game\work\ict397_project\testapp\testapp\statemachine.h(34): error C2061: syntax error: identifier 'State'
+c:\users\ducku\documents\ict397-game\work\ict397_project\testapp\testapp\statemachine.h(48): error C2061: syntax error: identifier 'State'
+c:\users\ducku\documents\ict397-game\work\ict397_project\testapp\testapp\statemachine.h(67): error C2143: syntax error: missing ';' before '<'
+c:\users\ducku\documents\ict397-game\work\ict397_project\testapp\testapp\statemachine.h(67): error C4430: missing type specifier - int assumed. Note: C++ does not support default-int
+c:\users\ducku\documents\ict397-game\work\ict397_project\testapp\testapp\statemachine.h(68): error C2334: unexpected token(s) preceding '{'; skipping apparent function body
+c:\users\ducku\documents\ict397-game\work\ict397_project\testapp\testapp\statemachine.h(72): error C2143: syntax error: missing ';' before '<'
+c:\users\ducku\documents\ict397-game\work\ict397_project\testapp\testapp\statemachine.h(72): error C4430: missing type specifier - int assumed. Note: C++ does not support default-int
+c:\users\ducku\documents\ict397-game\work\ict397_project\testapp\testapp\statemachine.h(73): error C2334: unexpected token(s) preceding '{'; skipping apparent function body
+c:\users\ducku\documents\ict397-game\work\ict397_project\testapp\testapp\statemachine.h(77): error C2143: syntax error: missing ';' before '<'
+c:\users\ducku\documents\ict397-game\work\ict397_project\testapp\testapp\statemachine.h(77): error C4430: missing type specifier - int assumed. Note: C++ does not support default-int
+c:\users\ducku\documents\ict397-game\work\ict397_project\testapp\testapp\statemachine.h(78): error C2334: unexpected token(s) preceding '{'; skipping apparent function body
+c:\users\ducku\documents\ict397-game\work\ict397_project\testapp\testapp\statemachine.h(82): error C4430: missing type specifier - int assumed. Note: C++ does not support default-int
+c:\users\ducku\documents\ict397-game\work\ict397_project\testapp\testapp\statemachine.h(82): error C2143: syntax error: missing ',' before '<'
+  RawIMGLoader.cpp
+c:\users\ducku\documents\ict397-game\work\ict397_project\testapp\testapp\rawimgloader.cpp(21): warning C4244: 'initializing': conversion from 'std::streamoff' to 'int', possible loss of data
+  PlayerInput.cpp
+c:\users\ducku\documents\ict397-game\work\ict397_project\ext_libs\bullet\src\linearmath\btidebugdraw.h(169): warning C4305: 'argument': truncation from 'double' to 'const btScalar'
+c:\users\ducku\documents\ict397-game\work\ict397_project\ext_libs\bullet\src\linearmath\btidebugdraw.h(170): warning C4305: 'argument': truncation from 'double' to 'const btScalar'
+c:\users\ducku\documents\ict397-game\work\ict397_project\ext_libs\bullet\src\linearmath\btidebugdraw.h(171): warning C4305: 'argument': truncation from 'double' to 'const btScalar'
+c:\users\ducku\documents\ict397-game\work\ict397_project\testapp\testapp\playerinput.cpp(8): warning C4244: '=': conversion from 'int' to 'GLfloat', possible loss of data
+c:\users\ducku\documents\ict397-game\work\ict397_project\testapp\testapp\playerinput.cpp(9): warning C4244: '=': conversion from 'int' to 'GLfloat', possible loss of data
+c:\users\ducku\documents\ict397-game\work\ict397_project\testapp\testapp\playerinput.cpp(15): warning C4244: '=': conversion from 'double' to 'GLfloat', possible loss of data
+c:\users\ducku\documents\ict397-game\work\ict397_project\testapp\testapp\playerinput.cpp(23): warning C4244: '=': conversion from 'int' to 'GLfloat', possible loss of data
+c:\users\ducku\documents\ict397-game\work\ict397_project\testapp\testapp\playerinput.cpp(24): warning C4244: '=': conversion from 'int' to 'GLfloat', possible loss of data
+c:\users\ducku\documents\ict397-game\work\ict397_project\testapp\testapp\playerinput.cpp(57): warning C4244: '=': conversion from 'int' to 'GLfloat', possible loss of data
+c:\users\ducku\documents\ict397-game\work\ict397_project\testapp\testapp\playerinput.cpp(58): warning C4244: '=': conversion from 'int' to 'GLfloat', possible loss of data
+c:\users\ducku\documents\ict397-game\work\ict397_project\testapp\testapp\playerinput.cpp(60): warning C4244: '=': conversion from 'double' to 'GLfloat', possible loss of data
+c:\users\ducku\documents\ict397-game\work\ict397_project\testapp\testapp\playerinput.cpp(62): warning C4800: 'bool *': forcing value to bool 'true' or 'false' (performance warning)
+c:\users\ducku\documents\ict397-game\work\ict397_project\testapp\testapp\playerinput.cpp(198): warning C4244: '=': conversion from 'double' to 'GLfloat', possible loss of data
+c:\users\ducku\documents\ict397-game\work\ict397_project\testapp\testapp\playerinput.cpp(199): warning C4244: '=': conversion from 'double' to 'GLfloat', possible loss of data
+c:\users\ducku\documents\ict397-game\work\ict397_project\testapp\testapp\playerinput.cpp(202): warning C4244: 'initializing': conversion from 'double' to 'GLfloat', possible loss of data
+c:\users\ducku\documents\ict397-game\work\ict397_project\testapp\testapp\playerinput.cpp(203): warning C4244: 'initializing': conversion from 'double' to 'GLfloat', possible loss of data
+c:\users\ducku\documents\ict397-game\work\ict397_project\testapp\testapp\playerinput.cpp(206): warning C4244: '=': conversion from 'double' to 'GLfloat', possible loss of data
+c:\users\ducku\documents\ict397-game\work\ict397_project\testapp\testapp\playerinput.cpp(207): warning C4244: '=': conversion from 'double' to 'GLfloat', possible loss of data
+c:\users\ducku\documents\ict397-game\work\ict397_project\testapp\testapp\playerinput.cpp(242): warning C4244: 'argument': conversion from 'double' to 'GLfloat', possible loss of data
+  Player.cpp
+c:\users\ducku\documents\ict397-game\work\ict397_project\testapp\testapp\animation.h(7): warning C4305: 'initializing': truncation from 'double' to 'float'
+c:\users\ducku\documents\ict397-game\work\ict397_project\testapp\testapp\animation.h(15): warning C4305: 'initializing': truncation from 'double' to 'float'
+c:\users\ducku\documents\ict397-game\work\ict397_project\testapp\testapp\bone.h(117): warning C4018: '<': signed/unsigned mismatch
+c:\users\ducku\documents\ict397-game\work\ict397_project\testapp\testapp\bone.h(166): warning C4018: '<': signed/unsigned mismatch
+c:\users\ducku\documents\ict397-game\work\ict397_project\testapp\testapp\bone.h(204): warning C4018: '>': signed/unsigned mismatch
+c:\users\ducku\documents\ict397-game\work\ict397_project\testapp\testapp\bone.h(257): warning C4018: '<': signed/unsigned mismatch
+c:\users\ducku\documents\ict397-game\work\ict397_project\testapp\testapp\model.h(194): warning C4018: '<': signed/unsigned mismatch
+c:\users\ducku\documents\ict397-game\work\ict397_project\ext_libs\bullet\src\linearmath\btidebugdraw.h(169): warning C4305: 'argument': truncation from 'double' to 'const btScalar'
+c:\users\ducku\documents\ict397-game\work\ict397_project\ext_libs\bullet\src\linearmath\btidebugdraw.h(170): warning C4305: 'argument': truncation from 'double' to 'const btScalar'
+c:\users\ducku\documents\ict397-game\work\ict397_project\ext_libs\bullet\src\linearmath\btidebugdraw.h(171): warning C4305: 'argument': truncation from 'double' to 'const btScalar'
+  PhysicsFacade.cpp
+c:\users\ducku\documents\ict397-game\work\ict397_project\ext_libs\bullet\src\linearmath\btidebugdraw.h(169): warning C4305: 'argument': truncation from 'double' to 'const btScalar'
+c:\users\ducku\documents\ict397-game\work\ict397_project\ext_libs\bullet\src\linearmath\btidebugdraw.h(170): warning C4305: 'argument': truncation from 'double' to 'const btScalar'
+c:\users\ducku\documents\ict397-game\work\ict397_project\ext_libs\bullet\src\linearmath\btidebugdraw.h(171): warning C4305: 'argument': truncation from 'double' to 'const btScalar'
+c:\users\ducku\documents\ict397-game\work\ict397_project\testapp\testapp\physicsfacade.cpp(42): warning C4316: 'PhysicsFacade': object allocated on the heap may not be aligned 16
+c:\users\ducku\documents\ict397-game\work\ict397_project\testapp\testapp\physicsfacade.cpp(195): warning C4244: 'argument': conversion from 'int' to 'const btScalar', possible loss of data
+c:\users\ducku\documents\ict397-game\work\ict397_project\testapp\testapp\physicsfacade.cpp(196): warning C4244: 'initializing': conversion from 'int' to 'btScalar', possible loss of data
+  NPC_States.cpp
+c:\program files (x86)\microsoft visual studio 14.0\vc\include\sal.h(2361): error C2988: unrecognizable template declaration/definition
+c:\program files (x86)\microsoft visual studio 14.0\vc\include\sal.h(2361): error C2059: syntax error: 'string'
+c:\program files (x86)\microsoft visual studio 14.0\vc\include\concurrencysal.h(22): error C2143: syntax error: missing ';' before '{'
+c:\program files (x86)\microsoft visual studio 14.0\vc\include\concurrencysal.h(22): error C2447: '{': missing function header (old-style formal list?)
+c:\program files (x86)\microsoft visual studio 14.0\vc\include\vcruntime.h(301): error C2065: 'uintptr_t': undeclared identifier
+c:\program files (x86)\microsoft visual studio 14.0\vc\include\vcruntime.h(301): error C2146: syntax error: missing ')' before identifier '_StackCookie'
+c:\program files (x86)\microsoft visual studio 14.0\vc\include\vcruntime.h(309): error C4430: missing type specifier - int assumed. Note: C++ does not support default-int
+c:\program files (x86)\microsoft visual studio 14.0\vc\include\vcruntime.h(309): error C2146: syntax error: missing ';' before identifier '__security_cookie'
+c:\program files (x86)\windows kits\10\include\10.0.10240.0\ucrt\corecrt.h(223): error C2061: syntax error: identifier 'uintptr_t'
+c:\program files (x86)\windows kits\10\include\10.0.10240.0\ucrt\corecrt.h(235): error C2061: syntax error: identifier 'uintptr_t'
+c:\program files (x86)\windows kits\10\include\10.0.10240.0\ucrt\stddef.h(48): error C2143: syntax error: missing ';' before '__cdecl'
+c:\program files (x86)\windows kits\10\include\10.0.10240.0\ucrt\stddef.h(48): error C4430: missing type specifier - int assumed. Note: C++ does not support default-int
+c:\program files (x86)\windows kits\10\include\10.0.10240.0\ucrt\stddef.h(48): error C2370: 'uintptr_t': redefinition; different storage class
+  c:\program files (x86)\microsoft visual studio 14.0\vc\include\vcruntime.h(309): note: see declaration of 'uintptr_t'
+c:\program files (x86)\windows kits\10\include\10.0.10240.0\ucrt\stdlib.h(163): error C2061: syntax error: identifier 'uintptr_t'
+c:\program files (x86)\windows kits\10\include\10.0.10240.0\ucrt\corecrt_wstdio.h(272): error C2061: syntax error: identifier 'va_list'
+c:\program files (x86)\windows kits\10\include\10.0.10240.0\ucrt\corecrt_wstdio.h(281): error C2061: syntax error: identifier 'va_list'
+c:\program files (x86)\windows kits\10\include\10.0.10240.0\ucrt\corecrt_wstdio.h(290): error C2061: syntax error: identifier 'va_list'
+c:\program files (x86)\windows kits\10\include\10.0.10240.0\ucrt\corecrt_wstdio.h(298): error C2061: syntax error: identifier 'va_list'
+c:\program files (x86)\windows kits\10\include\10.0.10240.0\ucrt\corecrt_wstdio.h(304): error C2065: '_ArgList': undeclared identifier
+c:\program files (x86)\windows kits\10\include\10.0.10240.0\ucrt\corecrt_wstdio.h(312): error C2061: syntax error: identifier 'va_list'
+c:\program files (x86)\windows kits\10\include\10.0.10240.0\ucrt\corecrt_wstdio.h(318): error C2065: '_ArgList': undeclared identifier
+c:\program files (x86)\windows kits\10\include\10.0.10240.0\ucrt\corecrt_wstdio.h(327): error C2061: syntax error: identifier 'va_list'
+c:\program files (x86)\windows kits\10\include\10.0.10240.0\ucrt\corecrt_wstdio.h(333): error C2065: '_ArgList': undeclared identifier
+c:\program files (x86)\windows kits\10\include\10.0.10240.0\ucrt\corecrt_wstdio.h(343): error C2061: syntax error: identifier 'va_list'
+c:\program files (x86)\windows kits\10\include\10.0.10240.0\ucrt\corecrt_wstdio.h(349): error C2065: '_ArgList': undeclared identifier
+c:\program files (x86)\windows kits\10\include\10.0.10240.0\ucrt\corecrt_wstdio.h(360): error C2061: syntax error: identifier 'va_list'
+c:\program files (x86)\windows kits\10\include\10.0.10240.0\ucrt\corecrt_wstdio.h(366): error C2065: '_ArgList': undeclared identifier
+c:\program files (x86)\windows kits\10\include\10.0.10240.0\ucrt\corecrt_wstdio.h(374): error C2061: syntax error: identifier 'va_list'
+c:\program files (x86)\windows kits\10\include\10.0.10240.0\ucrt\corecrt_wstdio.h(380): error C2065: '_ArgList': undeclared identifier
+c:\program files (x86)\windows kits\10\include\10.0.10240.0\ucrt\corecrt_wstdio.h(388): error C2061: syntax error: identifier 'va_list'
+c:\program files (x86)\windows kits\10\include\10.0.10240.0\ucrt\corecrt_wstdio.h(394): error C2065: '_ArgList': undeclared identifier
+c:\program files (x86)\windows kits\10\include\10.0.10240.0\ucrt\corecrt_wstdio.h(401): error C2061: syntax error: identifier 'va_list'
+c:\program files (x86)\windows kits\10\include\10.0.10240.0\ucrt\corecrt_wstdio.h(407): error C2065: '_ArgList': undeclared identifier
+c:\program files (x86)\windows kits\10\include\10.0.10240.0\ucrt\corecrt_wstdio.h(415): error C2061: syntax error: identifier 'va_list'
+c:\program files (x86)\windows kits\10\include\10.0.10240.0\ucrt\corecrt_wstdio.h(421): error C2065: '_ArgList': undeclared identifier
+c:\program files (x86)\windows kits\10\include\10.0.10240.0\ucrt\corecrt_wstdio.h(430): error C2061: syntax error: identifier 'va_list'
+c:\program files (x86)\windows kits\10\include\10.0.10240.0\ucrt\corecrt_wstdio.h(436): error C2065: '_ArgList': undeclared identifier
+c:\program files (x86)\windows kits\10\include\10.0.10240.0\ucrt\corecrt_wstdio.h(446): error C2061: syntax error: identifier 'va_list'
+c:\program files (x86)\windows kits\10\include\10.0.10240.0\ucrt\corecrt_wstdio.h(452): error C2065: '_ArgList': undeclared identifier
+c:\program files (x86)\windows kits\10\include\10.0.10240.0\ucrt\corecrt_wstdio.h(459): error C2061: syntax error: identifier 'va_list'
+c:\program files (x86)\windows kits\10\include\10.0.10240.0\ucrt\corecrt_wstdio.h(465): error C2065: '_ArgList': undeclared identifier
+c:\program files (x86)\windows kits\10\include\10.0.10240.0\ucrt\corecrt_wstdio.h(480): error C2065: 'va_list': undeclared identifier
+c:\program files (x86)\windows kits\10\include\10.0.10240.0\ucrt\corecrt_wstdio.h(480): error C2146: syntax error: missing ';' before identifier '_ArgList'
+c:\program files (x86)\windows kits\10\include\10.0.10240.0\ucrt\corecrt_wstdio.h(480): error C2065: '_ArgList': undeclared identifier
+c:\program files (x86)\windows kits\10\include\10.0.10240.0\ucrt\corecrt_wstdio.h(481): error C2065: '_ArgList': undeclared identifier
+c:\program files (x86)\windows kits\10\include\10.0.10240.0\ucrt\corecrt_wstdio.h(481): error C2065: 'va_list': undeclared identifier
+c:\program files (x86)\windows kits\10\include\10.0.10240.0\ucrt\corecrt_wstdio.h(482): error C2065: '_ArgList': undeclared identifier
+c:\program files (x86)\windows kits\10\include\10.0.10240.0\ucrt\corecrt_wstdio.h(483): error C2065: '_ArgList': undeclared identifier
+c:\program files (x86)\windows kits\10\include\10.0.10240.0\ucrt\corecrt_wstdio.h(483): error C2065: 'va_list': undeclared identifier
+c:\program files (x86)\windows kits\10\include\10.0.10240.0\ucrt\corecrt_wstdio.h(483): error C2059: syntax error: 'constant'
+c:\program files (x86)\windows kits\10\include\10.0.10240.0\ucrt\corecrt_wstdio.h(498): error C2065: 'va_list': undeclared identifier
+c:\program files (x86)\windows kits\10\include\10.0.10240.0\ucrt\corecrt_wstdio.h(498): error C2146: syntax error: missing ';' before identifier '_ArgList'
+c:\program files (x86)\windows kits\10\include\10.0.10240.0\ucrt\corecrt_wstdio.h(498): error C2065: '_ArgList': undeclared identifier
+c:\program files (x86)\windows kits\10\include\10.0.10240.0\ucrt\corecrt_wstdio.h(499): error C2065: '_ArgList': undeclared identifier
+c:\program files (x86)\windows kits\10\include\10.0.10240.0\ucrt\corecrt_wstdio.h(499): error C2065: 'va_list': undeclared identifier
+c:\program files (x86)\windows kits\10\include\10.0.10240.0\ucrt\corecrt_wstdio.h(500): error C2065: '_ArgList': undeclared identifier
+c:\program files (x86)\windows kits\10\include\10.0.10240.0\ucrt\corecrt_wstdio.h(501): error C2065: '_ArgList': undeclared identifier
+c:\program files (x86)\windows kits\10\include\10.0.10240.0\ucrt\corecrt_wstdio.h(501): error C2065: 'va_list': undeclared identifier
+c:\program files (x86)\windows kits\10\include\10.0.10240.0\ucrt\corecrt_wstdio.h(501): error C2059: syntax error: 'constant'
+c:\program files (x86)\windows kits\10\include\10.0.10240.0\ucrt\corecrt_wstdio.h(517): error C2065: 'va_list': undeclared identifier
+c:\program files (x86)\windows kits\10\include\10.0.10240.0\ucrt\corecrt_wstdio.h(517): error C2146: syntax error: missing ';' before identifier '_ArgList'
+c:\program files (x86)\windows kits\10\include\10.0.10240.0\ucrt\corecrt_wstdio.h(517): error C2065: '_ArgList': undeclared identifier
+c:\program files (x86)\windows kits\10\include\10.0.10240.0\ucrt\corecrt_wstdio.h(518): error C2065: '_ArgList': undeclared identifier
+c:\program files (x86)\windows kits\10\include\10.0.10240.0\ucrt\corecrt_wstdio.h(518): error C2065: 'va_list': undeclared identifier
+c:\program files (x86)\windows kits\10\include\10.0.10240.0\ucrt\corecrt_wstdio.h(519): error C2065: '_ArgList': undeclared identifier
+c:\program files (x86)\windows kits\10\include\10.0.10240.0\ucrt\corecrt_wstdio.h(520): error C2065: '_ArgList': undeclared identifier
+c:\program files (x86)\windows kits\10\include\10.0.10240.0\ucrt\corecrt_wstdio.h(520): error C2065: 'va_list': undeclared identifier
+c:\program files (x86)\windows kits\10\include\10.0.10240.0\ucrt\corecrt_wstdio.h(520): error C2059: syntax error: 'constant'
+c:\program files (x86)\windows kits\10\include\10.0.10240.0\ucrt\corecrt_wstdio.h(537): error C2065: 'va_list': undeclared identifier
+c:\program files (x86)\windows kits\10\include\10.0.10240.0\ucrt\corecrt_wstdio.h(537): error C2146: syntax error: missing ';' before identifier '_ArgList'
+c:\program files (x86)\windows kits\10\include\10.0.10240.0\ucrt\corecrt_wstdio.h(537): error C2065: '_ArgList': undeclared identifier
+c:\program files (x86)\windows kits\10\include\10.0.10240.0\ucrt\corecrt_wstdio.h(538): error C2065: '_ArgList': undeclared identifier
+c:\program files (x86)\windows kits\10\include\10.0.10240.0\ucrt\corecrt_wstdio.h(538): error C2065: 'va_list': undeclared identifier
+c:\program files (x86)\windows kits\10\include\10.0.10240.0\ucrt\corecrt_wstdio.h(539): error C2065: '_ArgList': undeclared identifier
+c:\program files (x86)\windows kits\10\include\10.0.10240.0\ucrt\corecrt_wstdio.h(540): error C2065: '_ArgList': undeclared identifier
+c:\program files (x86)\windows kits\10\include\10.0.10240.0\ucrt\corecrt_wstdio.h(540): error C2065: 'va_list': undeclared identifier
+c:\program files (x86)\windows kits\10\include\10.0.10240.0\ucrt\corecrt_wstdio.h(540): error C2059: syntax error: 'constant'
+c:\program files (x86)\windows kits\10\include\10.0.10240.0\ucrt\corecrt_wstdio.h(558): error C2065: 'va_list': undeclared identifier
+c:\program files (x86)\windows kits\10\include\10.0.10240.0\ucrt\corecrt_wstdio.h(558): error C2146: syntax error: missing ';' before identifier '_ArgList'
+c:\program files (x86)\windows kits\10\include\10.0.10240.0\ucrt\corecrt_wstdio.h(558): error C2065: '_ArgList': undeclared identifier
+c:\program files (x86)\windows kits\10\include\10.0.10240.0\ucrt\corecrt_wstdio.h(559): error C2065: '_ArgList': undeclared identifier
+c:\program files (x86)\windows kits\10\include\10.0.10240.0\ucrt\corecrt_wstdio.h(559): error C2065: 'va_list': undeclared identifier
+c:\program files (x86)\windows kits\10\include\10.0.10240.0\ucrt\corecrt_wstdio.h(560): error C2065: '_ArgList': undeclared identifier
+c:\program files (x86)\windows kits\10\include\10.0.10240.0\ucrt\corecrt_wstdio.h(561): error C2065: '_ArgList': undeclared identifier
+c:\program files (x86)\windows kits\10\include\10.0.10240.0\ucrt\corecrt_wstdio.h(561): error C2065: 'va_list': undeclared identifier
+c:\program files (x86)\windows kits\10\include\10.0.10240.0\ucrt\corecrt_wstdio.h(561): error C2059: syntax error: 'constant'
+c:\program files (x86)\windows kits\10\include\10.0.10240.0\ucrt\corecrt_wstdio.h(576): error C2065: 'va_list': undeclared identifier
+c:\program files (x86)\windows kits\10\include\10.0.10240.0\ucrt\corecrt_wstdio.h(576): error C2146: syntax error: missing ';' before identifier '_ArgList'
+c:\program files (x86)\windows kits\10\include\10.0.10240.0\ucrt\corecrt_wstdio.h(576): error C2065: '_ArgList': undeclared identifier
+c:\program files (x86)\windows kits\10\include\10.0.10240.0\ucrt\corecrt_wstdio.h(577): error C2065: '_ArgList': undeclared identifier
+c:\program files (x86)\windows kits\10\include\10.0.10240.0\ucrt\corecrt_wstdio.h(577): error C2065: 'va_list': undeclared identifier
+c:\program files (x86)\windows kits\10\include\10.0.10240.0\ucrt\corecrt_wstdio.h(578): error C2065: '_ArgList': undeclared identifier
+c:\program files (x86)\windows kits\10\include\10.0.10240.0\ucrt\corecrt_wstdio.h(579): error C2065: '_ArgList': undeclared identifier
+c:\program files (x86)\windows kits\10\include\10.0.10240.0\ucrt\corecrt_wstdio.h(579): error C2065: 'va_list': undeclared identifier
+c:\program files (x86)\windows kits\10\include\10.0.10240.0\ucrt\corecrt_wstdio.h(579): error C2059: syntax error: 'constant'
+c:\program files (x86)\windows kits\10\include\10.0.10240.0\ucrt\corecrt_wstdio.h(594): error C2065: 'va_list': undeclared identifier
+c:\program files (x86)\windows kits\10\include\10.0.10240.0\ucrt\corecrt_wstdio.h(594): error C2146: syntax error: missing ';' before identifier '_ArgList'
+c:\program files (x86)\windows kits\10\include\10.0.10240.0\ucrt\corecrt_wstdio.h(594): error C2065: '_ArgList': undeclared identifier
+c:\program files (x86)\windows kits\10\include\10.0.10240.0\ucrt\corecrt_wstdio.h(595): error C2065: '_ArgList': undeclared identifier
+c:\program files (x86)\windows kits\10\include\10.0.10240.0\ucrt\corecrt_wstdio.h(595): error C2065: 'va_list': undeclared identifier
+c:\program files (x86)\windows kits\10\include\10.0.10240.0\ucrt\corecrt_wstdio.h(596): error C2065: '_ArgList': undeclared identifier
+c:\program files (x86)\windows kits\10\include\10.0.10240.0\ucrt\corecrt_wstdio.h(597): error C2065: '_ArgList': undeclared identifier
+c:\program files (x86)\windows kits\10\include\10.0.10240.0\ucrt\corecrt_wstdio.h(597): error C2065: 'va_list': undeclared identifier
+c:\program files (x86)\windows kits\10\include\10.0.10240.0\ucrt\corecrt_wstdio.h(597): fatal error C1003: error count exceeds 100; stopping compilation
+  NPC.cpp
+c:\users\ducku\documents\ict397-game\work\ict397_project\testapp\testapp\animation.h(7): warning C4305: 'initializing': truncation from 'double' to 'float'
+c:\users\ducku\documents\ict397-game\work\ict397_project\testapp\testapp\animation.h(15): warning C4305: 'initializing': truncation from 'double' to 'float'
+c:\users\ducku\documents\ict397-game\work\ict397_project\testapp\testapp\bone.h(117): warning C4018: '<': signed/unsigned mismatch
+c:\users\ducku\documents\ict397-game\work\ict397_project\testapp\testapp\bone.h(166): warning C4018: '<': signed/unsigned mismatch
+c:\users\ducku\documents\ict397-game\work\ict397_project\testapp\testapp\bone.h(204): warning C4018: '>': signed/unsigned mismatch
+c:\users\ducku\documents\ict397-game\work\ict397_project\testapp\testapp\bone.h(257): warning C4018: '<': signed/unsigned mismatch
+c:\users\ducku\documents\ict397-game\work\ict397_project\testapp\testapp\model.h(194): warning C4018: '<': signed/unsigned mismatch
+c:\users\ducku\documents\ict397-game\work\ict397_project\ext_libs\bullet\src\linearmath\btidebugdraw.h(169): warning C4305: 'argument': truncation from 'double' to 'const btScalar'
+c:\users\ducku\documents\ict397-game\work\ict397_project\ext_libs\bullet\src\linearmath\btidebugdraw.h(170): warning C4305: 'argument': truncation from 'double' to 'const btScalar'
+c:\users\ducku\documents\ict397-game\work\ict397_project\ext_libs\bullet\src\linearmath\btidebugdraw.h(171): warning C4305: 'argument': truncation from 'double' to 'const btScalar'
+c:\users\ducku\documents\ict397-game\work\ict397_project\testapp\testapp\statemachine.h(11): error C2143: syntax error: missing ';' before '<'
+  c:\users\ducku\documents\ict397-game\work\ict397_project\testapp\testapp\statemachine.h(83): note: see reference to class template instantiation 'StateMachine<entity_type>' being compiled
+c:\users\ducku\documents\ict397-game\work\ict397_project\testapp\testapp\statemachine.h(11): error C4430: missing type specifier - int assumed. Note: C++ does not support default-int
+c:\users\ducku\documents\ict397-game\work\ict397_project\testapp\testapp\statemachine.h(11): error C2238: unexpected token(s) preceding ';'
+c:\users\ducku\documents\ict397-game\work\ict397_project\testapp\testapp\statemachine.h(13): error C2143: syntax error: missing ';' before '<'
+c:\users\ducku\documents\ict397-game\work\ict397_project\testapp\testapp\statemachine.h(13): error C4430: missing type specifier - int assumed. Note: C++ does not support default-int
+c:\users\ducku\documents\ict397-game\work\ict397_project\testapp\testapp\statemachine.h(13): error C2238: unexpected token(s) preceding ';'
+c:\users\ducku\documents\ict397-game\work\ict397_project\testapp\testapp\statemachine.h(15): error C2143: syntax error: missing ';' before '<'
+c:\users\ducku\documents\ict397-game\work\ict397_project\testapp\testapp\statemachine.h(15): error C4430: missing type specifier - int assumed. Note: C++ does not support default-int
+c:\users\ducku\documents\ict397-game\work\ict397_project\testapp\testapp\statemachine.h(15): error C2238: unexpected token(s) preceding ';'
+c:\users\ducku\documents\ict397-game\work\ict397_project\testapp\testapp\statemachine.h(24): error C2061: syntax error: identifier 'State'
+c:\users\ducku\documents\ict397-game\work\ict397_project\testapp\testapp\statemachine.h(29): error C2061: syntax error: identifier 'State'
+c:\users\ducku\documents\ict397-game\work\ict397_project\testapp\testapp\statemachine.h(34): error C2061: syntax error: identifier 'State'
+c:\users\ducku\documents\ict397-game\work\ict397_project\testapp\testapp\statemachine.h(48): error C2061: syntax error: identifier 'State'
+c:\users\ducku\documents\ict397-game\work\ict397_project\testapp\testapp\statemachine.h(67): error C2143: syntax error: missing ';' before '<'
+c:\users\ducku\documents\ict397-game\work\ict397_project\testapp\testapp\statemachine.h(67): error C4430: missing type specifier - int assumed. Note: C++ does not support default-int
+c:\users\ducku\documents\ict397-game\work\ict397_project\testapp\testapp\statemachine.h(68): error C2334: unexpected token(s) preceding '{'; skipping apparent function body
+c:\users\ducku\documents\ict397-game\work\ict397_project\testapp\testapp\statemachine.h(72): error C2143: syntax error: missing ';' before '<'
+c:\users\ducku\documents\ict397-game\work\ict397_project\testapp\testapp\statemachine.h(72): error C4430: missing type specifier - int assumed. Note: C++ does not support default-int
+c:\users\ducku\documents\ict397-game\work\ict397_project\testapp\testapp\statemachine.h(73): error C2334: unexpected token(s) preceding '{'; skipping apparent function body
+c:\users\ducku\documents\ict397-game\work\ict397_project\testapp\testapp\statemachine.h(77): error C2143: syntax error: missing ';' before '<'
+c:\users\ducku\documents\ict397-game\work\ict397_project\testapp\testapp\statemachine.h(77): error C4430: missing type specifier - int assumed. Note: C++ does not support default-int
+c:\users\ducku\documents\ict397-game\work\ict397_project\testapp\testapp\statemachine.h(78): error C2334: unexpected token(s) preceding '{'; skipping apparent function body
+c:\users\ducku\documents\ict397-game\work\ict397_project\testapp\testapp\statemachine.h(82): error C4430: missing type specifier - int assumed. Note: C++ does not support default-int
+c:\users\ducku\documents\ict397-game\work\ict397_project\testapp\testapp\statemachine.h(82): error C2143: syntax error: missing ',' before '<'
+c:\users\ducku\documents\ict397-game\work\ict397_project\testapp\testapp\statemachine.h(68): fatal error C1903: unable to recover from previous error(s); stopping compilation
