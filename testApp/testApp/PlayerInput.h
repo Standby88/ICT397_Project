@@ -90,24 +90,90 @@ public:
 	*/
 	static void WrapScrollCallback(GLFWwindow *window, double xOffset, double yOffset);
 
+	/**
+	* @brief returns true if photo is to be displayed
+	*
+	* @return bool
+	*/
 	bool getPhoto();
 	
-
+	/**
+	* @brief returns true if manual is to be displayed
+	*
+	* @return bool
+	*/
 	bool getManual();
 
+	/**
+	* @brief returns true if gameworld is to be displayed
+	*
+	* @return bool
+	*/
 	bool getWorldDisplay();
 
-
+	/**
+	* @brief returns true if wireframe is to be displayed
+	*
+	* @return bool
+	*/
 	bool getWire();
 
+	/**
+	* @brief returns true if main menu is to be displayed
+	*
+	* @return bool
+	*/
 	bool getMainMenu();
 
-	
+	/**
+	* @brief returns true if save game has been selected
+	*
+	* @return bool
+	*/
+	bool GetSaveGame();
+
+	/**
+	* @brief sets save game to true or false
+	*
+	* @param bool
+	* @return void
+	*/
+	void SetSaveGame(bool hasSaved);
+
+	/**
+	* @brief returns true if load game has been selected
+	*
+	* @return bool
+	*/
+	bool GetLoadGame();
+
+	/**
+	* @brief sets load game to true or false
+	*
+	* @param bool
+	* @return void
+	*/
+	void SetLoadGame(bool load);
+
+	/**
+	* @brief returns true if new game has been selected
+	*
+	* @return bool
+	*/
+	bool GetNewGame();
+
+	/**
+	* @brief sets new game to true or false
+	*
+	* @param bool
+	* @return void
+	*/
+	void SetNewGame(bool load);
 
 private:
 	
 	GLfloat m_time;
-///local camera points to existing camera
+	///local camera points to existing camera
 	Camera *camera;
 	///width and height of screen
 	int w, h;
@@ -152,6 +218,13 @@ private:
 	bool manual;
 
 	bool worldDisplay;
+
 	bool mainMenu;
+
+	bool saveGame;
+
+	bool loadGame;
+
+	bool newGame;
 };
 

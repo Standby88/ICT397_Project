@@ -12,6 +12,9 @@ PlayerInput::PlayerInput()
 	wire = false;
 	worldDisplay = true;
 	mainMenu = false;
+	saveGame = false;
+	loadGame = false;
+	newGame = false;
 	m_time = glfwGetTime();
 
 }
@@ -29,6 +32,9 @@ PlayerInput::PlayerInput(int width, int height, Camera *cam, GLfloat* deltaTime)
 	wire = false;
 	worldDisplay = true;
 	mainMenu = false;
+	saveGame = false;
+	loadGame = false;
+	newGame = false;
 }
 
 void PlayerInput::destroyCurrentPlayerInput()
@@ -121,16 +127,56 @@ void PlayerInput::WrapKeyCallback(GLFWwindow *window, int key, int scancode, int
 
 void PlayerInput::KeyCallback(GLFWwindow *window, int key, int scancode, int action, int mode)
 {
-	if (key == GLFW_KEY_X && action == GLFW_PRESS)
+	if (key == GLFW_KEY_ESCAPE && action == GLFW_PRESS)
 	{
-		if (photo == false)
+		if (mainMenu)
 		{
-			photo = true;
-			worldDisplay = false;
+			if (photo == false)
+			{
+				photo = true;
+				worldDisplay = false;
+			}
+			else if(photo == true)
+			{
+				glfwSetWindowShouldClose(glfwGetCurrentContext(), GL_TRUE);
+			}
+		}	
+	}
+
+	if (key == GLFW_KEY_S && action == GLFW_PRESS)
+	{
+		if (mainMenu)
+		{
+			if (!saveGame)
+			{
+				saveGame = true;
+			}
 		}
-		else if(photo == true)
+	}
+
+	if (key == GLFW_KEY_L && action == GLFW_PRESS)
+	{
+		if (mainMenu)
 		{
-			glfwSetWindowShouldClose(glfwGetCurrentContext(), GL_TRUE);
+			if (!loadGame)
+			{
+				loadGame = true;
+				mainMenu = false;
+				worldDisplay = true;
+			}
+		}
+	}
+
+	if (key == GLFW_KEY_N && action == GLFW_PRESS)
+	{
+		if (mainMenu)
+		{
+			if (!newGame)
+			{
+				newGame = true;
+				mainMenu = false;
+				worldDisplay = true;
+			}
 		}
 	}
 
@@ -241,3 +287,36 @@ void PlayerInput::ScrollCallback(GLFWwindow *window, double xOffset, double yOff
 {
 	camera->ProcessMouseScroll(yOffset);
 }
+
+bool PlayerInput::GetSaveGame()
+{
+	return saveGame;
+}
+
+void PlayerInput::SetSaveGame(bool saved)
+{
+	saveGame = saved;
+}
+
+bool PlayerInput::GetLoadGame()
+{
+	return loadGame;
+}
+
+void PlayerInput::SetLoadGame(bool load)
+{
+	loadGame = load;
+}
+
+bool PlayerInput::GetNewGame()
+{
+	return newGame;
+}
+
+void PlayerInput::SetNewGame(bool newG)
+{
+	newGame = newG;
+}
+
+
+

@@ -63,6 +63,9 @@ void GameController::update(GLfloat deltaTime)
 	gameWorld->setWorldDisplay(PlayerInput::getCurrentPlayerInput().getWorldDisplay());
 	gameWorld->setWire(PlayerInput::getCurrentPlayerInput().getWire());
 	gameWorld->setMainmenu(PlayerInput::getCurrentPlayerInput().getMainMenu());
+	gameWorld->SetSaveGame(PlayerInput::getCurrentPlayerInput().GetSaveGame());
+	gameWorld->SetLoadGame(PlayerInput::getCurrentPlayerInput().GetLoadGame());
+	gameWorld->SetNewGame(PlayerInput::getCurrentPlayerInput().GetNewGame());
 
 	if (gameWorld->getWorldDisplay() == true)
 	{
@@ -104,6 +107,33 @@ void GameController::update(GLfloat deltaTime)
 		}
 	}
 	
+	if (gameWorld->GetSaveGame())
+	{
+		std::cout << "Game is being saved..." << std::endl;
+		saveGame();
+		//make sure to reset the variable in playerinput so saving doesn't occur
+		//multiple times
+		PlayerInput::getCurrentPlayerInput().SetSaveGame(false);
+	}
+
+	if (gameWorld->GetLoadGame())
+	{
+		std::cout << "Game is being loaded..." << std::endl;
+		loadGame();
+		//make sure to reset the variable in playerinput so loading doesn't occur
+		//multiple times
+		PlayerInput::getCurrentPlayerInput().SetLoadGame(false);
+	}
+
+	if (gameWorld->GetNewGame())
+	{
+		std::cout << "Beginning new game..." << std::endl;
+		//not implemented yet
+		//make sure to reset the variable in playerinput so starting a new game
+		//doesn't occur multiple times
+		PlayerInput::getCurrentPlayerInput().SetNewGame(false);
+	}
+
 }
 
 Camera * GameController::getGameCamera()
