@@ -34,6 +34,8 @@ protected:
 	///facaded rigidbody variable
 	rigidBody* gameObjBody;
 
+	PhysicsFacade* gOPhys = PhysicsFacade::GetPhysicsInstance();
+
 public:
 
 	/**
@@ -97,6 +99,42 @@ public:
 	* @post
 	*/
 	rigidBody* GetRigidBody();
+
+	/**
+	* @brief updates position of an object's rigidbody
+	*
+	*
+	*
+	* @param V3
+	* @return void
+	* @pre
+	* @post
+	*/
+	void UpdateRigidBodyPosition(V3 position);
+
+	/**
+	* @brief Updates velocity of an object's rigidbody
+	*
+	*
+	*
+	* @param V3
+	* @return void
+	* @pre
+	* @post
+	*/
+	void UpdateRigidBodyVelocity(V3 velocity);
+
+	/**
+	* @brief Updates an object's rigidbody in the physics' world
+	*
+	*
+	*
+	* @param void
+	* @return void
+	* @pre
+	* @post
+	*/
+	void UpdatePhysicsWorldBody();
 
 	/**
 	* @brief register all functions to lua to be used.
