@@ -121,17 +121,21 @@ void PlayerInput::WrapKeyCallback(GLFWwindow *window, int key, int scancode, int
 
 void PlayerInput::KeyCallback(GLFWwindow *window, int key, int scancode, int action, int mode)
 {
-	if (key == GLFW_KEY_X && action == GLFW_PRESS)
+	if (key == GLFW_KEY_ESCAPE && action == GLFW_PRESS)
 	{
-		if (photo == false)
+		if (mainMenu)
 		{
-			photo = true;
-			worldDisplay = false;
+			if (photo == false)
+			{
+				photo = true;
+				worldDisplay = false;
+			}
+			else if(photo == true)
+			{
+				glfwSetWindowShouldClose(glfwGetCurrentContext(), GL_TRUE);
+			}
 		}
-		else if(photo == true)
-		{
-			glfwSetWindowShouldClose(glfwGetCurrentContext(), GL_TRUE);
-		}
+		
 	}
 
 	if (key == GLFW_KEY_M && action == GLFW_PRESS)

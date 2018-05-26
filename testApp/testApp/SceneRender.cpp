@@ -48,6 +48,7 @@ void SceneRender::renderScene()
 	if (gameWorld->getWorldDisplay() == false)
 	{
 		renderMenu(*shaders["menuOption"]);
+		//std::cout << "Hello world" << std::endl;
 	}
 	else
 	{
