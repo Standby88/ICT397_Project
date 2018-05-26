@@ -33,7 +33,9 @@ GameController::GameController(GameWorld * gw)
 	{
 		if ((*nPCItr).second->GetRigidBody())
 		{
+			//cout << "UserId = " << (*nPCItr).second->GetRigidBody()->getUserIndex() << std::endl;
 			PhysFac->AddRigidBody((*nPCItr).second->GetRigidBody());
+			//cout << "UserId = " << (*nPCItr).second->GetRigidBody()->getUserIndex() << std::endl;
 		}
 		else
 		{
@@ -89,7 +91,7 @@ void GameController::update(GLfloat deltaTime)
 					PhysFac->GetYPosition(tempInd),
 					PhysFac->GetZPosition(tempInd));
 		}
-
+		
 		updateCharList = gameWorld->getCharacters()->getUpdateList();
 		tempInd = 0;
 		for (int i = 0; i<updateCharList.size(); i++)
@@ -99,7 +101,6 @@ void GameController::update(GLfloat deltaTime)
 				updateCharList[i]->updateObject(PhysFac->GetXPosition(tempInd),
 					PhysFac->GetYPosition(tempInd),
 					PhysFac->GetZPosition(tempInd));
-
 		}
 	}
 	

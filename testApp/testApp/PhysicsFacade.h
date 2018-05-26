@@ -31,6 +31,8 @@ using namespace luabridge;
 
 typedef btRigidBody rigidBody;
 
+typedef btQuaternion quaternion;
+
 //---------------------------------------------------------------------------------
 
 /**
@@ -52,6 +54,10 @@ typedef btRigidBody rigidBody;
 * @version 03
 * @date 13/05/2018 Implementing new heightfield terrain function, implementing creation of capsule rigidbodies
 *
+* @author Kieron van der Kwast
+* @version 04
+* @date 26/05/2018 Implemented some set, get, and update functions so that specific bodies in the dynamicsWorld
+					can be updated.
 * @todo fix collision body locations and interactions
 *
 * @bug none
@@ -74,26 +80,26 @@ private:
 	btAlignedObjectArray<btCollisionShape*> collisionShapes;
 	/// btDiscreteDynamicsWorld object pointer
 	btDiscreteDynamicsWorld* dynamicsWorld;
-
+	/// a persistent instance of PhysicsFacade
 	static PhysicsFacade* instance;
-
+	/// a vector for tracking a player's positon
 	btVector3 playerPosition;
-
+	/// a vector for storing forces acting on a player
 	btVector3 playerForce;
-
+	/// integer that stores the userIndex of a player rigidbody
 	int playerID;
-
+	/// integer that stores the index of a terrain rigidbody
 	int terrainID;
-
+	///	used to keep track of number of rigidbodies and to assign them a userIndex
 	int bodyID;
 
 	/**
-	* @brief
+	* @brief Used to keep track of number of objects in dynamicsWorld
 	*
+	* Each time an object is added to dynamicsWorld this will set its userIndex 
 	*
-	*
-	* @param
-	* @return
+	* @param void 
+	* @return int
 	* @pre
 	* @post
 	*/
@@ -110,12 +116,12 @@ public:
 	~PhysicsFacade();
 
 	/**
-	* @brief
+	* @brief Used to get a single instance of PhysicsFacade
 	*
 	*
 	*
-	* @param
-	* @return
+	* @param void
+	* @return PhysicsFacade*
 	* @pre
 	* @post
 	*/
@@ -169,9 +175,55 @@ public:
 	*/
 	float GetZPosition(int index);
 
+	/**
+	* @brief gets quaternion for rotation of a rigidbody
+	*
+	*
+	*
+	* @param int
+	* @return quaternion
+	* @pre
+	* @post
+	*/
+	quaternion GetRotation(int index);
+
+	/**
+	* @brief sets quaternion for rotation of a rigidbody
+	*
+	*
+	*
+	* @param int, quaternion*
+	* @return void
+	* @pre
+	* @post
+	*/
+	void SetRotation(int index, quaternion* rotation);
+
 	//Exclude dynamicsWorld->addRigidBody from Create.. functions functions as they are created 
 	//in scripts, then added in constructors
+	/**
+	* @brief Adds a rigidbody to the dynamicsWorld
+	*
+	*
+	*
+	* @param rigidbody*
+	* @return void
+	* @pre
+	* @post
+	*/
 	void AddRigidBody(rigidBody* body);
+
+	/**
+	* @brief Updates an existing rigidbody stored in dynamicsWorld
+	*
+	*
+	*
+	* @param rigidbody*
+	* @return void
+	* @pre
+	* @post
+	*/
+	void UpdateRigidBody(rigidBody* body);
 
 	/**
 	* @brief
@@ -218,30 +270,30 @@ public:
 	*
 	*
 	* @param int, int, int, int, int, int, int
-	* @return
+	* @return rigidBody*
 	* @pre
 	* @post
 	*/
 	rigidBody* CreateBoxRigidBody(int height, int width, int length, int mass, int xPosition, int yPosition, int zPosition);
 
 	/**
-	* @brief
+	* @brief creates a specific body for a player controlled rigidbody
 	*
 	*
 	*
-	* @param
-	* @return
+	* @param float, float, float, V3, V3
+	* @return rigidBody*
 	* @pre
 	* @post
 	*/
 	rigidBody* CreatePlayerRigidBody(float radius, float height, float mass, V3 position, V3 inertia);
 
 	/**
-	* @brief
+	* @brief creates a capsule body 
 	*
 	*
 	*
-	* @param
+	* @param float, float, float, float, float, float
 	* @return
 	* @pre
 	* @post
