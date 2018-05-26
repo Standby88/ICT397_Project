@@ -34,6 +34,7 @@ TerManager:AddTerrain(T1)
 
 print ("hello")
 
+require "Scripts/Rocket"
 --require "Scripts/Asteriod_1"
 --require "Scripts/Asteriod_2"
 --require "Scripts/Asteriod_3"
@@ -54,6 +55,7 @@ require "Scripts/Astroboy_6"
 print ("hello 2")
 
 EnObjMan = EOM.EnvironmentObjManager()
+EnObjMan:addObject(R, "Rocket")
 --EnObjMan:addObject(A1, "asteroid_1")
 --EnObjMan:addObject(A2, "asteroid_2")
 --EnObjMan:addObject(A3, "asteroid_3")

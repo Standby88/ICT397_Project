@@ -6,7 +6,7 @@ GameController::GameController(GameWorld * gw)
 	gameWorld = gw;
 	camera = Camera::GetCameraInstance();
 	
-	gameWorld->setProjection(MathLib::perspective(camera->GetZoom(), (float)gameWorld->getScreenW() / (float)gameWorld->getScreenH(), 0.1f, 1000.0f));
+	gameWorld->setProjection(MathLib::perspective(camera->GetZoom(), (float)gameWorld->getScreenW() / (float)gameWorld->getScreenH(), 0.1f, 10000.0f));
 	playerInput = PlayerInput::getCurrentPlayerInput();
 	playerInput.SetAttributes(camera);
 	playerInput.SetCallbacks();
@@ -16,6 +16,7 @@ GameController::GameController(GameWorld * gw)
 	//for loop that uses an iterator to go through and add object's rigidbodies to the physics world
 	for (envItr = environmentObjList.begin(); envItr != environmentObjList.end(); envItr++)
 	{
+		std::cout << "size environment : " << environmentObjList.size() << std::endl;
 		if ((*envItr).second->GetRigidBody())
 		{
 			PhysFac->AddRigidBody((*envItr).second->GetRigidBody());
@@ -61,8 +62,8 @@ void GameController::update(GLfloat deltaTime)
 	gameWorld->setWorldDisplay(PlayerInput::getCurrentPlayerInput().getWorldDisplay());
 	gameWorld->setWire(PlayerInput::getCurrentPlayerInput().getWire());
 	gameWorld->setMainmenu(PlayerInput::getCurrentPlayerInput().getMainMenu());
-
-	if (gameWorld->getWorldDisplay() == true)
+	std::cout << "x: " << camera->GetCameraPosition().x << "y: " << camera->GetCameraPosition().y <<"z: "<< camera->GetCameraPosition().z << std::endl;
+	/*if (gameWorld->getWorldDisplay() == true)
 	{
 		
 		//updating physics
@@ -101,7 +102,7 @@ void GameController::update(GLfloat deltaTime)
 					PhysFac->GetZPosition(tempInd));
 
 		}
-	}
+	}*/
 	
 }
 
