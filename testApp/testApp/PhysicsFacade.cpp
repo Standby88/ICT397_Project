@@ -92,6 +92,16 @@ float PhysicsFacade::GetZPosition(int i)
 	}
 }
 
+quaternion PhysicsFacade::GetRotation(int i)
+{
+	return dynamicsWorld->getCollisionObjectArray()[i]->getWorldTransform().getRotation();
+}
+
+void PhysicsFacade::SetRotation(int i, quaternion* rot)
+{
+	dynamicsWorld->getCollisionObjectArray()[i]->getWorldTransform().setRotation(*rot);
+}
+
 void PhysicsFacade::AddRigidBody(rigidBody* body)
 {
 	if (body)
@@ -103,6 +113,11 @@ void PhysicsFacade::AddRigidBody(rigidBody* body)
 	{
 		std::cout << body->getUserIndex() << std::endl;
 	}
+}
+
+void PhysicsFacade::UpdateRigidBody(rigidBody* body)
+{
+	dynamicsWorld->getCollisionObjectArray()[body->getUserIndex()] = body;
 }
 
 //uses a heightmap to generate a collidable terrain

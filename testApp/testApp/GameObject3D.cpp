@@ -35,6 +35,23 @@ rigidBody* GameObject3D::GetRigidBody()
 	return gameObjBody;
 }
 
+void GameObject3D::UpdateRigidBodyPosition(V3 position)
+{
+	gameObjBody->getWorldTransform().getOrigin().setX(btScalar(position.x));
+	gameObjBody->getWorldTransform().getOrigin().setY(btScalar(position.y));
+	gameObjBody->getWorldTransform().getOrigin().setZ(btScalar(position.z));
+}
+
+void GameObject3D::UpdateRigidBodyVelocity(V3 vel)
+{
+	gameObjBody->setLinearVelocity(btVector3(vel.x, vel.y, vel.z));
+}
+
+void GameObject3D::UpdatePhysicsWorldBody()
+{
+	gOPhys->UpdateRigidBody(this->gameObjBody);
+}
+
 void GameObject3D::scriptRegister(lua_State * L)
 {
 	using namespace luabridge;
