@@ -12,6 +12,9 @@ PlayerInput::PlayerInput()
 	wire = false;
 	worldDisplay = true;
 	mainMenu = false;
+	saveGame = false;
+	loadGame = false;
+	newGame = false;
 	m_time = glfwGetTime();
 
 }
@@ -29,6 +32,9 @@ PlayerInput::PlayerInput(int width, int height, Camera *cam, GLfloat* deltaTime)
 	wire = false;
 	worldDisplay = true;
 	mainMenu = false;
+	saveGame = false;
+	loadGame = false;
+	newGame = false;
 }
 
 void PlayerInput::destroyCurrentPlayerInput()
@@ -134,8 +140,44 @@ void PlayerInput::KeyCallback(GLFWwindow *window, int key, int scancode, int act
 			{
 				glfwSetWindowShouldClose(glfwGetCurrentContext(), GL_TRUE);
 			}
+		}	
+	}
+
+	if (key == GLFW_KEY_S && action == GLFW_PRESS)
+	{
+		if (mainMenu)
+		{
+			if (!saveGame)
+			{
+				saveGame = true;
+			}
 		}
-		
+	}
+
+	if (key == GLFW_KEY_L && action == GLFW_PRESS)
+	{
+		if (mainMenu)
+		{
+			if (!loadGame)
+			{
+				loadGame = true;
+				mainMenu = false;
+				worldDisplay = true;
+			}
+		}
+	}
+
+	if (key == GLFW_KEY_N && action == GLFW_PRESS)
+	{
+		if (mainMenu)
+		{
+			if (!newGame)
+			{
+				newGame = true;
+				mainMenu = false;
+				worldDisplay = true;
+			}
+		}
 	}
 
 	if (key == GLFW_KEY_M && action == GLFW_PRESS)
@@ -245,3 +287,36 @@ void PlayerInput::ScrollCallback(GLFWwindow *window, double xOffset, double yOff
 {
 	camera->ProcessMouseScroll(yOffset);
 }
+
+bool PlayerInput::GetSaveGame()
+{
+	return saveGame;
+}
+
+void PlayerInput::SetSaveGame(bool saved)
+{
+	saveGame = saved;
+}
+
+bool PlayerInput::GetLoadGame()
+{
+	return loadGame;
+}
+
+void PlayerInput::SetLoadGame(bool load)
+{
+	loadGame = load;
+}
+
+bool PlayerInput::GetNewGame()
+{
+	return newGame;
+}
+
+void PlayerInput::SetNewGame(bool newG)
+{
+	newGame = newG;
+}
+
+
+

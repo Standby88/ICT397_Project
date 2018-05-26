@@ -19,6 +19,9 @@ private:
 	bool worldDisplay;
 	bool mainMenu;
 	bool wire;
+	bool saveGame;
+	bool loadGame;
+	bool newGame;
 	M4 view;
 	M4 projection;
 
@@ -49,12 +52,29 @@ public:
 	void setWorldDisplay(bool wor);
 	void setWire(bool wir);
 	void setMainmenu(bool menu);
+	/**
+	* @brief sets save game to true or false
+	*
+	* @param bool
+	* @return void
+	*/
+	void SetSaveGame(bool hasSaved);
+	void SetLoadGame(bool load);
+	void SetNewGame(bool newG);
 
 	bool getWire();
 	bool getMainMenu();
 	bool getManual();
 	bool getPhoto();
 	bool getWorldDisplay();
+	/**
+	* @brief returns true if save game has been selected
+	*
+	* @return bool
+	*/
+	bool GetSaveGame();
+	bool GetLoadGame();
+	bool GetNewGame();
 	void setScreenHW(int w, int h);
 
 	int getScreenH();

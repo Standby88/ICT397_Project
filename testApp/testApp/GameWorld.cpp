@@ -7,6 +7,8 @@ GameWorld::GameWorld(CharacterManager * cha, TerrainManager * ter, EnvironmentOb
 	worldDisplay = true;
 	mainMenu = false;
 	wire = false;
+	saveGame = false;
+	newGame = false;
 	camera = Camera::GetCameraInstance();
 	this->skybox = sky;
 	this->characters = cha;
@@ -94,6 +96,21 @@ void GameWorld::setMainmenu(bool menu)
 	mainMenu = menu;
 }
 
+void GameWorld::SetSaveGame(bool saved)
+{
+	saveGame = saved;
+}
+
+void GameWorld::SetLoadGame(bool load)
+{
+	loadGame = load;
+}
+
+void GameWorld::SetNewGame(bool newG)
+{
+	newGame = newG;
+}
+
 bool GameWorld::getWire()
 {
 	return wire;
@@ -117,6 +134,21 @@ bool GameWorld::getPhoto()
 bool GameWorld::getWorldDisplay()
 {
 	return worldDisplay;
+}
+
+bool GameWorld::GetSaveGame()
+{
+	return saveGame;
+}
+
+bool GameWorld::GetLoadGame()
+{
+	return loadGame;
+}
+
+bool GameWorld::GetNewGame()
+{
+	return newGame;
 }
 
 void GameWorld::setScreenHW(int w, int h)
