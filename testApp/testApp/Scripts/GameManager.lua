@@ -48,7 +48,7 @@ require "Scripts/Astroboy_1"
 require "Scripts/Astroboy_2"
 require "Scripts/Astroboy_3"
 require "Scripts/Astroboy_4"
-require "Scripts/Astroboy_5"
+----require "Scripts/Astroboy_5"
 require "Scripts/Astroboy_6"
 --require "Scripts/Monster"
 
@@ -71,8 +71,8 @@ CharacterMan:addNPC(Astronaut_1, "Astroboy_1")
 CharacterMan:addNPC(Astronaut_2, "Astroboy_2")
 CharacterMan:addNPC(Astronaut_3, "Astroboy_3")
 CharacterMan:addNPC(Astronaut_4, "Astroboy_4")
-CharacterMan:addNPC(Astronaut_5, "Astroboy_5")
-CharacterMan:addNPC(Astronaut_6, "Astroboy_6")
+--CharacterMan:addNPC(Astronaut_5, "Astroboy_5")
+--CharacterMan:addNPC(Astronaut_6, "Astroboy_6")
 --CharacterMan:addNPC(Monster, "Mon1")
 
 sky = SKY.skybox()

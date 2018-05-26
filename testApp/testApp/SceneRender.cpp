@@ -107,7 +107,7 @@ void SceneRender::renderEnvironmentObj(EnvironmentObjManager& EM, M4 view, M4 pr
 		if (angle > 0.0f)
 			model = MathLib::rotate(model, angle, rotateAxis);
 		model = MathLib::translate(model, posVec); // Translate it down a bit so it's at the center of the scene
-		model = MathLib::scale(model, V3(1.0f, 1.0f, 1.0f));	// It's a bit too big for our scene, so scale it down
+		model = MathLib::scale(model, (*itr).second->getScale());	// It's a bit too big for our scene, so scale it down
 		glUniformMatrix4fv(glGetUniformLocation(S.Program, "model"), 1, GL_FALSE, MathLib::value_ptr<const float *>(model));
 		(*itr).second->Draw(S);
 	}
@@ -199,7 +199,7 @@ void SceneRender::renderCharacters(CharacterManager & TM, M4 view, M4 projection
 		if (angle > 0.0f)
 			model = MathLib::rotate(model, angle, rotateAxis);
 		model = MathLib::translate(model, posVec); // Translate it down a bit so it's at the center of the scene
-		model = MathLib::scale(model, V3(1.0f, 1.0f, 1.0f));	// It's a bit too big for our scene, so scale it down
+		model = MathLib::scale(model, drawMap[i]->getScale());	// It's a bit too big for our scene, so scale it down
 		glUniformMatrix4fv(glGetUniformLocation(active->Program, "model"), 1, GL_FALSE, MathLib::value_ptr<const float *>(model));
 		M4  matr_normals_cube = glm::mat4(glm::transpose(glm::inverse(model)));
 		glUniformMatrix4fv(glGetUniformLocation(active->Program, "normals_matrix"), 1, GL_FALSE, glm::value_ptr(matr_normals_cube));

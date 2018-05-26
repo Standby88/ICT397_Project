@@ -6,6 +6,9 @@ EnvironmentObject::EnvironmentObject()
 	objectPos.x = 0;
 	objectPos.y = 0;
 	objectPos.z = 0;
+	scale.x = 1;
+	scale.y = 1;
+	scale.z = 1;
 	objectModel = NULL;
 }
 
