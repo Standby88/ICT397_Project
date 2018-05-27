@@ -62,13 +62,13 @@ void GameController::update(GLfloat deltaTime)
 	gameWorld->setWorldDisplay(PlayerInput::getCurrentPlayerInput().getWorldDisplay());
 	gameWorld->setWire(PlayerInput::getCurrentPlayerInput().getWire());
 	gameWorld->setMainmenu(PlayerInput::getCurrentPlayerInput().getMainMenu());
-	std::cout << "x: " << camera->GetCameraPosition().x << "y: " << camera->GetCameraPosition().y <<"z: "<< camera->GetCameraPosition().z << std::endl;
-	/*if (gameWorld->getWorldDisplay() == true)
+	//std::cout << "x: " << camera->GetCameraPosition().x << "y: " << camera->GetCameraPosition().y <<"z: "<< camera->GetCameraPosition().z << std::endl;
+	if (gameWorld->getWorldDisplay() == true)
 	{
 		
 		//updating physics
 		//Running the step simulation function to update rigidbodies in the physics environment
-		PhysFac->StepSimulation(1 / 60.f, 10, camera->GetCameraPosition());
+		PhysFac->StepSimulation(1 / 30.f, 10, camera->GetCameraPosition());
 
 		//the camera's position is updated in physics and based on collisions the new position is 
 		//now set for the user.
@@ -86,9 +86,13 @@ void GameController::update(GLfloat deltaTime)
 				tempInd = (*envItr).second->GetRigidBody()->getUserIndex();
 				//std::cout << "UserIndex for object: " << tempInd << std::endl;
 				//This is to update the position of the object for drawing.
-				(*envItr).second->updateObject(PhysFac->GetXPosition(tempInd),
+				if ((*envItr).second->getStatic() == false)
+				{
+					(*envItr).second->updateObject(PhysFac->GetXPosition(tempInd),
 					PhysFac->GetYPosition(tempInd),
 					PhysFac->GetZPosition(tempInd));
+				}
+				
 		}
 
 		updateCharList = gameWorld->getCharacters()->getUpdateList();
@@ -102,7 +106,7 @@ void GameController::update(GLfloat deltaTime)
 					PhysFac->GetZPosition(tempInd));
 
 		}
-	}*/
+	}
 	
 }
 

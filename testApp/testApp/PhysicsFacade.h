@@ -222,7 +222,7 @@ public:
 	* @pre
 	* @post
 	*/
-	rigidBody* CreateBoxRigidBody(int height, int width, int length, int mass, int xPosition, int yPosition, int zPosition);
+	rigidBody* CreateBoxRigidBody(float height, float width, float length, float mass, float xPosition, float yPosition, float zPosition);
 
 	/**
 	* @brief

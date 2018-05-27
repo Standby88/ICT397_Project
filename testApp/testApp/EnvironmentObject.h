@@ -19,9 +19,18 @@
 class EnvironmentObject : public GameObject3D
 {
 private:
-	
+	bool isStatic;
 public:
 
+	bool getStatic()
+	{
+		return isStatic;
+	}
+
+	void setStatic(bool t)
+	{
+		isStatic = t;
+	}
 	/**
 	* @brief Constructor for environment objsct. sets positons to 0,0,0 and sets the objectType to EnvironmentObject
 	*/
