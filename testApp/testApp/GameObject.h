@@ -29,6 +29,7 @@ protected:
 	///Stores where the object is located in the scene
 	V3 objectPos;
 	V3 rotateAxis;
+	V3 scale;
 	float angle;
 
 public:
@@ -56,6 +57,12 @@ public:
 	*/
 	void updateObjectRotation(float w, float x, float y, float z);
 
+	void ScaleObject(float scalefactor)
+	{
+		scale.x = scalefactor;
+		scale.z = scalefactor;
+		scale.y = scalefactor;
+	}
 	/**
 	* @brief used to access objects position
 	*
@@ -70,6 +77,10 @@ public:
 	*/
 	V3 getObjectRotation();
 
+	V3 getScale()
+	{
+		return scale;
+	}
 	/**
 	* @brief used to access objects angle of rotation
 	*

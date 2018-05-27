@@ -34,44 +34,42 @@ TerManager:AddTerrain(T1)
 
 print ("hello")
 
---require "Scripts/Asteriod_1"
---require "Scripts/Asteriod_2"
---require "Scripts/Asteriod_3"
---require "Scripts/Asteriod_4"
---require "Scripts/Asteriod_5"
---require "Scripts/Asteriod_6"
---require "Scripts/Asteriod_7"
---require "Scripts/Asteriod_8"
---require "Scripts/Asteriod_9"
+require "Scripts/Rocket"
+require "Scripts/Rock1"
+require "Scripts/Asteriod_1"
+
 require "Scripts/Astroboy_1"
 require "Scripts/Astroboy_2"
 require "Scripts/Astroboy_3"
 require "Scripts/Astroboy_4"
-require "Scripts/Astroboy_5"
-require "Scripts/Astroboy_6"
---require "Scripts/Monster"
+
 
 print ("hello 2")
 
 EnObjMan = EOM.EnvironmentObjManager()
---EnObjMan:addObject(A1, "asteroid_1")
---EnObjMan:addObject(A2, "asteroid_2")
---EnObjMan:addObject(A3, "asteroid_3")
---EnObjMan:addObject(A4, "asteroid_4")
---EnObjMan:addObject(A5, "asteroid_5")
---EnObjMan:addObject(A6, "asteroid_6")
---EnObjMan:addObject(A7, "asteroid_7")
---EnObjMan:addObject(A8, "asteroid_8")
---EnObjMan:addObject(A9, "asteroid_9")
+EnObjMan:addObject(R, "Rocket")
+EnObjMan:addObject(Ro1, "Rock1")
+EnObjMan:addObject(Ro2, "Rock2")
+EnObjMan:addObject(Ro3, "Rock3")
+EnObjMan:addObject(Ro4, "Rock4")
+EnObjMan:addObject(Ro5, "Rock5")
+EnObjMan:addObject(A1, "asteroid_1")
+EnObjMan:addObject(A2, "asteroid_2")
+EnObjMan:addObject(A3, "asteroid_3")
+EnObjMan:addObject(A4, "asteroid_4")
+EnObjMan:addObject(A5, "asteroid_5")
+EnObjMan:addObject(A6, "asteroid_6")
+EnObjMan:addObject(A7, "asteroid_7")
+EnObjMan:addObject(A8, "asteroid_8")
+EnObjMan:addObject(A9, "asteroid_9")
+EnObjMan:addObject(A10, "asteroid_10")
 
 CharacterMan = CM.CharacterManager()
 CharacterMan:addNPC(Astronaut_1, "Astroboy_1")
 CharacterMan:addNPC(Astronaut_2, "Astroboy_2")
 CharacterMan:addNPC(Astronaut_3, "Astroboy_3")
 CharacterMan:addNPC(Astronaut_4, "Astroboy_4")
-CharacterMan:addNPC(Astronaut_5, "Astroboy_5")
-CharacterMan:addNPC(Astronaut_6, "Astroboy_6")
---CharacterMan:addNPC(Monster, "Mon1")
+
 
 sky = SKY.skybox()
 sky:AddSkyboxPath("assets/skybox/indigo_rt.jpg")

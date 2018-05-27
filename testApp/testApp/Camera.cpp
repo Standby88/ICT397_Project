@@ -20,7 +20,7 @@ V3& Camera::GetCameraPosition()
 Camera* Camera::GetCameraInstance()
 {
 	if (instance == 0) {
-		instance = new Camera(V3(210.0f, 205.0f, 210.0f));
+		instance = new Camera(V3(2500.0f, 205.0f, 2500.0f));
 		std::cout << "First camera instance created" << std::endl;
 	}
 
@@ -41,14 +41,14 @@ void Camera::ProcessKeyboard(Camera_Move direction, GLfloat deltaTime)
 	{
 		this->position.x += this->front.x * velocity;
 		this->position.z += this->front.z * velocity;
-		this->position.y += this->front.y * velocity;
+		//this->position.y += this->front.y * velocity;
 	}
 
 	if (direction == BACKWARD)
 	{
 		this->position.x -= this->front.x * velocity;
 		this->position.z -= this->front.z * velocity;
-		this->position.y -= this->front.y * velocity;
+		//this->position.y -= this->front.y * velocity;
 	}
 
 	if (direction == LEFT)
@@ -137,6 +137,6 @@ void Camera::updateCameraVectors()
 
 void Camera::CreateCameraRigidBody()
 {
-	camBody = cPhysFac->CreatePlayerRigidBody(0.5f, 1.75f, 60.0f, position, V3(0, 0, 0));
+	camBody = cPhysFac->CreatePlayerRigidBody(2.5f, 8.5f, 60.0f, position, V3(0, 0, 0));
 	std::cout << "rigidBodyID for Camera: " << camBody->getUserIndex() << std::endl;
 }

@@ -5,6 +5,9 @@ GameObject::GameObject()
 	objectPos.x = 0;
 	objectPos.y = 0;
 	objectPos.z = 0;
+	scale.x = 1;
+	scale.y = 1;
+	scale.z = 1;
 
 }
 
@@ -50,6 +53,7 @@ void GameObject::scriptRegister(lua_State * L)
 		.addFunction("updateObject", &GameObject::updateObject)
 		.addFunction("getObjectPos", &GameObject::getObjectPos)
 		.addFunction("updateObjectRotation", &GameObject::updateObjectRotation)
+		.addFunction("ScaleObject", &GameObject::ScaleObject)
 		.endClass()
 		.endNamespace();
 }

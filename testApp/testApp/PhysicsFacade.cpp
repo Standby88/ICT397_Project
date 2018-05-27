@@ -16,7 +16,7 @@ PhysicsFacade::PhysicsFacade()
 
 	bodyID = 0;
 
-	SetGravity(-9.8f);
+	SetGravity(-25.8f);
 
 }
 
@@ -200,7 +200,7 @@ rigidBody* PhysicsFacade::CreateSphereRigidBody(float rad, float m, float xPos, 
 }
 
 //doesn't appear to collide with terrain, will use capsules instead
-rigidBody* PhysicsFacade::CreateBoxRigidBody(int h, int w, int l, int m, int xPos, int yPos, int zPos)
+rigidBody* PhysicsFacade::CreateBoxRigidBody(float h, float w, float l, float m, float xPos, float yPos, float zPos)
 {
 	btCollisionShape* boxShape = new btBoxShape(btVector3(btScalar(w), btScalar(h), btScalar(l)));
 	this->collisionShapes.push_back(boxShape);
@@ -239,7 +239,7 @@ rigidBody* PhysicsFacade::CreatePlayerRigidBody(float radius, float height, floa
 	btTransform capsuleTransform;
 	capsuleTransform.setIdentity();
 
-	capsuleTransform.setOrigin(btVector3(pos.x, pos.y, pos.z));
+	capsuleTransform.setOrigin(btVector3(pos.x, pos.y-7, pos.z));
 	btScalar capsuleMass(m);
 
 	bool isDynamic = (capsuleMass != 0.f);
@@ -357,7 +357,7 @@ void PhysicsFacade::StepSimulation(float tStep, int maxSubSteps, V3 &playerPos)
 			//std::cout << "something" << std::endl;
 			btVector3 playerP(btVector3(playerPos.x, playerPos.y, playerPos.z));
 			playerForce.setX((playerP.getX() - playerPosition.getX()) * 100000);
-			playerForce.setY((playerP.getY() - playerPosition.getY()) * 1000);
+			playerForce.setY((playerP.getY() - playerPosition.getY()) * 10000);
 			playerForce.setZ((playerP.getZ() - playerPosition.getZ()) * 100000);
 
 			body->applyCentralForce(playerForce);
@@ -404,6 +404,7 @@ void PhysicsFacade::scriptRegister(lua_State * L)
 		.addFunction("CreateSphereRigidBody", &PhysicsFacade::CreateSphereRigidBody)
 		.addFunction("CreatePlayerRigidBody", &PhysicsFacade::CreatePlayerRigidBody)
 		.addFunction("CreateCapsuleRigidBody", &PhysicsFacade::CreateCapsuleRigidBody)
+		.addFunction("CreateBoxRigidBody", &PhysicsFacade::CreateBoxRigidBody)
 		.addFunction("SetGravity", &PhysicsFacade::SetGravity)
 		.addFunction("print", &PhysicsFacade::print)
 		.endClass()

@@ -6,7 +6,15 @@ EnvironmentObject::EnvironmentObject()
 	objectPos.x = 0;
 	objectPos.y = 0;
 	objectPos.z = 0;
+	scale.x = 1;
+	scale.y = 1;
+	scale.z = 1;
 	objectModel = NULL;
+	angle = 0.0f;
+	rotateAxis.x = 0.0f;
+	rotateAxis.y = 0.0f;
+	rotateAxis.z = 0.0f;
+	isStatic = false;
 }
 
 EnvironmentObject::~EnvironmentObject()
@@ -28,6 +36,7 @@ void EnvironmentObject::scriptRegister(lua_State * L)
 		.addConstructor<void(*) (void)>()
 		.addFunction("Draw", &EnvironmentObject::Draw)
 		.addFunction("convert", &EnvironmentObject::convert)
+		.addFunction("setStatic", &EnvironmentObject::setStatic)
 		.endClass()
 		.endNamespace();
 }

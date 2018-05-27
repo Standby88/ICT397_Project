@@ -6,7 +6,7 @@ GameController::GameController(GameWorld * gw)
 	gameWorld = gw;
 	camera = Camera::GetCameraInstance();
 	
-	gameWorld->setProjection(MathLib::perspective(camera->GetZoom(), (float)gameWorld->getScreenW() / (float)gameWorld->getScreenH(), 0.1f, 1000.0f));
+	gameWorld->setProjection(MathLib::perspective(camera->GetZoom(), (float)gameWorld->getScreenW() / (float)gameWorld->getScreenH(), 0.1f, 10000.0f));
 	playerInput = PlayerInput::getCurrentPlayerInput();
 	playerInput.SetAttributes(camera);
 	playerInput.SetCallbacks();
@@ -16,6 +16,7 @@ GameController::GameController(GameWorld * gw)
 	//for loop that uses an iterator to go through and add object's rigidbodies to the physics world
 	for (envItr = environmentObjList.begin(); envItr != environmentObjList.end(); envItr++)
 	{
+		std::cout << "size environment : " << environmentObjList.size() << std::endl;
 		if ((*envItr).second->GetRigidBody())
 		{
 			PhysFac->AddRigidBody((*envItr).second->GetRigidBody());
@@ -67,12 +68,14 @@ void GameController::update(GLfloat deltaTime)
 	gameWorld->SetLoadGame(PlayerInput::getCurrentPlayerInput().GetLoadGame());
 	gameWorld->SetNewGame(PlayerInput::getCurrentPlayerInput().GetNewGame());
 
+	//need help
+	//std::cout << "x: " << camera->GetCameraPosition().x << "y: " << camera->GetCameraPosition().y <<"z: "<< camera->GetCameraPosition().z << std::endl;
 	if (gameWorld->getWorldDisplay() == true)
 	{
 		
 		//updating physics
 		//Running the step simulation function to update rigidbodies in the physics environment
-		PhysFac->StepSimulation(1 / 60.f, 10, camera->GetCameraPosition());
+		PhysFac->StepSimulation(1 / 30.f, 10, camera->GetCameraPosition());
 
 		//the camera's position is updated in physics and based on collisions the new position is 
 		//now set for the user.
@@ -90,9 +93,13 @@ void GameController::update(GLfloat deltaTime)
 				tempInd = (*envItr).second->GetRigidBody()->getUserIndex();
 				//std::cout << "UserIndex for object: " << tempInd << std::endl;
 				//This is to update the position of the object for drawing.
-				(*envItr).second->updateObject(PhysFac->GetXPosition(tempInd),
+				if ((*envItr).second->getStatic() == false)
+				{
+					(*envItr).second->updateObject(PhysFac->GetXPosition(tempInd),
 					PhysFac->GetYPosition(tempInd),
 					PhysFac->GetZPosition(tempInd));
+				}
+				
 		}
 		
 		updateCharList = gameWorld->getCharacters()->getUpdateList();
