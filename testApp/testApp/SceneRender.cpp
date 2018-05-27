@@ -1,5 +1,5 @@
 #include "SceneRender.h"
-
+#include "glm/gtx/string_cast.hpp"
 
 SceneRender::SceneRender(GameWorld * gw)
 {
@@ -103,9 +103,10 @@ void SceneRender::renderEnvironmentObj(EnvironmentObjManager& EM, M4 view, M4 pr
 		M4 model;
 		posVec = (*itr).second->getObjectPos();
 		angle = (*itr).second->getObjectAngle();
+		angle = MathLib::radians(angle);
 		rotateAxis = (*itr).second->getObjectRotation();
-		if (angle > 0.0f)
-			model = MathLib::rotate(model, angle, rotateAxis);
+		
+		model = MathLib::rotate(model, angle, rotateAxis);
 		model = MathLib::translate(model, posVec); // Translate it down a bit so it's at the center of the scene
 		model = MathLib::scale(model, (*itr).second->getScale());	// It's a bit too big for our scene, so scale it down
 		glUniformMatrix4fv(glGetUniformLocation(S.Program, "model"), 1, GL_FALSE, MathLib::value_ptr<const float *>(model));
@@ -196,10 +197,11 @@ void SceneRender::renderCharacters(CharacterManager & TM, M4 view, M4 projection
 		angle = drawMap[i]->getObjectAngle();
 		angle = MathLib::radians(angle);
 		rotateAxis = drawMap[i]->getObjectRotation();
-		if (angle > 0.0f)
-			model = MathLib::rotate(model, angle, rotateAxis);
-		model = MathLib::translate(model, posVec); // Translate it down a bit so it's at the center of the scene
-		model = MathLib::scale(model, drawMap[i]->getScale());	// It's a bit too big for our scene, so scale it down
+
+		model = MathLib::scale(model, drawMap[i]->getScale());	
+		model = MathLib::translate(model, posVec); 
+		model = MathLib::rotate(model, 4.71239, V3(1,0,0));
+		std::cout <<"afsgd"<< glm::to_string(model) << std::endl;
 		glUniformMatrix4fv(glGetUniformLocation(active->Program, "model"), 1, GL_FALSE, MathLib::value_ptr<const float *>(model));
 		M4  matr_normals_cube = glm::mat4(glm::transpose(glm::inverse(model)));
 		glUniformMatrix4fv(glGetUniformLocation(active->Program, "normals_matrix"), 1, GL_FALSE, glm::value_ptr(matr_normals_cube));

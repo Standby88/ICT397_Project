@@ -1,19 +1,9 @@
-﻿  GameEngine.cpp
+﻿  SceneRender.cpp
 c:\users\desmond\documents\github\ict397_project\ext_libs\bullet\src\linearmath\btidebugdraw.h(169): warning C4305: 'argument': truncation from 'double' to 'const btScalar'
 c:\users\desmond\documents\github\ict397_project\ext_libs\bullet\src\linearmath\btidebugdraw.h(170): warning C4305: 'argument': truncation from 'double' to 'const btScalar'
 c:\users\desmond\documents\github\ict397_project\ext_libs\bullet\src\linearmath\btidebugdraw.h(171): warning C4305: 'argument': truncation from 'double' to 'const btScalar'
-  Generating Code...
-  Compiling...
-  SceneRender.cpp
-c:\users\desmond\documents\github\ict397_project\ext_libs\bullet\src\linearmath\btidebugdraw.h(169): warning C4305: 'argument': truncation from 'double' to 'const btScalar'
-c:\users\desmond\documents\github\ict397_project\ext_libs\bullet\src\linearmath\btidebugdraw.h(170): warning C4305: 'argument': truncation from 'double' to 'const btScalar'
-c:\users\desmond\documents\github\ict397_project\ext_libs\bullet\src\linearmath\btidebugdraw.h(171): warning C4305: 'argument': truncation from 'double' to 'const btScalar'
-c:\users\desmond\documents\github\ict397_project\testapp\testapp\scenerender.cpp(182): warning C4018: '<': signed/unsigned mismatch
-c:\users\desmond\documents\github\ict397_project\testapp\testapp\scenerender.cpp(174): warning C4102: 'std': unreferenced label
-  Generating Code...
-  Skipping... (no relevant changes detected)
-  main.cpp
-  Water.cpp
-  ScriptEngine.cpp
+c:\users\desmond\documents\github\ict397_project\testapp\testapp\scenerender.cpp(183): warning C4018: '<': signed/unsigned mismatch
+c:\users\desmond\documents\github\ict397_project\testapp\testapp\scenerender.cpp(203): warning C4305: 'argument': truncation from 'double' to 'const float'
+c:\users\desmond\documents\github\ict397_project\testapp\testapp\scenerender.cpp(175): warning C4102: 'std': unreferenced label
   testApp.vcxproj -> C:\Users\Desmond\Documents\GitHub\ICT397_Project\testApp\Debug\testApp.exe
   testApp.vcxproj -> C:\Users\Desmond\Documents\GitHub\ICT397_Project\testApp\Debug\testApp.pdb (Full PDB)
