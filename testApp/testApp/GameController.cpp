@@ -62,6 +62,8 @@ void GameController::update(GLfloat deltaTime)
 	gameWorld->setWorldDisplay(PlayerInput::getCurrentPlayerInput().getWorldDisplay());
 	gameWorld->setWire(PlayerInput::getCurrentPlayerInput().getWire());
 	gameWorld->setMainmenu(PlayerInput::getCurrentPlayerInput().getMainMenu());
+
+	//need help
 	//std::cout << "x: " << camera->GetCameraPosition().x << "y: " << camera->GetCameraPosition().y <<"z: "<< camera->GetCameraPosition().z << std::endl;
 	if (gameWorld->getWorldDisplay() == true)
 	{
