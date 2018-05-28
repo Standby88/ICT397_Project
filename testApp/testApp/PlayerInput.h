@@ -15,6 +15,10 @@
 * @version 1
 * @date
 *
+* @author Kieron van der Kwast
+* @version 2
+* @date 28/05/2018, Implemented functions for getting and setting various boolean values
+				and also implemented menu functionalities.
 * @todo
 *
 * @bug
@@ -112,6 +116,14 @@ public:
 	bool getWorldDisplay();
 
 	/**
+	* @brief sets if gameworld is to be displayed
+	*
+	* @param bool
+	* @return void
+	*/
+	void SetWorldDisplay(bool dispWorld);
+
+	/**
 	* @brief returns true if wireframe is to be displayed
 	*
 	* @return bool
@@ -124,6 +136,14 @@ public:
 	* @return bool
 	*/
 	bool getMainMenu();
+
+	/**
+	* @brief sets if menu is to be displayed
+	* 
+	* @param bool
+	* @return void
+	*/
+	void SetMenuDisplay(bool dispMenu);
 
 	/**
 	* @brief returns true if save game has been selected
@@ -216,15 +236,15 @@ private:
 	bool wire ;
 	///draw manual
 	bool manual;
-
+	///world display variable
 	bool worldDisplay;
-
+	///main menu display variable
 	bool mainMenu;
-
+	///save game variable
 	bool saveGame;
-
+	///load game variable
 	bool loadGame;
-
+	///new game variable
 	bool newGame;
 };
 

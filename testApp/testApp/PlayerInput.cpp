@@ -30,7 +30,7 @@ PlayerInput::PlayerInput(int width, int height, Camera *cam, GLfloat* deltaTime)
 	photo = false;
 	manual = false;
 	wire = false;
-	worldDisplay = true;
+	worldDisplay = true;	
 	mainMenu = false;
 	saveGame = false;
 	loadGame = false;
@@ -275,14 +275,27 @@ bool PlayerInput::getWorldDisplay()
 {
 	return worldDisplay;
 }
+
+void PlayerInput::SetWorldDisplay(bool dispWorld)
+{
+	worldDisplay = dispWorld;
+}
+
 bool PlayerInput::getWire()
 {
 	return wire;
 }
+
 bool PlayerInput::getMainMenu()
 {
 	return mainMenu;
 }
+
+void PlayerInput::SetMenuDisplay(bool dispMenu)
+{
+	mainMenu = dispMenu;
+}
+
 void PlayerInput::ScrollCallback(GLFWwindow *window, double xOffset, double yOffset)
 {
 	camera->ProcessMouseScroll(yOffset);

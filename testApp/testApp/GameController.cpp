@@ -5,7 +5,7 @@ GameController::GameController(GameWorld * gw)
 	PhysFac = PhysicsFacade::GetPhysicsInstance();
 	gameWorld = gw;
 	camera = Camera::GetCameraInstance();
-	
+	startCount = 0;	//should be initialised to 0
 	gameWorld->setProjection(MathLib::perspective(camera->GetZoom(), (float)gameWorld->getScreenW() / (float)gameWorld->getScreenH(), 0.1f, 10000.0f));
 	playerInput = PlayerInput::getCurrentPlayerInput();
 	playerInput.SetAttributes(camera);
@@ -63,10 +63,18 @@ void GameController::update(GLfloat deltaTime)
 	gameWorld->setManual(PlayerInput::getCurrentPlayerInput().getManual());
 	gameWorld->setWorldDisplay(PlayerInput::getCurrentPlayerInput().getWorldDisplay());
 	gameWorld->setWire(PlayerInput::getCurrentPlayerInput().getWire());
-	gameWorld->setMainmenu(PlayerInput::getCurrentPlayerInput().getMainMenu());
+	gameWorld->setMainMenu(PlayerInput::getCurrentPlayerInput().getMainMenu());
 	gameWorld->SetSaveGame(PlayerInput::getCurrentPlayerInput().GetSaveGame());
 	gameWorld->SetLoadGame(PlayerInput::getCurrentPlayerInput().GetLoadGame());
 	gameWorld->SetNewGame(PlayerInput::getCurrentPlayerInput().GetNewGame());
+
+	if (startCount == 1)
+	{
+		PlayerInput::getCurrentPlayerInput().SetWorldDisplay(false);
+		PlayerInput::getCurrentPlayerInput().SetMenuDisplay(true);
+		gameWorld->setWorldDisplay(PlayerInput::getCurrentPlayerInput().getWorldDisplay());
+		gameWorld->setMainMenu(PlayerInput::getCurrentPlayerInput().getMainMenu());
+	}
 
 	//need help
 	//std::cout << "x: " << camera->GetCameraPosition().x << "y: " << camera->GetCameraPosition().y <<"z: "<< camera->GetCameraPosition().z << std::endl;
@@ -140,6 +148,18 @@ void GameController::update(GLfloat deltaTime)
 		//doesn't occur multiple times
 		PlayerInput::getCurrentPlayerInput().SetNewGame(false);
 	}
+
+	//this allows code to run through once before switching from world being displayed
+	//to menu being displayed.
+	if (startCount == 0)
+	{
+		startCount = 1;
+	}
+	else
+	{
+		startCount = 2;
+	}
+	
 
 }
 

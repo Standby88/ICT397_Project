@@ -91,7 +91,7 @@ void GameWorld::setWire(bool wir)
 	wire = wir;
 }
 
-void GameWorld::setMainmenu(bool menu)
+void GameWorld::setMainMenu(bool menu)
 {
 	mainMenu = menu;
 }

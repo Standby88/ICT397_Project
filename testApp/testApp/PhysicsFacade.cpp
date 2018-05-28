@@ -304,12 +304,6 @@ rigidBody* PhysicsFacade::CreateCapsuleRigidBody(float radius, float height, flo
 
 void PhysicsFacade::StepSimulation(float tStep, int maxSubSteps, V3 &playerPos)
 {
-	bool notMoved = false;
-	//check that the camera is being moved through input
-	if (playerPos.x == playerPosition.getX() && playerPos.y == playerPosition.getY() && playerPos.z == playerPosition.getZ())
-	{
-		notMoved = true;
-	}
 
 	dynamicsWorld->stepSimulation(tStep, maxSubSteps);
 
@@ -320,20 +314,9 @@ void PhysicsFacade::StepSimulation(float tStep, int maxSubSteps, V3 &playerPos)
 		btRigidBody* body = btRigidBody::upcast(obj);
 		btTransform trans;
 
-		//Checks if the player is colliding with terrain, and if they are, stops vertical sliding
 		//reset forces on player before next step simulation
 		if (body->getUserIndex() == playerID)
 		{
-			/*if (notMoved)
-			{
-				//btVector3 tempV = body->getLinearVelocity();
-				body->setLinearVelocity(btVector3(0, 0, 0));
-			}
-			else
-			{
-				btVector3 tempV = body->getLinearVelocity();
-				body->setLinearVelocity(btVector3(0, tempV.getY(), 0));
-			}*/
 			//body->clearForces();
 			btVector3 tempV = body->getLinearVelocity();
 			body->setLinearVelocity(btVector3(0, tempV.getY(), 0));
@@ -349,12 +332,9 @@ void PhysicsFacade::StepSimulation(float tStep, int maxSubSteps, V3 &playerPos)
 			trans = obj->getWorldTransform();
 		}
 
-		//std::cout << "playerID " << playerID << std::endl;
-		//std::cout << "body->getUserIndex() " << body->getUserIndex() << std::endl;
 		//if current body is the player's body
 		if (body->getUserIndex() == playerID)
 		{
-			//std::cout << "something" << std::endl;
 			btVector3 playerP(btVector3(playerPos.x, playerPos.y, playerPos.z));
 			playerForce.setX((playerP.getX() - playerPosition.getX()) * 100000);
 			playerForce.setY((playerP.getY() - playerPosition.getY()) * 10000);
@@ -362,20 +342,14 @@ void PhysicsFacade::StepSimulation(float tStep, int maxSubSteps, V3 &playerPos)
 
 			body->applyCentralForce(playerForce);
 			playerPosition = trans.getOrigin();
-			//std::cout << "btx: " << float(trans.getOrigin().getX()) << std::endl;
-			//std::cout << "bty: " << float(trans.getOrigin().getY()) << std::endl;
-			//std::cout << "btz: " << float(trans.getOrigin().getZ()) << std::endl;
+			
 			//update parameter
 			playerPos.x = float(trans.getOrigin().getX());
 			playerPos.y = float(trans.getOrigin().getY());
 			playerPos.z = float(trans.getOrigin().getZ());
 
-			//std::cout << "x after: " << playerPos.x << std::endl;
-			//std::cout << "y after: " << playerPos.y << std::endl;
-			//std::cout << "z after: " << playerPos.z << std::endl;
-
 			//std::cout << "world pos object " << i << " " << float(trans.getOrigin().getX()) << " "<< float(trans.getOrigin().getY()) << " " << float(trans.getOrigin().getZ()) << std::endl;
-
+			playerPosition.setY(playerPosition.getY());
 		}
 
 	}

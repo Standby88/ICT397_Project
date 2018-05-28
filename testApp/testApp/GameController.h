@@ -18,6 +18,11 @@
 * @version 2
 * @date 26/04/2018, Added a PhysicsFacade instance object to access Physics methods.
 *
+* @author Kieron van der Kwast
+* @version 3
+* @date 28/05/2018, added a check that will loop though update once, then sets menu 
+				to be displayed, essentially starting the game in the menu.
+*
 * @todo
 *
 * @bug
@@ -48,6 +53,8 @@ struct enObj
 class GameController
 {
 private:
+
+	int startCount;
 
 	Camera*  camera;
 

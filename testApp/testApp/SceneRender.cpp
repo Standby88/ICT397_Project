@@ -45,7 +45,7 @@ void SceneRender::renderScene()
 	}
 
 
-	if (gameWorld->getWorldDisplay() == false)
+	if (gameWorld->getMainMenu())	//if main menu is set to true
 	{
 		renderMenu(*shaders["menuOption"]);
 	}

@@ -51,7 +51,7 @@ public:
 	void setPhoto(bool pho);
 	void setWorldDisplay(bool wor);
 	void setWire(bool wir);
-	void setMainmenu(bool menu);
+	void setMainMenu(bool menu);
 	/**
 	* @brief sets save game to true or false
 	*
