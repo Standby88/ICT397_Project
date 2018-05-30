@@ -7,7 +7,6 @@
 #include <GLFW\glfw3.h>
 #include "MathLib.h"
 
-
 enum Camera_Move
 {
 	FORWARD,
@@ -142,33 +141,49 @@ public:
 	*/
 	void CreateCameraRigidBody();
 
+	/**
+	* @brief flips the pitch of the camera
+	* @param void
+	* @return void
+	*/
 	void flipPitch()
 	{
 		pitch = -pitch;
 		updateCameraVectors();
-		
 	}
+
 private:
+
 	// Camera Attributes
+	///position vector
 	V3 position;
+	///front vector
 	V3 front;
+	///up vector
 	V3 up;
+	///right vector
 	V3 right;
+	///worldUp vector
 	V3 worldUp;
 
 	// Eular Angles
+	///GLfloat variable for yaw
 	GLfloat yaw;
+	///GLfloat variable for pitch
 	GLfloat pitch;
 
 	// Camera options
+	///GLfloat variable for movement speed
 	GLfloat movementSpeed;
+	///Glfloat variable for mouse sensitivity
 	GLfloat mouseSensitivity;
+	///GLfloat variable for zoom
 	GLfloat zoom;
-	
+	///static Camera* variable 
 	static Camera* instance;
-
+	///PhysicsFacade* variable
 	PhysicsFacade* cPhysFac = PhysicsFacade::GetPhysicsInstance();
-
+	///rigidBody* variable
 	rigidBody* camBody;
 
 	/**
@@ -176,7 +191,5 @@ private:
 	*
 	*/
 	void updateCameraVectors();
-
-	
 
 };

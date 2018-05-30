@@ -101,10 +101,16 @@ public:
 	*@param float x, float y, float z
 	*/
 	void setScalingFactor(float x, float y, float z);
+
+	///vector of floats used to store heightfield data
 	std::vector<float> heights;
+	
+	/**
+	* @brief load a terrain from height field
+	*@param std::string , const int size
+	*/
 	void load(std::string file, int size);
 	
-
 	/**
 	* @brief convert a GameObjectBase to Worldterrain
 	*@param GameObject* a
@@ -112,7 +118,17 @@ public:
 	*/
 	WorldTerrain* convert(GameObject* a);
 
+	/**
+	* @brief returns size of Worldterrain
+	*@param void
+	*@return int
+	*/
 	int getSize();
 
+	/**
+	* @brief Calls creation method for terrain
+	*@param void
+	*@return void
+	*/
 	void CreateTerrainRigidBody();
 };

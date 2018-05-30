@@ -65,6 +65,12 @@ public:
 	*/
 	void DestroyTextureManager();
 
+	/**
+	* @brief loads a cube map
+	*
+	*@param std::vector<const GLchar*>
+	*@return GLuint
+	*/
 	static GLuint LoadCubemap(std::vector<const GLchar * > faces)
 	{
 		GLuint textureID;

@@ -26,11 +26,17 @@ class SceneRender
 {
 private:
 	//ModelManager m_Models;
+	///GameWorld pointer varaible
 	GameWorld* gameWorld;
+	///Std::map with std::strings as keys and Shader* as values
 	std::map<std::string, Shader*> shaders;
+	///Menu pointer variable
 	Menu * menu;
+	///Water pointer varaible
 	Water * water;
+	///WaterFrameBuffer variable
 	WaterFrameBuffer fbos;
+
 	/**
 	* @brief used to render environment objects
 	*@param EnvironmentObjManager& EM, M4 view, M4 projection, Shader &S
@@ -49,8 +55,16 @@ private:
 	*/
 	void renderSkybox(Skybox & sky, M4 view, M4 projection, Shader &S);
 
+	/**
+	* @brief used to render the menu
+	*@param Shader&
+	*/
 	void renderMenu(Shader& s);
 
+	/**
+	* @brief used to render characters
+	*@param CharacterManager&, M4, M4, Shader&, Shader&
+	*/
 	void renderCharacters(CharacterManager & TM, M4 view, M4 projection, Shader & animation, Shader & deflt);
 
 
@@ -58,23 +72,52 @@ public:
 
 	/**
 	* @brief Constructor for SceneRender
+	* @param GameWorld*
 	*/
 	SceneRender(GameWorld* gw);
 
-	void addShader(std::string ver, std::string frag, std::string name);
 	/**
-	* @brief desstructor for SceneRender
+	* @brief adds shaders
+	*@param std::string, std::string, std::string
 	*/
+	void addShader(std::string ver, std::string frag, std::string name);
+
+	///Default destructor for SceneRender
 	~SceneRender();
 
+	/**
+	* @brief renders the scene
+	* @param void
+	* @return void
+	*/
 	void renderScene();
 
+	/**
+	* @brief renders game scene
+	* @param void
+	* @return void
+	*/
 	void renderGameScene();
 	
+	/**
+	* @brief renders water
+	* @param void
+	* @return void
+	*/
 	void renderWater();
 	
+	/**
+	* @brief register all functions to lua to be used.
+	*
+	* @param lua_State * L
+	*/
 	static void scriptRegister(lua_State * L);
 
+	/**
+	* @brief returns a shader
+	* @param std::string
+	* @return Shader*
+	*/
 	Shader* getShader(std::string name);
 };
 

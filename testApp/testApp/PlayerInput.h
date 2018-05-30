@@ -1,12 +1,10 @@
 #pragma once
 
 #include <iostream>
-
 #include <GL\glew.h>
 #include <GLFW\glfw3.h>
-
-
 #include "Camera.h"
+
 /**
 * @class PlayerInput
 * @brief manages player input
@@ -191,7 +189,7 @@ public:
 	void SetNewGame(bool load);
 
 private:
-	
+	///GLfloat variable for time
 	GLfloat m_time;
 	///local camera points to existing camera
 	Camera *camera;

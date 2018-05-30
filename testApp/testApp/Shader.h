@@ -55,7 +55,7 @@ public:
 	*/
 	static void scriptRegister(lua_State * L);
 	
-
+	///integer variable for program
 	int Program;
 };
 

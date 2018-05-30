@@ -19,18 +19,30 @@
 class EnvironmentObject : public GameObject3D
 {
 private:
+	///boolean flag for if an object is static
 	bool isStatic;
 public:
 
+	/**
+	* @brief returns isStatic boolean flag
+	* @param void
+	* @return bool
+	*/
 	bool getStatic()
 	{
 		return isStatic;
 	}
 
+	/**
+	* @brief sets isStatic boolean flag
+	* @param bool
+	* @return void
+	*/
 	void setStatic(bool t)
 	{
 		isStatic = t;
 	}
+
 	/**
 	* @brief Constructor for environment objsct. sets positons to 0,0,0 and sets the objectType to EnvironmentObject
 	*/

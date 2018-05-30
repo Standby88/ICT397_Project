@@ -33,21 +33,21 @@ public:
 
 	/**
 	* @brief adds model to map using path as key.
-	*@param string modelpath
-	*@return bool
+	* @param string modelpath
+	* @return bool
 	*/
 	bool addModel(std::string modelPath);
 
 	/**
 	* @brief returns a model from list
-	*@param string modelpath
-	*@return model*
+	* @param string modelpath
+	* @return model*
 	*/
 	Model* GetModel(std::string modelPath);
 
 	/**
 	* @brief returns wholemodel maanager instance
-	*@return modelManager&
+	* @return modelManager&
 	*/
 	static ModelManager & GetModelManager();
 
@@ -58,12 +58,14 @@ public:
 
 	/**
 	* @brief expose functions to lua
-	*@param lua_State * L
+	* @param lua_State * L
 	*/
 	static void scriptRegister(lua_State * L);
 
 
 private:
+
+	///std::map with std::string as the keys and Model* as the values
 	std::map<std::string, Model *> models;
 
 };

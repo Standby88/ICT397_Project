@@ -1,5 +1,6 @@
 #pragma once
 #include "GameObject3D.h"
+
 /**
 * @class PlayerObject
 * @brief class used to create players
@@ -18,6 +19,7 @@ class Player : public GameObject3D
 private:
 	
 public:
+
 	/**
 	* @brief Constructor for initializing player position and type values
 	*/

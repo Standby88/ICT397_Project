@@ -29,8 +29,9 @@ extern "C"
 
 using namespace luabridge;
 
+//hide bullet specific rigidbodies behind a facade
 typedef btRigidBody rigidBody;
-
+//hide bullet specific quaternions behind a facade
 typedef btQuaternion quaternion;
 
 //---------------------------------------------------------------------------------
@@ -58,9 +59,10 @@ typedef btQuaternion quaternion;
 * @version 04
 * @date 26/05/2018 Implemented some set, get, and update functions so that specific bodies in the dynamicsWorld
 					can be updated.
-* @todo fix collision body locations and interactions
 *
-* @bug none
+* @todo 
+*
+* @bug 
 */
 
 //---------------------------------------------------------------------------------
@@ -118,8 +120,6 @@ public:
 	/**
 	* @brief Used to get a single instance of PhysicsFacade
 	*
-	*
-	*
 	* @param void
 	* @return PhysicsFacade*
 	* @pre
@@ -129,8 +129,6 @@ public:
 
 	/**
 	* @brief Sets the gravity
-	*
-	*
 	*
 	* @param float
 	* @return void
@@ -142,8 +140,6 @@ public:
 	/**
 	* @brief Gets X position of a rigidbody
 	*
-	*
-	*
 	* @param int
 	* @return float
 	* @pre
@@ -153,8 +149,6 @@ public:
 
 	/**
 	* @brief Gets Y position of a rigidbody
-	*
-	*
 	*
 	* @param int
 	* @return float
@@ -166,8 +160,6 @@ public:
 	/**
 	* @brief Gets Z position of a rigidbody
 	*
-	*
-	*
 	* @param int
 	* @return float
 	* @pre
@@ -178,8 +170,6 @@ public:
 	/**
 	* @brief gets quaternion for rotation of a rigidbody
 	*
-	*
-	*
 	* @param int
 	* @return quaternion
 	* @pre
@@ -189,8 +179,6 @@ public:
 
 	/**
 	* @brief sets quaternion for rotation of a rigidbody
-	*
-	*
 	*
 	* @param int, quaternion*
 	* @return void
@@ -204,8 +192,6 @@ public:
 	/**
 	* @brief Adds a rigidbody to the dynamicsWorld
 	*
-	*
-	*
 	* @param rigidbody*
 	* @return void
 	* @pre
@@ -216,8 +202,6 @@ public:
 	/**
 	* @brief Updates an existing rigidbody stored in dynamicsWorld
 	*
-	*
-	*
 	* @param rigidbody*
 	* @return void
 	* @pre
@@ -226,9 +210,7 @@ public:
 	void UpdateRigidBody(rigidBody* body);
 
 	/**
-	* @brief
-	*
-	*
+	* @brief currently not defined
 	*
 	* @param
 	* @return
@@ -239,8 +221,6 @@ public:
 
 	/**
 	* @brief Takes in a height field and creates a rigid body
-	*
-	*
 	*
 	* @param int, int, const void*, float, int, bool, bool
 	* @return void
@@ -254,8 +234,6 @@ public:
 	/**
 	* @brief Creates a spherical rigid body
 	*
-	*
-	*
 	* @param float, float, float, float, float, float, float, float
 	* @return void
 	* @pre
@@ -267,8 +245,6 @@ public:
 	/**
 	* @brief Creates a box shaped rigid body
 	*
-	*
-	*
 	* @param int, int, int, int, int, int, int
 	* @return rigidBody*
 	* @pre
@@ -278,8 +254,6 @@ public:
 
 	/**
 	* @brief creates a specific body for a player controlled rigidbody
-	*
-	*
 	*
 	* @param float, float, float, V3, V3
 	* @return rigidBody*
@@ -291,10 +265,8 @@ public:
 	/**
 	* @brief creates a capsule body 
 	*
-	*
-	*
 	* @param float, float, float, float, float, float
-	* @return
+	* @return rigidBody*
 	* @pre
 	* @post
 	*/
@@ -302,8 +274,6 @@ public:
 
 	/**
 	* @brief Updates the rigid bodies within the world
-	*
-	*
 	*
 	* @param float, int
 	* @return void
@@ -315,8 +285,6 @@ public:
 	/**
 	* @brief Updates the rigid bodies within the world
 	*
-	*
-	*
 	* @param float, int
 	* @return void
 	* @pre
@@ -326,8 +294,6 @@ public:
 
 	/**
 	* @brief Exposes the class methods to Lua
-	*
-	*
 	*
 	* @param lua_state*
 	* @return void

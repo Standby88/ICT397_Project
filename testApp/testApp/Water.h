@@ -2,15 +2,32 @@
 #include "TextureManager.h"
 #include "Shader.h"
 #include "MathLib.h"
+
+/**
+* @class Water
+* @brief used to encapsulate water display
+*
+* @author
+* @version 1
+* @date
+*
+* @todo
+*
+* @bug
+*/
 class Water
 {
 private:
 
-
+	///TextureManager variable
 	TextureManager m_TextureMan;
+	///GLuint variables for Buffer and Array objects
 	GLuint VBO, VAO, EBO;
+	///GLuint variable
 	GLuint t1;
+	///GLuint variable
 	GLuint t2;
+	///GLfloat array for position of water
 	GLfloat points[32] =
 	{
 		        
@@ -19,7 +36,7 @@ private:
 		-100.0f, 0.0f, -100.0f,   0.0f, 0.0f, 1.0f,   0.0f, 0.0f, // Bottom Left
 		-100.0f,  0.0f, 100.0f,   1.0f, 1.0f, 0.0f,   0.0f, 1.0f  // Top Left
 	};
-	
+	///GLuint array for indices
 	GLuint indices[6] =
 	{
 		0, 1, 3,
@@ -27,6 +44,11 @@ private:
 	};
 public:
 
+	/**
+	* @brief Constructor for Water
+	*
+	*@param GLuint, GLuint
+	*/
 	Water(GLuint reflect, GLuint refract)
 	{
 		
@@ -57,6 +79,13 @@ public:
 		t1 = reflect;
 		t2 = refract;
 	}
+
+	/**
+	* @brief draws water
+	*
+	*@param Shader, M4, M4
+	*@return void
+	*/
 	void drawWater(Shader S, M4 view, M4 projection)
 	{
 		S.Use();
@@ -84,6 +113,8 @@ public:
 		glDrawElements(GL_TRIANGLES, 6, GL_UNSIGNED_INT, 0);
 		glBindVertexArray(0);
 	}
+
+	///Default destructor
 	~Water();
 };
 

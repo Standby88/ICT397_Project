@@ -34,6 +34,7 @@ protected:
 	///facaded rigidbody variable
 	rigidBody* gameObjBody;
 
+	///PhysicsFacade singleton instance variable
 	PhysicsFacade* gOPhys = PhysicsFacade::GetPhysicsInstance();
 
 public:

@@ -36,12 +36,14 @@ struct Texture
 	string type;
 	aiString path;
 };
+
 struct BoneMatrix
 {
 	aiMatrix4x4 offset_matrix;
 	aiMatrix4x4 final_world_transform;
 
 };
+
 struct VertexBoneData
 {
 	uint ids[NUM_BONES_PER_VEREX];   // we have 4 bone ids for EACH vertex & 4 weights for EACH vertex
@@ -66,6 +68,7 @@ struct VertexBoneData
 		}
 	}
 };
+
 /**
 * @class Mesh
 * @brief Used to store mesh details and handle mesh use
@@ -92,7 +95,7 @@ public:
 	/*  Functions  */
 	// Constructor
 	/**
-	* @brief Mesh constructor that initializes a new mess given parameters
+	* @brief Mesh constructor that initializes a new mesh given parameters
 	*
 	*@param vector<Vertex> vertices, vector<GLuint> indices, vector<Texture> texture
 	*/

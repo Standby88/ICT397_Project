@@ -2,6 +2,7 @@
 #include <unordered_map>
 #include "Player.h"
 #include "NPC.h"
+
 /**
 * @class ChacterManager
 * @brief Used to manage character objects like player, enemies and NPC
@@ -20,17 +21,23 @@ class CharacterManager
 private:
 	///pointer to player object
 	Player* p;
-
-	///used to store NPC 
+	///used to store NPCs 
 	std::unordered_map<std::string, NPC* > nPCList;
-
+	///std::vector of NPC* variables
 	std::vector<NPC*> npcUpdateList;
+
 public:
 	
+	/**
+	* @brief returns npcUpdateList
+	* @param void
+	* @return std::vector<NPC*>&
+	*/
 	std::vector<NPC*>& getUpdateList()
 	{
 		return npcUpdateList;
 	}
+
 	/**
 	* @brief Constructor for charactermanager
 	*/
@@ -103,6 +110,11 @@ public:
 	*/
 	static void scriptRegister(lua_State * L);
 
+	/**
+	* @brief Returns list of NPCs
+	* @param void
+	* @return std::unordered_map<std::string, NPC*>&
+	*/
 	std::unordered_map<std::string, NPC* >& getCharMap();
 	
 };
