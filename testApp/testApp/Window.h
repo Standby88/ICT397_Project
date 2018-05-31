@@ -7,7 +7,7 @@
 * @class Window
 * @brief used to represent window of a game
 *
-* @author 
+* @author Desmond ma
 * @version 1
 * @date
 *

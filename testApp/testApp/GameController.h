@@ -36,7 +36,7 @@ struct enObj
 * @class GameController
 * @brief
 *
-* @author Des (I assume)
+* @author Des
 * @version 1
 * @date
 *

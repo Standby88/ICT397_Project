@@ -12,7 +12,7 @@ typedef glm::mat4 M4;
 * @brief Used to facade glm 
 *
 *
-* @author 
+* @author Desmond Ma
 * @version 1
 * @date
 *

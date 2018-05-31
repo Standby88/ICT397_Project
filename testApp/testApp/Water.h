@@ -7,7 +7,7 @@
 * @class Water
 * @brief used to encapsulate water display
 *
-* @author
+* @author Desmond
 * @version 1
 * @date
 *

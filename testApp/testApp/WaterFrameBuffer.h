@@ -6,7 +6,7 @@
 * @class WaterFrameBuffer
 * @brief used to manage buffers used to display water
 *
-* @author
+* @author Desmond
 * @version 1
 * @date
 *

@@ -7,11 +7,12 @@
 * @class Menu
 * @brief used to encapsulate Menu information and functions
 *
-* @author 
+* @author Desmond 
 * @version 1
 * @date
 *
 * @todo
+*
 *
 * @bug
 */

@@ -4,7 +4,7 @@
 * @class FrameTime
 * @brief Used to encapsulate delta time and elapsed time
 *
-* @author 
+* @author yik Jun Desmond ma
 * @version 1
 * @date
 *

@@ -5,7 +5,7 @@
 * @class NPC
 * @brief NPCs inherit from GameObject3D class and encapsulate data specific to NPCs
 *
-* @author 
+* @author Desmond Ma
 * @version 1
 * @date
 *
